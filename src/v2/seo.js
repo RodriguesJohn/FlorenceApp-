@@ -32,10 +32,10 @@ const pages = {
     type: "CollectionPage"
   },
   "/design-systems": {
-    title: "Agent-Ready Design Systems | Human AI Studio",
+    title: "AI-Ready Design System Workshop | Human AI Studio",
     description:
-      "A live, hands-on workshop that gets your team building an agent-ready design system, working in your own tokens, components, and docs.",
-    type: "Service"
+      "Everything you need to make your design system agent-ready: the framework, readiness evals, component architecture, and a step-by-step checklist.",
+    type: "Course"
   },
   "/product": {
     title: "AI Agent Teams for Creative Businesses | Human AI Studio",
