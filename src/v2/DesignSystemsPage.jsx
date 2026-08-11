@@ -1,4 +1,5 @@
 import React from "react";
+import { track } from "@vercel/analytics";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import profilePicture from "../assets/Profile Picture.jpg";
@@ -128,13 +129,25 @@ function MasterclassCountdown() {
   );
 }
 
+function trackWorkshopClick(href, label, location) {
+  track(href === WORKSHOP_URL ? "Workshop CTA Click" : "Masterclass CTA Click", {
+    route: "/design-systems",
+    label,
+    location,
+    href
+  });
+}
+
 function CtaLink({ href, children, variant = "primary", className = "" }) {
+  const label = typeof children === "string" ? children : "Workshop CTA";
+
   return (
     <a
       className={`ds-conversion-cta is-${variant} ${className}`.trim()}
       href={href}
       target="_blank"
       rel="noreferrer"
+      onClick={() => trackWorkshopClick(href, label, "workshop_page")}
     >
       <span>{children}</span>
       <ArrowIcon />
@@ -181,6 +194,7 @@ export default function DesignSystemsPage() {
         target="_blank"
         rel="noreferrer"
         aria-label="Join the free AI-Ready Design Systems Masterclass on August 18 at 12:00 PM Pacific Time on Maven"
+        onClick={() => trackWorkshopClick(MASTERCLASS_URL, "Join the free masterclass", "urgency_bar")}
       >
         <span className="ds-banner-date">August 18 · 12:00 PM PT</span>
         <MasterclassCountdown />

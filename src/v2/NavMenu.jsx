@@ -30,6 +30,14 @@ function trackAcademyNavClick() {
   });
 }
 
+function trackWorkshopNavClick() {
+  track("Workshop Page Click", {
+    location: "primary_navigation",
+    label: "Workshop",
+    href: designSystemsUrl
+  });
+}
+
 const serviceLinks = [
   { label: "All work", href: allWorkUrl },
   { label: "Websites", href: websitesUrl },
@@ -132,6 +140,7 @@ export function NavMenu() {
         className="nav-direct-link"
         href={designSystemsUrl}
         aria-current={currentPath === designSystemsUrl ? "page" : undefined}
+        onClick={trackWorkshopNavClick}
       >
         Workshop
       </a>
