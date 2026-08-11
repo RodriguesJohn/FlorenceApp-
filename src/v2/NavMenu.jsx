@@ -128,6 +128,13 @@ export function NavMenu() {
       <a className="nav-direct-link" href={academyUrl} onClick={trackAcademyNavClick}>
         Academy
       </a>
+      <a
+        className="nav-direct-link"
+        href={designSystemsUrl}
+        aria-current={currentPath === designSystemsUrl ? "page" : undefined}
+      >
+        Workshop
+      </a>
 
       <div className={`nav-menu${open ? " is-open" : ""}`} ref={rootRef}>
         <button
