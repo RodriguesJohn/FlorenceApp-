@@ -72,9 +72,10 @@
 .nav-menu-panel {
   position: fixed;
   z-index: 120;
-  width: min(20.75rem, calc(100vw - 2rem));
-  padding: 0.65rem;
-  border-radius: 1.85rem;
+  min-width: 11.5rem;
+  max-width: calc(100vw - 2rem);
+  padding: 0.4rem;
+  border-radius: 1rem;
   background: rgba(14, 14, 14, 0.94);
   box-shadow:
     0 1.1rem 2.4rem rgba(0, 0, 0, 0.42),
@@ -94,11 +95,11 @@
 
 .nav-menu-item {
   display: block;
-  padding: 1rem 1.4rem;
-  border-radius: 1.25rem;
+  padding: 0.72rem 0.9rem;
+  border-radius: 0.72rem;
   color: rgba(255, 255, 255, 0.86);
-  font-size: clamp(1rem, 1.7vw, 1.35rem);
-  font-weight: 580;
+  font-size: 0.84rem;
+  font-weight: 500;
   line-height: 1.2;
   text-decoration: none;
   transition:
@@ -107,19 +108,19 @@
 }
 
 .nav-menu-item--nested {
-  padding-left: 1.65rem;
+  padding-left: 1.15rem;
 }
 
 .nav-menu-divider {
   height: 1px;
-  margin: 0.45rem 1rem;
+  margin: 0.35rem 0.6rem;
   background: rgba(255, 255, 255, 0.1);
 }
 
 .nav-menu-item:hover,
 .nav-menu-item.is-active {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .nav-menu-trigger--icon {

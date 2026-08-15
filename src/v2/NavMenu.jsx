@@ -17,8 +17,8 @@ const bookingAttributes = {
 
 const academyUrl = "/academy";
 const studioUrl = "/";
-const websitesUrl = "/websites";
 const allWorkUrl = "/case-studies";
+const florenceUrl = "/florence";
 const designSystemsUrl = "/design-systems";
 const blogUrl = "/blog";
 
@@ -40,8 +40,7 @@ function trackWorkshopNavClick() {
 
 const serviceLinks = [
   { label: "All work", href: allWorkUrl },
-  { label: "Websites", href: websitesUrl },
-  { label: "Product design", href: studioUrl },
+  { label: "Florence", href: florenceUrl },
   { label: "Design systems workshop", href: designSystemsUrl },
   { label: "Blog", href: blogUrl }
 ];
