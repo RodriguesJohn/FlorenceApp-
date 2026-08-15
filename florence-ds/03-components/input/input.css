@@ -1,0 +1,144 @@
+.field {
+  display: grid;
+  gap: var(--space-stack-xs);
+  width: 100%;
+}
+
+.field__label {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+}
+
+.field__control {
+  width: 100%;
+  margin: 0;
+  border: var(--border-control) solid var(--color-border-default);
+  border-radius: var(--radius-control-md);
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-body-sm-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  outline: none;
+  transition:
+    border-color var(--motion-interaction-duration) var(--motion-interaction-easing),
+    background var(--motion-interaction-duration) var(--motion-interaction-easing),
+    opacity var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.field__control::placeholder {
+  color: var(--color-text-muted);
+}
+
+.field__control:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-border-strong);
+}
+
+.field__control:focus-visible {
+  border-color: var(--color-border-strong);
+  outline: var(--border-control) solid var(--color-border-strong);
+  outline-offset: 0;
+}
+
+.field__message {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+  animation: field-message-in var(--motion-expand-duration)
+    var(--motion-ease-emphasized);
+}
+
+.field__message--error {
+  color: var(--color-text-danger);
+}
+
+@keyframes field-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.15rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sizes */
+.field--sm .field__control {
+  padding: var(--space-inset-sm) var(--space-inset-sm);
+  border-radius: var(--radius-control-md);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+.field--md .field__control {
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  border-radius: var(--radius-control-md);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-body-sm-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+}
+
+.field--lg .field__control {
+  padding: var(--space-inset-md) var(--space-inset-lg);
+  border-radius: var(--radius-control-lg);
+  font-family: var(--text-body-font-family);
+  font-size: var(--text-body-font-size);
+  font-weight: var(--text-body-font-weight);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-body-letter-spacing);
+}
+
+/* Error */
+.field--error .field__control {
+  border-color: var(--color-border-danger);
+}
+
+.field--error .field__control:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-border-danger);
+}
+
+.field--error .field__control:focus-visible {
+  border-color: var(--color-border-danger);
+  outline-color: var(--color-border-danger);
+}
+
+/* Disabled */
+.field__control:disabled {
+  background: var(--color-disabled-bg);
+  border-color: var(--color-disabled-border);
+  color: var(--color-disabled-text);
+  cursor: not-allowed;
+}
+
+.field:has(.field__control:disabled) .field__label {
+  color: var(--color-disabled-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field__control {
+    transition: none;
+  }
+
+  .field__message {
+    animation: none;
+  }
+}

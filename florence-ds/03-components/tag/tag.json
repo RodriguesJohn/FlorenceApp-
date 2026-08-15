@@ -1,0 +1,107 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "tag",
+  "name": "Tag",
+  "category": "feedback",
+  "path": "03-components/tag",
+  "exports": [
+    "Tag"
+  ],
+  "intent": "Label status, category, or metadata with a compact tone-colored chip.",
+  "whenToUse": [
+    "Status in tables",
+    "Filter chips",
+    "Lightweight categorical labels"
+  ],
+  "whenNotToUse": [
+    "Primary actions — use Button",
+    "Long paragraphs of meaning — use text + insight card"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "tone",
+        "type": "enum",
+        "values": [
+          "neutral",
+          "brand",
+          "success",
+          "warning",
+          "danger",
+          "info"
+        ],
+        "default": "neutral"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "onRemove",
+        "type": "() => void",
+        "description": "Shows remove control when provided"
+      },
+      {
+        "name": "removeLabel",
+        "type": "string"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-bg-*-subtle",
+      "--color-text-*",
+      "--color-border-*",
+      "--color-status-*"
+    ],
+    "typography": [
+      "--text-caption-*",
+      "--text-label-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-inline-*"
+    ],
+    "radius": [
+      "--radius-pill",
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-control"
+    ]
+  },
+  "a11y": [
+    "Remove button needs accessible name via removeLabel or children"
+  ],
+  "examples": [
+    {
+      "title": "Status",
+      "code": "<Tag tone=\"warning\" size=\"sm\">In review</Tag>"
+    }
+  ],
+  "related": [
+    "data-table",
+    "toast"
+  ]
+}

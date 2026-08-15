@@ -242,7 +242,7 @@ export default function DesignSystemsPage() {
             />
             <div>
               <span>Florence · Built by Human AI Studio</span>
-              <a href="/offerings/agent-ready-design-system">
+              <a href="/florence">
                 See the system behind the workshop <ArrowIcon />
               </a>
             </div>

@@ -1,0 +1,124 @@
+.chart-tooltip {
+  position: absolute;
+  z-index: 2;
+  min-width: 8rem;
+  max-width: 14rem;
+  padding: var(--space-inset-xs) var(--space-inset-sm);
+  border: var(--border-surface) solid var(--color-border-subtle);
+  border-radius: var(--radius-surface-sm);
+  background: var(--color-bg-page);
+  box-shadow: var(--shadow-overlay-md);
+  pointer-events: none;
+}
+
+.chart-tooltip__title {
+  margin: 0 0 var(--space-stack-2xs);
+  color: var(--color-text-secondary);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+.chart-tooltip__rows {
+  display: grid;
+  gap: var(--space-stack-2xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chart-tooltip__row {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: baseline;
+  gap: var(--space-inline-2xs);
+  min-width: 0;
+}
+
+/* A short stroke, not a filled box — a box is data-weight ink at this size. */
+.chart-tooltip__key {
+  width: 0.75rem;
+  height: 0.125rem;
+  border-radius: var(--radius-pill);
+  align-self: center;
+}
+
+/* Values lead: the reader already has the series and wants the number. The
+   hierarchy rides on ink color against the secondary label — components draw
+   weight from semantic text styles only, never the weight primitives. */
+.chart-tooltip__value {
+  color: var(--color-text-primary);
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-tooltip__label {
+  overflow: hidden;
+  color: var(--color-text-secondary);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  line-height: var(--text-caption-line-height);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chart-crosshair {
+  stroke: var(--color-chart-crosshair);
+  stroke-width: 1;
+}
+
+.chart-plot {
+  position: relative;
+}
+
+.chart-plot__svg {
+  display: block;
+  overflow: visible;
+  touch-action: none;
+}
+
+/* Gridlines and axes: solid hairlines one step off the surface. Never dashed —
+   dashing reads as "projection" or "threshold" when it is just a grid. */
+.chart-grid-line {
+  stroke: var(--color-chart-grid);
+  stroke-width: 1;
+}
+
+.chart-axis-line {
+  stroke: var(--color-chart-axis);
+  stroke-width: 1;
+}
+
+.chart-axis-label {
+  fill: var(--color-chart-label);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Direct labels ride the marks but never wear the series color — a light
+   categorical hue is illegible as text on the surface. */
+.chart-data-label {
+  fill: var(--color-text-primary);
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-label-font-weight);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The hit target includes the mark's 2px gap and then some. */
+.chart-hit-area {
+  fill: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.chart-hit-area:focus-visible {
+  stroke: var(--color-focus-ring);
+  stroke-width: var(--border-focus);
+}

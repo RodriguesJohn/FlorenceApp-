@@ -1,0 +1,105 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "tabs",
+  "name": "Tabs",
+  "category": "navigation",
+  "path": "03-components/tabs",
+  "exports": [
+    "Tabs",
+    "TabsList",
+    "TabsTrigger",
+    "TabsContent"
+  ],
+  "intent": "Switch between peer views in the same context without leaving the page.",
+  "whenToUse": [
+    "Settings sections",
+    "Component docs Preview / API",
+    "Related panels that share page chrome"
+  ],
+  "whenNotToUse": [
+    "Primary app navigation — use Sidebar",
+    "Stepped wizard with validation — prefer explicit steps"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "name": "defaultValue",
+        "type": "string"
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: string) => void"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "variant",
+        "type": "enum",
+        "values": [
+          "segmented",
+          "underline"
+        ],
+        "default": "segmented"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-*",
+      "--color-border-*",
+      "--color-interactive-*",
+      "--color-focus-ring"
+    ],
+    "typography": [
+      "--text-label-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-gap-*",
+      "--space-stack-*"
+    ],
+    "radius": [
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-control",
+      "--border-divider",
+      "--border-focus"
+    ],
+    "motion": [
+      "--motion-interaction-*"
+    ]
+  },
+  "a11y": [
+    "tablist / tab / tabpanel roles",
+    "Arrow-key navigation between triggers"
+  ],
+  "examples": [
+    {
+      "title": "Segmented",
+      "code": "<Tabs defaultValue=\"one\"><TabsList><TabsTrigger value=\"one\">One</TabsTrigger></TabsList><TabsContent value=\"one\">…</TabsContent></Tabs>"
+    }
+  ],
+  "related": [
+    "sidebar",
+    "button"
+  ]
+}

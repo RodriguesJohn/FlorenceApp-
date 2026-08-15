@@ -1,0 +1,142 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "chat-pattern",
+  "name": "ChatPattern",
+  "category": "agentic",
+  "path": "03-components/agentic-ui-patterns/chat-pattern",
+  "exports": [
+    "ChatPattern"
+  ],
+  "intent": "Full assistant conversation surface: header status, message thread, suggestions, composer, and optional menu.",
+  "whenToUse": [
+    "Product copilots",
+    "Support / ops assistants beside a workspace"
+  ],
+  "whenNotToUse": [
+    "Simple confirmations — use Modal/Toast",
+    "Non-conversational forms — use Input + Button"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "default": "Assistant"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "default": "Ready"
+      },
+      {
+        "name": "messages",
+        "type": "{ id, role, content, timestamp? }[]",
+        "default": []
+      },
+      {
+        "name": "suggestions",
+        "type": "string[]"
+      },
+      {
+        "name": "placeholder",
+        "type": "string"
+      },
+      {
+        "name": "isThinking",
+        "type": "boolean"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: string) => void"
+      },
+      {
+        "name": "onSend",
+        "type": "(content: string) => void"
+      },
+      {
+        "name": "onClose",
+        "type": "() => void"
+      },
+      {
+        "name": "menuItems",
+        "type": "{ id, label, onSelect }[]"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-*",
+      "--color-border-*",
+      "--color-interactive-*"
+    ],
+    "typography": [
+      "--text-heading-*",
+      "--text-body-*",
+      "--text-caption-*",
+      "--text-label-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*",
+      "--space-gap-*"
+    ],
+    "radius": [
+      "--radius-surface-*",
+      "--radius-control-*",
+      "--radius-pill"
+    ],
+    "border": [
+      "--border-surface",
+      "--border-divider",
+      "--border-control"
+    ],
+    "shadow": [
+      "--shadow-raised-*",
+      "--shadow-overlay-*"
+    ],
+    "motion": [
+      "--motion-overlay-*",
+      "--motion-interaction-*"
+    ]
+  },
+  "a11y": [
+    "Composer labeled",
+    "Send disabled when empty",
+    "Thinking state announced via status"
+  ],
+  "examples": [
+    {
+      "title": "Rail",
+      "code": "<ChatPattern title=\"Workspace assistant\" messages={messages} onSend={handleSend} suggestions={[\"Assign Final QA\"]} />"
+    }
+  ],
+  "deps": [
+    "thinking-animation"
+  ],
+  "related": [
+    "thinking-animation",
+    "shimmer-text",
+    "button",
+    "input"
+  ]
+}

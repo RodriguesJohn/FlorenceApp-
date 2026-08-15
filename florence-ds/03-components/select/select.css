@@ -1,0 +1,312 @@
+.select-field {
+  display: grid;
+  gap: var(--space-stack-xs);
+  width: 100%;
+}
+
+.select-field__label {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+}
+
+.select-field__shell {
+  position: relative;
+  display: grid;
+}
+
+.select-field__control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-inline-sm);
+  width: 100%;
+  margin: 0;
+  border: var(--border-control) solid var(--color-border-default);
+  border-radius: var(--radius-control-md);
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-body-sm-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  text-align: left;
+  outline: none;
+  cursor: pointer;
+  transition:
+    border-color var(--motion-interaction-duration) var(--motion-interaction-easing),
+    background var(--motion-interaction-duration) var(--motion-interaction-easing),
+    opacity var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.select-field__value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select-field__value--placeholder {
+  color: var(--color-text-muted);
+}
+
+.select-field__control:hover:not(:disabled):not(:focus-visible) {
+  border-color: var(--color-border-strong);
+}
+
+.select-field__control:focus-visible,
+.select-field--open .select-field__control {
+  border-color: var(--color-border-focus);
+  outline: var(--border-focus) solid var(--color-focus-ring);
+  outline-offset: var(--space-inset-2xs);
+}
+
+.select-field__chevron {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-icon-muted);
+  transition:
+    color var(--motion-interaction-duration) var(--motion-interaction-easing),
+    transform var(--motion-overlay-duration) var(--motion-overlay-easing);
+}
+
+.select-field--open .select-field__chevron {
+  transform: rotate(180deg);
+  color: var(--color-icon-brand);
+}
+
+.select-field__chevron svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.select-field__control:hover:not(:disabled) .select-field__chevron {
+  color: var(--color-icon-secondary);
+}
+
+.select-field__menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + var(--space-stack-xs));
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: var(--space-inset-xs);
+  list-style: none;
+  border: var(--border-control) solid var(--color-border-default);
+  border-radius: var(--radius-control-md);
+  background: var(--color-bg-page);
+  box-shadow: var(--shadow-modal);
+  max-height: 16rem;
+  overflow: auto;
+  animation: select-menu-in var(--motion-overlay-duration)
+    var(--motion-overlay-easing);
+}
+
+.select-field__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-inline-sm);
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  border-radius: var(--radius-control-sm);
+  color: var(--color-text-primary);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-body-sm-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+  cursor: pointer;
+}
+
+.select-field__option.is-active {
+  background: var(--color-bg-subtle);
+}
+
+.select-field__option.is-selected {
+  color: var(--color-text-brand);
+}
+
+.select-field__option.is-selected.is-active {
+  background: var(--color-interactive-selected);
+}
+
+.select-field__option.is-disabled {
+  color: var(--color-disabled-text);
+  cursor: not-allowed;
+}
+
+.select-field__option-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select-field__option-check {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-icon-brand);
+}
+
+.select-field__option-check svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.select-field__message {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+  animation: select-message-in var(--motion-expand-duration)
+    var(--motion-ease-emphasized);
+}
+
+.select-field__message--error {
+  color: var(--color-text-danger);
+}
+
+@keyframes select-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--space-inset-2xs)));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes select-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.15rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sizes */
+.select-field--sm .select-field__control {
+  padding: var(--space-inset-sm);
+  border-radius: var(--radius-control-md);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+.select-field--sm .select-field__chevron {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.select-field--sm .select-field__option {
+  padding: var(--space-inset-xs) var(--space-inset-sm);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+.select-field--md .select-field__control {
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  border-radius: var(--radius-control-md);
+}
+
+.select-field--lg .select-field__control {
+  padding: var(--space-inset-md) var(--space-inset-lg);
+  border-radius: var(--radius-control-lg);
+  font-family: var(--text-body-font-family);
+  font-size: var(--text-body-font-size);
+  font-weight: var(--text-body-font-weight);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-body-letter-spacing);
+}
+
+.select-field--lg .select-field__chevron {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.select-field--lg .select-field__menu {
+  border-radius: var(--radius-control-lg);
+  padding: var(--space-inset-sm);
+}
+
+.select-field--lg .select-field__option {
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  border-radius: var(--radius-control-md);
+  font-family: var(--text-body-font-family);
+  font-size: var(--text-body-font-size);
+  font-weight: var(--text-body-font-weight);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-body-letter-spacing);
+}
+
+/* Error */
+.select-field--error .select-field__control {
+  border-color: var(--color-border-danger);
+}
+
+.select-field--error .select-field__control:hover:not(:disabled):not(:focus-visible) {
+  border-color: var(--color-border-danger);
+}
+
+.select-field--error .select-field__control:focus-visible,
+.select-field--error.select-field--open .select-field__control {
+  border-color: var(--color-border-danger);
+  outline-color: var(--color-border-danger);
+}
+
+.select-field--error .select-field__chevron {
+  color: var(--color-icon-danger);
+}
+
+/* Disabled */
+.select-field__control:disabled {
+  background: var(--color-disabled-bg);
+  border-color: var(--color-disabled-border);
+  color: var(--color-disabled-text);
+  cursor: not-allowed;
+}
+
+.select-field:has(.select-field__control:disabled) .select-field__label,
+.select-field:has(.select-field__control:disabled) .select-field__chevron,
+.select-field:has(.select-field__control:disabled) .select-field__value {
+  color: var(--color-disabled-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .select-field__control,
+  .select-field__chevron,
+  .select-field__menu,
+  .select-field__message {
+    transition: none;
+    animation: none;
+  }
+}

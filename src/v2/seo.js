@@ -48,6 +48,12 @@ const pages = {
     description:
       "Notes from Human AI Studio on AI-native products, agent-ready design systems, and practical workflows for teams shipping with AI.",
     type: "Blog"
+  },
+  "/florence": {
+    title: "Florence — AI-ready design systems | Human AI Studio",
+    description:
+      "Florence is an AI-ready design system your coding agents can retrieve accurately and ship without the slop.",
+    type: "Service"
   }
 };
 

@@ -1,0 +1,78 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "number-transition",
+  "name": "NumberTransition",
+  "category": "motion",
+  "path": "03-components/motion-components/number-transition",
+  "exports": [
+    "NumberTransition"
+  ],
+  "intent": "Animate numeric value changes digit-by-digit for metrics that update live.",
+  "whenToUse": [
+    "KPI heroes",
+    "Live counters",
+    "Dashboard metric refresh"
+  ],
+  "whenNotToUse": [
+    "Static copy",
+    "Non-numeric status labels — use Tag/text"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "value",
+        "type": "number|string",
+        "required": true
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*"
+    ],
+    "typography": [
+      "--text-metric-*",
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-stack-*"
+    ],
+    "motion": [
+      "--motion-interaction-*",
+      "--motion-expand-*"
+    ]
+  },
+  "a11y": [
+    "Final value remains in the accessibility tree",
+    "Motion should tone down under reduced-motion"
+  ],
+  "examples": [
+    {
+      "title": "KPI",
+      "code": "<NumberTransition value={12480} label=\"Active users\" />"
+    }
+  ],
+  "related": [
+    "kpi-card",
+    "line-chart"
+  ]
+}

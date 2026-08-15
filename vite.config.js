@@ -59,10 +59,32 @@ function blogPlugin() {
   };
 }
 
+function htmlAliases() {
+  const aliases = {
+    "/florence": "/florence.html",
+    "/florence/system": "/florence-system.html"
+  };
+
+  return {
+    name: "html-aliases",
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const url = new URL(req.url, "http://localhost");
+        const pathname = url.pathname.replace(/\/+$/, "") || "/";
+        const target = aliases[pathname];
+        if (target) {
+          req.url = target + url.search;
+        }
+        next();
+      });
+    }
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), blogPlugin()],
+  plugins: [react(), htmlAliases(), blogPlugin()],
   optimizeDeps: {
-    entries: ["index.html", "academy.html"]
+    entries: ["index.html", "academy.html", "florence.html", "florence-system.html"]
   },
   build: {
     rollupOptions: {
@@ -80,7 +102,9 @@ export default defineConfig({
           ["offeringAiNativeProducts", "offering-ai-native-products.html"],
           ["offeringAiConsulting", "offering-ai-consulting.html"],
           ["offeringAiTrainingEnablement", "offering-ai-training-enablement.html"],
-          ["offeringAgentReadyDesignSystem", "offering-agent-ready-design-system.html"]
+          ["offeringAgentReadyDesignSystem", "offering-agent-ready-design-system.html"],
+          ["florence", "florence.html"],
+          ["florenceSystem", "florence-system.html"]
         ].map(([name, file]) => [name, resolve(import.meta.dirname, file)])
       )
     }

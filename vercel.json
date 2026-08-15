@@ -24,6 +24,16 @@
       "source": "/offerings/agent-ready-design-system/",
       "destination": "/offerings/agent-ready-design-system",
       "permanent": true
+    },
+    {
+      "source": "/florence/",
+      "destination": "/florence",
+      "permanent": true
+    },
+    {
+      "source": "/florence/system/",
+      "destination": "/florence/system",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -74,6 +84,14 @@
     {
       "source": "/offerings/agent-ready-design-system",
       "destination": "/offering-agent-ready-design-system.html"
+    },
+    {
+      "source": "/florence",
+      "destination": "/florence.html"
+    },
+    {
+      "source": "/florence/system",
+      "destination": "/florence-system.html"
     },
     {
       "source": "/robots.txt",

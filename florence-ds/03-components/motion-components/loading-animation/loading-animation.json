@@ -1,0 +1,93 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "loading-animation",
+  "name": "LoadingAnimation",
+  "category": "motion",
+  "path": "03-components/motion-components/loading-animation",
+  "exports": [
+    "LoadingAnimation"
+  ],
+  "intent": "Indeterminate loading mark for surfaces fetching data.",
+  "whenToUse": [
+    "Chart body loading",
+    "Panel refresh",
+    "Empty canvas waiting on data"
+  ],
+  "whenNotToUse": [
+    "Agent cognition cue — ThinkingAnimation",
+    "Text-only waiting — ShimmerText"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "default": "Loading"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "variant",
+        "type": "enum",
+        "values": [
+          "grid",
+          "dots"
+        ],
+        "default": "grid"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-*",
+      "--color-border-*",
+      "--color-interactive-*"
+    ],
+    "typography": [
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*",
+      "--space-gap-*"
+    ],
+    "radius": [
+      "--radius-surface-*",
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-surface"
+    ],
+    "motion": [
+      "--motion-*"
+    ]
+  },
+  "a11y": [
+    "Accessible label for the loading state",
+    "Respect reduced motion"
+  ],
+  "examples": [
+    {
+      "title": "Grid",
+      "code": "<LoadingAnimation label=\"Loading chart\" variant=\"grid\" />"
+    }
+  ],
+  "related": [
+    "chart-core",
+    "thinking-animation"
+  ]
+}

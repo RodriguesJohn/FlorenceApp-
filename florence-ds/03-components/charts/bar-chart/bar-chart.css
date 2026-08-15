@@ -1,0 +1,31 @@
+.bar-chart__plot {
+  width: 100%;
+  min-height: var(--bar-chart-height, 15rem);
+}
+
+.bar-chart__svg {
+  width: 100%;
+  height: auto;
+}
+
+.bar-chart__category-label {
+  max-width: 4rem;
+}
+
+.bar-chart__bar {
+  transition: opacity var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.bar-chart__bar--dimmed {
+  opacity: var(--opacity-muted);
+}
+
+.bar-chart__legend {
+  margin-block-end: var(--space-stack-2xs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar-chart__bar {
+    transition: none;
+  }
+}

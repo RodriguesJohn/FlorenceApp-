@@ -1,0 +1,122 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "checkbox",
+  "name": "Checkbox",
+  "category": "forms",
+  "path": "03-components/checkbox",
+  "exports": [
+    "Checkbox",
+    "CheckboxGroup"
+  ],
+  "intent": "Select one or many options that will be committed with a form or bulk action.",
+  "whenToUse": [
+    "Multi-select lists",
+    "Terms acceptance",
+    "Table row selection companion"
+  ],
+  "whenNotToUse": [
+    "Immediate on/off preference — prefer Switch",
+    "Exactly one choice — use Radio"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "checked",
+        "type": "boolean"
+      },
+      {
+        "name": "indeterminate",
+        "type": "boolean"
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "(checked: boolean) => void"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "error",
+        "type": "string|boolean"
+      },
+      {
+        "name": "hint",
+        "type": "string"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "compounds": {
+      "CheckboxGroup": [
+        "label",
+        "disabled",
+        "error",
+        "hint",
+        "size",
+        "children"
+      ]
+    }
+  },
+  "tokens": {
+    "color": [
+      "--color-interactive-*",
+      "--color-border-*",
+      "--color-text-*",
+      "--color-focus-ring",
+      "--color-status-danger"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-stack-*",
+      "--space-inline-*",
+      "--space-inset-*"
+    ],
+    "radius": [
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-control",
+      "--border-focus"
+    ],
+    "motion": [
+      "--motion-interaction-*"
+    ]
+  },
+  "a11y": [
+    "Native checkbox input",
+    "Group provides shared label and messaging"
+  ],
+  "examples": [
+    {
+      "title": "Group",
+      "code": "<CheckboxGroup label=\"Channels\"><Checkbox label=\"Email\" /><Checkbox label=\"Slack\" /></CheckboxGroup>"
+    }
+  ],
+  "related": [
+    "switch",
+    "radio",
+    "data-table"
+  ]
+}

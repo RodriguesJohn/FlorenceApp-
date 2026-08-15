@@ -51,6 +51,12 @@ async function boot() {
       return;
     }
 
+    if (route === "/florence" || route === "/offerings/agent-ready-design-system") {
+      const { default: FlorenceOfferPage } = await import("./v2/FlorenceOfferPage.jsx");
+      renderWithAnalytics(root, <FlorenceOfferPage />);
+      return;
+    }
+
     if (route === "/blog" || route.startsWith("/blog/")) {
       const { default: BlogPage } = await import("./v2/BlogPage.jsx");
       renderWithAnalytics(root, <BlogPage />);

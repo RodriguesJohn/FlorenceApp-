@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@paper-design/shaders-react": "^0.0.80",
     "@vercel/analytics": "^2.0.1",
     "@vitejs/plugin-react": "^5.0.0",
     "framer-motion": "^12.42.2",
     "geist": "^1.7.2",
     "gray-matter": "^4.0.3",
+    "lucide-react": "^1.31.0",
     "marked": "^18.0.9",
+    "motion": "^13.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "three": "^0.185.0",

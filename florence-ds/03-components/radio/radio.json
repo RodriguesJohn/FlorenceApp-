@@ -1,0 +1,99 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "radio",
+  "name": "Radio",
+  "category": "forms",
+  "path": "03-components/radio",
+  "exports": [
+    "Radio",
+    "RadioGroup"
+  ],
+  "intent": "Choose exactly one option from a short visible list.",
+  "whenToUse": [
+    "2–6 mutually exclusive choices shown at once"
+  ],
+  "whenNotToUse": [
+    "Long option lists — use Select",
+    "Multi-select — use Checkbox",
+    "Immediate boolean setting — use Switch"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ],
+    "compounds": {
+      "RadioGroup": [
+        "label",
+        "value",
+        "defaultValue",
+        "onValueChange",
+        "disabled",
+        "error",
+        "hint",
+        "size",
+        "children"
+      ]
+    }
+  },
+  "tokens": {
+    "color": [
+      "--color-interactive-*",
+      "--color-border-*",
+      "--color-text-*",
+      "--color-focus-ring"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-stack-*",
+      "--space-inline-*"
+    ],
+    "radius": [
+      "--radius-pill",
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-control",
+      "--border-focus"
+    ],
+    "motion": [
+      "--motion-interaction-*"
+    ]
+  },
+  "a11y": [
+    "Radios share one name/group context",
+    "Arrow keys move within group"
+  ],
+  "examples": [
+    {
+      "title": "Plan picker",
+      "code": "<RadioGroup label=\"Plan\" defaultValue=\"pro\"><Radio value=\"free\" label=\"Free\" /><Radio value=\"pro\" label=\"Pro\" /></RadioGroup>"
+    }
+  ],
+  "related": [
+    "select",
+    "checkbox",
+    "switch"
+  ]
+}

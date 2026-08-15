@@ -1,0 +1,25 @@
+:root {
+  /* Interaction — hover, press, focus feedback (≤160ms, ease-out) */
+  --motion-interaction-duration: var(--motion-duration-100);
+  --motion-interaction-easing: var(--motion-ease-out);
+
+  /* Expand — on-screen morph / disclosure (ease-in-out) */
+  --motion-expand-duration: var(--motion-duration-300);
+  --motion-expand-easing: var(--motion-ease-in-out);
+
+  /* Overlay — menus, popovers, tooltips (enter ease-out; exit faster) */
+  --motion-overlay-duration: var(--motion-duration-200);
+  --motion-overlay-easing: var(--motion-ease-out);
+  --motion-overlay-exit-duration: var(--motion-duration-100);
+  --motion-overlay-exit-easing: var(--motion-ease-out);
+
+  /* Modal — dialogs, drawers (enter soft spring; exit faster ease-out) */
+  --motion-modal-duration: var(--motion-duration-500);
+  --motion-modal-easing: var(--motion-ease-spring-soft);
+  --motion-modal-exit-duration: var(--motion-duration-200);
+  --motion-modal-exit-easing: var(--motion-ease-out);
+
+  /* Page — rare view transitions (can be longer) */
+  --motion-page-duration: var(--motion-duration-500);
+  --motion-page-easing: var(--motion-ease-emphasized);
+}

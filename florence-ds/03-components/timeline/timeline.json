@@ -1,0 +1,101 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "timeline",
+  "name": "Timeline",
+  "category": "navigation",
+  "path": "03-components/timeline",
+  "exports": [
+    "Timeline"
+  ],
+  "intent": "Show a vertical sequence of phases — what is current, what is next, and what is later — without implying a chart or a table.",
+  "whenToUse": [
+    "Product roadmaps and shipping plans",
+    "Onboarding or process steps where order matters more than dates",
+    "Status of a multi-stage workflow at a glance"
+  ],
+  "whenNotToUse": [
+    "Comparing magnitudes — use BarChart",
+    "Change over time with values — use LineChart",
+    "A single metric — use KpiCard",
+    "Switching peer views — use Tabs"
+  ],
+  "deps": [],
+  "api": {
+    "props": [
+      {
+        "name": "items",
+        "type": "{ id?: string, status: 'now' | 'next' | 'later', phase?: string, title: string, body?: string }[]",
+        "required": true,
+        "description": "Ordered steps. status paints the rail: filled now, hollow next, muted later."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Accessible name for the list"
+      },
+      {
+        "name": "headingLevel",
+        "type": "enum",
+        "values": [
+          2,
+          3,
+          4
+        ],
+        "default": 3,
+        "description": "Heading level for step titles so the page outline stays honest"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-primary",
+      "--color-text-secondary",
+      "--color-text-muted",
+      "--color-border-strong",
+      "--color-border-default",
+      "--color-border-subtle"
+    ],
+    "typography": [
+      "--text-caption-*",
+      "--text-heading-xs-*",
+      "--text-body-sm-*"
+    ],
+    "spacing": [
+      "--space-inline-lg",
+      "--space-inset-sm",
+      "--space-inset-md",
+      "--space-stack-2xs",
+      "--space-stack-xs",
+      "--space-stack-lg"
+    ],
+    "radius": [
+      "--radius-pill"
+    ],
+    "border": [
+      "--border-control",
+      "--border-control-strong"
+    ]
+  },
+  "a11y": [
+    "Rendered as an ordered list",
+    "label becomes aria-label on the list",
+    "Rail is aria-hidden; meaning lives in phase, title, and body",
+    "headingLevel keeps titles in the document outline"
+  ],
+  "examples": [
+    {
+      "title": "Roadmap",
+      "code": "<Timeline label=\"Roadmap\" items={[{ status: \"now\", phase: \"Now\", title: \"V1 shipped\", body: \"React components with contracts, retrievable by agents.\" }, { status: \"next\", phase: \"Next\", title: \"Retrieval accuracy\" }]} />"
+    }
+  ],
+  "related": [
+    "tabs",
+    "kpi-card",
+    "insight-card"
+  ]
+}

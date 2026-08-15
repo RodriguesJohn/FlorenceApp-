@@ -1,0 +1,186 @@
+.insight-card {
+  display: grid;
+  gap: var(--space-stack-md);
+  width: min(100%, 24rem);
+  margin: 0;
+  padding: var(--space-inset-xl);
+  border: var(--border-highlight) solid var(--color-border-highlight);
+  border-radius: var(--radius-surface-md);
+  background: var(--color-bg-page);
+  box-shadow: var(--shadow-raised-depth);
+  color: var(--color-text-primary);
+  text-align: start;
+}
+
+.insight-card--sm {
+  width: min(100%, 20rem);
+  gap: var(--space-stack-sm);
+  padding: var(--space-inset-lg);
+}
+
+.insight-card--lg {
+  width: min(100%, 28rem);
+  gap: var(--space-stack-lg);
+  padding: var(--space-inset-2xl);
+}
+
+.insight-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-inline-sm);
+  min-width: 0;
+}
+
+.insight-card__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-inline-2xs);
+  min-width: 0;
+  color: var(--color-text-secondary);
+}
+
+.insight-card__icon {
+  display: grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-icon-brand);
+}
+
+.insight-card__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.insight-card__eyebrow-text {
+  color: var(--color-text-secondary);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+  text-transform: none;
+}
+
+.insight-card__confidence {
+  color: var(--color-text-muted);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+.insight-card__body {
+  display: grid;
+  gap: var(--space-stack-xs);
+  min-width: 0;
+}
+
+.insight-card__title {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--text-heading-xs-font-family);
+  font-size: var(--text-heading-xs-font-size);
+  font-weight: var(--text-heading-xs-font-weight);
+  line-height: var(--text-heading-xs-line-height);
+  letter-spacing: var(--text-heading-xs-letter-spacing);
+}
+
+.insight-card--lg .insight-card__title {
+  font-family: var(--text-heading-sm-font-family);
+  font-size: var(--text-heading-sm-font-size);
+  font-weight: var(--text-heading-sm-font-weight);
+  line-height: var(--text-heading-sm-line-height);
+  letter-spacing: var(--text-heading-sm-letter-spacing);
+}
+
+.insight-card__description {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-body-sm-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+}
+
+.insight-card__source {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+.insight-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-inline-md);
+  min-width: 0;
+  margin-block-start: var(--space-stack-2xs);
+}
+
+.insight-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-inline-xs);
+}
+
+.insight-card__dismiss {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+  transition: color var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.insight-card__dismiss:hover {
+  color: var(--color-text-secondary);
+}
+
+.insight-card__dismiss:focus-visible {
+  outline: var(--border-focus) solid var(--color-focus-ring);
+  outline-offset: var(--space-inset-2xs);
+  border-radius: var(--radius-control-sm);
+}
+
+/* Tone — icon color carries the signal; surface stays quiet. */
+.insight-card--opportunity .insight-card__icon {
+  color: var(--color-icon-brand);
+}
+
+.insight-card--warning .insight-card__icon {
+  color: var(--color-icon-warning);
+}
+
+.insight-card--danger .insight-card__icon {
+  color: var(--color-icon-danger);
+}
+
+.insight-card--info .insight-card__icon {
+  color: var(--color-icon-info);
+}
+
+.insight-card--neutral .insight-card__icon {
+  color: var(--color-icon-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .insight-card__dismiss {
+    transition: none;
+  }
+}

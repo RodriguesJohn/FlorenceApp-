@@ -1,0 +1,26 @@
+:root {
+  /* Columns */
+  --grid-columns: 12;
+
+  /* Gutters */
+  --grid-gutter-sm: var(--space-300); /* 12px */
+  --grid-gutter-md: var(--space-400); /* 16px */
+  --grid-gutter-lg: var(--space-600); /* 24px */
+  --grid-gutter-xl: var(--space-800); /* 40px */
+
+  /* Margins */
+  --grid-margin-sm: var(--space-400); /* 16px */
+  --grid-margin-md: var(--space-600); /* 24px */
+  --grid-margin-lg: var(--space-800); /* 40px */
+
+  /* Widths */
+  --grid-width-sm: 40rem; /* 640px */
+  --grid-width-md: 64rem; /* 1024px */
+  --grid-width-lg: 80rem; /* 1280px */
+  --grid-width-xl: 90rem; /* 1440px */
+
+  /* Breakpoints */
+  --grid-breakpoint-sm: 40rem; /* 640px */
+  --grid-breakpoint-md: 64rem; /* 1024px */
+  --grid-breakpoint-lg: 80rem; /* 1280px */
+}

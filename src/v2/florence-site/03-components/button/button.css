@@ -1,0 +1,144 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-inline-sm);
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  border: var(--border-control) solid transparent;
+  border-radius: var(--radius-control-md);
+  background: transparent;
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+  cursor: pointer;
+  transform: scale(1);
+  transition:
+    background var(--motion-interaction-duration) var(--motion-interaction-easing),
+    border-color var(--motion-interaction-duration) var(--motion-interaction-easing),
+    color var(--motion-interaction-duration) var(--motion-interaction-easing),
+    opacity var(--motion-interaction-duration) var(--motion-interaction-easing),
+    transform var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn:hover:not(:disabled):not([aria-disabled='true']) {
+  transform: scale(1.02);
+}
+
+.btn:active:not(:disabled):not([aria-disabled='true']) {
+  transform: scale(0.97);
+}
+
+/* Sizes */
+/* Button labels inherit medium weight from --text-label; sm keeps it readable. */
+.btn--sm {
+  gap: var(--space-inline-xs);
+  padding: var(--space-inset-xs) var(--space-inset-sm);
+  border-radius: var(--radius-control-sm);
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+}
+
+.btn--md {
+  gap: var(--space-inline-sm);
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  border-radius: var(--radius-control-md);
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+}
+
+.btn--lg {
+  gap: var(--space-inline-sm);
+  padding: var(--space-inset-md) var(--space-inset-lg);
+  border-radius: var(--radius-control-lg);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+}
+
+/* Variants */
+.btn--primary {
+  background: var(--color-interactive-primary);
+  color: var(--color-brand-on-brand);
+}
+
+.btn--primary:hover {
+  background: var(--color-interactive-primary-hover);
+}
+
+.btn--primary:active {
+  background: var(--color-interactive-primary-active);
+}
+
+.btn--secondary {
+  background: var(--color-interactive-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-default);
+}
+
+.btn--secondary:hover {
+  background: var(--color-interactive-secondary-hover);
+}
+
+.btn--secondary:active {
+  background: var(--color-interactive-secondary-active);
+}
+
+.btn--tertiary {
+  background: transparent;
+  color: var(--color-text-brand);
+}
+
+.btn--tertiary:hover {
+  background: var(--color-bg-brand-subtle);
+}
+
+.btn--tertiary:active {
+  background: var(--color-interactive-selected);
+}
+
+.btn--danger {
+  background: var(--color-interactive-danger);
+  color: var(--color-brand-on-brand);
+}
+
+.btn--danger:hover {
+  background: var(--color-interactive-danger-hover);
+}
+
+.btn--danger:active {
+  background: var(--color-interactive-danger-active);
+}
+
+.btn:focus-visible {
+  outline: var(--border-focus) solid var(--color-focus-ring);
+  outline-offset: var(--space-inset-2xs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+    transform: none;
+  }
+
+  .btn:hover:not(:disabled):not([aria-disabled='true']),
+  .btn:active:not(:disabled):not([aria-disabled='true']) {
+    transform: none;
+  }
+}

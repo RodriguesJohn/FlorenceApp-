@@ -1,0 +1,107 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "chart-core",
+  "name": "ChartFrame",
+  "category": "data-display",
+  "path": "03-components/charts/chart-core",
+  "exports": [
+    "ChartFrame",
+    "ChartLegend",
+    "ChartTable"
+  ],
+  "intent": "Shared chrome for Florence charts — title, legend, loading/empty, and accessible table twin.",
+  "whenToUse": [
+    "Wrapping any Florence chart mark",
+    "Providing legend + table toggle consistently"
+  ],
+  "whenNotToUse": [
+    "Standalone KPI — use KpiCard",
+    "Non-chart panels — use layout cards"
+  ],
+  "deps": [],
+  "api": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "legend",
+        "type": "ReactNode"
+      },
+      {
+        "name": "table",
+        "type": "ReactNode"
+      },
+      {
+        "name": "isLoading",
+        "type": "boolean"
+      },
+      {
+        "name": "isEmpty",
+        "type": "boolean"
+      },
+      {
+        "name": "emptyMessage",
+        "type": "string"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-page",
+      "--color-border-highlight",
+      "--color-data-*"
+    ],
+    "typography": [
+      "--text-heading-*",
+      "--text-caption-*",
+      "--text-label-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*",
+      "--space-gap-*"
+    ],
+    "radius": [
+      "--radius-surface-*"
+    ],
+    "border": [
+      "--border-highlight",
+      "--border-control"
+    ],
+    "shadow": [
+      "--shadow-raised-depth"
+    ]
+  },
+  "a11y": [
+    "Chart always has a table alternative when provided",
+    "Legend items keyboardable when interactive"
+  ],
+  "examples": [
+    {
+      "title": "Frame",
+      "code": "<ChartFrame title=\"Revenue\" legend={<ChartLegend series={series} />}>{chart}</ChartFrame>"
+    }
+  ],
+  "related": [
+    "pie-chart",
+    "bar-chart",
+    "line-chart"
+  ]
+}

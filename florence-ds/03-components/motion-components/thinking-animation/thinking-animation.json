@@ -1,0 +1,79 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "thinking-animation",
+  "name": "ThinkingAnimation",
+  "category": "motion",
+  "path": "03-components/motion-components/thinking-animation",
+  "exports": [
+    "ThinkingAnimation"
+  ],
+  "intent": "Calm processing indicator while an agent or system is working.",
+  "whenToUse": [
+    "Assistant thinking states",
+    "Short indeterminate waits tied to AI"
+  ],
+  "whenNotToUse": [
+    "Full-page loads of unknown length — prefer LoadingAnimation",
+    "Content placeholders — prefer ShimmerText or skeletons"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "default": "Thinking"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-interactive-*",
+      "--color-bg-*"
+    ],
+    "typography": [
+      "--text-caption-*",
+      "--text-label-*"
+    ],
+    "spacing": [
+      "--space-inline-*",
+      "--space-inset-*"
+    ],
+    "motion": [
+      "--motion-interaction-*"
+    ],
+    "opacity": [
+      "--opacity-*"
+    ]
+  },
+  "a11y": [
+    "Provide live status text via label",
+    "Honor reduced motion"
+  ],
+  "examples": [
+    {
+      "title": "Default",
+      "code": "<ThinkingAnimation label=\"Thinking\" />"
+    }
+  ],
+  "related": [
+    "chat-pattern",
+    "shimmer-text",
+    "loading-animation"
+  ]
+}

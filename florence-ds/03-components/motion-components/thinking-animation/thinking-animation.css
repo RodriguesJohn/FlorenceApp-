@@ -1,0 +1,91 @@
+.thinking-animation {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-inline-sm);
+  color: var(--color-text-muted);
+}
+
+.thinking-animation__dots {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-inline-2xs);
+}
+
+.thinking-animation__dot {
+  inline-size: var(--space-inset-xs);
+  block-size: var(--space-inset-xs);
+  border-radius: var(--radius-pill);
+  background: var(--color-icon-secondary);
+  opacity: var(--opacity-muted);
+  animation: thinking-dot calc(var(--motion-modal-duration) * 3)
+    var(--motion-expand-easing) infinite;
+  will-change: transform, opacity;
+}
+
+.thinking-animation__dot:nth-child(2) {
+  animation-delay: var(--motion-interaction-duration);
+}
+
+.thinking-animation__dot:nth-child(3) {
+  animation-delay: calc(var(--motion-interaction-duration) * 2);
+}
+
+.thinking-animation__label {
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+.thinking-animation--sm {
+  gap: var(--space-inline-xs);
+}
+
+.thinking-animation--sm .thinking-animation__dots {
+  gap: var(--space-inline-2xs);
+}
+
+.thinking-animation--sm .thinking-animation__dot {
+  inline-size: var(--space-inset-2xs);
+  block-size: var(--space-inset-2xs);
+}
+
+.thinking-animation--lg {
+  gap: var(--space-inline-md);
+}
+
+.thinking-animation--lg .thinking-animation__dot {
+  inline-size: var(--space-inset-sm);
+  block-size: var(--space-inset-sm);
+}
+
+.thinking-animation--lg .thinking-animation__label {
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-body-sm-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+}
+
+@keyframes thinking-dot {
+  0%,
+  60%,
+  100% {
+    opacity: var(--opacity-muted);
+    transform: translateY(0) scale(0.8);
+  }
+
+  30% {
+    opacity: var(--opacity-full);
+    transform: translateY(calc(-1 * var(--space-inset-xs))) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinking-animation__dot {
+    opacity: var(--opacity-full);
+    animation: none;
+    transform: none;
+  }
+}

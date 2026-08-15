@@ -1,0 +1,342 @@
+:root {
+  /* Text */
+  --color-text-primary: var(--color-gray-900);
+  --color-text-secondary: var(--color-gray-700);
+  --color-text-muted: var(--color-gray-400);
+  --color-text-inverse: var(--color-white);
+  --color-text-brand: var(--color-blue-700);
+  --color-text-success: var(--color-green-700);
+  --color-text-warning: var(--color-amber-700);
+  --color-text-danger: var(--color-red-700);
+  --color-text-info: var(--color-sky-700);
+
+  /* Background */
+  --color-bg-page: var(--color-white);
+  --color-bg-surface: var(--color-gray-50);
+  --color-bg-subtle: var(--color-gray-100);
+  --color-bg-muted: var(--color-gray-200);
+  --color-bg-inverse: var(--color-gray-900);
+  --color-bg-brand: var(--color-blue-600);
+  --color-bg-brand-subtle: var(--color-blue-50);
+  --color-bg-success: var(--color-green-600);
+  --color-bg-success-subtle: var(--color-green-50);
+  --color-bg-warning: var(--color-amber-500);
+  --color-bg-warning-subtle: var(--color-amber-50);
+  --color-bg-danger: var(--color-red-600);
+  --color-bg-danger-subtle: var(--color-red-50);
+  --color-bg-info: var(--color-sky-600);
+  --color-bg-info-subtle: var(--color-sky-50);
+
+  /* Border */
+  --color-border-default: var(--color-gray-200);
+  --color-border-strong: var(--color-gray-400);
+  --color-border-subtle: var(--color-gray-100);
+  /* Glass stroke — soft white edge; pair with --border-highlight */
+  --color-border-highlight: rgb(255 255 255 / 0.55);
+  --color-border-brand: var(--color-blue-600);
+  --color-border-focus: var(--color-blue-500);
+  --color-border-success: var(--color-green-600);
+  --color-border-warning: var(--color-amber-500);
+  --color-border-danger: var(--color-red-600);
+  --color-border-info: var(--color-sky-500);
+
+  /* Icon */
+  --color-icon-primary: var(--color-gray-700);
+  --color-icon-secondary: var(--color-gray-500);
+  --color-icon-muted: var(--color-gray-400);
+  --color-icon-inverse: var(--color-white);
+  --color-icon-brand: var(--color-blue-600);
+  --color-icon-success: var(--color-green-600);
+  --color-icon-warning: var(--color-amber-600);
+  --color-icon-danger: var(--color-red-600);
+  --color-icon-info: var(--color-sky-600);
+
+  /* Brand */
+  --color-brand-primary: var(--color-blue-600);
+  --color-brand-primary-hover: var(--color-blue-700);
+  --color-brand-primary-active: var(--color-blue-800);
+  --color-brand-subtle: var(--color-blue-50);
+  --color-brand-on-brand: var(--color-white);
+
+  /* Interactive */
+  --color-interactive-primary: var(--color-blue-600);
+  --color-interactive-primary-hover: var(--color-blue-700);
+  --color-interactive-primary-active: var(--color-blue-800);
+  --color-interactive-secondary: var(--color-gray-100);
+  --color-interactive-secondary-hover: var(--color-gray-200);
+  --color-interactive-secondary-active: var(--color-gray-300);
+  --color-interactive-danger: var(--color-red-600);
+  --color-interactive-danger-hover: var(--color-red-700);
+  --color-interactive-danger-active: var(--color-red-800);
+  --color-interactive-selected: var(--color-blue-50);
+  --color-interactive-selected-border: var(--color-blue-600);
+
+  /* Focus */
+  --color-focus-ring: var(--color-blue-500);
+  --color-focus-ring-offset: var(--color-white);
+  --color-focus-ring-inverse: var(--color-blue-300);
+
+  /* Disabled */
+  --color-disabled-text: var(--color-gray-400);
+  --color-disabled-bg: var(--color-gray-100);
+  --color-disabled-border: var(--color-gray-200);
+  --color-disabled-icon: var(--color-gray-300);
+
+  /* Link */
+  --color-link-default: var(--color-blue-700);
+  --color-link-hover: var(--color-blue-800);
+  --color-link-visited: var(--color-violet-700);
+  --color-link-active: var(--color-blue-900);
+
+  /* Fill */
+  --color-fill-strong: var(--color-gray-900);
+  --color-fill-subtle: var(--color-gray-100);
+  --color-fill-brand: var(--color-blue-600);
+  --color-fill-brand-subtle: var(--color-blue-50);
+  --color-fill-success: var(--color-green-600);
+  --color-fill-success-subtle: var(--color-green-50);
+  --color-fill-warning: var(--color-amber-500);
+  --color-fill-warning-subtle: var(--color-amber-50);
+  --color-fill-danger: var(--color-red-600);
+  --color-fill-danger-subtle: var(--color-red-50);
+  --color-fill-info: var(--color-sky-600);
+  --color-fill-info-subtle: var(--color-sky-50);
+
+  /* Status */
+  --color-status-success: var(--color-green-600);
+  --color-status-success-subtle: var(--color-green-50);
+  --color-status-success-text: var(--color-green-800);
+  --color-status-warning: var(--color-amber-500);
+  --color-status-warning-subtle: var(--color-amber-50);
+  --color-status-warning-text: var(--color-amber-800);
+  --color-status-danger: var(--color-red-600);
+  --color-status-danger-subtle: var(--color-red-50);
+  --color-status-danger-text: var(--color-red-800);
+  --color-status-info: var(--color-sky-600);
+  --color-status-info-subtle: var(--color-sky-50);
+  --color-status-info-text: var(--color-sky-800);
+
+  /* Overlay */
+  --color-overlay-scrim: var(--color-black);
+  --color-overlay-scrim-soft: var(--color-gray-900);
+  --color-overlay-surface: var(--color-white);
+
+  /* Shadow */
+  --color-shadow-default: var(--color-gray-900);
+  --color-shadow-brand: var(--color-blue-900);
+  --color-shadow-danger: var(--color-red-900);
+
+  /* Data / chart
+     Categorical slots are assigned in fixed order and never cycled; a 9th
+     series folds into --color-chart-other. Soft mid-tones for filled marks
+     (donut bands, bars). Each slot also ships a from/to pair for mark
+     gradients (lighter → deeper). Re-run the dataviz validator before
+     changing any slot. Slot 1 is the brand hue. */
+  --color-data-1: var(--color-blue-500);
+  --color-data-1-from: var(--color-blue-400);
+  --color-data-1-to: var(--color-blue-600);
+  --color-data-2: var(--color-lime-400);
+  --color-data-2-from: var(--color-lime-300);
+  --color-data-2-to: var(--color-lime-500);
+  --color-data-3: var(--color-violet-400);
+  --color-data-3-from: var(--color-violet-300);
+  --color-data-3-to: var(--color-violet-500);
+  --color-data-4: var(--color-rose-400);
+  --color-data-4-from: var(--color-rose-300);
+  --color-data-4-to: var(--color-rose-500);
+  --color-data-5: var(--color-cyan-400);
+  --color-data-5-from: var(--color-cyan-300);
+  --color-data-5-to: var(--color-cyan-500);
+  --color-data-6: var(--color-amber-400);
+  --color-data-6-from: var(--color-amber-300);
+  --color-data-6-to: var(--color-amber-500);
+  --color-data-7: var(--color-fuchsia-400);
+  --color-data-7-from: var(--color-fuchsia-300);
+  --color-data-7-to: var(--color-fuchsia-500);
+  --color-data-8: var(--color-pink-400);
+  --color-data-8-from: var(--color-pink-300);
+  --color-data-8-to: var(--color-pink-500);
+
+  /* Chart furniture — recessive by design; the data is the only loud thing */
+  --color-chart-grid: var(--color-gray-200);
+  --color-chart-axis: var(--color-gray-300);
+  --color-chart-label: var(--color-gray-500);
+  --color-chart-crosshair: var(--color-gray-400);
+  --color-chart-other: var(--color-gray-400);
+  --color-chart-other-from: var(--color-gray-300);
+  --color-chart-other-to: var(--color-gray-500);
+  /* The 2px gap between touching marks and the ring on overlapping dots are
+     painted in the surface color — they are negative space, not a stroke. */
+  --color-chart-surface: var(--color-bg-page);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* Text */
+  --color-text-primary: var(--color-gray-50);
+  --color-text-secondary: var(--color-gray-300);
+  --color-text-muted: var(--color-gray-500);
+  --color-text-inverse: var(--color-gray-900);
+  --color-text-brand: var(--color-blue-300);
+  --color-text-success: var(--color-green-300);
+  --color-text-warning: var(--color-amber-300);
+  --color-text-danger: var(--color-red-300);
+  --color-text-info: var(--color-sky-300);
+
+  /* Background */
+  --color-bg-page: var(--color-black);
+  --color-bg-surface: var(--color-black);
+  --color-bg-subtle: #141414;
+  --color-bg-muted: #1a1a1a;
+  --color-bg-inverse: var(--color-gray-50);
+  --color-bg-brand: var(--color-blue-500);
+  --color-bg-brand-subtle: var(--color-blue-900);
+  --color-bg-success: var(--color-green-500);
+  --color-bg-success-subtle: var(--color-green-900);
+  --color-bg-warning: var(--color-amber-500);
+  --color-bg-warning-subtle: var(--color-amber-900);
+  --color-bg-danger: var(--color-red-500);
+  --color-bg-danger-subtle: var(--color-red-900);
+  --color-bg-info: var(--color-sky-500);
+  --color-bg-info-subtle: var(--color-sky-900);
+
+  /* Border */
+  --color-border-default: #262626;
+  --color-border-strong: #404040;
+  --color-border-subtle: #1a1a1a;
+  /* Quieter glass stroke — stacks with specular inset rim */
+  --color-border-highlight: rgb(255 255 255 / 0.08);
+  --color-border-brand: var(--color-blue-400);
+  --color-border-focus: var(--color-blue-400);
+  --color-border-success: var(--color-green-400);
+  --color-border-warning: var(--color-amber-400);
+  --color-border-danger: var(--color-red-400);
+  --color-border-info: var(--color-sky-400);
+
+  /* Icon */
+  --color-icon-primary: var(--color-gray-200);
+  --color-icon-secondary: var(--color-gray-400);
+  --color-icon-muted: var(--color-gray-500);
+  --color-icon-inverse: var(--color-gray-900);
+  --color-icon-brand: var(--color-blue-400);
+  --color-icon-success: var(--color-green-400);
+  --color-icon-warning: var(--color-amber-400);
+  --color-icon-danger: var(--color-red-400);
+  --color-icon-info: var(--color-sky-400);
+
+  /* Brand */
+  --color-brand-primary: var(--color-blue-400);
+  --color-brand-primary-hover: var(--color-blue-300);
+  --color-brand-primary-active: var(--color-blue-200);
+  --color-brand-subtle: var(--color-blue-900);
+  --color-brand-on-brand: var(--color-white);
+
+  /* Interactive */
+  --color-interactive-primary: var(--color-blue-400);
+  --color-interactive-primary-hover: var(--color-blue-300);
+  --color-interactive-primary-active: var(--color-blue-200);
+  --color-interactive-secondary: #141414;
+  --color-interactive-secondary-hover: #1f1f1f;
+  --color-interactive-secondary-active: #262626;
+  --color-interactive-danger: var(--color-red-400);
+  --color-interactive-danger-hover: var(--color-red-300);
+  --color-interactive-danger-active: var(--color-red-200);
+  --color-interactive-selected: var(--color-blue-900);
+  --color-interactive-selected-border: var(--color-blue-400);
+
+  /* Focus */
+  --color-focus-ring: var(--color-blue-400);
+  --color-focus-ring-offset: var(--color-black);
+  --color-focus-ring-inverse: var(--color-blue-300);
+
+  /* Disabled */
+  --color-disabled-text: var(--color-gray-500);
+  --color-disabled-bg: var(--color-gray-800);
+  --color-disabled-border: var(--color-gray-700);
+  --color-disabled-icon: var(--color-gray-600);
+
+  /* Link */
+  --color-link-default: var(--color-blue-300);
+  --color-link-hover: var(--color-blue-200);
+  --color-link-visited: var(--color-violet-300);
+  --color-link-active: var(--color-blue-100);
+
+  /* Fill */
+  --color-fill-strong: var(--color-gray-100);
+  --color-fill-subtle: var(--color-gray-800);
+  --color-fill-brand: var(--color-blue-400);
+  --color-fill-brand-subtle: var(--color-blue-900);
+  --color-fill-success: var(--color-green-400);
+  --color-fill-success-subtle: var(--color-green-900);
+  --color-fill-warning: var(--color-amber-400);
+  --color-fill-warning-subtle: var(--color-amber-900);
+  --color-fill-danger: var(--color-red-400);
+  --color-fill-danger-subtle: var(--color-red-900);
+  --color-fill-info: var(--color-sky-400);
+  --color-fill-info-subtle: var(--color-sky-900);
+
+  /* Status */
+  --color-status-success: var(--color-green-400);
+  --color-status-success-subtle: var(--color-green-900);
+  --color-status-success-text: var(--color-green-200);
+  --color-status-warning: var(--color-amber-400);
+  --color-status-warning-subtle: var(--color-amber-900);
+  --color-status-warning-text: var(--color-amber-200);
+  --color-status-danger: var(--color-red-400);
+  --color-status-danger-subtle: var(--color-red-900);
+  --color-status-danger-text: var(--color-red-200);
+  --color-status-info: var(--color-sky-400);
+  --color-status-info-subtle: var(--color-sky-900);
+  --color-status-info-text: var(--color-sky-200);
+
+  /* Overlay */
+  --color-overlay-scrim: var(--color-black);
+  --color-overlay-scrim-soft: var(--color-gray-900);
+  --color-overlay-surface: var(--color-gray-900);
+
+  /* Shadow */
+  --color-shadow-default: var(--color-black);
+  --color-shadow-brand: var(--color-blue-900);
+  --color-shadow-danger: var(--color-red-900);
+
+  /* Data / chart
+     Dark is selected against the black surface, not an automatic flip of
+     light: the dark lightness band is narrower (L 0.48-0.67), so amber and
+     fuchsia step up while the other six hold. Same hue families in both
+     themes — a series must not change identity when the theme does. */
+  --color-data-1: var(--color-blue-400);
+  --color-data-1-from: var(--color-blue-300);
+  --color-data-1-to: var(--color-blue-500);
+  --color-data-2: var(--color-lime-400);
+  --color-data-2-from: var(--color-lime-300);
+  --color-data-2-to: var(--color-lime-500);
+  --color-data-3: var(--color-violet-400);
+  --color-data-3-from: var(--color-violet-300);
+  --color-data-3-to: var(--color-violet-500);
+  --color-data-4: var(--color-rose-400);
+  --color-data-4-from: var(--color-rose-300);
+  --color-data-4-to: var(--color-rose-500);
+  --color-data-5: var(--color-cyan-400);
+  --color-data-5-from: var(--color-cyan-300);
+  --color-data-5-to: var(--color-cyan-500);
+  --color-data-6: var(--color-amber-400);
+  --color-data-6-from: var(--color-amber-300);
+  --color-data-6-to: var(--color-amber-500);
+  --color-data-7: var(--color-fuchsia-400);
+  --color-data-7-from: var(--color-fuchsia-300);
+  --color-data-7-to: var(--color-fuchsia-500);
+  --color-data-8: var(--color-pink-400);
+  --color-data-8-from: var(--color-pink-300);
+  --color-data-8-to: var(--color-pink-500);
+
+  /* Chart furniture */
+  --color-chart-grid: var(--color-gray-800);
+  --color-chart-axis: var(--color-gray-700);
+  --color-chart-label: var(--color-gray-400);
+  --color-chart-crosshair: var(--color-gray-600);
+  --color-chart-other: var(--color-gray-600);
+  --color-chart-other-from: var(--color-gray-500);
+  --color-chart-other-to: var(--color-gray-700);
+  --color-chart-surface: var(--color-bg-page);
+}

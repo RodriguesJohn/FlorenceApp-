@@ -2767,7 +2767,7 @@ function App() {
         <ProductPage />
       ) : isAcademy ? (
         <AcademyPage />
-      ) : offeringSlug === "agent-ready-design-system" ? (
+      ) : route === "/florence" || offeringSlug === "agent-ready-design-system" ? (
         <FlorenceOfferPage />
       ) : offeringSlug ? (
         <OfferingPage slug={offeringSlug} />

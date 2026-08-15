@@ -1,6 +1,5 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve, join } from "node:path";
-import matter from "gray-matter";
 import { marked } from "marked";
 
 export const SITE = "https://www.humanaistudio.io";
@@ -27,6 +26,60 @@ const slugify = (value) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
+// The blog only needs a small, predictable subset of YAML frontmatter. Keeping
+// that parser here avoids loading gray-matter's legacy js-yaml dependency while
+// Vite is starting (which can stall before the dev server binds to its port).
+const parseFrontmatterValue = (raw) => {
+  const value = raw.trim();
+  if (value === "true") return true;
+  if (value === "false") return false;
+  if (value === "null") return null;
+  if (/^-?\d+(?:\.\d+)?$/.test(value)) return Number(value);
+
+  if (value.startsWith('"') && value.endsWith('"')) {
+    return JSON.parse(value);
+  }
+
+  if (value.startsWith("'") && value.endsWith("'")) {
+    return value.slice(1, -1).replace(/''/g, "'");
+  }
+
+  if (value.startsWith("[") && value.endsWith("]")) {
+    try {
+      return JSON.parse(value);
+    } catch {
+      return value
+        .slice(1, -1)
+        .split(",")
+        .map((item) => parseFrontmatterValue(item));
+    }
+  }
+
+  return value;
+};
+
+const parseFrontmatter = (source, filename) => {
+  const normalized = source.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
+  if (!normalized.startsWith("---\n")) return { data: {}, content: normalized };
+
+  const closing = normalized.indexOf("\n---\n", 4);
+  if (closing === -1) throw new Error(`${filename}: unclosed frontmatter`);
+
+  const data = {};
+  for (const line of normalized.slice(4, closing).split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+
+    const separator = line.indexOf(":");
+    if (separator === -1) throw new Error(`${filename}: invalid frontmatter line "${line}"`);
+
+    const key = line.slice(0, separator).trim();
+    data[key] = parseFrontmatterValue(line.slice(separator + 1));
+  }
+
+  return { data, content: normalized.slice(closing + 5) };
+};
+
 /**
  * Reads every non-draft post, newest first. Each post carries the rendered body
  * plus the headings we need for the article's anchor navigation.
@@ -36,7 +89,10 @@ export function loadPosts() {
     .filter((name) => name.endsWith(".md"))
     .map((name) => {
       const slug = name.replace(/\.md$/, "");
-      const { data, content } = matter(readFileSync(join(CONTENT_DIR, name), "utf8"));
+      const { data, content } = parseFrontmatter(
+        readFileSync(join(CONTENT_DIR, name), "utf8"),
+        name
+      );
 
       if (!data.title) throw new Error(`${name}: missing "title" in frontmatter`);
       if (!data.date) throw new Error(`${name}: missing "date" in frontmatter`);

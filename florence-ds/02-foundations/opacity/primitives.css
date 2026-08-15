@@ -1,0 +1,11 @@
+:root {
+  /* Opacity scale */
+  --opacity-0: 0;
+  --opacity-100: 0.08;
+  --opacity-200: 0.16;
+  --opacity-300: 0.32;
+  --opacity-400: 0.48;
+  --opacity-500: 0.64;
+  --opacity-600: 0.8;
+  --opacity-700: 1;
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "shimmer-text",
+  "name": "ShimmerText",
+  "category": "motion",
+  "path": "03-components/motion-components/shimmer-text",
+  "exports": [
+    "ShimmerText"
+  ],
+  "intent": "Animate text as a soft progress cue while work is in flight.",
+  "whenToUse": [
+    "“Working…” / generating copy lines",
+    "Inline agent status beside other UI"
+  ],
+  "whenNotToUse": [
+    "Numeric KPI ticks — use NumberTransition",
+    "Blocking loaders — use LoadingAnimation"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "default": "Working…"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*"
+    ],
+    "typography": [
+      "--text-body-*",
+      "--text-label-*"
+    ],
+    "motion": [
+      "--motion-*"
+    ],
+    "opacity": [
+      "--opacity-*"
+    ]
+  },
+  "a11y": [
+    "Text remains readable; shimmer is decorative enhancement"
+  ],
+  "examples": [
+    {
+      "title": "Working",
+      "code": "<ShimmerText>Generating summary…</ShimmerText>"
+    }
+  ],
+  "related": [
+    "thinking-animation",
+    "chat-pattern"
+  ]
+}

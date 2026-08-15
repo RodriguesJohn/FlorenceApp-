@@ -1,0 +1,36 @@
+:root {
+  /* Family */
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+
+  /* Size — Mercury-leaning UI floor starts around 14px, not 11–12 */
+  --font-size-50: 0.75rem; /* 12px — micro only */
+  --font-size-100: 0.8125rem; /* 13px */
+  --font-size-200: 0.875rem; /* 14px */
+  --font-size-300: 1rem; /* 16px */
+  --font-size-400: 1.125rem; /* 18px */
+  --font-size-500: 1.25rem; /* 20px */
+  --font-size-600: 1.5rem; /* 24px */
+  --font-size-700: 1.875rem; /* 30px */
+  --font-size-800: 2.125rem; /* 34px — soft metric hero */
+  --font-size-900: 3rem; /* 48px */
+
+  /* Weight — prefer soft hierarchy over heavy semibold jumps */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line height */
+  --line-height-tight: 1.15;
+  --line-height-snug: 1.3;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.65;
+
+  /* Letter spacing */
+  --letter-spacing-tighter: -0.03em;
+  --letter-spacing-tight: -0.015em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
+  --letter-spacing-wider: 0.04em;
+}

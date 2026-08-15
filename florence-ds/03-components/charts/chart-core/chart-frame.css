@@ -1,0 +1,273 @@
+.chart-frame {
+  display: grid;
+  gap: var(--space-stack-md);
+  margin: 0;
+  padding: var(--space-inset-lg);
+  border: var(--border-highlight) solid var(--color-border-highlight);
+  border-radius: var(--radius-surface-md);
+  background: var(--color-bg-page);
+  box-shadow: var(--shadow-raised-depth);
+  color: var(--color-text-primary);
+}
+
+.chart-frame--plain {
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.chart-frame__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-inline-sm);
+  min-width: 0;
+}
+
+.chart-frame__heading {
+  display: grid;
+  gap: var(--space-stack-2xs);
+  min-width: 0;
+}
+
+.chart-frame__title {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--text-heading-sm-font-family);
+  font-size: var(--text-heading-sm-font-size);
+  font-weight: var(--text-heading-sm-font-weight);
+  line-height: var(--text-heading-sm-line-height);
+  letter-spacing: var(--text-heading-sm-letter-spacing);
+}
+
+.chart-frame__description {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+.chart-frame__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-inline-xs);
+}
+
+.chart-frame__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-inline-2xs);
+  padding: var(--space-inset-2xs) var(--space-inset-xs);
+  border: var(--border-control) solid var(--color-border-subtle);
+  border-radius: var(--radius-control-sm);
+  background: var(--color-bg-page);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+  transition:
+    color var(--motion-interaction-duration) var(--motion-interaction-easing),
+    border-color var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.chart-frame__toggle svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.chart-frame__toggle:hover {
+  border-color: var(--color-border-default);
+  color: var(--color-text-primary);
+}
+
+.chart-frame__toggle:focus-visible {
+  outline: var(--border-focus) solid var(--color-focus-ring);
+  outline-offset: var(--space-inset-2xs);
+}
+
+/* No fixed height: the plot, axis band, legend, and caption each contribute,
+   so the card can never clip its own x-axis into a nested scrollbar. */
+.chart-frame__body {
+  min-width: 0;
+}
+
+/* Refetch holds the previous render rather than flashing a skeleton. */
+.chart-frame__body--loading {
+  opacity: var(--opacity-muted);
+  transition: opacity var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.chart-frame__empty {
+  display: grid;
+  place-items: center;
+  min-height: 8rem;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-body-sm-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+}
+
+.chart-frame__footnote {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+/* Legend — always present for two or more series, so identity never rests on
+   color alone. */
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-inline-xs) var(--space-inline-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chart-legend--vertical {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: var(--space-stack-xs);
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+  text-align: start;
+}
+
+.chart-legend--vertical > li {
+  width: 100%;
+}
+
+.chart-legend--vertical .chart-legend__item {
+  width: 100%;
+  justify-content: flex-start;
+  gap: var(--space-inline-sm);
+  text-align: start;
+}
+
+.chart-legend--vertical .chart-legend__label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: start;
+}
+
+.chart-legend--vertical .chart-legend__meta {
+  margin-inline-start: auto;
+  color: var(--color-text-primary);
+  font-weight: var(--text-label-font-weight);
+}
+
+.chart-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-inline-2xs);
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+  transition: opacity var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+button.chart-legend__item {
+  cursor: pointer;
+}
+
+button.chart-legend__item:hover {
+  color: var(--color-text-primary);
+}
+
+button.chart-legend__item:focus-visible {
+  outline: var(--border-focus) solid var(--color-focus-ring);
+  outline-offset: var(--space-inset-2xs);
+  border-radius: var(--radius-control-sm);
+}
+
+.chart-legend__item--dimmed {
+  opacity: var(--opacity-muted);
+}
+
+.chart-legend__swatch {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: var(--radius-control-sm);
+  flex: none;
+}
+
+.chart-legend__swatch--dot {
+  border-radius: var(--radius-pill);
+}
+
+.chart-legend__meta {
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-legend__key {
+  width: 1rem;
+  height: 0.5rem;
+  flex: none;
+}
+
+/* Table view — the accessibility twin of every chart. */
+.chart-table__scroll {
+  overflow-x: auto;
+}
+
+.chart-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  line-height: var(--text-body-sm-line-height);
+}
+
+.chart-table th,
+.chart-table td {
+  padding: var(--space-inset-xs) var(--space-inset-sm);
+  border-bottom: var(--border-divider) solid var(--color-border-subtle);
+  text-align: start;
+}
+
+.chart-table thead th {
+  color: var(--color-text-secondary);
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  white-space: nowrap;
+}
+
+.chart-table tbody th {
+  color: var(--color-text-primary);
+  font-weight: var(--text-label-font-weight);
+}
+
+.chart-table td {
+  color: var(--color-text-primary);
+  /* Columns of numbers align vertically — the one place tabular figures earn
+     their keep. */
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}

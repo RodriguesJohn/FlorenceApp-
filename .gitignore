@@ -1,6 +1,8 @@
 node_modules/
 dist/
 .DS_Store
+.env
+acquisition-agent/.env
 
 # Reference-only source project (not part of the site)
 MyPortfolio/

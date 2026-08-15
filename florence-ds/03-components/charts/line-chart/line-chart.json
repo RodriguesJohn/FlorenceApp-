@@ -1,0 +1,100 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "line-chart",
+  "name": "LineChart",
+  "category": "data-display",
+  "path": "03-components/charts/line-chart",
+  "exports": [
+    "LineChart"
+  ],
+  "intent": "Show change over an ordered dimension (usually time), optionally with area fill.",
+  "whenToUse": [
+    "Weekly active users",
+    "Multi-series trends"
+  ],
+  "whenNotToUse": [
+    "Unordered category compare — use BarChart",
+    "Single snapshot share — use PieChart"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "data",
+        "type": "{ label: string, value: number }[]",
+        "description": "Single-series shorthand"
+      },
+      {
+        "name": "series",
+        "type": "{ label: string, data: number[] }[]"
+      },
+      {
+        "name": "categories",
+        "type": "string[]"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "name": "variant",
+        "type": "enum",
+        "values": [
+          "area",
+          "line"
+        ],
+        "default": "area"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-data-*",
+      "--color-text-*",
+      "--color-border-*"
+    ],
+    "typography": [
+      "--text-caption-*",
+      "--text-heading-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-gap-*"
+    ],
+    "radius": [
+      "--radius-surface-*"
+    ],
+    "border": [
+      "--border-highlight"
+    ],
+    "shadow": [
+      "--shadow-raised-depth"
+    ]
+  },
+  "a11y": [
+    "Point hit areas focusable",
+    "Table twin via ChartFrame"
+  ],
+  "examples": [
+    {
+      "title": "Area",
+      "code": "<LineChart title=\"Weekly active users\" variant=\"area\" data={[{ label: \"Mon\", value: 1240 }]} />"
+    }
+  ],
+  "deps": [
+    "chart-core"
+  ],
+  "related": [
+    "chart-core",
+    "bar-chart",
+    "number-transition"
+  ]
+}

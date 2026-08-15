@@ -1,0 +1,71 @@
+.line-chart__plot {
+  width: 100%;
+  min-height: var(--line-chart-height, 15rem);
+}
+
+.line-chart__svg {
+  width: 100%;
+  height: auto;
+}
+
+.line-chart__legend {
+  margin-block-end: var(--space-stack-2xs);
+}
+
+.line-chart .chart-grid-line {
+  opacity: var(--opacity-hover);
+}
+
+.line-chart .chart-crosshair {
+  opacity: var(--opacity-muted);
+}
+
+.line-chart__line {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.line-chart__line--dimmed {
+  opacity: var(--opacity-muted);
+}
+
+.line-chart__area {
+  transition: opacity var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.line-chart__area--dimmed {
+  opacity: var(--opacity-muted);
+}
+
+.line-chart__dot {
+  stroke: var(--color-chart-surface);
+  stroke-width: 2.5;
+  transition:
+    r var(--motion-interaction-duration) var(--motion-interaction-easing),
+    opacity var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.line-chart__overlay {
+  fill: transparent;
+  cursor: default;
+}
+
+.line-chart__hits {
+  pointer-events: none;
+}
+
+.line-chart__hits .chart-hit-area {
+  pointer-events: auto;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line-chart__line,
+  .line-chart__area,
+  .line-chart__dot {
+    transition: none;
+  }
+}

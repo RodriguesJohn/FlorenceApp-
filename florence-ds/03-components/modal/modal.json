@@ -1,0 +1,105 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "modal",
+  "name": "Modal",
+  "category": "overlays",
+  "path": "03-components/modal",
+  "exports": [
+    "Modal"
+  ],
+  "intent": "Interrupt the page for a focused task or decision that needs attention now.",
+  "whenToUse": [
+    "Confirm destructive work",
+    "Short forms that must finish before continuing"
+  ],
+  "whenNotToUse": [
+    "Non-blocking notices — use Toast",
+    "Side context while browsing — use a panel/rail"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode"
+      },
+      {
+        "name": "contained",
+        "type": "boolean",
+        "description": "Render within a container instead of viewport"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-overlay-scrim*",
+      "--color-bg-*",
+      "--color-text-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*"
+    ],
+    "radius": [
+      "--radius-surface-*"
+    ],
+    "border": [
+      "--border-surface"
+    ],
+    "shadow": [
+      "--shadow-modal"
+    ],
+    "motion": [
+      "--motion-modal-*"
+    ],
+    "opacity": [
+      "--opacity-scrim*"
+    ]
+  },
+  "a11y": [
+    "Scrim click + Escape dismiss",
+    "Focus should move into the dialog while open"
+  ],
+  "examples": [
+    {
+      "title": "Confirm",
+      "code": "<Modal open={open} onOpenChange={setOpen} title=\"Delete project?\" description=\"This cannot be undone.\" />"
+    }
+  ],
+  "related": [
+    "modal-card",
+    "button",
+    "toast"
+  ]
+}

@@ -28,7 +28,7 @@ export const caseStudies = [
       "An agent-ready design system, so AI reuses real components instead of inventing UI. Early eval: 95% query accuracy on catalog matches, with potential $10M+ in yearly savings at enterprise scale.",
     image: florenceWorkImage,
     position: "center",
-    offerUrl: "/offerings/agent-ready-design-system",
+    offerUrl: "/florence",
     ctaLabel: "Learn more"
   },
   {

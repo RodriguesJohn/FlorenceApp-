@@ -1,0 +1,114 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "kpi-card",
+  "name": "KpiCard",
+  "category": "data-display",
+  "path": "03-components/kpi-card",
+  "exports": [
+    "KpiCard"
+  ],
+  "intent": "Highlight one metric with label, value, optional delta/trend, and supporting hint.",
+  "whenToUse": [
+    "Dashboard metric rows",
+    "Executive summaries",
+    "Single-number health signals"
+  ],
+  "whenNotToUse": [
+    "Multi-series comparison — use charts",
+    "Narrative recommendations — use InsightCard"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "delta",
+        "type": "string"
+      },
+      {
+        "name": "trend",
+        "type": "enum",
+        "values": [
+          "up",
+          "down",
+          "neutral"
+        ]
+      },
+      {
+        "name": "hint",
+        "type": "string"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "onClick",
+        "type": "() => void",
+        "description": "Makes the card interactive when set"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-page",
+      "--color-border-highlight",
+      "--color-status-*"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-metric-*",
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*"
+    ],
+    "radius": [
+      "--radius-surface-*"
+    ],
+    "border": [
+      "--border-highlight"
+    ],
+    "shadow": [
+      "--shadow-raised-depth"
+    ],
+    "motion": [
+      "--motion-interaction-*"
+    ]
+  },
+  "a11y": [
+    "Prefer article semantics; interactive cards need keyboard activation"
+  ],
+  "examples": [
+    {
+      "title": "Metric",
+      "code": "<KpiCard label=\"Active users\" value=\"12,480\" delta=\"+8.1%\" trend=\"up\" hint=\"vs last week\" />"
+    }
+  ],
+  "related": [
+    "insight-card",
+    "pie-chart",
+    "number-transition"
+  ]
+}

@@ -1,0 +1,48 @@
+@import '../../02-foundations/typography/primitives.css';
+@import '../../02-foundations/typography/semantics.css';
+@import '../../02-foundations/spacing/primitives.css';
+@import '../../02-foundations/spacing/semantics.css';
+@import '../../02-foundations/grid/primitives.css';
+@import '../../02-foundations/grid/semantics.css';
+@import '../../02-foundations/radius/primitives.css';
+@import '../../02-foundations/radius/semantics.css';
+@import '../../02-foundations/border/primitives.css';
+@import '../../02-foundations/border/semantics.css';
+@import '../../02-foundations/shadow/primitives.css';
+@import '../../02-foundations/shadow/semantics.css';
+@import '../../02-foundations/motion/primitives.css';
+@import '../../02-foundations/motion/semantics.css';
+@import '../../02-foundations/opacity/primitives.css';
+@import '../../02-foundations/opacity/semantics.css';
+
+:root {
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--text-body-font-family);
+  font-size: var(--text-body-font-size);
+  font-weight: var(--text-body-font-weight);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-body-letter-spacing);
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+}
