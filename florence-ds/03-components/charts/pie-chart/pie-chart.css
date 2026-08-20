@@ -119,7 +119,7 @@
   text-align: end;
 }
 
-@container pie-chart (max-width: 22rem) {
+@container pie-chart (max-width: 40rem) {
   .pie-chart--split .pie-chart__layout {
     grid-template-columns: max-content;
     justify-items: start;

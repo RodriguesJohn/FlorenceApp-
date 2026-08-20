@@ -13,8 +13,8 @@
     "Contained demo dialogs in docs"
   ],
   "whenNotToUse": [
-    "Full page content — use layout patterns",
-    "Transient messages — use Toast"
+    "Full page content - use layout patterns",
+    "Transient messages - use Toast"
   ],
   "api": {
     "props": [

@@ -15,8 +15,8 @@
     "Table row selection companion"
   ],
   "whenNotToUse": [
-    "Immediate on/off preference — prefer Switch",
-    "Exactly one choice — use Radio"
+    "Immediate on/off preference - prefer Switch",
+    "Exactly one choice - use Radio"
   ],
   "api": {
     "props": [

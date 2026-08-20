@@ -128,7 +128,7 @@
   letter-spacing: var(--text-caption-letter-spacing);
 }
 
-/* Legend — always present for two or more series, so identity never rests on
+/* Legend - always present for two or more series, so identity never rests on
    color alone. */
 .chart-legend {
   display: flex;
@@ -231,7 +231,7 @@ button.chart-legend__item:focus-visible {
   flex: none;
 }
 
-/* Table view — the accessibility twin of every chart. */
+/* Table view - the accessibility twin of every chart. */
 .chart-table__scroll {
   overflow-x: auto;
 }
@@ -266,7 +266,7 @@ button.chart-legend__item:focus-visible {
 
 .chart-table td {
   color: var(--color-text-primary);
-  /* Columns of numbers align vertically — the one place tabular figures earn
+  /* Columns of numbers align vertically - the one place tabular figures earn
      their keep. */
   font-variant-numeric: tabular-nums;
   text-align: end;

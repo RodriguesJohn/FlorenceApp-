@@ -33,11 +33,11 @@ import { DataTable } from './DataTable.jsx'
 
 Set `toolbar` to enable the control bar above the table:
 
-- **Search** — filters rows across visible text columns (override with `searchKeys`)
-- **Filters** — faceted dropdowns per column; options auto-derive from `rows` when omitted
-- **Column settings** — show/hide columns with `columnSettings`
-- **Active filter chips** — removable chips for the current query and filters
-- **Result count** — `Showing X of Y` summary
+- **Search** - filters rows across visible text columns (override with `searchKeys`)
+- **Filters** - faceted dropdowns per column; options auto-derive from `rows` when omitted
+- **Column settings** - show/hide columns with `columnSettings`
+- **Active filter chips** - removable chips for the current query and filters
+- **Result count** - `Showing X of Y` summary
 
 Use `filteredEmptyMessage` when rows exist but none match the current filters.
 

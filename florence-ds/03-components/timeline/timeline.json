@@ -7,17 +7,17 @@
   "exports": [
     "Timeline"
   ],
-  "intent": "Show a vertical sequence of phases — what is current, what is next, and what is later — without implying a chart or a table.",
+  "intent": "Show a vertical sequence of phases - what is current, what is next, and what is later - without implying a chart or a table.",
   "whenToUse": [
     "Product roadmaps and shipping plans",
     "Onboarding or process steps where order matters more than dates",
     "Status of a multi-stage workflow at a glance"
   ],
   "whenNotToUse": [
-    "Comparing magnitudes — use BarChart",
-    "Change over time with values — use LineChart",
-    "A single metric — use KpiCard",
-    "Switching peer views — use Tabs"
+    "Comparing magnitudes - use BarChart",
+    "Change over time with values - use LineChart",
+    "A single metric - use KpiCard",
+    "Switching peer views - use Tabs"
   ],
   "deps": [],
   "api": {

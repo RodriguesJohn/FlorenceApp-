@@ -13,9 +13,9 @@
     "Forms that need inline validation messaging"
   ],
   "whenNotToUse": [
-    "Multi-line copy — use Textarea",
-    "Choosing from known options — use Select or Radio",
-    "On/off settings — use Switch"
+    "Multi-line copy - use Textarea",
+    "Choosing from known options - use Select or Radio",
+    "On/off settings - use Switch"
   ],
   "api": {
     "props": [

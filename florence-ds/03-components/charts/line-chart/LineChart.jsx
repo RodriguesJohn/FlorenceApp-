@@ -29,7 +29,7 @@ import { useChartSize } from '../chart-core/useChartSize.js'
 import './line-chart.css'
 
 /**
- * Change over time — progress, trends, and trajectories.
+ * Change over time - progress, trends, and trajectories.
  *
  * Smooth cubic curves between samples for a fluid read; tooltip values still
  * come from the real points, never from the interpolated path. Single-series

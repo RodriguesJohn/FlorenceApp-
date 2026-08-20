@@ -6,7 +6,7 @@ Florence is a token-first design system:
 
 ---
 
-## Option A — one-liner
+## Option A - one-liner
 
 In your app folder:
 
@@ -27,7 +27,7 @@ import { Button } from './florence/components/button/Button.jsx'
 
 ---
 
-## Option B — Preview docs locally
+## Option B - Preview docs locally
 
 ```bash
 cd preview
@@ -39,7 +39,7 @@ Open [http://localhost:4721](http://localhost:4721)
 
 ---
 
-## Option C — CLI without linking
+## Option C - CLI without linking
 
 From the Florence repo root:
 
@@ -56,7 +56,7 @@ npm run flowrix -- validate
 
 1. Import foundation CSS via `florence/florence.css`.
 2. Style UI with **semantic tokens only**, e.g. `var(--color-text-primary)`.
-3. Do not use hex or primitive ramps in components — see `AGENTS.md`.
-4. Read `<component>/<id>.json` before composing — that file is the retrieval contract (`whenToUse`, props, deps).
+3. Do not use hex or primitive ramps in components - see `AGENTS.md`.
+4. Read `<component>/<id>.json` before composing - that file is the retrieval contract (`whenToUse`, props, deps).
 
 Point AI coding tools at `florence/AGENTS.md` so generated UI stays on-system.

@@ -31,7 +31,7 @@
   --color-border-default: var(--color-gray-200);
   --color-border-strong: var(--color-gray-400);
   --color-border-subtle: var(--color-gray-100);
-  /* Glass stroke — soft white edge; pair with --border-highlight */
+  /* Glass stroke - soft white edge; pair with --border-highlight */
   --color-border-highlight: rgb(255 255 255 / 0.55);
   --color-border-brand: var(--color-blue-600);
   --color-border-focus: var(--color-blue-500);
@@ -157,7 +157,7 @@
   --color-data-8-from: var(--color-pink-300);
   --color-data-8-to: var(--color-pink-500);
 
-  /* Chart furniture — recessive by design; the data is the only loud thing */
+  /* Chart furniture - recessive by design; the data is the only loud thing */
   --color-chart-grid: var(--color-gray-200);
   --color-chart-axis: var(--color-gray-300);
   --color-chart-label: var(--color-gray-500);
@@ -166,7 +166,7 @@
   --color-chart-other-from: var(--color-gray-300);
   --color-chart-other-to: var(--color-gray-500);
   /* The 2px gap between touching marks and the ring on overlapping dots are
-     painted in the surface color — they are negative space, not a stroke. */
+     painted in the surface color - they are negative space, not a stroke. */
   --color-chart-surface: var(--color-bg-page);
 }
 
@@ -205,7 +205,7 @@
   --color-border-default: #262626;
   --color-border-strong: #404040;
   --color-border-subtle: #1a1a1a;
-  /* Quieter glass stroke — stacks with specular inset rim */
+  /* Quieter glass stroke - stacks with specular inset rim */
   --color-border-highlight: rgb(255 255 255 / 0.08);
   --color-border-brand: var(--color-blue-400);
   --color-border-focus: var(--color-blue-400);
@@ -304,7 +304,7 @@
      Dark is selected against the black surface, not an automatic flip of
      light: the dark lightness band is narrower (L 0.48-0.67), so amber and
      fuchsia step up while the other six hold. Same hue families in both
-     themes — a series must not change identity when the theme does. */
+     themes - a series must not change identity when the theme does. */
   --color-data-1: var(--color-blue-400);
   --color-data-1-from: var(--color-blue-300);
   --color-data-1-to: var(--color-blue-500);

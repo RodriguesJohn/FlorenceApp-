@@ -14,8 +14,8 @@
     "Task backlogs"
   ],
   "whenNotToUse": [
-    "Simple key/value details — use definition list or cards",
-    "Heavy analytics pivots — use charts + specialized grids"
+    "Simple key/value details - use definition list or cards",
+    "Heavy analytics pivots - use charts + specialized grids"
   ],
   "api": {
     "props": [

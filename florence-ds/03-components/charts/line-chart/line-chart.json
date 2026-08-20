@@ -13,8 +13,8 @@
     "Multi-series trends"
   ],
   "whenNotToUse": [
-    "Unordered category compare — use BarChart",
-    "Single snapshot share — use PieChart"
+    "Unordered category compare - use BarChart",
+    "Single snapshot share - use PieChart"
   ],
   "api": {
     "props": [

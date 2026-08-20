@@ -14,8 +14,8 @@
     "Non-blocking errors"
   ],
   "whenNotToUse": [
-    "Blocking decisions — use Modal",
-    "Permanent page status — use inline alert / insight"
+    "Blocking decisions - use Modal",
+    "Permanent page status - use inline alert / insight"
   ],
   "api": {
     "props": [

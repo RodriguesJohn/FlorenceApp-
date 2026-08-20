@@ -13,8 +13,8 @@
     "Short forms that must finish before continuing"
   ],
   "whenNotToUse": [
-    "Non-blocking notices — use Toast",
-    "Side context while browsing — use a panel/rail"
+    "Non-blocking notices - use Toast",
+    "Side context while browsing - use a panel/rail"
   ],
   "api": {
     "props": [

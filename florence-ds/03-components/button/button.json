@@ -14,9 +14,9 @@
     "Toolbar or empty-state actions (secondary / tertiary)"
   ],
   "whenNotToUse": [
-    "In-page navigation — use a link",
-    "Binary on/off settings — use Switch",
-    "Choosing one of many options — use Radio or Select"
+    "In-page navigation - use a link",
+    "Binary on/off settings - use Switch",
+    "Choosing one of many options - use Radio or Select"
   ],
   "api": {
     "props": [

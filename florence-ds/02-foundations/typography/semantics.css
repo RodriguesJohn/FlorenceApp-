@@ -1,19 +1,19 @@
 :root {
-  /* Display — soft, large, for page heroes */
+  /* Display - soft, large, for page heroes */
   --text-display-font-family: var(--font-sans);
   --text-display-font-size: var(--font-size-900);
   --text-display-font-weight: var(--font-weight-medium);
   --text-display-line-height: var(--line-height-tight);
   --text-display-letter-spacing: var(--letter-spacing-tighter);
 
-  /* Metric — balances / KPI heroes (tabular, optically tight) */
+  /* Metric - balances / KPI heroes (tabular, optically tight) */
   --text-metric-font-family: var(--font-sans);
   --text-metric-font-size: var(--font-size-800);
   --text-metric-font-weight: var(--font-weight-medium);
   --text-metric-line-height: var(--line-height-tight);
   --text-metric-letter-spacing: var(--letter-spacing-tighter);
 
-  /* Heading — size hierarchy with soft medium weight */
+  /* Heading - size hierarchy with soft medium weight */
   --text-heading-xl-font-family: var(--font-sans);
   --text-heading-xl-font-size: var(--font-size-700);
   --text-heading-xl-font-weight: var(--font-weight-medium);
@@ -63,21 +63,21 @@
   --text-body-sm-line-height: var(--line-height-normal);
   --text-body-sm-letter-spacing: var(--letter-spacing-normal);
 
-  /* Label — UI chrome ~14px, medium so Geist doesn’t read underweight */
+  /* Label - UI chrome ~14px, medium so Geist doesn’t read underweight */
   --text-label-font-family: var(--font-sans);
   --text-label-font-size: var(--font-size-200);
   --text-label-font-weight: var(--font-weight-medium);
   --text-label-line-height: var(--line-height-snug);
   --text-label-letter-spacing: var(--letter-spacing-normal);
 
-  /* Caption — muted meta, sentence case */
+  /* Caption - muted meta, sentence case */
   --text-caption-font-family: var(--font-sans);
   --text-caption-font-size: var(--font-size-200);
   --text-caption-font-weight: var(--font-weight-medium);
   --text-caption-line-height: var(--line-height-normal);
   --text-caption-letter-spacing: var(--letter-spacing-normal);
 
-  /* Overline — quiet section meta (no shouty uppercase) */
+  /* Overline - quiet section meta (no shouty uppercase) */
   --text-overline-font-family: var(--font-sans);
   --text-overline-font-size: var(--font-size-100);
   --text-overline-font-weight: var(--font-weight-medium);

@@ -14,8 +14,8 @@
     "Lightweight categorical labels"
   ],
   "whenNotToUse": [
-    "Primary actions — use Button",
-    "Long paragraphs of meaning — use text + insight card"
+    "Primary actions - use Button",
+    "Long paragraphs of meaning - use text + insight card"
   ],
   "api": {
     "props": [

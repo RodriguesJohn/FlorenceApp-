@@ -14,9 +14,9 @@
     "Binary product settings"
   ],
   "whenNotToUse": [
-    "Submitting a form choice that needs review — use Checkbox",
-    "Selecting one of many options — use Radio",
-    "Triggering an action — use Button"
+    "Submitting a form choice that needs review - use Checkbox",
+    "Selecting one of many options - use Radio",
+    "Triggering an action - use Button"
   ],
   "api": {
     "props": [

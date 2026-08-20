@@ -15,7 +15,7 @@
   ],
   "whenNotToUse": [
     "Date ranges in v1 without extra composition",
-    "Time-of-day — pair with a time control"
+    "Time-of-day - pair with a time control"
   ],
   "api": {
     "props": [

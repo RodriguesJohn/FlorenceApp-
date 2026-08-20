@@ -15,7 +15,7 @@
   ],
   "whenNotToUse": [
     "Static copy",
-    "Non-numeric status labels — use Tag/text"
+    "Non-numeric status labels - use Tag/text"
   ],
   "api": {
     "props": [

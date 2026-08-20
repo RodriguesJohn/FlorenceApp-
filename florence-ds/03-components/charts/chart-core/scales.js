@@ -6,7 +6,7 @@
  * lines of d3-scale/d3-shape that the core four actually need.
  */
 
-/** Categorical series colors. Fixed order, never cycled — a 9th series folds
+/** Categorical series colors. Fixed order, never cycled - a 9th series folds
  *  into "Other" rather than reusing a hue (see charts/README.md). */
 export const DATA_SLOTS = 8
 
@@ -64,7 +64,7 @@ export function bandScale(count, [r0, r1], { padding = 0.2 } = {}) {
 }
 
 /**
- * "Nice" axis ticks — rounds the domain out to clean 1/2/5×10ⁿ steps so the
+ * "Nice" axis ticks - rounds the domain out to clean 1/2/5×10ⁿ steps so the
  * axis reads 0 / 1,000 / 2,000 rather than 0 / 1,137 / 2,274.
  */
 export function niceTicks(min, max, count = 5) {
@@ -96,15 +96,15 @@ function round(n) {
   return Math.abs(n) < 1e-10 ? 0 : +n.toPrecision(12)
 }
 
-/** Axis ticks and table cells — comma-grouped, never compacted. */
+/** Axis ticks and table cells - comma-grouped, never compacted. */
 export function formatValue(value, { maximumFractionDigits = 2 } = {}) {
-  if (value == null || Number.isNaN(value)) return '—'
+  if (value == null || Number.isNaN(value)) return '-'
   return new Intl.NumberFormat(undefined, { maximumFractionDigits }).format(value)
 }
 
-/** Stat-tile and hero figures — compact (12.9K, 4.2M). */
+/** Stat-tile and hero figures - compact (12.9K, 4.2M). */
 export function formatCompact(value) {
-  if (value == null || Number.isNaN(value)) return '—'
+  if (value == null || Number.isNaN(value)) return '-'
   return new Intl.NumberFormat(undefined, {
     notation: 'compact',
     maximumFractionDigits: 1,
@@ -120,7 +120,7 @@ export function linePath(points) {
 }
 
 /**
- * Smooth cubic path for time-series lines — horizontal tangents at each sample
+ * Smooth cubic path for time-series lines - horizontal tangents at each sample
  * so the curve reads fluid without overshooting the data envelope.
  */
 export function smoothLinePath(points) {
@@ -171,7 +171,7 @@ export function smoothAreaPath(points, baselineY) {
 }
 
 /**
- * Rounded on the data end, square at the baseline — the mark spec for bars and
+ * Rounded on the data end, square at the baseline - the mark spec for bars and
  * columns. `orientation` is the direction the bar grows.
  */
 export function barPath({ x, y, width, height, radius = 4, orientation = 'up' }) {
@@ -192,7 +192,7 @@ export function barPath({ x, y, width, height, radius = 4, orientation = 'up' })
   }
 }
 
-/** Index of the datum nearest a pointer x — powers the crosshair snap. */
+/** Index of the datum nearest a pointer x - powers the crosshair snap. */
 export function nearestIndex(positions, pointerX) {
   if (!positions.length) return -1
   let best = 0

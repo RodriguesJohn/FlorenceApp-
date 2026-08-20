@@ -11,7 +11,7 @@ import './insight-card.css'
 /**
  * Dedicated surface for an AI recommendation or analytical insight.
  *
- * One idea per card — title states the finding, body explains why it matters,
+ * One idea per card - title states the finding, body explains why it matters,
  * and optional actions let the reader act without leaving the dashboard.
  */
 

@@ -19,8 +19,8 @@
     "Workspace switchers with nested projects"
   ],
   "whenNotToUse": [
-    "In-page section switching — use Tabs",
-    "Temporary overlays — use Modal"
+    "In-page section switching - use Tabs",
+    "Temporary overlays - use Modal"
   ],
   "api": {
     "compounds": {

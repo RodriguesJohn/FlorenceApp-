@@ -13,8 +13,8 @@
     "Short indeterminate waits tied to AI"
   ],
   "whenNotToUse": [
-    "Full-page loads of unknown length — prefer LoadingAnimation",
-    "Content placeholders — prefer ShimmerText or skeletons"
+    "Full-page loads of unknown length - prefer LoadingAnimation",
+    "Content placeholders - prefer ShimmerText or skeletons"
   ],
   "api": {
     "props": [

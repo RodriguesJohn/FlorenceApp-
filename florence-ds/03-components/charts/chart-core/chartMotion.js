@@ -3,7 +3,7 @@ import { useReducedMotion } from 'motion/react'
 /**
  * Shared motion presets for chart hover.
  *
- * Position uses a long ease-out tween — springs feel jerky when scrubbing
+ * Position uses a long ease-out tween - springs feel jerky when scrubbing
  * between discrete samples. Opacity uses slightly slower fades so dimming
  * and tooltips feel calm, not snappy.
  */

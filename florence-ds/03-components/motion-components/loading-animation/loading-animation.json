@@ -14,8 +14,8 @@
     "Empty canvas waiting on data"
   ],
   "whenNotToUse": [
-    "Agent cognition cue — ThinkingAnimation",
-    "Text-only waiting — ShimmerText"
+    "Agent cognition cue - ThinkingAnimation",
+    "Text-only waiting - ShimmerText"
   ],
   "api": {
     "props": [

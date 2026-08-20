@@ -13,8 +13,8 @@
     "Category share where ranking angles is acceptable"
   ],
   "whenNotToUse": [
-    "Close values that need ranking — use BarChart",
-    "Trends over time — use LineChart",
+    "Close values that need ranking - use BarChart",
+    "Trends over time - use LineChart",
     "More than six meaningful slices without aggregation"
   ],
   "api": {

@@ -13,8 +13,8 @@
     "Filters and form fields with known values"
   ],
   "whenNotToUse": [
-    "Free text — use Input",
-    "Very short lists (2–4) that deserve permanence — consider Radio"
+    "Free text - use Input",
+    "Very short lists (2-4) that deserve permanence - consider Radio"
   ],
   "api": {
     "props": [

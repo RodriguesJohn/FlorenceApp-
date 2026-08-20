@@ -37,7 +37,7 @@
   min-width: 0;
 }
 
-/* A short stroke, not a filled box — a box is data-weight ink at this size. */
+/* A short stroke, not a filled box - a box is data-weight ink at this size. */
 .chart-tooltip__key {
   width: 0.75rem;
   height: 0.125rem;
@@ -46,7 +46,7 @@
 }
 
 /* Values lead: the reader already has the series and wants the number. The
-   hierarchy rides on ink color against the secondary label — components draw
+   hierarchy rides on ink color against the secondary label - components draw
    weight from semantic text styles only, never the weight primitives. */
 .chart-tooltip__value {
   color: var(--color-text-primary);
@@ -82,7 +82,7 @@
   touch-action: none;
 }
 
-/* Gridlines and axes: solid hairlines one step off the surface. Never dashed —
+/* Gridlines and axes: solid hairlines one step off the surface. Never dashed -
    dashing reads as "projection" or "threshold" when it is just a grid. */
 .chart-grid-line {
   stroke: var(--color-chart-grid);
@@ -101,7 +101,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Direct labels ride the marks but never wear the series color — a light
+/* Direct labels ride the marks but never wear the series color - a light
    categorical hue is illegible as text on the surface. */
 .chart-data-label {
   fill: var(--color-text-primary);

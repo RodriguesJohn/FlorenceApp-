@@ -27,7 +27,7 @@ import './bar-chart.css'
 /**
  * Compare magnitudes across categories.
  *
- * The honest form when the reader needs to rank values — close numbers read
+ * The honest form when the reader needs to rank values - close numbers read
  * instantly as bar length, which is why the pie chart page points here for
  * that job. Single-series accepts a flat `data` array; multi-series uses
  * `categories` + `series` and renders grouped columns with a shared legend.
@@ -40,7 +40,7 @@ const MARGINS = {
   left: 44,
 }
 
-/** Space between category bands — higher padding keeps columns slim in wide cards. */
+/** Space between category bands - higher padding keeps columns slim in wide cards. */
 const BAND_PADDING = 0.48
 
 /** Bars stop growing past this width and stay centred in their band. */

@@ -402,3 +402,10 @@
     transform: none;
   }
 }
+
+@media (max-width: 40rem) {
+  .chat-pattern__header,
+  .chat-pattern__composer {
+    padding-inline: var(--space-inset-md);
+  }
+}

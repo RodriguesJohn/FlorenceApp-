@@ -14,8 +14,8 @@
     "Single-number health signals"
   ],
   "whenNotToUse": [
-    "Multi-series comparison — use charts",
-    "Narrative recommendations — use InsightCard"
+    "Multi-series comparison - use charts",
+    "Narrative recommendations - use InsightCard"
   ],
   "api": {
     "props": [

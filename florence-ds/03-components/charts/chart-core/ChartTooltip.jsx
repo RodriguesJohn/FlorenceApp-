@@ -5,7 +5,7 @@ import './chart-tooltip.css'
 /**
  * The hover readout.
  *
- * Values lead and labels follow — the legend's hierarchy inverted, because by
+ * Values lead and labels follow - the legend's hierarchy inverted, because by
  * the time a reader is hovering they already know the series and want the
  * number. Series are keyed with a short stroke rather than a filled box: at
  * this density a box is data-weight ink doing a label's job.

@@ -17,8 +17,8 @@
     "Related panels that share page chrome"
   ],
   "whenNotToUse": [
-    "Primary app navigation — use Sidebar",
-    "Stepped wizard with validation — prefer explicit steps"
+    "Primary app navigation - use Sidebar",
+    "Stepped wizard with validation - prefer explicit steps"
   ],
   "api": {
     "props": [

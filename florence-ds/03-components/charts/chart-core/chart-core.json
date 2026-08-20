@@ -9,14 +9,14 @@
     "ChartLegend",
     "ChartTable"
   ],
-  "intent": "Shared chrome for Florence charts — title, legend, loading/empty, and accessible table twin.",
+  "intent": "Shared chrome for Florence charts - title, legend, loading/empty, and accessible table twin.",
   "whenToUse": [
     "Wrapping any Florence chart mark",
     "Providing legend + table toggle consistently"
   ],
   "whenNotToUse": [
-    "Standalone KPI — use KpiCard",
-    "Non-chart panels — use layout cards"
+    "Standalone KPI - use KpiCard",
+    "Non-chart panels - use layout cards"
   ],
   "deps": [],
   "api": {

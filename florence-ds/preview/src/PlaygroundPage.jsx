@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Archive,
   ChartBar,
@@ -688,7 +688,19 @@ function DashboardPlayground() {
   const [resourcesOpen, setResourcesOpen] = useState(false)
   const [messages, setMessages] = useState(DASHBOARD_CHAT_SEED)
   const [isThinking, setIsThinking] = useState(false)
-  const [chatOpen, setChatOpen] = useState(true)
+  const [chatOpen, setChatOpen] = useState(() =>
+    typeof window !== 'undefined'
+      ? window.matchMedia('(min-width: 64rem)').matches
+      : true,
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 64rem)')
+    const handler = (e) => { if (!e.matches) setChatOpen(false) }
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   const [visibleTaskCount, setVisibleTaskCount] = useState(DASHBOARD_ROWS.length)
 
   function handleSend(content) {
@@ -1145,7 +1157,7 @@ export function PlaygroundPage() {
       <header className="playground-page-header">
         <h1>Playground</h1>
         <p>
-          App shell on Florence patterns — dashboard content with a
+          App shell on Florence patterns - dashboard content with a
           full-height assistant rail you can open and close.
         </p>
       </header>

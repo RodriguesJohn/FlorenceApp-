@@ -10,12 +10,12 @@
   ],
   "intent": "Choose exactly one option from a short visible list.",
   "whenToUse": [
-    "2–6 mutually exclusive choices shown at once"
+    "2-6 mutually exclusive choices shown at once"
   ],
   "whenNotToUse": [
-    "Long option lists — use Select",
-    "Multi-select — use Checkbox",
-    "Immediate boolean setting — use Switch"
+    "Long option lists - use Select",
+    "Multi-select - use Checkbox",
+    "Immediate boolean setting - use Switch"
   ],
   "api": {
     "props": [

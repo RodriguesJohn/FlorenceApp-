@@ -1,5 +1,5 @@
 :root {
-  /* Duration — UI stays snappy; longer steps are for occasional surfaces */
+  /* Duration - UI stays snappy; longer steps are for occasional surfaces */
   --motion-duration-0: 0ms;
   --motion-duration-100: 120ms;
   --motion-duration-150: 160ms;
@@ -9,7 +9,7 @@
   --motion-duration-500: 400ms;
   --motion-duration-600: 500ms;
 
-  /* Easing — strong custom curves (built-in CSS easings are too weak) */
+  /* Easing - strong custom curves (built-in CSS easings are too weak) */
   --motion-ease-linear: linear;
   --motion-ease-in: cubic-bezier(0.7, 0, 1, 0.5);
   --motion-ease-out: cubic-bezier(0.23, 1, 0.32, 1);

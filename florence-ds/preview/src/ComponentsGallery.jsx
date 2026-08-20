@@ -20,6 +20,8 @@ import { PieChart } from '../../03-components/charts/pie-chart/PieChart.jsx'
 import { BarChart } from '../../03-components/charts/bar-chart/BarChart.jsx'
 import { LineChart } from '../../03-components/charts/line-chart/LineChart.jsx'
 import { Timeline } from '../../03-components/timeline/Timeline.jsx'
+import { Tag } from '../../03-components/tag/Tag.jsx'
+import { Tooltip } from '../../03-components/tooltip/Tooltip.jsx'
 import { Toast } from '../../03-components/toast/Toast.jsx'
 import { ChatPattern } from '../../03-components/agentic-ui-patterns/chat-pattern/ChatPattern.jsx'
 import { ThinkingAnimation } from '../../03-components/motion-components/thinking-animation/ThinkingAnimation.jsx'
@@ -172,7 +174,7 @@ function GalleryPreview({ id }) {
       )
     case 'switches':
       return (
-        <div className="component-gallery__sample">
+        <div className="component-gallery__sample component-gallery__sample--switch">
           <Switch defaultChecked size="lg" aria-label="Notifications" />
         </div>
       )
@@ -268,7 +270,7 @@ function GalleryPreview({ id }) {
             tone="opportunity"
             eyebrow="Recommendation"
             title="Raise listing prices"
-            description="Three units look 6–9% under market."
+            description="Three units look 6-9% under market."
             confidence="High confidence"
           />
         </div>
@@ -361,6 +363,24 @@ function GalleryPreview({ id }) {
           />
         </div>
       )
+    case 'tags':
+      return (
+        <div className="component-gallery__sample component-gallery__sample--tags">
+          <Tag tone="brand">Design</Tag>
+          <Tag tone="success">Ready</Tag>
+          <Tag tone="warning">Review</Tag>
+        </div>
+      )
+    case 'tooltips':
+      return (
+        <div className="component-gallery__sample component-gallery__sample--tooltip">
+          <Tooltip content="Duplicate row" side="bottom" open>
+            <Button size="sm" variant="secondary">
+              Hover target
+            </Button>
+          </Tooltip>
+        </div>
+      )
     case 'toasts':
       return (
         <div className="component-gallery__sample">
@@ -385,7 +405,7 @@ export function ComponentsGallery({ pages, onNavigate }) {
       <header className="hero">
         <h1>Components</h1>
         <p className="lede">
-          Gallery of every building block — open any card for full docs and
+          Gallery of every building block - open any card for full docs and
           variants.
         </p>
       </header>

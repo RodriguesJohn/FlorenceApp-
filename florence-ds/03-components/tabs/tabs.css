@@ -86,7 +86,7 @@
   will-change: opacity, filter, transform;
 }
 
-/* Segmented — neutrals only; sliding pill */
+/* Segmented - neutrals only; sliding pill */
 .tabs--segmented .tabs__list {
   gap: var(--space-inline-2xs);
   padding: var(--space-inset-2xs);
@@ -106,7 +106,7 @@
   padding: var(--space-inset-sm) var(--space-inset-md);
 }
 
-/* Line — neutrals only; sliding underline */
+/* Line - neutrals only; sliding underline */
 .tabs--line .tabs__list {
   gap: var(--space-inline-md);
   width: 100%;

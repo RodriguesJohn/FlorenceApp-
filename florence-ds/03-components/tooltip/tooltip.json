@@ -14,8 +14,8 @@
     "Light affordance hints"
   ],
   "whenNotToUse": [
-    "Critical information required to act — put it in the UI",
-    "Long help content — use inline hint or modal"
+    "Critical information required to act - put it in the UI",
+    "Long help content - use inline hint or modal"
   ],
   "api": {
     "props": [

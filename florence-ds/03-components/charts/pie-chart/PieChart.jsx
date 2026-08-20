@@ -68,7 +68,7 @@ function wedgePath({ cx, cy, radius, startAngle, endAngle }) {
   ].join(' ')
 }
 
-/** Ring segment for donut hit targets — keeps the centre quiet. */
+/** Ring segment for donut hit targets - keeps the centre quiet. */
 function ringPath({ cx, cy, innerRadius, outerRadius, startAngle, endAngle }) {
   const sweep = endAngle - startAngle
   if (sweep <= 0) return ''
@@ -107,7 +107,7 @@ function ringPath({ cx, cy, innerRadius, outerRadius, startAngle, endAngle }) {
 /**
  * Fold the tail into "Other" and sort largest-first.
  *
- * Sorting is what makes a pie readable at a glance — adjacent similar angles
+ * Sorting is what makes a pie readable at a glance - adjacent similar angles
  * are the form's weakness, and descending order at least makes the ranking
  * legible. "Other" always sorts last regardless of its size.
  */
@@ -193,7 +193,7 @@ export function PieChart({
     const cy = size / 2
     const pad = 4
     const outerRadius = size / 2 - pad
-    // Thick continuous band — the SaaS donut read, not a thin stroked track.
+    // Thick continuous band - the SaaS donut read, not a thin stroked track.
     const thickness = isDonut ? Math.max(28, outerRadius * 0.34) : 0
     const innerRadius = isDonut ? Math.max(0, outerRadius - thickness) : 0
     const midRadius = isDonut ? (outerRadius + innerRadius) / 2 : outerRadius * 0.55

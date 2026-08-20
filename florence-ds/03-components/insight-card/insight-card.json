@@ -13,8 +13,8 @@
     "Risk / opportunity callouts"
   ],
   "whenNotToUse": [
-    "Raw metrics without narrative — use KpiCard",
-    "System toasts — use Toast"
+    "Raw metrics without narrative - use KpiCard",
+    "System toasts - use Toast"
   ],
   "api": {
     "props": [

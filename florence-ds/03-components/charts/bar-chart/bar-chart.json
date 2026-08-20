@@ -13,8 +13,8 @@
     "Ranking discrete categories"
   ],
   "whenNotToUse": [
-    "Part-to-whole only — PieChart may suffice",
-    "Continuous time series — prefer LineChart"
+    "Part-to-whole only - PieChart may suffice",
+    "Continuous time series - prefer LineChart"
   ],
   "api": {
     "props": [

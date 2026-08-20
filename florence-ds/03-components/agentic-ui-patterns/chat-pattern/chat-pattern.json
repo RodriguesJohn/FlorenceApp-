@@ -13,8 +13,8 @@
     "Support / ops assistants beside a workspace"
   ],
   "whenNotToUse": [
-    "Simple confirmations — use Modal/Toast",
-    "Non-conversational forms — use Input + Button"
+    "Simple confirmations - use Modal/Toast",
+    "Non-conversational forms - use Input + Button"
   ],
   "api": {
     "props": [

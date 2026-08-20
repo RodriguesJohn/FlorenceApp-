@@ -13,8 +13,8 @@
     "Inline agent status beside other UI"
   ],
   "whenNotToUse": [
-    "Numeric KPI ticks — use NumberTransition",
-    "Blocking loaders — use LoadingAnimation"
+    "Numeric KPI ticks - use NumberTransition",
+    "Blocking loaders - use LoadingAnimation"
   ],
   "api": {
     "props": [

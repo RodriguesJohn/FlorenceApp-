@@ -1087,7 +1087,7 @@ function GridPage() {
   return (
     <FoundationPage
       title="Grid systems"
-      lede="SaaS layout patterns first — app shell, canvas, workspace, metrics, and content splits. Primitives stay available as the source scale."
+      lede="SaaS layout patterns first - app shell, canvas, workspace, metrics, and content splits. Primitives stay available as the source scale."
       Semantics={GridSemanticsPage}
       Primitives={GridPrimitivesPage}
     />
@@ -1327,7 +1327,7 @@ function GettingStartedDocs() {
 
       <div className="docs">
         <section className="docs__section">
-          <h2>Option A — one-liner</h2>
+          <h2>Option A - one-liner</h2>
           <p>In your app folder:</p>
           <CopyableCode>{`npx github:RodriguesJohn/ADS-Flowrix setup --install`}</CopyableCode>
           <p>
@@ -1345,7 +1345,7 @@ import { Button } from './florence/components/button/Button.jsx'`}</CopyableCode
         </section>
 
         <section className="docs__section">
-          <h2>Option B — Preview docs locally</h2>
+          <h2>Option B - Preview docs locally</h2>
           <CopyableCode>{`cd preview
 npm install
 npm run dev`}</CopyableCode>
@@ -1358,7 +1358,7 @@ npm run dev`}</CopyableCode>
         </section>
 
         <section className="docs__section">
-          <h2>Option C — CLI without linking</h2>
+          <h2>Option C - CLI without linking</h2>
           <p>From the Florence repo root:</p>
           <CopyableCode>{`npm run flowrix -- init ./path/to/app
 npm run flowrix -- add button
@@ -1377,7 +1377,7 @@ npm run flowrix -- validate`}</CopyableCode>
               <code>var(--color-text-primary)</code>
             </li>
             <li>
-              Do not use hex or primitive ramps in components — see{' '}
+              Do not use hex or primitive ramps in components - see{' '}
               <code>AGENTS.md</code>.
             </li>
           </ol>
@@ -1423,7 +1423,7 @@ function InstallationPage({ onNavigate }) {
               className="statement__btn statement__btn--secondary"
               onClick={() => onNavigate('playground')}
             >
-              Open the playground
+              Join the workshop
             </button>
           </div>
         </section>
@@ -1597,7 +1597,7 @@ function AgentsGuidelinesPage() {
         'Prefer custom curves over built-in CSS easings; default UI motion uses ease-out',
         'Keep everyday UI motion under ~300ms; make exits faster than enters',
         'Animate transform and opacity only; honor prefers-reduced-motion',
-        'Never enter from scale(0) — start around scale(0.95)+ with opacity',
+        'Never enter from scale(0) - start around scale(0.95)+ with opacity',
         'Preview demos may use Motion (motion/react); product components should prefer semantic CSS tokens',
       ],
     },
@@ -1618,7 +1618,7 @@ function AgentsGuidelinesPage() {
         <h1>Guidelines</h1>
         <p className="lede">
           The same rules agents follow in <code>AGENTS.md</code>. Use semantic
-          roles only — never invent values.
+          roles only - never invent values.
         </p>
       </header>
 
@@ -1680,7 +1680,7 @@ const FLORENCE_ROADMAP = [
     status: 'next',
     phase: 'Next',
     title: 'Retrieval accuracy',
-    body: 'Raise how reliably agents find the right tokens, components, and rules — and keep improving the components they retrieve.',
+    body: 'Raise how reliably agents find the right tokens, components, and rules - and keep improving the components they retrieve.',
   },
   {
     status: 'next',
@@ -1703,7 +1703,8 @@ function AboutPage({ onNavigate }) {
         <div className="layout-split home-pair">
         <article className="statement">
           <h1 className="statement__brand text-display">
-            Florence AI-ready design system
+            <span>Florence</span>
+            <span>AI-ready design system</span>
           </h1>
 
           <p className="statement__body text-body">
@@ -1716,9 +1717,9 @@ function AboutPage({ onNavigate }) {
             <button
               type="button"
               className="statement__btn statement__btn--primary"
-              onClick={() => onNavigate('playground')}
+              onClick={() => onNavigate('gallery')}
             >
-              Open the playground
+              Open view components
             </button>
             <a
               className="statement__btn statement__btn--secondary"
@@ -3525,7 +3526,7 @@ function ButtonsPage() {
       <header className="hero">
         <h1>Buttons</h1>
         <p className="lede">
-          Action hierarchy across primary, secondary, tertiary, and danger —
+          Action hierarchy across primary, secondary, tertiary, and danger -
           each in lg, md, and sm.
         </p>
       </header>
@@ -3862,7 +3863,7 @@ function SwitchesPage() {
       <header className="hero">
         <h1>Switches</h1>
         <p className="lede">
-          Binary toggles for settings and feature flags — each in lg, md, and
+          Binary toggles for settings and feature flags - each in lg, md, and
           sm.
         </p>
       </header>
@@ -4038,7 +4039,7 @@ function RadiosPage() {
       <header className="hero">
         <h1>Radios</h1>
         <p className="lede">
-          Single-select choices for settings and forms — each in lg, md, and
+          Single-select choices for settings and forms - each in lg, md, and
           sm.
         </p>
       </header>
@@ -4149,7 +4150,7 @@ function RadiosPage() {
               id="radio-group"
               title="Group"
               aboutTitle="Usage"
-              about="Always group radios that share one decision. One selected value per group — never use radios for multi-select."
+              about="Always group radios that share one decision. One selected value per group - never use radios for multi-select."
               lang="jsx"
               code={`<RadioGroup label="Billing" defaultValue="monthly">
               <Radio value="monthly" label="Monthly" />
@@ -4282,7 +4283,7 @@ function CheckboxesPage() {
       <header className="hero">
         <h1>Checkboxes</h1>
         <p className="lede">
-          Multi-select choices and confirmations — each in lg, md, and sm.
+          Multi-select choices and confirmations - each in lg, md, and sm.
         </p>
       </header>
 
@@ -4509,7 +4510,7 @@ function SelectsPage() {
       <header className="hero">
         <h1>Selects</h1>
         <p className="lede">
-          Single choice from a list — each in lg, md, and sm.
+          Single choice from a list - each in lg, md, and sm.
         </p>
       </header>
 
@@ -4785,7 +4786,7 @@ function TabsPage() {
       <header className="hero">
         <h1>Tabs</h1>
         <p className="lede">
-          Switch between related views in place — segmented or line, in lg,
+          Switch between related views in place - segmented or line, in lg,
           md, and sm.
         </p>
       </header>
@@ -4861,7 +4862,7 @@ function TabsPage() {
                 id="tabs-segmented"
                 title="Segmented"
                 aboutTitle="Usage"
-                about="Use segmented tabs for compact local switching — preview/code, filters, or settings panes."
+                about="Use segmented tabs for compact local switching - preview/code, filters, or settings panes."
                 lang="jsx"
                 code={`<Tabs defaultValue="preview" size="lg" variant="segmented">
                 <TabsList>
@@ -5024,7 +5025,7 @@ function TextareasPage() {
       <header className="hero">
         <h1>Textareas</h1>
         <p className="lede">
-          Multi-line fields for notes and messages — each in lg, md, and sm.
+          Multi-line fields for notes and messages - each in lg, md, and sm.
         </p>
       </header>
 
@@ -5138,14 +5139,14 @@ function TextareasPage() {
               lang="jsx"
               code={`<Textarea
               label="Feedback"
-              hint="Optional — share anything we should know."
+              hint="Optional - share anything we should know."
               placeholder="What stood out?"
             />`}
             preview={
               <div className="textarea-preview">
                 <Textarea
                   label="Feedback"
-                  hint="Optional — share anything we should know."
+                  hint="Optional - share anything we should know."
                   placeholder="What stood out?"
                   size="lg"
                 />
@@ -5237,7 +5238,7 @@ function ModalsPage() {
       <header className="hero">
         <h1>Modals</h1>
         <p className="lede">
-          Focused dialogs for confirmations and short tasks — each in lg, md,
+          Focused dialogs for confirmations and short tasks - each in lg, md,
           and sm.
         </p>
       </header>
@@ -5416,7 +5417,7 @@ function ModalsPage() {
               id="modal-body"
               title="Body copy"
               aboutTitle="Usage"
-              about="Modal wraps ModalCard — title, body copy, and actions. Use denser forms only when the flow truly needs inputs."
+              about="Modal wraps ModalCard - title, body copy, and actions. Use denser forms only when the flow truly needs inputs."
               lang="jsx"
               code={`<Modal
               open={open}
@@ -5959,7 +5960,7 @@ function InsightCardsPage() {
     `  tone="${tone}"`,
     `  eyebrow="Recommendation"`,
     `  title="Raise listing price on 3 underpriced units"`,
-    `  description="Comparable closes in the last 14 days suggest these listings are 6–9% below market. Adjusting could add about $42k in projected revenue."`,
+    `  description="Comparable closes in the last 14 days suggest these listings are 6-9% below market. Adjusting could add about $42k in projected revenue."`,
     showConfidence ? `  confidence="High confidence"` : null,
     showSource ? `  source="Based on last 30 days of closes"` : null,
     showActions
@@ -5979,7 +5980,7 @@ function InsightCardsPage() {
       <header className="hero">
         <h1>Insight cards</h1>
         <p className="lede">
-          Dedicated surfaces for AI recommendations and analytical findings —
+          Dedicated surfaces for AI recommendations and analytical findings -
           one idea per card, with optional confidence and actions.
         </p>
       </header>
@@ -5997,7 +5998,7 @@ function InsightCardsPage() {
                 tone={tone}
                 eyebrow="Recommendation"
                 title="Raise listing price on 3 underpriced units"
-                description="Comparable closes in the last 14 days suggest these listings are 6–9% below market. Adjusting could add about $42k in projected revenue."
+                description="Comparable closes in the last 14 days suggest these listings are 6-9% below market. Adjusting could add about $42k in projected revenue."
                 confidence={showConfidence ? 'High confidence' : undefined}
                 source={
                   showSource ? 'Based on last 30 days of closes' : undefined
@@ -6091,7 +6092,7 @@ function InsightCardsPage() {
                 id="insight-card-warning"
                 title="Warning tone"
                 aboutTitle="Usage"
-                about="Use warning when the finding needs attention but is not a failure — risk of churn, stalled tasks, or a threshold approaching."
+                about="Use warning when the finding needs attention but is not a failure - risk of churn, stalled tasks, or a threshold approaching."
                 lang="jsx"
                 code={`<InsightCard
   tone="warning"
@@ -6122,13 +6123,13 @@ function InsightCardsPage() {
                 id="insight-card-info"
                 title="Informational"
                 aboutTitle="Usage"
-                about="Use info for explanatory findings that do not demand an immediate action — patterns, context, or summaries the reader should know."
+                about="Use info for explanatory findings that do not demand an immediate action - patterns, context, or summaries the reader should know."
                 lang="jsx"
                 code={`<InsightCard
   tone="info"
   eyebrow="Insight"
   title="Weekend traffic is outpacing weekdays"
-  description="Saturday sessions are up 22% versus the weekday average. Consider shifting promo spend toward Friday–Sunday."
+  description="Saturday sessions are up 22% versus the weekday average. Consider shifting promo spend toward Friday-Sunday."
   source="Traffic, last 28 days"
 />`}
                 preview={
@@ -6137,7 +6138,7 @@ function InsightCardsPage() {
                       tone="info"
                       eyebrow="Insight"
                       title="Weekend traffic is outpacing weekdays"
-                      description="Saturday sessions are up 22% versus the weekday average. Consider shifting promo spend toward Friday–Sunday."
+                      description="Saturday sessions are up 22% versus the weekday average. Consider shifting promo spend toward Friday-Sunday."
                       source="Traffic, last 28 days"
                     />
                   </div>
@@ -6245,7 +6246,7 @@ function PieChartsPage() {
         <h1>Pie charts</h1>
         <p className="lede">
           Part-to-whole share for a handful of segments, as a donut or a solid
-          pie. Reach for it when the reader needs a rough share at a glance —
+          pie. Reach for it when the reader needs a rough share at a glance -
           not when they need to rank close values.
         </p>
       </header>
@@ -6300,7 +6301,7 @@ function PieChartsPage() {
                 id="pie-chart-other"
                 title="The six-segment cap"
                 aboutTitle="Usage"
-                about="Past six slices adjacent angles stop being distinguishable, so the component folds the tail into a single Other slice in the de-emphasis gray. The folded categories are still listed individually in the table view — nothing is lost, it just stops competing for a hue."
+                about="Past six slices adjacent angles stop being distinguishable, so the component folds the tail into a single Other slice in the de-emphasis gray. The folded categories are still listed individually in the table view - nothing is lost, it just stops competing for a hue."
                 lang="jsx"
                 code={`<PieChart
   title="Traffic by source"
@@ -6322,7 +6323,7 @@ function PieChartsPage() {
                 id="pie-chart-wrong-form"
                 title="When not to use it"
                 aboutTitle="Usage"
-                about="These four regions are within 7% of each other. The pie makes them look identical because the eye cannot rank similar angles — the same data as a bar chart is read instantly. Use a pie for rough share, a bar for comparison."
+                about="These four regions are within 7% of each other. The pie makes them look identical because the eye cannot rank similar angles - the same data as a bar chart is read instantly. Use a pie for rough share, a bar for comparison."
                 lang="jsx"
                 code={`// Close values: reach for a bar chart instead.
 <PieChart data={regions} />`}
@@ -6330,7 +6331,7 @@ function PieChartsPage() {
                   <div className="pie-chart-preview">
                     <PieChart
                       title="Revenue by region"
-                      description="Close values — the wrong job for this form"
+                      description="Close values - the wrong job for this form"
                       variant="pie"
                       data={PIE_CLOSE_VALUES}
                     />
@@ -6389,7 +6390,7 @@ function BarChartsPage() {
         <h1>Bar charts</h1>
         <p className="lede">
           Compare magnitudes across categories. Reach for it when the reader
-          needs to rank values — close numbers read instantly as bar length.
+          needs to rank values - close numbers read instantly as bar length.
         </p>
       </header>
 
@@ -6403,7 +6404,7 @@ function BarChartsPage() {
             <div className="bar-chart-preview">
               <BarChart
                 title="Revenue by region"
-                description="Close values — the right job for this form"
+                description="Close values - the right job for this form"
                 orientation={orientation}
                 showGrid={showGrid}
                 data={PIE_CLOSE_VALUES}
@@ -6554,7 +6555,7 @@ function LineChartsPage() {
         <h1>Line charts</h1>
         <p className="lede">
           Change and progress over time. Reach for it when the reader needs to
-          follow a trajectory — not compare unrelated magnitudes at one moment.
+          follow a trajectory - not compare unrelated magnitudes at one moment.
         </p>
       </header>
 
@@ -6562,7 +6563,7 @@ function LineChartsPage() {
         <ComponentMaster
           id="line-chart-master"
           summary="Switch between line and area, and toggle grid lines."
-          about="A line chart answers “how is this moving?” across ordered samples. Segments stay straight — no smoothing that invents values between points. Hover snaps to the nearest sample and reads every series at that moment."
+          about="A line chart answers “how is this moving?” across ordered samples. Segments stay straight - no smoothing that invents values between points. Hover snaps to the nearest sample and reads every series at that moment."
           code={masterCode}
           preview={
             <div className="line-chart-preview">
@@ -6639,7 +6640,7 @@ function LineChartsPage() {
                 id="line-chart-area"
                 title="Area variant"
                 aboutTitle="Usage"
-                about="Area fill helps when volume under the curve matters — cumulative totals, capacity used, or anything where the space below the line carries meaning. Keep single-series area unless the reader truly needs to compare stacked volume."
+                about="Area fill helps when volume under the curve matters - cumulative totals, capacity used, or anything where the space below the line carries meaning. Keep single-series area unless the reader truly needs to compare stacked volume."
                 lang="jsx"
                 code={`<LineChart
   title="Sessions"
@@ -6854,7 +6855,7 @@ function TimelinesPage() {
       <header className="hero">
         <h1>Timelines</h1>
         <p className="lede">
-          A vertical sequence of now, next, and later — for roadmaps and
+          A vertical sequence of now, next, and later - for roadmaps and
           multi-stage work, not for charts.
         </p>
       </header>
@@ -7414,7 +7415,7 @@ function ToastsPage() {
               id="toast-action"
               title="With action"
               aboutTitle="Usage"
-              about="Add one clear follow-up when the next step matters — undo, view, or retry."
+              about="Add one clear follow-up when the next step matters - undo, view, or retry."
               lang="jsx"
               code={`<Toast
               status="success"
@@ -7445,7 +7446,7 @@ function ToastsPage() {
               id="toast-live"
               title="Timed"
               aboutTitle="Usage"
-              about="Use duration for brief confirmations. Keep copy short — anything critical belongs in a modal."
+              about="Use duration for brief confirmations. Keep copy short - anything critical belongs in a modal."
               lang="jsx"
               code={`<Toast
               open={open}
@@ -7697,7 +7698,7 @@ function ShimmerTextPage() {
         <ComponentMaster
           id="shimmer-text-master"
           summary="Change the speed to preview the shimmer treatment."
-          about="Use ShimmerText for short indeterminate processing copy. Prefer it only while waiting — swap to real content when ready."
+          about="Use ShimmerText for short indeterminate processing copy. Prefer it only while waiting - swap to real content when ready."
           code={masterCode}
           preview={
             <div className="shimmer-text-preview">
@@ -8186,7 +8187,7 @@ function SidebarsPage() {
                       >
                         Documents
                       </SidebarItem>
-                      <SidebarItem icon={<File />}>Sprint 28 — Product spec</SidebarItem>
+                      <SidebarItem icon={<File />}>Sprint 28 - Product spec</SidebarItem>
                       <SidebarItem icon={<Layers />}>
                         Design system update
                       </SidebarItem>
@@ -8488,10 +8489,8 @@ export default function App() {
     >
       <header className="topbar">
         <div className="topbar__brand">
-          <a href="/florence" className="topbar__home">
-            <strong>Florence</strong>
-            <span>AI-ready design system</span>
-          </a>
+          <strong>Florence</strong>
+          <span>AI-ready design system</span>
         </div>
         <div className="topbar__actions">
           <ThemeToggle theme={theme} onChange={setTheme} />
@@ -8530,8 +8529,9 @@ export default function App() {
           className="nav-toggle"
           onClick={() => setNavOpen((open) => !open)}
           aria-expanded={navOpen}
+          aria-label={navOpen ? 'Close menu' : 'Open menu'}
         >
-          {navOpen ? 'Close' : 'Menu'}
+          {navOpen ? <X strokeWidth={1.75} /> : <Menu strokeWidth={1.75} />}
         </button>
         {content}
       </div>

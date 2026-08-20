@@ -9,7 +9,7 @@ import './chart-frame.css'
  * The container every chart mounts in: title, legend, the table-view twin, and
  * the empty / loading states.
  *
- * Height is never fixed on the frame — the plot has its own height and the
+ * Height is never fixed on the frame - the plot has its own height and the
  * axis band, legend, and caption add to it, so a card can't end up with a
  * nested scrollbar that hides the x-axis.
  */

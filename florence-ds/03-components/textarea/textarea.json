@@ -12,8 +12,8 @@
     "Comments, notes, descriptions, longer form fields"
   ],
   "whenNotToUse": [
-    "Single-line values — use Input",
-    "Structured choices — use Select"
+    "Single-line values - use Input",
+    "Structured choices - use Select"
   ],
   "api": {
     "props": [
