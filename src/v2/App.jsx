@@ -9,6 +9,7 @@ import * as PricingCard from "./PricingCard.jsx";
 import { Entrance, EntranceItem, entranceChild, entranceViewport } from "./entrance.jsx";
 import { StudioProcessLoop } from "./StudioProcessLoop.jsx";
 import { NavMenu } from "./NavMenu.jsx";
+import { WorkshopCountdown } from "./WorkshopCountdown.jsx";
 import profilePicture from "../assets/Profile Picture.jpg";
 import studioAbstract from "../assets/studio-abstract.png";
 import caseStudiesHeroVideo from "../assets/case-studies-hero.mp4";
@@ -442,9 +443,9 @@ const workPathways = [
     color1: "#8b5cf6",
     color2: "#ddd6fe",
     features: [
-      "Ambiguous idea to a fully functional product",
-      "A real prototype you can test with users",
-      "Validate the product before you scale it"
+      "End-to-end audits, reports, and analysis",
+      "Evals, components, contracts, metadata, intent, and reusability",
+      "Deliverables across Figma, code, animation, and foundations"
     ]
   },
   {
@@ -453,11 +454,10 @@ const workPathways = [
     color1: "#10b981",
     color2: "#a7f3d0",
     ctaLabel: "Join Workshop",
-    ctaHref: "/design-systems",
+    ctaHref: "/workshop",
     features: [
-      "Access to courses, resources, and AI workflows",
-      "Learn at your own pace, around your real work",
-      "Level up on real projects, not toy demos"
+      "Hands-on workshop to audit and build AI-ready design systems",
+      "Practical tooling and workflows"
     ]
   }
 ];
@@ -490,9 +490,6 @@ function StudioProcess() {
             <h2 id="studio-process-title" className="studio-process-title">
               Audit, design, build, ship.
             </h2>
-            <p className="studio-process-lede">
-              Human judgment sets direction. Agentic workflows move the work.
-            </p>
           </EntranceItem>
 
           <EntranceItem className="studio-process-visual">
@@ -679,7 +676,7 @@ const homeOffers = [
     description:
       "Most prototypes get thrown out at handoff. We get your design system agent-ready, so the prototype becomes production code instead of a rebuild.",
     slug: "ai-native-products",
-    link: "/design-systems",
+    link: "/workshop",
     stage: "Systems",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
@@ -698,7 +695,8 @@ const homeOffers = [
 
 const homeProblems = [
   {
-    title: "Product and design teams are moving fast but they're shipping AI slop.",
+    title: "Product and design teams move fast but ship AI slop.",
+    titleLines: ["Product and design teams", "move fast but ship AI slop."],
     fadedLabelLines: ["Reduce AI", "Slop"],
     color1: "#3b82f6",
     color2: "#bae6fd"
@@ -1183,23 +1181,6 @@ const newsletterCompanies = [
 
 const newsletterUrl = "https://substack.com/@johnrodrigues";
 const academyUrl = "/academy";
-
-function handleCohortShaderMove(event) {
-  const card = event.currentTarget;
-  const rect = card.getBoundingClientRect();
-  const x = ((event.clientX - rect.left) / rect.width) * 100;
-  const y = ((event.clientY - rect.top) / rect.height) * 100;
-
-  card.style.setProperty("--shader-x", `${x.toFixed(2)}%`);
-  card.style.setProperty("--shader-y", `${y.toFixed(2)}%`);
-}
-
-function handleCohortShaderLeave(event) {
-  const card = event.currentTarget;
-
-  card.style.setProperty("--shader-x", "18%");
-  card.style.setProperty("--shader-y", "16%");
-}
 
 const academyProofVideo = "/academy/hero.mp4?v=hero-cd598d71";
 const academyProofVideoMobile = "/academy/hero-mobile.mp4?v=hero-cd598d71";
@@ -2044,6 +2025,25 @@ function StudioHome({ isHistory = false }) {
         </div>
       </motion.nav>
 
+      {!isHistory && (
+        <a
+          className="home-workshop-bar"
+          href="/workshop#workshop-offer"
+          aria-label="Reserve your seat for the AI-Ready Design System Workshop on August 29 at 9:00 AM Pacific Time"
+        >
+          <span className="home-workshop-bar-inner">
+            <span className="home-workshop-date">August 29 · 9:00 AM PT</span>
+            <span className="home-workshop-actions">
+              <WorkshopCountdown className="is-home-banner" label="Workshop starts in" />
+              <span className="home-workshop-cta">
+                Reserve your seat
+                <span className="home-workshop-arrow" aria-hidden="true">↗</span>
+              </span>
+            </span>
+          </span>
+        </a>
+      )}
+
       {isHistory ? (
         <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
           <DotMatrixBackground className="v2-hero-entrance-dots" intensity={3.2} dotScale={1.15} />
@@ -2155,7 +2155,15 @@ function StudioHome({ isHistory = false }) {
                       ))}
                     </span>
                   ) : null}
-                  <h3 className="offering-thumb-title">{step.title}</h3>
+                  <h3 className="offering-thumb-title">
+                    {step.titleLines
+                      ? step.titleLines.map((line) => (
+                          <span className="offering-title-line" key={line}>
+                            {line}
+                          </span>
+                        ))
+                      : step.title}
+                  </h3>
                 </div>
               </EntranceItem>
             ))}
@@ -2169,7 +2177,7 @@ function StudioHome({ isHistory = false }) {
             <EntranceItem className="home-florence-header">
               <div className="home-florence-copy">
                 <h2 id="home-florence-title" className="home-florence-title">
-                  Florence Agent Ready Design System
+                  Work Highlight
                 </h2>
               </div>
               <a className="home-florence-cta" href="/florence">
@@ -2197,7 +2205,7 @@ function StudioHome({ isHistory = false }) {
 
       {!isHistory && <StudioProcess />}
 
-      <section className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
+      <section id="tools" className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
         {isHistory ? (
           <div className="approach-inner reveal">
             <div>
@@ -2311,12 +2319,15 @@ function StudioHome({ isHistory = false }) {
               </div>
             </div>
           ) : (
-            <Entrance className="bio-copy">
+            <Entrance className="bio-copy" initial={false}>
               <EntranceItem as="h2" id="v2-bio-title">
                 <span>Your Design Engineering Partner</span>
               </EntranceItem>
               <EntranceItem as="p">
-                I combine AI strategy and design engineering to help teams ship products people trust, from startup to enterprise.
+                I work with teams from startups to enterprise, combining AI strategy and design engineering to turn complex technology into products people trust. I hold a Master's in Interaction Design, a Bachelor's in Engineering, and completed Stanford's AI and UX program.
+              </EntranceItem>
+              <EntranceItem as="p">
+                I've earned recognition from JPMorgan Chase leadership, and my Substack, four years running, is read by 4,200+ designers, leaders, and founders from Apple, Google, and other top companies.
               </EntranceItem>
               <EntranceItem className="bio-actions">
                 <a
@@ -2408,6 +2419,12 @@ function StudioHome({ isHistory = false }) {
         <section className="cohort-section" aria-labelledby="cohort-card-title" data-nav-theme="dark">
           <Entrance className="cohort-section-inner">
             <EntranceItem as="div" className="cohort-card">
+              <OfferingShader
+                color1="#7c3aed"
+                color2="#0ea5e9"
+                seed={8.4}
+                className="cohort-card-shader"
+              />
               <div className="cohort-card-copy">
                 <div className="cohort-card-meta" aria-label="Cohort highlights">
                   <span>4.6/5 rating</span>

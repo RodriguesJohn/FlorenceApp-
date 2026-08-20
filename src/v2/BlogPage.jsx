@@ -1,5 +1,5 @@
 import React from "react";
-import { NavMenu } from "./NavMenu.jsx";
+import { SiteHeader } from "./SiteHeader.jsx";
 import { blogPosts, getBlogPost } from "./blogData.js";
 import "./blog.css";
 
@@ -41,12 +41,7 @@ function openBookingModal(event) {
 function BlogShell({ children }) {
   return (
     <div className="blog-page">
-      <header className="blog-nav">
-        <a className="blog-brand" href="/" aria-label="Human AI Studio home">
-          Human AI Studio
-        </a>
-        <NavMenu />
-      </header>
+      <SiteHeader />
       {children}
       <footer className="blog-footer">
         <a href="/">Studio</a>

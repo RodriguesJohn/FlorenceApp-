@@ -1,6 +1,6 @@
 import React from "react";
 import { Entrance, EntranceItem } from "./entrance.jsx";
-import { NavMenu } from "./NavMenu.jsx";
+import { SiteHeader } from "./SiteHeader.jsx";
 import { WebsitesHero } from "./WebsitesHero.jsx";
 import { websiteProjects } from "./caseStudiesData.js";
 import googleCompanyLogo from "../assets/companies/GoogleLogog.png";
@@ -246,13 +246,7 @@ export default function WebsitesPage() {
 
   return (
     <div className={`web-page${isDark ? " web-page--dark" : ""}`}>
-      <header className="web-nav">
-        <a className="web-brand" href="/">
-          <span className="web-brand-mark" aria-hidden="true" />
-          Human AI Studio
-        </a>
-        <NavMenu />
-      </header>
+      <SiteHeader />
 
       <main className="web-main">
         <WebsitesHero

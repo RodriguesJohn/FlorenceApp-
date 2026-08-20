@@ -10,9 +10,8 @@ import "./design-systems.css";
 
 const WORKSHOP_URL = "https://maven.com/humanaistudio/ai-ready-design-system-workshop";
 const MASTERCLASS_URL = "https://maven.com/p/7ff349/ai-ready-design-systems-masterclass";
+const BOOKING_URL = "https://cal.com/john-rodrigues-rqt2lg/15min";
 const newsletterUrl = "https://substack.com/@johnrodrigues";
-const footerVideoUrl =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260619_191346_9d19d66e-86a4-47f7-8dc6-712c1788c3b2.mp4";
 
 const outcomes = [
   {
@@ -82,7 +81,7 @@ function CheckIcon() {
 
 function trackWorkshopClick(href, label, location) {
   track(href === WORKSHOP_URL ? "Workshop CTA Click" : "Masterclass CTA Click", {
-    route: "/design-systems",
+    route: "/workshop",
     label,
     location,
     href
@@ -163,7 +162,8 @@ export default function DesignSystemsPage() {
           <div className="ds-audit-hero-copy">
             <div className="ds-hero-main">
               <EntranceItem as="h1" id="ds-audit-title">
-                Everything you need to make your design system agent-ready.
+                <span>Everything you need to make</span>
+                <span>your design system agent-ready.</span>
               </EntranceItem>
               <EntranceItem as="p" className="ds-audit-intro">
                 Learn the framework, evals, component architecture, and step-by-step
@@ -274,7 +274,8 @@ export default function DesignSystemsPage() {
           </EntranceItem>
           <div className="ds-masterclass-copy">
             <EntranceItem as="h2" id="masterclass-title">
-              Not ready for the workshop yet?
+              <span>Not ready for the</span>
+              <span>workshop yet?</span>
             </EntranceItem>
             <EntranceItem as="p">
               Join the free AI-Ready Design Systems Masterclass. Learn what changes when
@@ -301,7 +302,8 @@ export default function DesignSystemsPage() {
       <section className="ds-agenda" aria-labelledby="agenda-title">
         <Entrance className="ds-audit-rail">
           <EntranceItem as="h2" id="agenda-title">
-            Four focused hours from framework to implementation.
+            <span>Four focused hours</span>
+            <span>from framework to implementation.</span>
           </EntranceItem>
           <ol className="ds-agenda-list">
             {agenda.map((item, index) => (
@@ -428,7 +430,8 @@ export default function DesignSystemsPage() {
       <section className="ds-final-choice" aria-labelledby="final-choice-title">
         <Entrance className="ds-final-choice-inner">
           <EntranceItem as="h2" id="final-choice-title">
-            Start with the free masterclass, or go deeper in the live workshop.
+            <span>Start with the free masterclass, or</span>
+            <span>go deeper in the live workshop.</span>
           </EntranceItem>
           <EntranceItem className="ds-audit-actions">
             <CtaLink href={WORKSHOP_URL}>Reserve your workshop seat</CtaLink>
@@ -438,17 +441,6 @@ export default function DesignSystemsPage() {
       </section>
 
       <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
-        <video
-          className="footer-growth-video"
-          src={footerVideoUrl}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-        />
-        <div className="footer-growth-scrim" aria-hidden="true" />
         <div className="site-footer-inner">
           <Entrance className="footer-brand">
             <EntranceItem as="a" className="brand" href="/#top" aria-label="Human AI Studio home">
@@ -468,9 +460,14 @@ export default function DesignSystemsPage() {
             <EntranceItem as="a" href="mailto:john@humanaistudio.ai">
               john@humanaistudio.ai
             </EntranceItem>
+            <EntranceItem as="a" href={BOOKING_URL} target="_blank" rel="noreferrer">
+              Book a call
+            </EntranceItem>
           </Entrance>
         </div>
-        <div className="footer-wordmark" aria-hidden="true">Human AI Studio</div>
+        <EntranceItem as="div" className="footer-wordmark" aria-hidden="true">
+          Human AI Studio
+        </EntranceItem>
       </footer>
     </main>
   );

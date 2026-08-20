@@ -61,6 +61,7 @@ function blogPlugin() {
 
 function htmlAliases() {
   const aliases = {
+    "/workshop": "/design-systems.html",
     "/florence": "/florence.html",
     "/florence/system": "/florence-system.html"
   };
@@ -96,6 +97,7 @@ export default defineConfig({
           ["academy", "academy.html"],
           ["websites", "websites.html"],
           ["caseStudies", "case-studies.html"],
+          ["tools", "tools.html"],
           ["designSystems", "design-systems.html"],
           ["product", "product.html"],
           ["offeringDesignEngineering", "offering-design-engineering.html"],

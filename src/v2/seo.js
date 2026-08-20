@@ -31,7 +31,20 @@ const pages = {
       "Selected AI systems, product design, design engineering, and growth work by Human AI Studio for startups and enterprise teams.",
     type: "CollectionPage"
   },
+  "/tools": {
+    title: "Tools | Human AI Studio",
+    description:
+      "Open-source tools from Human AI Studio for connecting everyday workflows with AI agents.",
+    type: "CollectionPage"
+  },
+  "/workshop": {
+    title: "AI-Ready Design System Workshop | Human AI Studio",
+    description:
+      "Everything you need to make your design system agent-ready: the framework, readiness evals, component architecture, and a step-by-step checklist.",
+    type: "Course"
+  },
   "/design-systems": {
+    path: "/workshop",
     title: "AI-Ready Design System Workshop | Human AI Studio",
     description:
       "Everything you need to make your design system agent-ready: the framework, readiness evals, component architecture, and a step-by-step checklist.",

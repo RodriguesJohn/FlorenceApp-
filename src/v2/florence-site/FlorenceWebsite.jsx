@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Play } from "lucide-react";
 import demoStill from "./assets/demo-still.png";
+import { SiteHeader } from "../SiteHeader.jsx";
 import "./florence-website.css";
 
-const MASTERCLASS_URL = "/design-systems";
+const MASTERCLASS_URL = "/workshop";
 const SYSTEM_URL = "/florence/system";
 const GIANT_WORD = "FLORENCE";
 const ASCII_GLYPHS = "█▓▒░#@*+=-:/\\";
@@ -163,10 +164,9 @@ export default function FlorenceWebsite() {
   }, []);
 
   return (
-    <div className="hero">
-      <a className="hero__studio" href="/">
-        Human AI Studio
-      </a>
+    <>
+      <SiteHeader />
+      <div className="hero">
       <div className="hero__bloom" aria-hidden="true" />
       <div className="hero__mast">
         <GiantMark />
@@ -194,6 +194,7 @@ export default function FlorenceWebsite() {
       </div>
 
       <DemoReel />
-    </div>
+      </div>
+    </>
   );
 }

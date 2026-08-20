@@ -19,7 +19,7 @@ const academyUrl = "/academy";
 const studioUrl = "/";
 const allWorkUrl = "/case-studies";
 const florenceUrl = "/florence";
-const designSystemsUrl = "/design-systems";
+const designSystemsUrl = "/workshop";
 const blogUrl = "/blog";
 
 function trackAcademyNavClick() {
@@ -41,7 +41,7 @@ function trackWorkshopNavClick() {
 const serviceLinks = [
   { label: "All work", href: allWorkUrl },
   { label: "Florence", href: florenceUrl },
-  { label: "Design systems workshop", href: designSystemsUrl },
+  { label: "Tools", href: "/tools" },
   { label: "Blog", href: blogUrl }
 ];
 

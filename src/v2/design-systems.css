@@ -246,12 +246,27 @@
 }
 
 .ds-audit-hero h1 {
-  max-width: 14ch;
+  max-width: none;
   margin: 0;
-  font-size: clamp(2.35rem, 4vw, 3.75rem);
+  font-size: clamp(2.35rem, 3.65vw, 3.4rem);
   font-weight: 500;
   letter-spacing: -0.045em;
   line-height: 1.05;
+  text-align: start;
+  overflow-wrap: break-word;
+}
+
+.ds-audit-hero h1 span {
+  display: block;
+  width: 100%;
+  text-align: start;
+  white-space: normal;
+}
+
+@media (min-width: 1280px) {
+  .ds-audit-hero h1 span {
+    white-space: nowrap;
+  }
 }
 
 .ds-audit-intro {
@@ -672,8 +687,13 @@
 }
 
 .ds-masterclass h2 {
-  max-width: 12ch;
-  font-size: clamp(2.2rem, 4vw, 3.9rem);
+  max-width: none;
+  font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+}
+
+.ds-masterclass h2 span {
+  display: block;
+  white-space: nowrap;
 }
 
 .ds-masterclass-copy > p:not(.ds-section-kicker, .ds-masterclass-proof) {
@@ -733,7 +753,12 @@
 }
 
 .ds-agenda h2 {
-  max-width: 17ch;
+  max-width: none;
+}
+
+.ds-agenda h2 span {
+  display: block;
+  white-space: nowrap;
 }
 
 .ds-agenda-list {
@@ -859,9 +884,7 @@
 }
 
 .ds-offer {
-  background:
-    radial-gradient(48rem 36rem at 50% 10%, rgba(139, 92, 246, 0.18), transparent 70%),
-    #070708;
+  background: #070708;
 }
 
 .ds-offer-card {
@@ -1063,7 +1086,12 @@
 }
 
 .ds-final-choice h2 {
-  max-width: 14ch;
+  max-width: none;
+}
+
+.ds-final-choice h2 span {
+  display: block;
+  white-space: nowrap;
 }
 
 @media (max-width: 1100px) {
@@ -1115,6 +1143,10 @@
 }
 
 @media (max-width: 700px) {
+  .ds-agenda h2 span {
+    white-space: normal;
+  }
+
   .ds-audit-page {
     --ds-banner-height: 4.75rem;
   }
@@ -1182,6 +1214,10 @@
     max-width: 100%;
     font-size: clamp(2.25rem, 9vw, 3.3rem);
     letter-spacing: -0.052em;
+    white-space: normal;
+  }
+
+  .ds-audit-hero h1 span {
     white-space: normal;
   }
 
@@ -1272,6 +1308,10 @@
 
   .ds-audit-page .footer-wordmark {
     font-size: clamp(1.5rem, 9vw, 3rem);
+  }
+
+  .ds-final-choice h2 span {
+    white-space: normal;
   }
 }
 

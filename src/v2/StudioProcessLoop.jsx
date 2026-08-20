@@ -24,15 +24,6 @@ export function StudioProcessLoop({ steps }) {
         activeIndex={activeIndex}
         reducedMotion={shouldReduceMotion}
       />
-
-      <ol className="studio-process-a11y">
-        {steps.map((step) => (
-          <li key={step.name}>
-            <span>{step.name}</span>
-            <span>{step.body}</span>
-          </li>
-        ))}
-      </ol>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SaaSProductMockup from "./SaaSProductMockup.jsx";
+import { SiteHeader } from "./SiteHeader.jsx";
 import "./product.css";
 
 const bookingUrl = "https://cal.com/john-rodrigues-rqt2lg/15min";
@@ -45,14 +46,7 @@ function ProductPage() {
 
   return (
     <main className="product-page">
-      <nav className="product-nav" aria-label="Primary">
-        <a className="product-brand" href="/" aria-label="Human AI Studio home"><span />Human AI Studio</a>
-        <div className="product-nav-links">
-          <a href="#context">The system</a>
-          <a href="#outcomes">What you get</a>
-          <a className="product-nav-cta" href={bookingUrl}>Book a call</a>
-        </div>
-      </nav>
+      <SiteHeader />
 
       <section className="product-hero product-hero-context" id="top">
         <div className="product-grid" aria-hidden="true" />

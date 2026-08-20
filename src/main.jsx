@@ -66,7 +66,13 @@ async function boot() {
       return;
     }
 
-    if (route === "/design-systems") {
+    if (route === "/tools") {
+      const { default: ToolsPage } = await import("./v2/ToolsPage.jsx");
+      renderWithAnalytics(root, <ToolsPage />);
+      return;
+    }
+
+    if (route === "/workshop" || route === "/design-systems") {
       const { default: DesignSystemsPage } = await import("./v2/DesignSystemsPage.jsx");
       renderWithAnalytics(root, <DesignSystemsPage />);
       return;

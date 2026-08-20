@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Entrance, EntranceItem, entranceChild } from "./entrance.jsx";
-import { NavMenu } from "./NavMenu.jsx";
+import { Entrance, EntranceItem } from "./entrance.jsx";
+import { SiteHeader } from "./SiteHeader.jsx";
 import { caseStudies } from "./caseStudiesData.js";
 import caseStudiesHero from "../assets/work-reel.mp4";
 import chaseLogo from "../assets/companies/Chase.png";
@@ -182,20 +182,7 @@ export default function CaseStudiesPage() {
 
   return (
     <div className="cs-page">
-      <motion.header
-        className="cs-nav"
-        variants={entranceChild}
-        initial={shouldReduceMotion ? false : "hidden"}
-        animate="visible"
-      >
-        <a className="cs-brand" href="/">
-          <span className="cs-brand-mark" aria-hidden="true" />
-          Human AI Studio
-        </a>
-        <div className="cs-nav-actions">
-          <NavMenu />
-        </div>
-      </motion.header>
+      <SiteHeader />
 
       <main>
         <section className="cs-hero" aria-labelledby="cs-hero-title">

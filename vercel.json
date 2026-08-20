@@ -50,6 +50,14 @@
       "destination": "/case-studies.html"
     },
     {
+      "source": "/tools",
+      "destination": "/tools.html"
+    },
+    {
+      "source": "/workshop",
+      "destination": "/design-systems.html"
+    },
+    {
       "source": "/design-systems",
       "destination": "/design-systems.html"
     },

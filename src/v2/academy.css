@@ -393,6 +393,8 @@ html:has(.academy-page) {
   z-index: 1;
   width: 100%;
   max-width: min(100%, 46rem);
+  align-self: flex-start;
+  margin-inline: 0;
   padding: 0;
   overflow-wrap: anywhere;
 }
@@ -416,19 +418,22 @@ html:has(.academy-page) {
 }
 
 .academy-hero h1 {
+  width: 100%;
   margin: 0;
   padding-block: 0.04em;
   max-width: 100%;
-  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-size: clamp(1.55rem, 2.5vw, 2rem);
   font-weight: 560;
   line-height: 1.12;
   letter-spacing: -0.03em;
-  text-align: left;
+  text-align: start;
   overflow-wrap: break-word;
 }
 
 .academy-hero-line {
   display: block;
+  width: 100%;
+  text-align: start;
   white-space: normal;
 }
 
@@ -436,9 +441,28 @@ html:has(.academy-page) {
   margin-top: 0.12em;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 769px) {
   .academy-hero-line {
     white-space: nowrap;
+  }
+}
+
+@media (max-width: 900px) {
+  .academy-hero {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    padding-inline: var(--page-padding);
+  }
+
+  .academy-hero-copy,
+  .academy-hero h1 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .academy-hero-line {
+    white-space: normal;
   }
 }
 
@@ -464,6 +488,7 @@ html:has(.academy-page) {
 
 .academy-hero-actions {
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
@@ -1843,15 +1868,15 @@ html:has(.academy-page) {
   }
 
   .academy-hero {
-    width: var(--academy-rail);
-    max-width: none;
-    margin-inline: auto;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
     flex: 1 1 auto;
     align-items: flex-start;
     justify-content: flex-end;
     gap: 1.75rem;
     padding:
-      calc(4.75rem + env(safe-area-inset-top)) 0
+      calc(4.75rem + env(safe-area-inset-top)) var(--page-padding)
       calc(4.5rem + env(safe-area-inset-bottom));
   }
 
@@ -1863,13 +1888,13 @@ html:has(.academy-page) {
 
   .academy-hero h1 {
     margin-top: 0;
-    font-size: clamp(1.3rem, 5vw, 1.65rem);
+    font-size: clamp(1.2rem, 4.6vw, 1.5rem);
     line-height: 1.1;
     letter-spacing: -0.03em;
   }
 
   .academy-hero-line {
-    white-space: nowrap;
+    white-space: normal;
   }
 
   @media (max-width: 379px) {

@@ -166,36 +166,33 @@ const pricingBenefits = [
 const pathOptions = [
   {
     title: "Stay ahead of the shift",
-    description:
-      "AI-native workflows aren't the edge case anymore, they're becoming the baseline. Designers and PMs who can build with Claude Code, Cursor, and Codex are already commanding more at their companies. This track teaches the real skills through real product work.",
+    description: "Build practical AI fluency through real product work.",
     bullets: [
-      "Claude Code, Cursor, and Codex tracks",
-      "Practical projects for real product work",
-      "Recordings, prompts, and templates"
+      "Claude Code, Cursor, and Codex",
+      "Real product projects",
+      "Prompts, templates, and recordings"
     ],
     color1: "#38bdf8",
     color2: "#e0f2fe"
   },
   {
     title: "Learn and grow together",
-    description:
-      "Join a curated group of AI-native designers and builders. Learn from each other, trade what's working, and level up your network as you grow.",
+    description: "Learn alongside AI-native designers and builders.",
     bullets: [
-      "Get feedback when you feel stuck",
-      "Stay accountable as you build",
-      "Learn from what others are shipping"
+      "Get unstuck with feedback",
+      "Stay accountable",
+      "See what others are shipping"
     ],
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
     title: "Monthly live sessions",
-    description:
-      "Join John every month to ask questions, unblock your work, and keep shipping.",
+    description: "Join John monthly to unblock your work and keep shipping.",
     bullets: [
-      "Live Q&A and practical walkthroughs",
-      "Apply the learning to real workflows",
-      "Watch the recording anytime"
+      "Live Q&A and walkthroughs",
+      "Apply it to real workflows",
+      "Replay anytime"
     ],
     color1: "#8b5cf6",
     color2: "#ddd6fe"
@@ -519,12 +516,8 @@ function AcademyPage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1">
-                <span className="academy-hero-line">Become AI Native Product Builder</span>
-                <span className="academy-hero-line">and Master AI Workflows.</span>
-              </EntranceItem>
-              <EntranceItem as="p" className="academy-hero-sub">
-                <span>Learn to build products with AI agents and systems, guided by</span>
-                <span>experts and alongside a community of builders.</span>
+                <span className="academy-hero-line">Learn How to Build Products, Design Systems,</span>
+                <span className="academy-hero-line">and Agents With AI Workflows.</span>
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
                 <a
