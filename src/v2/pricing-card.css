@@ -1,0 +1,158 @@
+/* Pricing card layout — adapted from shadcn, styled to match studio pathways */
+
+.pricing-card-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  margin-bottom: clamp(0.7rem, 1vw, 0.85rem);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  background: #000000;
+}
+
+.pricing-card-header::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 72%;
+  background: radial-gradient(
+    120% 100% at 50% 0%,
+    color-mix(in srgb, var(--card-1) 30%, transparent) 0%,
+    color-mix(in srgb, var(--card-2) 14%, transparent) 48%,
+    transparent 74%
+  );
+  opacity: 0.72;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.pricing-card-header::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--card-1) 35%,
+    var(--card-2) 65%,
+    transparent 100%
+  );
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.pricing-card-header-glass {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 42%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.pricing-card-header-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: clamp(1.15rem, 1.55vw, 1.4rem);
+}
+
+.pricing-card-header-intro {
+  flex: 1 1 auto;
+  min-height: clamp(3.25rem, 5vw, 4.5rem);
+}
+
+.pricing-card-body {
+  padding: 0 0.35rem;
+  align-self: start;
+}
+
+.pricing-card-plan-name {
+  margin: 0;
+}
+
+.pricing-card-description {
+  margin: clamp(0.45rem, 0.75vw, 0.6rem) 0 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: clamp(0.88rem, 1vw, 0.98rem);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.pricing-card-price {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.25rem;
+  margin: clamp(0.65rem, 0.9vw, 0.8rem) 0 0;
+}
+
+.pricing-card-main-price {
+  color: #ffffff;
+  font-size: clamp(1.05rem, 1.45vw, 1.2rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.pricing-card-header .pathway-cta {
+  display: flex;
+  width: 100%;
+  min-height: 2.75rem;
+  margin-top: clamp(0.75rem, 1vw, 0.9rem);
+  padding: 0.7rem 1rem;
+}
+
+.pricing-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pricing-card-list-item {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: clamp(0.88rem, 1.02vw, 0.97rem);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.pricing-card-list-item svg {
+  flex: 0 0 auto;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.12rem;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.pathway-card:hover .pricing-card-header::before {
+  opacity: 0.92;
+}
+
+.pathway-card.is-featured .pricing-card-header {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: #000000;
+}
+
+.pathway-card.is-featured .pricing-card-header::before {
+  opacity: 0.88;
+}

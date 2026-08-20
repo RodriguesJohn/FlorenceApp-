@@ -2,9 +2,12 @@ import React from "react";
 import { track } from "@vercel/analytics";
 import { Analytics } from "@vercel/analytics/react";
 import { AnimatePresence, motion, useReducedMotion, useInView } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
 import * as THREE from "three";
 import OfferingShader from "./OfferingShader.jsx";
+import * as PricingCard from "./PricingCard.jsx";
 import { Entrance, EntranceItem, entranceChild, entranceViewport } from "./entrance.jsx";
+import { StudioProcessLoop } from "./StudioProcessLoop.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import profilePicture from "../assets/Profile Picture.jpg";
 import studioAbstract from "../assets/studio-abstract.png";
@@ -342,7 +345,13 @@ function CinematicHero() {
               className="hero-cinematic-line"
               variants={entranceChild}
             >
-              AI Native Product Studio
+              Design Systems for
+            </motion.span>
+            <motion.span
+              className="hero-cinematic-line"
+              variants={entranceChild}
+            >
+              Humans and AI Agents
             </motion.span>
           </h1>
 
@@ -350,9 +359,14 @@ function CinematicHero() {
             className="hero-cinematic-subtitle"
             variants={entranceChild}
           >
-            We design and build{" "}
-            <span className="motto-emphasis">AI-native products, agents, and systems</span> for
-            ambitious companies.
+            <span className="hero-cinematic-subtitle-line">
+              Agents are drifting and shipping{" "}
+              <span className="motto-emphasis">AI slop</span>.
+            </span>
+            <span className="hero-cinematic-subtitle-line">
+              We build <span className="motto-emphasis">agent-ready design systems</span> your
+              models understand.
+            </span>
           </motion.p>
 
           <motion.div className="hero-cinematic-cta-row" variants={entranceChild}>
@@ -410,61 +424,83 @@ function CinematicHero() {
 
 const workPathways = [
   {
-    name: "Fractional Design Engineer",
-    tagline: "Ideal for Series A to B teams",
+    name: "1:1 Consultation",
+    price: "$500/hour",
     color1: "#3b82f6",
     color2: "#bae6fd",
+    ctaLabel: "Book a 15-minute call",
     features: [
-      "A senior design partner embedded in your team",
-      "AI-native product, UI, and prototyping work",
-      "Design systems your engineers can ship from",
-      "Continuous improvements that lift retention",
-      "Product thinking that drives growth"
+      "Help build AI workflows",
+      "Provide guidance and support",
+      "Consultation and advisory"
     ]
   },
   {
-    name: "0 → 1 Product MVP Sprint",
-    tagline: "Ideal for pre-seed to seed startups",
+    name: "Audits and Team Embedded",
+    price: "Contact for pricing",
     featured: true,
     color1: "#8b5cf6",
     color2: "#ddd6fe",
     features: [
       "Ambiguous idea to a fully functional product",
       "A real prototype you can test with users",
-      "Validate the product before you scale it",
-      "A working demo to raise funding on",
-      "Production-ready components, not throwaway mockups",
-      "Ships in weeks, not quarters"
+      "Validate the product before you scale it"
     ]
   },
   {
-    name: "Training and Workshops",
-    tagline: "Ideal for designers and builders levelling up",
+    name: "AI Ready Design System Workshop",
+    price: "$599/seat",
     color1: "#10b981",
     color2: "#a7f3d0",
-    ctaLabel: "Explore the Academy",
-    ctaHref: "/academy",
+    ctaLabel: "Join Workshop",
+    ctaHref: "/design-systems",
     features: [
       "Access to courses, resources, and AI workflows",
       "Learn at your own pace, around your real work",
-      "Level up on real projects, not toy demos",
-      "Self-paced courses through AI Design Academy"
+      "Level up on real projects, not toy demos"
     ]
   }
 ];
 
-function CheckIcon() {
+const studioProcessSteps = [
+  {
+    name: "Audit",
+    body: "Find where workflows break, systems drift, and agents lack context."
+  },
+  {
+    name: "Design",
+    body: "Shape the product, UI, and design system humans and agents share."
+  },
+  {
+    name: "Build",
+    body: "Prototype and engineer with AI-native tools in the same loop."
+  },
+  {
+    name: "Ship",
+    body: "Deploy, measure, and tighten what ships in production."
+  }
+];
+
+function StudioProcess() {
   return (
-    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none">
-      <circle cx="10" cy="10" r="9" fill="currentColor" opacity="0.16" />
-      <path
-        d="M6 10.4l2.6 2.6L14 7.6"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <section className="studio-process" aria-labelledby="studio-process-title" data-nav-theme="dark">
+      <Entrance className="studio-process-inner">
+        <div className="studio-process-layout">
+          <EntranceItem className="studio-process-copy">
+            <h2 id="studio-process-title" className="studio-process-title">
+              Audit, design, build, ship.
+            </h2>
+            <p className="studio-process-lede">
+              Human judgment sets direction. Agentic workflows move the work.
+            </p>
+          </EntranceItem>
+
+          <EntranceItem className="studio-process-visual">
+            <StudioProcessLoop steps={studioProcessSteps} />
+          </EntranceItem>
+        </div>
+      </Entrance>
+    </section>
   );
 }
 
@@ -475,9 +511,6 @@ function WorkPathways() {
         <EntranceItem as="h2" id="pathways-title" className="pathways-title">
           Ways to work together
         </EntranceItem>
-        <EntranceItem as="p" className="pathways-lede">
-          Three pathways, depending on where your product is today.
-        </EntranceItem>
 
         <EntranceItem className="pathways-grid">
           {workPathways.map((plan) => (
@@ -486,40 +519,54 @@ function WorkPathways() {
               key={plan.name}
               style={{ "--card-1": plan.color1, "--card-2": plan.color2 }}
             >
-              <div className="pathway-head">
-                <h3 className="pathway-name">{plan.name}</h3>
-              </div>
-              <p className="pathway-tagline">{plan.tagline}</p>
-              {plan.ctaHref ? (
-                <a
-                  className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
-                  href={plan.ctaHref}
-                  onClick={
-                    plan.ctaHref === "/academy"
-                      ? () => trackAcademyCtaClick("work_pathways", plan.ctaLabel)
-                      : undefined
-                  }
-                >
-                  {plan.ctaLabel}
-                </a>
-              ) : (
-                <a
-                  className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
-                  href={bookingUrl}
-                  onClick={openBookingModal}
-                  {...bookingAttributes}
-                >
-                  Book 15 min call
-                </a>
-              )}
-              <ul className="pathway-features">
-                {plan.features.map((feature) => (
-                  <li key={feature}>
-                    <CheckIcon />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
+              <PricingCard.Header>
+                <div className="pricing-card-header-intro">
+                  <PricingCard.PlanName as="h3" className="pathway-name">
+                    {plan.name}
+                  </PricingCard.PlanName>
+                  {plan.tagline ? (
+                    <PricingCard.Description>{plan.tagline}</PricingCard.Description>
+                  ) : null}
+                </div>
+                {plan.price ? (
+                  <PricingCard.Price>
+                    <PricingCard.MainPrice>{plan.price}</PricingCard.MainPrice>
+                  </PricingCard.Price>
+                ) : null}
+                {plan.ctaHref ? (
+                  <a
+                    className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
+                    href={plan.ctaHref}
+                    onClick={
+                      plan.ctaHref === "/academy"
+                        ? () => trackAcademyCtaClick("work_pathways", plan.ctaLabel)
+                        : undefined
+                    }
+                  >
+                    {plan.ctaLabel}
+                  </a>
+                ) : (
+                  <a
+                    className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
+                    href={bookingUrl}
+                    onClick={openBookingModal}
+                    {...bookingAttributes}
+                  >
+                    {plan.ctaLabel || "Book 15 min call"}
+                  </a>
+                )}
+              </PricingCard.Header>
+
+              <PricingCard.Body>
+                <PricingCard.List className="pathway-features">
+                  {plan.features.map((feature) => (
+                    <PricingCard.ListItem key={feature}>
+                      <CheckCircle2 aria-hidden="true" />
+                      <span>{feature}</span>
+                    </PricingCard.ListItem>
+                  ))}
+                </PricingCard.List>
+              </PricingCard.Body>
             </article>
           ))}
         </EntranceItem>
@@ -651,29 +698,20 @@ const homeOffers = [
 
 const homeProblems = [
   {
-    title: "From Ambiguity to Clear Product Strategy",
-    titleLines: ["From Ambiguity to", "Clear Product Strategy"],
-    description:
-      "We turn scattered ideas into a direction the team can act on.",
-    stage: "Strategy",
+    title: "Product and design teams are moving fast but they're shipping AI slop.",
+    fadedLabelLines: ["Reduce AI", "Slop"],
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Design and Build Without the AI Slop",
-    titleLines: ["Design and Build", "Without the AI Slop"],
-    description:
-      "Fast doesn't have to mean generic. The craft survives the speed.",
-    stage: "Craft",
+    title: "Your design systems are drifting and agents and humans are confused.",
+    fadedLabelLines: ["Reduce Agent", "Drifts"],
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Ship Fast With Human Judgment and AI Capabilities",
-    titleLines: ["Ship Fast With Human", "Judgment and AI Capabilities"],
-    description:
-      "Judgment and taste, at the speed the tools now allow.",
-    stage: "Speed",
+    title: "Even your best models are not able to have the design context.",
+    fadedLabelLines: ["Automate", "manual work"],
     color1: "#10b981",
     color2: "#a7f3d0"
   }
@@ -1092,7 +1130,6 @@ function WorkShowcase() {
   );
 }
 
-const showSelectedProjects = true;
 
 const v2Principles = [
   "Scope the business problem and customer workflow",
@@ -2109,22 +2146,16 @@ function StudioHome({ isHistory = false }) {
                     color2={step.color2}
                     seed={index * 3.7 + 1.3}
                   />
-                  <span className="offering-thumb-number">
-                    {step.stage || String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="offering-thumb-title">
-                    {step.titleLines
-                      ? step.titleLines.map((line) => (
-                          <span className="offering-title-line" key={line}>
-                            {line}
-                          </span>
-                        ))
-                      : step.title}
-                  </h3>
-                </div>
-                <div className="offering-copy">
-                  {step.kicker && <p className="offering-kicker">{step.kicker}</p>}
-                  <p>{step.description}</p>
+                  {step.fadedLabelLines ? (
+                    <span className="offering-thumb-number" aria-hidden="true">
+                      {step.fadedLabelLines.map((line) => (
+                        <span className="offering-thumb-number-line" key={line}>
+                          {line}
+                        </span>
+                      ))}
+                    </span>
+                  ) : null}
+                  <h3 className="offering-thumb-title">{step.title}</h3>
                 </div>
               </EntranceItem>
             ))}
@@ -2132,29 +2163,39 @@ function StudioHome({ isHistory = false }) {
         )}
       </section>
 
-      {!isHistory && !showSelectedProjects && (
-        <section className="context-demo" aria-label="Product context platform demonstration" data-nav-theme="dark">
-          <Entrance className="context-demo-inner">
-            <EntranceItem>
-              <video
-                src={productContextVideo}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-label="Product and AI workflow platform demonstration"
+      {!isHistory && (
+        <section className="home-florence-showcase" aria-labelledby="home-florence-title" data-nav-theme="dark">
+          <Entrance className="home-florence-showcase-inner">
+            <EntranceItem className="home-florence-header">
+              <div className="home-florence-copy">
+                <h2 id="home-florence-title" className="home-florence-title">
+                  Florence Agent Ready Design System
+                </h2>
+              </div>
+              <a className="home-florence-cta" href="/florence">
+                Explore Florence <span aria-hidden="true">↗</span>
+              </a>
+            </EntranceItem>
+            <EntranceItem className="home-florence-media">
+              <img
+                src={florenceWorkImage}
+                alt="Florence agent-ready design system showing a structured component library"
+                loading="lazy"
               />
+              <div>
+                <span>Florence · Built by Human AI Studio</span>
+                <a href="/florence">
+                  See the system behind the workshop <span aria-hidden="true">↗</span>
+                </a>
+              </div>
             </EntranceItem>
           </Entrance>
         </section>
       )}
 
-      {!isHistory && showSelectedProjects && (
-        <WorkShowcase />
-      )}
-
       {!isHistory && <WorkPathways />}
+
+      {!isHistory && <StudioProcess />}
 
       <section className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
         {isHistory ? (
@@ -2177,9 +2218,6 @@ function StudioHome({ isHistory = false }) {
           <Entrance className="approach-inner">
             <EntranceItem>
               <h2 id="v2-approach-title">Built for your existing stack.</h2>
-              <p className="approach-subhead">
-                We plug into the tools your team already uses across design, product, engineering, and AI, keeping collaboration practical, handoffs clear, and new workflows easy to adopt.
-              </p>
             </EntranceItem>
             <EntranceItem className="approach-details">
               <div className="stack-card" aria-label="Tool stack">
@@ -2278,7 +2316,7 @@ function StudioHome({ isHistory = false }) {
                 <span>Your Design Engineering Partner</span>
               </EntranceItem>
               <EntranceItem as="p">
-                I work with teams from startups to enterprise, combining AI strategy and design engineering to turn complex technology into products people trust. I hold a Master's in Interaction Design, a Bachelor's in Engineering, completed Stanford's AI and UX program, and have earned recognition from JPMorgan Chase leadership while building a Substack read by 4,200+ designers, leaders, and founders from Apple, Google, and other top companies.
+                I combine AI strategy and design engineering to help teams ship products people trust, from startup to enterprise.
               </EntranceItem>
               <EntranceItem className="bio-actions">
                 <a
@@ -2367,24 +2405,14 @@ function StudioHome({ isHistory = false }) {
       )}
 
       {!isHistory && (
-        <section className="cohort-section" aria-labelledby="cohort-title" data-nav-theme="dark">
+        <section className="cohort-section" aria-labelledby="cohort-card-title" data-nav-theme="dark">
           <Entrance className="cohort-section-inner">
-            <EntranceItem className="section-heading no-section-note">
-              <div>
-                <h2 id="cohort-title">Learn how to build products with AI</h2>
-              </div>
-            </EntranceItem>
-            <EntranceItem
-              as="div"
-              className="cohort-card"
-              onPointerMove={handleCohortShaderMove}
-              onPointerLeave={handleCohortShaderLeave}
-            >
+            <EntranceItem as="div" className="cohort-card">
               <div className="cohort-card-copy">
                 <div className="cohort-card-meta" aria-label="Cohort highlights">
                   <span>4.6/5 rating</span>
                 </div>
-                <h3>Join AI Academy</h3>
+                <h3 id="cohort-card-title">Join AI Academy</h3>
                 <p>
                   Build practical AI fluency through structured learning tracks, a
                   community of designers and builders, and monthly live sessions
@@ -2512,21 +2540,6 @@ function StudioHome({ isHistory = false }) {
       )}
 
       <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
-        {!isHistory && (
-          <>
-            <video
-              className="footer-growth-video"
-              src={cinematicHeroVideo}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-hidden="true"
-            />
-            <div className="footer-growth-scrim" aria-hidden="true" />
-          </>
-        )}
         <div className="site-footer-inner">
           {isHistory ? (
             <div className="footer-brand">

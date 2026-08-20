@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { Analytics } from "@vercel/analytics/react";
 import { applyPageSeo, setupSeoTracking } from "./v2/seo.js";
+import "./v2/styles.css";
 
 const route = window.location.pathname.replace(/\/+$/, "") || "/";
 
@@ -25,6 +26,26 @@ async function boot() {
   }
 
   const root = createRoot(rootEl);
+
+  root.render(
+    <main
+      style={{
+        minHeight: "100vh",
+        background: "#050506",
+        color: "rgba(255, 255, 255, 0.45)",
+        display: "grid",
+        placeItems: "center",
+        fontFamily: "Geist, system-ui, sans-serif",
+        fontSize: "0.82rem",
+        letterSpacing: "0.12em",
+        textTransform: "uppercase"
+      }}
+      aria-live="polite"
+      aria-busy="true"
+    >
+      Loading
+    </main>
+  );
 
   try {
     if (route === "/academy") {

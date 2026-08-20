@@ -114,7 +114,20 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     watch: {
-      ignored: ["**/MyPortfolio/**", "**/versions/**", "**/src/assets/academy-refs/**"]
+      ignored: [
+        "**/MyPortfolio/**",
+        "**/versions/**",
+        "**/backups/**",
+        "**/acquisition-agent/**",
+        "**/tmp/**",
+        "**/.claude/**",
+        "**/* 2.html",
+        "**/* 2.jsx",
+        "**/* 2.js",
+        "**/* 2.css",
+        "**/* 2.json",
+        "**/src/assets/academy-refs/**"
+      ]
     }
   }
 });

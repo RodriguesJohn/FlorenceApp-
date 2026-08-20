@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node scripts/dev-server.mjs",
+    "dev:keep-alive": "node scripts/keep-dev-alive.mjs",
     "dev:academy": "node scripts/academy-server.mjs",
     "build": "vite build",
     "preview": "vite preview"

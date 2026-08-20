@@ -1,6 +1,6 @@
 .ds-audit-page {
   --ds-nav-height: clamp(4.25rem, 7vw, 5.9rem);
-  --ds-banner-height: 5.25rem;
+  --ds-banner-height: 6rem;
   --ds-rail: min(calc(100% - var(--page-padding) * 2), 74rem);
   --ds-text: rgba(255, 255, 255, 0.72);
   --ds-muted: rgba(255, 255, 255, 0.5);
@@ -8,7 +8,7 @@
   --ds-violet: #8b5cf6;
   --ds-blue: #2f7df5;
   overflow: clip;
-  background: #070708;
+  background: #000000;
   color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -71,8 +71,7 @@
   min-height: var(--ds-banner-height);
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  padding: 1.1rem var(--page-padding);
+  padding: 1.25rem var(--page-padding);
   border-top: 1px solid rgba(255, 255, 255, 0.07);
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   background: rgba(16, 16, 18, 0.96);
@@ -84,9 +83,25 @@
   color: rgba(255, 255, 255, 0.65);
   font-size: 1rem;
   letter-spacing: 0.02em;
-  text-align: center;
   text-decoration: none;
   transition: background-color 160ms ease-out, color 160ms ease-out;
+}
+
+.ds-urgency-bar-inner {
+  display: flex;
+  width: var(--ds-rail);
+  max-width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin-inline: auto;
+}
+
+.ds-urgency-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 1.8vw, 1.75rem);
+  flex-shrink: 0;
 }
 
 .ds-urgency-spacer {
@@ -133,25 +148,29 @@
   transform: scale(0.96);
 }
 
-.ds-masterclass-countdown {
+.ds-masterclass-countdown,
+.workshop-countdown.is-banner {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.65rem;
   color: rgba(255, 255, 255, 0.76);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
-.ds-countdown-label {
-  margin-inline: 0.35rem 0.2rem;
+.ds-countdown-label,
+.workshop-countdown.is-banner .workshop-countdown-label {
+  margin-inline: 0;
   color: rgba(255, 255, 255, 0.42);
   font-size: 0.75rem;
   font-weight: 540;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  width: auto;
 }
 
-.ds-countdown-unit {
+.ds-countdown-unit,
+.workshop-countdown.is-banner .workshop-countdown-unit {
   display: inline-flex;
   min-width: 3rem;
   align-items: baseline;
@@ -163,20 +182,23 @@
   background: rgba(255, 255, 255, 0.055);
 }
 
-.ds-countdown-unit strong {
+.ds-countdown-unit strong,
+.workshop-countdown.is-banner .workshop-countdown-unit strong {
   font-size: 0.95rem;
   font-weight: 620;
   line-height: 1;
 }
 
-.ds-countdown-unit small {
+.ds-countdown-unit small,
+.workshop-countdown.is-banner .workshop-countdown-unit small {
   color: rgba(255, 255, 255, 0.4);
   font-size: 0.62rem;
   line-height: 1;
   text-transform: uppercase;
 }
 
-.ds-masterclass-countdown.is-status {
+.ds-masterclass-countdown.is-status,
+.workshop-countdown.is-banner.is-status {
   padding: 0.3rem 0.55rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
@@ -186,11 +208,8 @@
 
 .ds-audit-hero {
   position: relative;
-  padding: clamp(4.5rem, 8vw, 7rem) var(--page-padding) clamp(5rem, 9vw, 8rem);
-  background:
-    radial-gradient(55rem 35rem at 50% -10%, rgba(94, 62, 215, 0.24), transparent 70%),
-    radial-gradient(32rem 26rem at 92% 40%, rgba(20, 108, 255, 0.1), transparent 70%),
-    #070708;
+  padding: clamp(5.25rem, 8.5vw, 7.5rem) var(--page-padding) clamp(5rem, 9vw, 8rem);
+  background: #000000;
 }
 
 .ds-audit-hero-inner,
@@ -1097,14 +1116,22 @@
 
 @media (max-width: 700px) {
   .ds-audit-page {
-    --ds-banner-height: 4.35rem;
+    --ds-banner-height: 4.75rem;
   }
 
   .ds-urgency-bar {
-    gap: 0.58rem;
     padding-inline: max(0.75rem, env(safe-area-inset-left));
-    padding-block: 0.8rem;
+    padding-block: 0.95rem;
     font-size: 0.8rem;
+  }
+
+  .ds-urgency-bar-inner {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .ds-urgency-bar-actions {
+    gap: 0.75rem;
   }
 
   .ds-countdown-label {
@@ -1250,12 +1277,15 @@
 
 @media (max-width: 430px) {
   .ds-audit-page {
-    --ds-banner-height: 4rem;
+    --ds-banner-height: 4.35rem;
   }
 
   .ds-urgency-bar {
-    gap: 0.4rem;
     padding-inline: 0.75rem;
+  }
+
+  .ds-urgency-bar-actions {
+    gap: 0.55rem;
   }
 
   .ds-banner-date {

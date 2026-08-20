@@ -2,6 +2,7 @@ import React from "react";
 import { track } from "@vercel/analytics";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
+import { WorkshopCountdown } from "./WorkshopCountdown.jsx";
 import profilePicture from "../assets/Profile Picture.jpg";
 import florenceWorkImage from "../assets/work/Florence.png";
 import "./styles.css";
@@ -9,8 +10,6 @@ import "./design-systems.css";
 
 const WORKSHOP_URL = "https://maven.com/humanaistudio/ai-ready-design-system-workshop";
 const MASTERCLASS_URL = "https://maven.com/p/7ff349/ai-ready-design-systems-masterclass";
-const MASTERCLASS_START = new Date("2026-08-18T19:00:00Z").getTime();
-const MASTERCLASS_END = new Date("2026-08-18T20:00:00Z").getTime();
 const newsletterUrl = "https://substack.com/@johnrodrigues";
 const footerVideoUrl =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260619_191346_9d19d66e-86a4-47f7-8dc6-712c1788c3b2.mp4";
@@ -81,54 +80,6 @@ function CheckIcon() {
   return <span className="ds-check" aria-hidden="true">✓</span>;
 }
 
-function getMasterclassCountdown(now = Date.now()) {
-  if (now >= MASTERCLASS_END) return { status: "Masterclass ended" };
-  if (now >= MASTERCLASS_START) return { status: "Live now" };
-
-  const totalSeconds = Math.max(0, Math.floor((MASTERCLASS_START - now) / 1000));
-  return {
-    days: Math.floor(totalSeconds / 86400),
-    hours: Math.floor((totalSeconds % 86400) / 3600),
-    minutes: Math.floor((totalSeconds % 3600) / 60),
-    seconds: totalSeconds % 60
-  };
-}
-
-function MasterclassCountdown() {
-  const [countdown, setCountdown] = React.useState(() => getMasterclassCountdown());
-
-  React.useEffect(() => {
-    const timer = window.setInterval(() => {
-      setCountdown(getMasterclassCountdown());
-    }, 1000);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
-  if (countdown.status) {
-    return <span className="ds-masterclass-countdown is-status" aria-hidden="true">{countdown.status}</span>;
-  }
-
-  const units = [
-    [countdown.days, "d"],
-    [countdown.hours, "h"],
-    [countdown.minutes, "m"],
-    [countdown.seconds, "s"]
-  ];
-
-  return (
-    <span className="ds-masterclass-countdown" aria-hidden="true">
-      <span className="ds-countdown-label">Starts in</span>
-      {units.map(([value, label]) => (
-        <span className="ds-countdown-unit" key={label}>
-          <strong>{String(value).padStart(2, "0")}</strong>
-          <small>{label}</small>
-        </span>
-      ))}
-    </span>
-  );
-}
-
 function trackWorkshopClick(href, label, location) {
   track(href === WORKSHOP_URL ? "Workshop CTA Click" : "Masterclass CTA Click", {
     route: "/design-systems",
@@ -190,17 +141,19 @@ export default function DesignSystemsPage() {
 
       <a
         className="ds-urgency-bar"
-        href={MASTERCLASS_URL}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Join the free AI-Ready Design Systems Masterclass on August 18 at 12:00 PM Pacific Time on Maven"
-        onClick={() => trackWorkshopClick(MASTERCLASS_URL, "Join the free masterclass", "urgency_bar")}
+        href="#workshop-offer"
+        aria-label="Reserve your seat for the AI-Ready Design System Workshop on August 29 at 9:00 AM Pacific Time"
+        onClick={() => trackWorkshopClick(WORKSHOP_URL, "Reserve your seat", "urgency_bar")}
       >
-        <span className="ds-banner-date">August 18 · 12:00 PM PT</span>
-        <MasterclassCountdown />
-        <span className="ds-banner-cta">
-          Join the free masterclass
-          <span className="ds-banner-arrow" aria-hidden="true">↗</span>
+        <span className="ds-urgency-bar-inner">
+          <span className="ds-banner-date">August 29 · 9:00 AM PT</span>
+          <span className="ds-urgency-bar-actions">
+            <WorkshopCountdown className="is-banner" label="Workshop starts in" />
+            <span className="ds-banner-cta">
+              Reserve your seat
+              <span className="ds-banner-arrow" aria-hidden="true">↗</span>
+            </span>
+          </span>
         </span>
       </a>
       <div className="ds-urgency-spacer" aria-hidden="true" />
