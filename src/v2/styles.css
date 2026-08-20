@@ -5756,12 +5756,12 @@ h3 {
 .current-home .hero-cinematic-content {
   position: absolute;
   z-index: 2;
-  top: 49%;
-  right: 0;
-  left: 0;
+  top: 56%;
+  right: auto;
+  left: 50%;
   width: var(--home-rail);
   margin-inline: auto;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
   pointer-events: auto;
 }
 
