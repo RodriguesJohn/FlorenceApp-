@@ -1,75 +1,77 @@
-import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Play } from "lucide-react";
+import { useEffect, useRef, useState } from 'react'
+import { ArrowUpRight, Play } from 'lucide-react'
 import demoStill from "./assets/demo-still.png";
 import { SiteHeader } from "../SiteHeader.jsx";
 import "./florence-website.css";
 
-const MASTERCLASS_URL = "/workshop";
-const SYSTEM_URL = "/florence/system";
-const GIANT_WORD = "FLORENCE";
-const ASCII_GLYPHS = "█▓▒░#@*+=-:/\\";
+const MASTERCLASS_URL = '/design-systems'
+const DEMO_URL = '/florence/system'
+const GIANT_WORD = 'FLORENCE'
+const ASCII_GLYPHS = '█▓▒░#@*+=-:/\\'
 
 function GiantMark() {
-  const [chars, setChars] = useState(GIANT_WORD.split(""));
-  const [burst, setBurst] = useState(false);
-  const scrambleRef = useRef(null);
-  const burstRef = useRef(null);
-  const loopRef = useRef(null);
+  const [chars, setChars] = useState(GIANT_WORD.split(''))
+  const [burst, setBurst] = useState(false)
+  const scrambleRef = useRef(null)
+  const burstRef = useRef(null)
+  const loopRef = useRef(null)
 
   function prefersReducedMotion() {
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
   }
 
   function stopScramble(restore = true) {
     if (scrambleRef.current) {
-      window.clearInterval(scrambleRef.current);
-      scrambleRef.current = null;
+      window.clearInterval(scrambleRef.current)
+      scrambleRef.current = null
     }
-    if (restore) setChars(GIANT_WORD.split(""));
+    if (restore) setChars(GIANT_WORD.split(''))
   }
 
   function scramble() {
-    stopScramble(false);
-    let ticks = 0;
+    stopScramble(false)
+    let ticks = 0
     scrambleRef.current = window.setInterval(() => {
-      ticks += 1;
+      ticks += 1
       setChars(
-        GIANT_WORD.split("").map((letter) => {
-          if (ticks > 10 && Math.random() > 0.35) return letter;
-          return ASCII_GLYPHS[Math.floor(Math.random() * ASCII_GLYPHS.length)];
-        })
-      );
-      if (ticks > 14) stopScramble(true);
-    }, 45);
+        GIANT_WORD.split('').map((letter) => {
+          if (ticks > 10 && Math.random() > 0.35) return letter
+          return ASCII_GLYPHS[Math.floor(Math.random() * ASCII_GLYPHS.length)]
+        }),
+      )
+      if (ticks > 14) stopScramble(true)
+    }, 45)
   }
 
   function playBurst() {
-    if (prefersReducedMotion()) return;
-    scramble();
-    setBurst(true);
-    if (burstRef.current) window.clearTimeout(burstRef.current);
-    burstRef.current = window.setTimeout(() => setBurst(false), 1400);
+    if (prefersReducedMotion()) return
+    scramble()
+    setBurst(true)
+    if (burstRef.current) window.clearTimeout(burstRef.current)
+    burstRef.current = window.setTimeout(() => setBurst(false), 1400)
   }
 
   useEffect(() => {
-    if (prefersReducedMotion()) return undefined;
+    if (prefersReducedMotion()) return undefined
 
-    const kickoff = window.setTimeout(playBurst, 1600);
-    loopRef.current = window.setInterval(playBurst, 5600);
+    const kickoff = window.setTimeout(playBurst, 1600)
+    loopRef.current = window.setInterval(playBurst, 5600)
 
     return () => {
-      window.clearTimeout(kickoff);
-      if (loopRef.current) window.clearInterval(loopRef.current);
-      if (burstRef.current) window.clearTimeout(burstRef.current);
-      stopScramble(false);
-    };
-  }, []);
+      window.clearTimeout(kickoff)
+      if (loopRef.current) window.clearInterval(loopRef.current)
+      if (burstRef.current) window.clearTimeout(burstRef.current)
+      stopScramble(false)
+    }
+  }, [])
 
-  const mid = (GIANT_WORD.length - 1) / 2;
+  const mid = (GIANT_WORD.length - 1) / 2
 
   return (
     <p
-      className={["hero__giant", burst ? "hero__giant--burst" : ""].filter(Boolean).join(" ")}
+      className={['hero__giant', burst ? 'hero__giant--burst' : '']
+        .filter(Boolean)
+        .join(' ')}
       aria-hidden="true"
       onMouseEnter={playBurst}
     >
@@ -81,8 +83,8 @@ function GiantMark() {
             className="hero__giant-letter"
             data-char={char}
             style={{
-              "--i": index,
-              "--spread": index - mid
+              '--i': index,
+              '--spread': index - mid,
             }}
           >
             {char}
@@ -90,7 +92,7 @@ function GiantMark() {
         ))}
       </span>
     </p>
-  );
+  )
 }
 
 function SelectFrame({ children }) {
@@ -104,7 +106,7 @@ function SelectFrame({ children }) {
       </span>
       {children}
     </span>
-  );
+  )
 }
 
 function ProgressiveBlur({ steps = 4 }) {
@@ -115,13 +117,13 @@ function ProgressiveBlur({ steps = 4 }) {
           key={index}
           className="hero__progressive-band"
           style={{
-            "--i": index + 1,
-            "--steps": steps
+            '--i': index + 1,
+            '--steps': steps,
           }}
         />
       ))}
     </div>
-  );
+  )
 }
 
 function DemoReel() {
@@ -141,12 +143,16 @@ function DemoReel() {
         <span className="hero__reel-rule hero__reel-rule--bottom" aria-hidden="true" />
         <span className="hero__reel-rule hero__reel-rule--start" aria-hidden="true" />
         <div className="hero__reel-stage">
-          <img className="hero__video" src={demoStill} alt="Florence component gallery" />
+          <img
+            className="hero__video"
+            src={demoStill}
+            alt="Florence component gallery"
+          />
           <ProgressiveBlur />
         </div>
       </div>
     </figure>
-  );
+  )
 }
 
 export default function FlorenceWebsite() {
@@ -182,11 +188,16 @@ export default function FlorenceWebsite() {
           </span>
         </p>
         <div className="hero__actions">
-          <a className="btn btn--primary btn--lg hero__btn" href={SYSTEM_URL}>
+          <a className="btn btn--primary btn--lg hero__btn" href={DEMO_URL}>
             View the design system
             <Play aria-hidden="true" />
           </a>
-          <a className="btn btn--secondary btn--lg hero__btn hero__btn--ghost" href={MASTERCLASS_URL}>
+          <a
+            className="btn btn--secondary btn--lg hero__btn hero__btn--ghost"
+            href={MASTERCLASS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Join the live masterclass
             <ArrowUpRight aria-hidden="true" />
           </a>
@@ -196,5 +207,5 @@ export default function FlorenceWebsite() {
       <DemoReel />
       </div>
     </>
-  );
+  )
 }

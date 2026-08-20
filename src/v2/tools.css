@@ -132,6 +132,11 @@ html:has(.tools-page) body {
   color: #171717;
 }
 
+.tool-card-icon--ollie {
+  background: #d8ccff;
+  color: #121018;
+}
+
 .tool-card-icon svg {
   width: 65%;
   height: 65%;
@@ -262,11 +267,36 @@ html:has(.tools-page) body {
   }
 
   .tools-hero {
-    padding-block: 5rem 3.5rem;
+    padding-block: 3.5rem 2rem;
+  }
+
+  .tools-hero h1 {
+    font-size: clamp(2.25rem, 10.5vw, 3rem);
+  }
+
+  .tools-grid {
+    grid-template-columns: minmax(0, 100%);
+    justify-content: stretch;
+    gap: 0.75rem;
+    padding-bottom: 4rem;
   }
 
   .tool-card {
     min-height: 0;
+    width: 100%;
+    padding: 0.85rem;
+    border-radius: 0.8rem;
+  }
+
+  .tool-card-topline {
+    gap: 0.75rem;
+    font-size: 0.54rem;
+    letter-spacing: 0.12em;
+  }
+
+  .tool-card-number {
+    width: 1.75rem;
+    height: 1.75rem;
   }
 
   .tool-card-content,
@@ -276,17 +306,36 @@ html:has(.tools-page) body {
   }
 
   .tool-card-content {
-    padding-block: 2.5rem 2.25rem;
+    gap: 0.9rem;
+    padding-block: 1.2rem 1.15rem;
   }
 
   .tool-card-icon {
-    width: 3.75rem;
-    border-radius: 0.9rem;
+    width: 2.65rem;
+    border-radius: 0.65rem;
+  }
+
+  .tool-card-copy h2 {
+    font-size: 1.22rem;
+  }
+
+  .tool-card-copy p {
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    line-height: 1.45;
+  }
+
+  .tool-card-footer {
+    gap: 0;
+    padding-top: 0.75rem;
   }
 
   .tool-card-footer > a {
     width: 100%;
+    min-height: 2.25rem;
     justify-content: space-between;
+    padding: 0.48rem 0.68rem;
+    font-size: 0.7rem;
   }
 
   .tools-footer {

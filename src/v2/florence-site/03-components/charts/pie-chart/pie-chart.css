@@ -1,0 +1,138 @@
+.pie-chart {
+  container-name: pie-chart;
+  container-type: inline-size;
+}
+
+.pie-chart__layout {
+  display: grid;
+  align-items: center;
+  gap: var(--space-gap-md);
+  min-width: 0;
+  width: 100%;
+  padding-block: var(--space-inset-sm);
+}
+
+.pie-chart--split .pie-chart__layout {
+  grid-template-columns: var(--pie-size, 240px) max-content;
+  align-items: center;
+  justify-content: start;
+  justify-items: start;
+  gap: var(--space-gap-md);
+}
+
+.pie-chart__plot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: start;
+  width: var(--pie-size, 240px);
+  max-width: 100%;
+  overflow: visible;
+}
+
+.pie-chart--stack .pie-chart__layout {
+  grid-template-columns: 1fr;
+  justify-items: start;
+  gap: var(--space-gap-lg);
+}
+
+.pie-chart--stack .pie-chart__plot {
+  justify-self: start;
+}
+
+.pie-chart__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.pie-chart__legend.chart-legend--vertical {
+  display: grid;
+  grid-template-columns: auto minmax(max-content, 1fr) auto;
+  align-items: center;
+  column-gap: var(--space-inline-sm);
+  row-gap: var(--space-stack-sm);
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+  justify-self: start;
+}
+
+.pie-chart__legend.chart-legend--vertical > li,
+.pie-chart__legend.chart-legend--vertical .chart-legend__item {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  align-items: center;
+  width: auto;
+  column-gap: inherit;
+}
+
+.pie-chart__legend.chart-legend--vertical .chart-legend__item {
+  padding-block: var(--space-inset-2xs);
+  text-align: start;
+}
+
+.pie-chart__segment,
+.pie-chart__segment-glow {
+  transform-box: view-box;
+}
+
+.pie-chart__segment-glow {
+  pointer-events: none;
+}
+
+.pie-chart__center {
+  pointer-events: none;
+}
+
+.pie-chart__center-value {
+  fill: var(--color-text-primary);
+  font-family: var(--text-heading-lg-font-family);
+  font-size: var(--text-heading-lg-font-size);
+  font-weight: var(--text-heading-lg-font-weight);
+  letter-spacing: var(--text-heading-lg-letter-spacing);
+  font-variant-numeric: tabular-nums;
+}
+
+.pie-chart__center-label {
+  fill: var(--color-text-muted);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+.pie-chart__legend.chart-legend--vertical .chart-legend__label {
+  min-width: 0;
+  overflow: visible;
+  text-overflow: unset;
+  white-space: nowrap;
+}
+
+.pie-chart__legend.chart-legend--vertical .chart-legend__meta {
+  margin-inline-start: 0;
+  padding-inline-start: var(--space-inline-md);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+@container pie-chart (max-width: 40rem) {
+  .pie-chart--split .pie-chart__layout {
+    grid-template-columns: max-content;
+    justify-items: start;
+    gap: var(--space-gap-lg);
+  }
+
+  .pie-chart--split .pie-chart__plot {
+    width: min(var(--pie-size, 240px), 12.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pie-chart__segment {
+    transform: none;
+  }
+}

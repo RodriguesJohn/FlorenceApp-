@@ -1,0 +1,105 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "sidebar",
+  "name": "Sidebar",
+  "category": "navigation",
+  "path": "03-components/sidebar",
+  "exports": [
+    "Sidebar",
+    "SidebarHeader",
+    "SidebarNav",
+    "SidebarSection",
+    "SidebarItem",
+    "SidebarSubmenu",
+    "SidebarFooter"
+  ],
+  "intent": "Structure product navigation into branded header, sections, items, nested menus, and footer actions.",
+  "whenToUse": [
+    "App shell primary nav",
+    "Workspace switchers with nested projects"
+  ],
+  "whenNotToUse": [
+    "In-page section switching - use Tabs",
+    "Temporary overlays - use Modal"
+  ],
+  "api": {
+    "compounds": {
+      "Sidebar": [
+        "children",
+        "className",
+        "aria-label"
+      ],
+      "SidebarHeader": [
+        "children"
+      ],
+      "SidebarNav": [
+        "children"
+      ],
+      "SidebarSection": [
+        "label",
+        "children"
+      ],
+      "SidebarItem": [
+        "icon",
+        "badge",
+        "active",
+        "disabled",
+        "href",
+        "onClick",
+        "children"
+      ],
+      "SidebarSubmenu": [
+        "children"
+      ],
+      "SidebarFooter": [
+        "children"
+      ]
+    }
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-surface",
+      "--color-bg-page",
+      "--color-border-*",
+      "--color-interactive-*"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-caption-*",
+      "--text-heading-xs-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*",
+      "--space-inline-*"
+    ],
+    "radius": [
+      "--radius-surface-*",
+      "--radius-control-*",
+      "--radius-pill"
+    ],
+    "border": [
+      "--border-surface",
+      "--border-divider"
+    ],
+    "shadow": [
+      "--shadow-raised-depth"
+    ]
+  },
+  "a11y": [
+    "nav landmark",
+    "active item indicated",
+    "disabled items not activatable"
+  ],
+  "examples": [
+    {
+      "title": "Shell",
+      "code": "<Sidebar aria-label=\"Workspace\"><SidebarHeader>…</SidebarHeader><SidebarNav><SidebarSection label=\"Workspace\"><SidebarItem active>Overview</SidebarItem></SidebarSection></SidebarNav></Sidebar>"
+    }
+  ],
+  "related": [
+    "tabs",
+    "button"
+  ]
+}

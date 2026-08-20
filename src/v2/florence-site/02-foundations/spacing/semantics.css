@@ -1,5 +1,5 @@
 :root {
-  /* Inset — padding inside components */
+  /* Inset - padding inside components */
   --space-inset-2xs: var(--space-50);
   --space-inset-xs: var(--space-100);
   --space-inset-sm: var(--space-200);
@@ -8,7 +8,7 @@
   --space-inset-xl: var(--space-600);
   --space-inset-2xl: var(--space-700);
 
-  /* Stack — vertical rhythm between siblings */
+  /* Stack - vertical rhythm between siblings */
   --space-stack-2xs: var(--space-50);
   --space-stack-xs: var(--space-100);
   --space-stack-sm: var(--space-200);
@@ -17,7 +17,7 @@
   --space-stack-xl: var(--space-800);
   --space-stack-2xl: var(--space-1000);
 
-  /* Inline — horizontal gap between siblings */
+  /* Inline - horizontal gap between siblings */
   --space-inline-2xs: var(--space-50);
   --space-inline-xs: var(--space-100);
   --space-inline-sm: var(--space-200);
@@ -25,14 +25,14 @@
   --space-inline-lg: var(--space-400);
   --space-inline-xl: var(--space-600);
 
-  /* Gap — layout grids and flex gaps */
+  /* Gap - layout grids and flex gaps */
   --space-gap-xs: var(--space-200);
   --space-gap-sm: var(--space-300);
   --space-gap-md: var(--space-400);
   --space-gap-lg: var(--space-600);
   --space-gap-xl: var(--space-800);
 
-  /* Section — page-level separation */
+  /* Section - page-level separation */
   --space-section-sm: var(--space-700);
   --space-section-md: var(--space-900);
   --space-section-lg: var(--space-1000);

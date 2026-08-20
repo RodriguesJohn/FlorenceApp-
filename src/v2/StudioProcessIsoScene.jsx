@@ -20,11 +20,10 @@ export function StudioProcessIsoScene({ steps, activeIndex, reducedMotion }) {
         <path className="studio-process-infinity-rail" d={LOOP_PATH} />
         <path className="studio-process-infinity-flow" d={LOOP_PATH} />
 
-        <circle
+        <path
           className="studio-process-runner"
-          r="5"
-          cx={reducedMotion ? 206 : 0}
-          cy={reducedMotion ? 133 : 0}
+          d="M -0.01 0 H 0.01"
+          transform={reducedMotion ? "translate(206 133)" : undefined}
         >
           {!reducedMotion ? (
             <animateMotion
@@ -34,7 +33,7 @@ export function StudioProcessIsoScene({ steps, activeIndex, reducedMotion }) {
               path={LOOP_PATH}
             />
           ) : null}
-        </circle>
+        </path>
       </svg>
 
       <div className="studio-process-loop-label" aria-hidden="true">

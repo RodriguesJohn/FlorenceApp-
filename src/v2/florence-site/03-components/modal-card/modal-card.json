@@ -1,0 +1,93 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "modal-card",
+  "name": "ModalCard",
+  "category": "overlays",
+  "path": "03-components/modal-card",
+  "exports": [
+    "ModalCard"
+  ],
+  "intent": "Present the dialog surface (title, description, body, close) used inside Modal or custom overlays.",
+  "whenToUse": [
+    "Building modal content chrome",
+    "Contained demo dialogs in docs"
+  ],
+  "whenNotToUse": [
+    "Full page content - use layout patterns",
+    "Transient messages - use Toast"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "onClose",
+        "type": "() => void"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-bg-page",
+      "--color-text-*",
+      "--color-border-*",
+      "--color-icon-*"
+    ],
+    "typography": [
+      "--text-heading-*",
+      "--text-body-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*"
+    ],
+    "radius": [
+      "--radius-surface-*"
+    ],
+    "border": [
+      "--border-surface"
+    ],
+    "shadow": [
+      "--shadow-modal"
+    ]
+  },
+  "a11y": [
+    "Close button needs accessible name",
+    "Title should label the dialog"
+  ],
+  "examples": [
+    {
+      "title": "Card only",
+      "code": "<ModalCard title=\"Invite member\" description=\"Send an email invite.\" onClose={close}>…</ModalCard>"
+    }
+  ],
+  "related": [
+    "modal",
+    "button"
+  ]
+}

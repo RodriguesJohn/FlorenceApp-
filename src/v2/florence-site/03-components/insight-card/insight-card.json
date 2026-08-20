@@ -1,0 +1,115 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "insight-card",
+  "name": "InsightCard",
+  "category": "data-display",
+  "path": "03-components/insight-card",
+  "exports": [
+    "InsightCard"
+  ],
+  "intent": "Surface a recommended action or observation with tone, copy, and optional CTAs.",
+  "whenToUse": [
+    "AI or analytics recommendations",
+    "Risk / opportunity callouts"
+  ],
+  "whenNotToUse": [
+    "Raw metrics without narrative - use KpiCard",
+    "System toasts - use Toast"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "name": "tone",
+        "type": "enum",
+        "values": [
+          "opportunity",
+          "risk",
+          "info",
+          "success"
+        ],
+        "default": "opportunity"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "primaryAction",
+        "type": "{ label: string, onClick: () => void }"
+      },
+      {
+        "name": "secondaryAction",
+        "type": "{ label: string, onClick: () => void }"
+      },
+      {
+        "name": "onDismiss",
+        "type": "() => void"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-*",
+      "--color-border-highlight",
+      "--color-status-*"
+    ],
+    "typography": [
+      "--text-heading-*",
+      "--text-body-*",
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*",
+      "--space-gap-*"
+    ],
+    "radius": [
+      "--radius-surface-*"
+    ],
+    "border": [
+      "--border-highlight"
+    ],
+    "shadow": [
+      "--shadow-raised-depth"
+    ]
+  },
+  "a11y": [
+    "Actions are real buttons",
+    "Dismiss control needs accessible name"
+  ],
+  "examples": [
+    {
+      "title": "Opportunity",
+      "code": "<InsightCard title=\"Reassign blocked tasks\" description=\"3 tasks have no owner.\" tone=\"risk\" />"
+    }
+  ],
+  "deps": [
+    "button"
+  ],
+  "related": [
+    "kpi-card",
+    "button",
+    "toast"
+  ]
+}

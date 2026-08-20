@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "florence.component.v1",
+  "title": "Florence component contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "id",
+    "name",
+    "category",
+    "path",
+    "exports",
+    "intent",
+    "whenToUse",
+    "whenNotToUse",
+    "api",
+    "tokens",
+    "a11y",
+    "examples",
+    "related"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "florence.component.v1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^03-components/"
+    },
+    "exports": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "intent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "whenToUse": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "whenNotToUse": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "deps": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Catalog ids copied with flowrix add. Not the same as related."
+    },
+    "api": {
+      "type": "object"
+    },
+    "tokens": {
+      "type": "object"
+    },
+    "a11y": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "examples": {
+      "type": "array",
+      "minItems": 1
+    },
+    "related": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "button",
+  "name": "Button",
+  "category": "actions",
+  "path": "03-components/button",
+  "exports": [
+    "Button"
+  ],
+  "intent": "Trigger a single action with clear visual hierarchy. One primary path per view; quieter variants for secondary work.",
+  "whenToUse": [
+    "Primary CTA on a screen or dialog",
+    "Form submit and destructive confirms (danger)",
+    "Toolbar or empty-state actions (secondary / tertiary)"
+  ],
+  "whenNotToUse": [
+    "In-page navigation - use a link",
+    "Binary on/off settings - use Switch",
+    "Choosing one of many options - use Radio or Select"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "values": [
+          "primary",
+          "secondary",
+          "tertiary",
+          "danger"
+        ],
+        "default": "primary",
+        "description": "Visual hierarchy and emphasis"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md",
+        "description": "Control density"
+      },
+      {
+        "name": "type",
+        "type": "enum",
+        "values": [
+          "button",
+          "submit",
+          "reset"
+        ],
+        "default": "button"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "description": "Label content"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-interactive-primary*",
+      "--color-interactive-secondary*",
+      "--color-interactive-danger*",
+      "--color-text-primary",
+      "--color-text-brand",
+      "--color-brand-on-brand",
+      "--color-border-default",
+      "--color-bg-brand-subtle",
+      "--color-focus-ring"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-body-sm-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-inline-*"
+    ],
+    "radius": [
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-control",
+      "--border-focus"
+    ],
+    "motion": [
+      "--motion-interaction-*"
+    ],
+    "opacity": [
+      "--opacity-disabled"
+    ]
+  },
+  "a11y": [
+    "Native button element",
+    "Focus-visible ring via --color-focus-ring",
+    "Disabled uses opacity-disabled and removes pointer events"
+  ],
+  "examples": [
+    {
+      "title": "Primary action",
+      "code": "<Button variant=\"primary\">Save changes</Button>"
+    },
+    {
+      "title": "Quiet action",
+      "code": "<Button variant=\"secondary\" size=\"sm\">Export</Button>"
+    },
+    {
+      "title": "Destructive",
+      "code": "<Button variant=\"danger\">Delete</Button>"
+    }
+  ],
+  "related": [
+    "input",
+    "modal",
+    "toast"
+  ]
+}

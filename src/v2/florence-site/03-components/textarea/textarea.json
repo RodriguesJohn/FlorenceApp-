@@ -1,0 +1,99 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "textarea",
+  "name": "Textarea",
+  "category": "forms",
+  "path": "03-components/textarea",
+  "exports": [
+    "Textarea"
+  ],
+  "intent": "Capture multi-line text with the same label / hint / error pattern as Input.",
+  "whenToUse": [
+    "Comments, notes, descriptions, longer form fields"
+  ],
+  "whenNotToUse": [
+    "Single-line values - use Input",
+    "Structured choices - use Select"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "type": "string"
+      },
+      {
+        "name": "error",
+        "type": "string|boolean"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "rows",
+        "type": "number"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-*",
+      "--color-border-*",
+      "--color-focus-ring"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-body-*",
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*"
+    ],
+    "radius": [
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-control",
+      "--border-focus"
+    ],
+    "motion": [
+      "--motion-interaction-*"
+    ]
+  },
+  "a11y": [
+    "Label linked to control",
+    "Error/hint announced as description"
+  ],
+  "examples": [
+    {
+      "title": "Notes",
+      "code": "<Textarea label=\"Notes\" rows={4} />"
+    }
+  ],
+  "related": [
+    "input",
+    "button"
+  ]
+}

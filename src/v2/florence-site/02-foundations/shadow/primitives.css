@@ -1,5 +1,5 @@
 :root {
-  /* Soft ambient elevation — high blur, wide spread, low opacity */
+  /* Soft ambient elevation - high blur, wide spread, low opacity */
   --shadow-0: none;
   --shadow-100: 0 4px 14px 2px rgb(0 0 0 / 0.008), 0 12px 40px 4px rgb(0 0 0 / 0.012);
   --shadow-150: 0 8px 24px 4px rgb(0 0 0 / 0.008), 0 24px 64px 8px rgb(0 0 0 / 0.014);
@@ -10,7 +10,7 @@
   --shadow-500: 0 20px 48px 10px rgb(0 0 0 / 0.014), 0 44px 96px 14px rgb(0 0 0 / 0.025);
   --shadow-600: 0 28px 64px 12px rgb(0 0 0 / 0.016), 0 52px 112px 16px rgb(0 0 0 / 0.03);
 
-  /* Specular / rim highlights — light catching glass edges */
+  /* Specular / rim highlights - light catching glass edges */
   --shadow-inset-top-light: inset 0 1px 0 rgb(255 255 255 / 0.72);
   --shadow-inset-start-light: inset 1px 0 0 rgb(255 255 255 / 0.28);
   --shadow-inset-end-light: inset -1px 0 0 rgb(255 255 255 / 0.1);

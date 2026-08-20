@@ -1,0 +1,175 @@
+.modal-card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-stack-xs);
+  width: min(100%, 28rem);
+  max-height: min(90vh, 40rem);
+  margin: 0;
+  padding: var(--space-inset-lg);
+  border: 0;
+  border-radius: var(--radius-control-lg);
+  background: var(--color-bg-page);
+  box-shadow: var(--shadow-modal);
+  overflow: auto;
+  outline: none;
+}
+
+.modal-card--animated {
+  animation: modal-card-in var(--motion-modal-duration) var(--motion-modal-easing) both;
+}
+
+.modal-card--contained {
+  max-height: calc(100% - var(--space-inset-md) * 2);
+  width: min(100%, 22rem);
+}
+
+.modal-card--sm {
+  width: min(100%, 22rem);
+  padding: var(--space-inset-md);
+  gap: var(--space-stack-2xs);
+}
+
+.modal-card--sm.modal-card--contained {
+  width: min(100%, 18rem);
+}
+
+.modal-card--md {
+  width: min(100%, 28rem);
+}
+
+.modal-card--lg {
+  width: min(100%, 36rem);
+  padding: var(--space-inset-xl);
+  gap: var(--space-stack-sm);
+}
+
+.modal-card--lg.modal-card--contained {
+  width: min(100%, 26rem);
+  padding: var(--space-inset-md) var(--space-inset-lg);
+}
+
+.modal-card__header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-inline-md);
+}
+
+.modal-card__heading {
+  display: grid;
+  gap: var(--space-stack-xs);
+  min-width: 0;
+}
+
+.modal-card__title {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--text-heading-sm-font-family);
+  font-size: var(--text-heading-sm-font-size);
+  font-weight: var(--text-heading-sm-font-weight);
+  line-height: var(--text-heading-sm-line-height);
+  letter-spacing: var(--text-heading-sm-letter-spacing);
+}
+
+.modal-card__description {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-body-sm-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+}
+
+.modal-card__close {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-control-sm);
+  background: transparent;
+  color: var(--color-icon-muted);
+  cursor: pointer;
+  transition:
+    color var(--motion-interaction-duration) var(--motion-interaction-easing),
+    background var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.modal-card__close svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.modal-card__close:hover {
+  color: var(--color-icon-primary);
+  background: var(--color-bg-subtle);
+}
+
+.modal-card__close:focus-visible {
+  outline: var(--border-focus) solid var(--color-focus-ring);
+  outline-offset: var(--space-inset-2xs);
+}
+
+.modal-card__body {
+  color: var(--color-text-secondary);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-body-sm-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+}
+
+.modal-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-inline-sm);
+}
+
+.modal-card--sm .modal-card__title {
+  font-family: var(--text-heading-xs-font-family);
+  font-size: var(--text-heading-xs-font-size);
+  font-weight: var(--text-heading-xs-font-weight);
+  line-height: var(--text-heading-xs-line-height);
+  letter-spacing: var(--text-heading-xs-letter-spacing);
+}
+
+.modal-card--lg .modal-card__title {
+  font-family: var(--text-heading-md-font-family);
+  font-size: var(--text-heading-md-font-size);
+  font-weight: var(--text-heading-md-font-weight);
+  line-height: var(--text-heading-md-line-height);
+  letter-spacing: var(--text-heading-md-letter-spacing);
+}
+
+.modal-card--lg .modal-card__description,
+.modal-card--lg .modal-card__body {
+  font-family: var(--text-body-font-family);
+  font-size: var(--text-body-font-size);
+  font-weight: var(--text-body-font-weight);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-body-letter-spacing);
+}
+
+@keyframes modal-card-in {
+  from {
+    transform: translateY(var(--space-inset-sm)) scale(0.96);
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-card--animated,
+  .modal-card__close {
+    transition: none;
+    animation: none;
+  }
+}

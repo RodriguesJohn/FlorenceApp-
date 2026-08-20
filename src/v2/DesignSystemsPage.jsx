@@ -141,15 +141,15 @@ export default function DesignSystemsPage() {
       <a
         className="ds-urgency-bar"
         href="#workshop-offer"
-        aria-label="Reserve your seat for the AI-Ready Design System Workshop on August 29 at 9:00 AM Pacific Time"
-        onClick={() => trackWorkshopClick(WORKSHOP_URL, "Reserve your seat", "urgency_bar")}
+        aria-label="Join Workshop for the AI-Ready Design System Workshop on August 29 at 9:00 AM Pacific Time"
+        onClick={() => trackWorkshopClick(WORKSHOP_URL, "Join Workshop", "urgency_bar")}
       >
         <span className="ds-urgency-bar-inner">
           <span className="ds-banner-date">August 29 · 9:00 AM PT</span>
           <span className="ds-urgency-bar-actions">
             <WorkshopCountdown className="is-banner" label="Workshop starts in" />
             <span className="ds-banner-cta">
-              Reserve your seat
+              Join Workshop
               <span className="ds-banner-arrow" aria-hidden="true">↗</span>
             </span>
           </span>

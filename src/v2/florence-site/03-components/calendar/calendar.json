@@ -1,0 +1,113 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "calendar",
+  "name": "Calendar",
+  "category": "forms",
+  "path": "03-components/calendar",
+  "exports": [
+    "Calendar"
+  ],
+  "intent": "Pick a single date from a month grid with keyboard-friendly day navigation.",
+  "whenToUse": [
+    "Scheduling",
+    "Filters by day",
+    "Form date fields"
+  ],
+  "whenNotToUse": [
+    "Date ranges in v1 without extra composition",
+    "Time-of-day - pair with a time control"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "value",
+        "type": "Date|null"
+      },
+      {
+        "name": "defaultValue",
+        "type": "Date|null",
+        "default": null
+      },
+      {
+        "name": "onValueChange",
+        "type": "(date: Date) => void"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "minDate",
+        "type": "Date"
+      },
+      {
+        "name": "maxDate",
+        "type": "Date"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-*",
+      "--color-border-*",
+      "--color-interactive-*",
+      "--color-focus-ring"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-caption-*",
+      "--text-body-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*",
+      "--space-gap-*"
+    ],
+    "radius": [
+      "--radius-surface-*",
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-surface",
+      "--border-control"
+    ],
+    "shadow": [
+      "--shadow-raised-*"
+    ],
+    "motion": [
+      "--motion-interaction-*"
+    ]
+  },
+  "a11y": [
+    "Days are buttons",
+    "Month navigation labeled",
+    "Selected day announced"
+  ],
+  "examples": [
+    {
+      "title": "Default",
+      "code": "<Calendar onValueChange={setDate} />"
+    }
+  ],
+  "related": [
+    "input",
+    "select"
+  ]
+}

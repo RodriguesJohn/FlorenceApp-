@@ -51,28 +51,14 @@ a {
   isolation: isolate;
   display: grid;
   grid-template-rows: auto auto auto;
+  align-content: start;
+  min-width: 0;
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
   background: var(--color-overlay-scrim);
-}
-
-.hero__studio {
-  position: absolute;
-  top: var(--space-inset-lg);
-  left: var(--space-inset-xl);
-  z-index: 5;
-  color: var(--color-text-muted);
-  font-family: var(--text-code-font-family);
-  font-size: var(--text-code-font-size);
-  font-weight: var(--text-code-font-weight);
-  letter-spacing: var(--text-code-letter-spacing);
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.hero__studio:hover {
-  color: var(--color-text-primary);
+  container-type: inline-size;
+  container-name: hero;
 }
 
 .hero__bloom {
@@ -97,7 +83,9 @@ a {
   position: relative;
   z-index: 3;
   display: grid;
-  justify-items: center;
+  justify-items: stretch;
+  min-width: 0;
+  overflow: hidden;
   gap: var(--space-stack-md);
   padding: calc(var(--space-stack-2xl) + var(--space-stack-lg))
     var(--layout-margin-md) 0;
@@ -108,6 +96,7 @@ a {
   z-index: 3;
   display: grid;
   justify-items: center;
+  min-width: 0;
   gap: var(--space-stack-md);
   padding: var(--space-stack-lg) var(--layout-margin-md) var(--space-stack-lg);
   text-align: center;
@@ -119,6 +108,7 @@ a {
   align-items: center;
   width: fit-content;
   max-width: 100%;
+  min-width: 0;
   margin: 0;
   color: var(--color-text-secondary);
   font-family: var(--text-body-lg-font-family);
@@ -291,8 +281,12 @@ a {
 .hero__giant {
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin: 0;
   padding: 0;
+  overflow: hidden;
   font-family: var(--text-code-font-family);
   font-size: clamp(5rem, 14vw, 10rem);
   font-weight: var(--font-weight-bold);
@@ -409,6 +403,7 @@ a {
   position: relative;
   z-index: 2;
   display: grid;
+  min-width: 0;
   gap: var(--space-stack-xs);
   margin-inline: auto;
   margin-block-end: var(--layout-margin-md);
@@ -598,16 +593,111 @@ a {
   }
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 64rem) {
   .hero__lede {
-    font-size: var(--text-body-font-size);
+    width: 100%;
   }
 
   .hero__lede-line {
     white-space: normal;
   }
 
+  .hero__lede .hero__select {
+    white-space: normal;
+  }
+
   .hero__giant {
-    font-size: clamp(3.25rem, 18vw, 6.5rem);
+    font-size: min(12vw, 8rem);
+  }
+
+  .hero__giant-fill {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hero__giant-letter {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .hero__giant:hover .hero__giant-letter,
+  .hero__giant--burst .hero__giant-letter {
+    transform: scale(1.04);
+  }
+}
+
+@media (max-width: 40rem) {
+  .hero {
+    padding-block-start: env(safe-area-inset-top);
+    padding-block-end: env(safe-area-inset-bottom);
+  }
+
+  .hero__mast {
+    padding-block-start: var(--space-stack-xl);
+    padding-inline: var(--layout-margin-sm);
+  }
+
+  .hero__copy {
+    justify-items: stretch;
+    gap: var(--space-stack-lg);
+    padding-inline: var(--layout-margin-sm);
+  }
+
+  .hero__lede {
+    font-size: var(--text-body-font-size);
+    line-height: var(--text-body-line-height);
+  }
+
+  .hero__giant {
+    font-size: min(12vw, 4.5rem);
+  }
+
+  .hero__giant:hover .hero__giant-letter,
+  .hero__giant--burst .hero__giant-letter {
+    transform: none;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: var(--space-gap-sm);
+  }
+
+  .hero__btn {
+    width: 100%;
+    min-block-size: var(--space-section-sm);
+    white-space: normal;
+  }
+
+  .hero__reel {
+    width: min(100% - (var(--layout-margin-sm) * 2), var(--layout-container-lg));
+    margin-block-end: calc(
+      var(--layout-margin-sm) + env(safe-area-inset-bottom)
+    );
+  }
+
+  .hero__reel-chrome {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-stack-xs) var(--space-inline-md);
+  }
+
+  .hero__reel-stage {
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero__reel-rule--top,
+  .hero__reel-rule--bottom {
+    left: 0;
+    right: 0;
+  }
+
+  .hero__reel-rule--start,
+  .hero__reel-rule--end {
+    top: 0;
+    bottom: 0;
   }
 }

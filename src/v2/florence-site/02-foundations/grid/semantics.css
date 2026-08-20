@@ -1,28 +1,29 @@
 :root {
-  /* Container — content max-widths */
+  /* Container - content max-widths */
   --layout-container-sm: var(--grid-width-sm); /* 640px */
   --layout-container-md: var(--grid-width-md); /* 1024px */
   --layout-container-lg: var(--grid-width-lg); /* 1280px */
   --layout-container-xl: var(--grid-width-xl); /* 1440px */
 
-  /* Gutter — column and section gaps */
+  /* Gutter - column and section gaps */
   --layout-gutter-sm: var(--grid-gutter-sm);
   --layout-gutter-md: var(--grid-gutter-md);
   --layout-gutter-lg: var(--grid-gutter-lg);
   --layout-gutter-xl: var(--grid-gutter-xl);
 
-  /* Margin — page edge inset */
+  /* Margin - page edge inset */
   --layout-margin-sm: var(--grid-margin-sm);
   --layout-margin-md: var(--grid-margin-md);
   --layout-margin-lg: var(--grid-margin-lg);
 
-  /* SaaS shell — app chrome widths */
+  /* SaaS shell - app chrome widths */
   --layout-sidebar: 14rem;
+  --layout-sidebar-compact: var(--space-section-lg);
   --layout-rail: 22rem;
   --layout-metrics-min: 12rem;
   --layout-auto-min: 16rem;
 
-  /* Split — 12-column spans */
+  /* Split - 12-column spans */
   --layout-split-primary: 8;
   --layout-split-secondary: 4;
   --layout-split-half: 6;
@@ -30,11 +31,11 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* SaaS patterns — compose these in product shells and dashboards     */
+/* SaaS patterns - compose these in product shells and dashboards     */
 /* ------------------------------------------------------------------ */
 
 /**
- * App shell — fixed nav + fluid canvas.
+ * App shell - fixed nav + fluid canvas.
  * Children: nav, canvas (order matters).
  */
 .layout-app {
@@ -50,7 +51,7 @@
 }
 
 /**
- * Canvas — page header + scrollable body inside the app shell.
+ * Canvas - page header + scrollable body inside the app shell.
  * Children: header, body (workspace or content).
  */
 .layout-canvas {
@@ -62,7 +63,7 @@
 }
 
 /**
- * Workspace — primary content + optional context rail (chat, inspector).
+ * Workspace - primary content + optional context rail (chat, inspector).
  * Children: main, rail.
  */
 .layout-workspace {
@@ -83,7 +84,7 @@
 }
 
 /**
- * Content — stacked dashboard sections with page inset.
+ * Content - stacked dashboard sections with page inset.
  * Put metrics, splits, and full-bleed tables inside this.
  */
 .layout-content {
@@ -107,7 +108,7 @@
 }
 
 /**
- * Metrics — KPI / summary card strip for SaaS dashboards.
+ * Metrics - KPI / summary card strip for SaaS dashboards.
  */
 .layout-metrics {
   display: grid;
@@ -127,7 +128,7 @@
 }
 
 /**
- * Header bar — title cluster + actions row inside a canvas.
+ * Header bar - title cluster + actions row inside a canvas.
  */
 .layout-header {
   display: flex;
@@ -147,7 +148,7 @@
 }
 
 /* ------------------------------------------------------------------ */
-/* Content ratios — panels inside layout-content                      */
+/* Content ratios - panels inside layout-content                      */
 /* ------------------------------------------------------------------ */
 
 .layout-split {
@@ -312,7 +313,7 @@
 
 @media (max-width: 64rem) {
   .layout-app {
-    grid-template-columns: 1fr;
+    grid-template-columns: var(--layout-sidebar-compact) minmax(0, 1fr);
   }
 
   .layout-workspace {

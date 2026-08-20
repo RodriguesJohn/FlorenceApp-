@@ -516,8 +516,8 @@ function AcademyPage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1">
-                <span className="academy-hero-line">Learn How to Build Products, Design Systems,</span>
-                <span className="academy-hero-line">and Agents With AI Workflows.</span>
+                <span className="academy-hero-line">Learn How to Build Products,</span>
+                <span className="academy-hero-line">Design Systems, and AI Agents.</span>
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
                 <a
@@ -644,7 +644,10 @@ function AcademyPage() {
         <section className="academy-section academy-section--bonus">
           <Entrance className="academy-bonus-split">
             <EntranceItem className="academy-bonus-copy">
-              <h2>More resources and courses for you to level up your skills.</h2>
+              <h2>
+                <span>More resources and courses</span>
+                <span>to level up your skills.</span>
+              </h2>
             </EntranceItem>
             <EntranceItem>
               <BonusCardStack />

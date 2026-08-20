@@ -1,0 +1,109 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "pie-chart",
+  "name": "PieChart",
+  "category": "data-display",
+  "path": "03-components/charts/pie-chart",
+  "exports": [
+    "PieChart"
+  ],
+  "intent": "Show part-to-whole share for a small set of segments (max six; fold the rest into Other).",
+  "whenToUse": [
+    "Status mix",
+    "Category share where ranking angles is acceptable"
+  ],
+  "whenNotToUse": [
+    "Close values that need ranking - use BarChart",
+    "Trends over time - use LineChart",
+    "More than six meaningful slices without aggregation"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "data",
+        "type": "{ label: string, value: number }[]",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "name": "variant",
+        "type": "enum",
+        "values": [
+          "donut",
+          "pie"
+        ],
+        "default": "donut"
+      },
+      {
+        "name": "layout",
+        "type": "enum",
+        "values": [
+          "split",
+          "stack"
+        ],
+        "default": "split"
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "default": 240
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-data-*",
+      "--color-text-*",
+      "--color-border-highlight"
+    ],
+    "typography": [
+      "--text-metric-*",
+      "--text-caption-*",
+      "--text-heading-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-gap-*"
+    ],
+    "radius": [
+      "--radius-surface-*"
+    ],
+    "border": [
+      "--border-highlight"
+    ],
+    "shadow": [
+      "--shadow-raised-depth"
+    ]
+  },
+  "a11y": [
+    "Segments focusable",
+    "Table twin via ChartFrame",
+    "Values not hover-only"
+  ],
+  "examples": [
+    {
+      "title": "Donut split",
+      "code": "<PieChart title=\"Properties by status\" data={[{ label: \"Closed\", value: 514 }]} layout=\"split\" />"
+    }
+  ],
+  "deps": [
+    "chart-core"
+  ],
+  "related": [
+    "chart-core",
+    "bar-chart",
+    "kpi-card"
+  ]
+}

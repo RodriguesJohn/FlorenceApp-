@@ -1,0 +1,107 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "switch",
+  "name": "Switch",
+  "category": "forms",
+  "path": "03-components/switch",
+  "exports": [
+    "Switch"
+  ],
+  "intent": "Toggle a single immediate setting on or off.",
+  "whenToUse": [
+    "Feature flags",
+    "Notification preferences",
+    "Binary product settings"
+  ],
+  "whenNotToUse": [
+    "Submitting a form choice that needs review - use Checkbox",
+    "Selecting one of many options - use Radio",
+    "Triggering an action - use Button"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "checked",
+        "type": "boolean",
+        "description": "Controlled state"
+      },
+      {
+        "name": "defaultChecked",
+        "type": "boolean"
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "(checked: boolean) => void"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-interactive-*",
+      "--color-border-*",
+      "--color-bg-*",
+      "--color-text-*",
+      "--color-focus-ring"
+    ],
+    "typography": [
+      "--text-label-*"
+    ],
+    "spacing": [
+      "--space-inline-*",
+      "--space-inset-*"
+    ],
+    "radius": [
+      "--radius-pill",
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-control",
+      "--border-focus"
+    ],
+    "motion": [
+      "--motion-interaction-*"
+    ],
+    "opacity": [
+      "--opacity-disabled"
+    ]
+  },
+  "a11y": [
+    "Exposes switch role / aria-checked via native or ARIA control",
+    "Keyboard operable"
+  ],
+  "examples": [
+    {
+      "title": "Setting",
+      "code": "<Switch label=\"Notifications\" defaultChecked />"
+    }
+  ],
+  "related": [
+    "checkbox",
+    "radio"
+  ]
+}
