@@ -446,7 +446,7 @@ export default function DesignSystemsPage() {
               Human AI Studio
             </EntranceItem>
             <EntranceItem as="p">
-              Human AI Studio is a company of Human Inspire Studio LLC.
+              AI product studio for design systems, agents, and AI-native workflows.
             </EntranceItem>
           </Entrance>
 

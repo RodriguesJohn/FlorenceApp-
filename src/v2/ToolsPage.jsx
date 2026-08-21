@@ -114,7 +114,7 @@ export default function ToolsPage() {
             <span className="tools-brand-mark" aria-hidden="true" />
             Human AI Studio
           </a>
-          <p>Human AI Studio is a company of Human Inspire Studio LLC.</p>
+          <p>AI product studio for design systems, agents, and AI-native workflows.</p>
         </div>
         <div className="tools-footer-links">
           <span>Contact</span>

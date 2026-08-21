@@ -1992,8 +1992,7 @@ function OriginalHome() {
               Human AI Studio
             </a>
             <p>
-              Human AI Studio by Human Inspire Studio. Independent AI product
-              studio run by John Rodrigues in the SF Bay Area.
+              Independent AI product studio run by John Rodrigues in the SF Bay Area.
             </p>
           </div>
 
@@ -2590,7 +2589,7 @@ function StudioHome({ isHistory = false }) {
                 Human AI Studio
               </a>
               <p>
-                Human AI Studio by Human Inspire Studio. AI agent operating system design and development studio run by John Rodrigues.
+                AI agent operating system design and development studio run by John Rodrigues.
               </p>
             </div>
           ) : (
@@ -2600,7 +2599,7 @@ function StudioHome({ isHistory = false }) {
                 Human AI Studio
               </EntranceItem>
               <EntranceItem as="p">
-                Human AI Studio is a company of Human Inspire Studio LLC.
+                AI product studio for design systems, agents, and AI-native workflows.
               </EntranceItem>
             </Entrance>
           )}
