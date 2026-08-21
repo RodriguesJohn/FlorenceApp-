@@ -3,13 +3,17 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const hostArgIndex = process.argv.indexOf("--host");
+const portArgIndex = process.argv.indexOf("--port");
+const host = hostArgIndex === -1 ? "127.0.0.1" : process.argv[hostArgIndex + 1] || "0.0.0.0";
+const port = portArgIndex === -1 ? 5173 : Number(process.argv[portArgIndex + 1]) || 5173;
 
 const server = await createServer({
   configFile: path.join(root, "vite.config.js"),
   root,
   server: {
-    host: "127.0.0.1",
-    port: 5173,
+    host,
+    port,
     strictPort: true,
     watch: {
       ignored: [

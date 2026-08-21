@@ -695,21 +695,23 @@ const homeOffers = [
 
 const homeProblems = [
   {
-    title: "Product and design teams move fast but ship AI slop.",
-    titleLines: ["Product and design teams", "move fast but ship AI slop."],
+    title: "Teams move fast. AI ships slop.",
+    titleLines: ["Teams move fast.", "AI ships slop."],
     fadedLabelLines: ["Reduce AI", "Slop"],
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Your design systems are drifting and agents and humans are confused.",
-    fadedLabelLines: ["Reduce Agent", "Drifts"],
+    title: "Systems drift. Teams lose context.",
+    titleLines: ["Systems drift.", "Teams lose context."],
+    fadedLabelLines: ["Reduce", "Drift"],
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Even your best models are not able to have the design context.",
-    fadedLabelLines: ["Automate", "manual work"],
+    title: "Models miss your design context.",
+    titleLines: ["Models miss your", "design context."],
+    fadedLabelLines: ["Automate", "Work"],
     color1: "#10b981",
     color2: "#a7f3d0"
   }
