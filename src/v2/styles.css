@@ -1290,6 +1290,10 @@ h2 {
     letter-spacing: 0.04em;
     white-space: nowrap;
   }
+
+  .home-florence-media > img {
+    aspect-ratio: 16 / 11;
+  }
 }
 
 .home-florence-media {
