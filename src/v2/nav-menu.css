@@ -249,6 +249,11 @@
     gap: 0.1rem;
   }
 
+  .nav-direct > .nav-direct-link:not(.nav-menu-trigger),
+  .nav-direct > .nav-direct-book {
+    display: none;
+  }
+
   .nav-direct-link,
   .nav-direct-book,
   .nav-menu-trigger {

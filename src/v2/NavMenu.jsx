@@ -45,6 +45,12 @@ const serviceLinks = [
   { label: "Blog", href: blogUrl }
 ];
 
+const primaryLinks = [
+  { label: "Studio", href: studioUrl },
+  { label: "Academy", href: academyUrl, onClick: trackAcademyNavClick },
+  { label: "Workshop", href: designSystemsUrl, onClick: trackWorkshopNavClick }
+];
+
 function openBookingModal(event) {
   if (
     event.defaultPrevented ||
@@ -178,6 +184,22 @@ export function NavMenu() {
             role="menu"
             style={panelStyle}
           >
+            {primaryLinks.map((item) => (
+              <a
+                key={item.label}
+                className={`nav-menu-item${currentPath === item.href ? " is-active" : ""}`}
+                href={item.href}
+                role="menuitem"
+                aria-current={currentPath === item.href ? "page" : undefined}
+                onClick={() => {
+                  close();
+                  item.onClick?.();
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+            <div className="nav-menu-divider" role="separator" aria-hidden="true" />
             {serviceLinks.map((service) => (
               <a
                 key={service.label}
