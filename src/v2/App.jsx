@@ -695,23 +695,23 @@ const homeOffers = [
 
 const homeProblems = [
   {
-    title: "Teams move fast. AI ships slop.",
-    titleLines: ["Teams move fast.", "AI ships slop."],
-    fadedLabelLines: ["Reduce AI", "Slop"],
+    title: "AI slop to on-brand UI.",
+    titleLines: ["AI slop →", "on-brand UI."],
+    fadedLabelLines: ["From AI", "Slop"],
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Systems drift. Teams lose context.",
-    titleLines: ["Systems drift.", "Teams lose context."],
-    fadedLabelLines: ["Reduce", "Drift"],
+    title: "Design drift to shared context.",
+    titleLines: ["Design drift →", "shared context."],
+    fadedLabelLines: ["From", "Drift"],
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Models miss your design context.",
-    titleLines: ["Models miss your", "design context."],
-    fadedLabelLines: ["Automate", "Work"],
+    title: "Models guessing to models with context.",
+    titleLines: ["Models guessing →", "models with context."],
+    fadedLabelLines: ["From", "Guessing"],
     color1: "#10b981",
     color2: "#a7f3d0"
   }
