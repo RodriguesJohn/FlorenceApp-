@@ -290,6 +290,9 @@ export default function CaseStudiesPage() {
         <div className="cs-footer-links">
           <a href="/">Studio</a>
           <a href="/academy">Academy</a>
+          <address className="cs-footer-address">
+            Human AI Studio · 455 Market St Ste 1940 · PMB 769150 · San Francisco, California 94105-2448 US
+          </address>
           <a href={bookingUrl} {...bookingAttributes} onClick={openBookingModal}>
             Book a call
           </a>

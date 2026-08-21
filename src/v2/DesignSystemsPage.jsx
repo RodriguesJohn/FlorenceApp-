@@ -460,6 +460,12 @@ export default function DesignSystemsPage() {
             <EntranceItem as="a" href="mailto:john@humanaistudio.ai">
               john@humanaistudio.ai
             </EntranceItem>
+            <EntranceItem as="address" className="footer-address">
+              Human AI Studio<br />
+              455 Market St Ste 1940<br />
+              PMB 769150<br />
+              San Francisco, California 94105-2448 US
+            </EntranceItem>
             <EntranceItem as="a" href={BOOKING_URL} target="_blank" rel="noreferrer">
               Book a call
             </EntranceItem>

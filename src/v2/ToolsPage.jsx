@@ -119,6 +119,12 @@ export default function ToolsPage() {
         <div className="tools-footer-links">
           <span>Contact</span>
           <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
+          <address className="tools-footer-address">
+            Human AI Studio<br />
+            455 Market St Ste 1940<br />
+            PMB 769150<br />
+            San Francisco, California 94105-2448 US
+          </address>
           <a href="/workshop">Workshop</a>
         </div>
       </footer>

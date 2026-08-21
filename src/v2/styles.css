@@ -4014,10 +4014,16 @@ h3 {
 
 .footer-brand p,
 .footer-column a,
-.footer-column span {
+.footer-column span,
+.footer-address {
   color: rgba(255, 255, 255, 0.58);
   font-size: 0.86rem;
   line-height: 1.55;
+}
+
+.footer-address {
+  margin: 0;
+  font-style: normal;
 }
 
 .footer-brand p {

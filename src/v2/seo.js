@@ -165,6 +165,15 @@ function structuredDataFor(page) {
     "@type": "Organization",
     name: SITE_NAME,
     url: SITE_URL,
+    address: {
+      "@type": "PostalAddress",
+      name: SITE_NAME,
+      streetAddress: "455 Market St Ste 1940 PMB 769150",
+      addressLocality: "San Francisco",
+      addressRegion: "CA",
+      postalCode: "94105-2448",
+      addressCountry: "US"
+    },
     founder: {
       "@type": "Person",
       name: "John Rodrigues",

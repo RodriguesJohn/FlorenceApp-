@@ -769,6 +769,12 @@ function AcademyPage() {
           <div className="academy-footer-column">
             <p>Contact</p>
             <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
+            <address className="academy-footer-address">
+              Human AI Studio<br />
+              455 Market St Ste 1940<br />
+              PMB 769150<br />
+              San Francisco, California 94105-2448 US
+            </address>
           </div>
         </div>
         <div className="academy-footer-wordmark" aria-hidden="true">Human AI Studio</div>

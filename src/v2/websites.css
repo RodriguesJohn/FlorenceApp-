@@ -825,9 +825,19 @@ html:has(.web-page) body {
   text-transform: uppercase;
 }
 
-.web-footer-contact a {
+.web-footer-contact a,
+.web-footer-address {
   color: var(--web-muted);
   font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.web-footer-address {
+  margin: 0;
+  font-style: normal;
+}
+
+.web-footer-contact a {
   transition: color 180ms ease;
 }
 

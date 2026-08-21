@@ -466,9 +466,19 @@ html:has(.cs-page) body {
   gap: 1.25rem;
 }
 
-.cs-footer-links a {
+.cs-footer-links a,
+.cs-footer-address {
   color: var(--cs-muted);
   font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.cs-footer-address {
+  margin: 0;
+  font-style: normal;
+}
+
+.cs-footer-links a {
   text-decoration: none;
 }
 

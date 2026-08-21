@@ -1808,10 +1808,19 @@ html:has(.academy-page) {
   text-transform: uppercase;
 }
 
-.academy-footer-column a {
+.academy-footer-column a,
+.academy-footer-address {
   color: var(--academy-muted);
   font-size: 0.88rem;
   line-height: 1.55;
+}
+
+.academy-footer-address {
+  margin: 0;
+  font-style: normal;
+}
+
+.academy-footer-column a {
   transition: color 160ms ease;
 }
 

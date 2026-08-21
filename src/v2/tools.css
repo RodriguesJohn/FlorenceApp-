@@ -223,10 +223,16 @@ html:has(.tools-page) body {
 }
 
 .tools-footer p,
-.tools-footer-links a {
+.tools-footer-links a,
+.tools-footer-address {
   color: rgba(255, 255, 255, 0.52);
   font-size: 0.84rem;
   line-height: 1.55;
+}
+
+.tools-footer-address {
+  margin: 0;
+  font-style: normal;
 }
 
 .tools-footer p {
