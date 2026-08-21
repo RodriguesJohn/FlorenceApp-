@@ -146,7 +146,7 @@ const head = ({ title, description, canonical, type }) => `
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&display=swap" />
-    <link rel="stylesheet" href="/blog.css" />
+    <link rel="stylesheet" href="/blog.css?v=20260821-home-blur" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TYCCEQBP58"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -208,10 +208,13 @@ const chrome = (inner) => `<!doctype html>
               </svg>
             </button>
             <div class="nav-menu-panel" id="primary-nav-menu" role="menu" hidden data-nav-panel>
+              <a class="nav-menu-item" href="/" role="menuitem">Studio</a>
+              <a class="nav-menu-item" href="/academy" role="menuitem">Academy</a>
+              <a class="nav-menu-item" href="/workshop" role="menuitem">Workshop</a>
+              <div class="nav-menu-divider" role="separator" aria-hidden="true"></div>
               <a class="nav-menu-item nav-menu-item--nested" href="/case-studies" role="menuitem">All work</a>
-              <a class="nav-menu-item nav-menu-item--nested" href="/websites" role="menuitem">Websites</a>
-              <a class="nav-menu-item nav-menu-item--nested" href="/" role="menuitem">Product design</a>
-              <a class="nav-menu-item nav-menu-item--nested" href="/design-systems" role="menuitem">Design systems</a>
+              <a class="nav-menu-item nav-menu-item--nested" href="/florence" role="menuitem">Florence</a>
+              <a class="nav-menu-item nav-menu-item--nested" href="/tools" role="menuitem">Tools</a>
               <a class="nav-menu-item nav-menu-item--nested is-active" href="/blog" role="menuitem" aria-current="page">Blog</a>
               <div class="nav-menu-divider" role="separator" aria-hidden="true"></div>
               <a
@@ -228,6 +231,7 @@ const chrome = (inner) => `<!doctype html>
       </div>
     </nav>
 ${inner.body}
+    <div class="page-bottom-blur" aria-hidden="true"></div>
     <footer class="blog-footer">
       <p>&copy; ${new Date().getUTCFullYear()} Human AI Studio</p>
       <a href="/">Back to the studio</a>
@@ -278,14 +282,6 @@ ${inner.body}
 /** Article page — the OpenAI-style editorial layout. */
 export function renderPost(post) {
   const canonical = `${SITE}${post.url}`;
-  const toc = post.headings.length
-    ? `<nav class="article__toc" aria-label="On this page">
-          <p class="article__toc-label">On this page</p>
-          <ol>
-${post.headings.map((h) => `            <li><a href="#${h.id}">${escapeHtml(h.text)}</a></li>`).join("\n")}
-          </ol>
-        </nav>`
-    : "";
 
   return chrome({
     head: head({
@@ -320,7 +316,6 @@ ${JSON.stringify(
         <h1>${escapeHtml(post.title)}</h1>
         ${post.description ? `<p class="article__standfirst">${escapeHtml(post.description)}</p>` : ""}
       </header>
-      ${toc}
       <div class="article__body">
 ${post.body}
       </div>

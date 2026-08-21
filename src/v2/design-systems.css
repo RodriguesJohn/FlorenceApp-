@@ -246,21 +246,25 @@
 }
 
 .ds-audit-hero h1 {
-  max-width: none;
+  max-width: 15ch;
   margin: 0;
-  font-size: clamp(2.35rem, 3.65vw, 3.4rem);
+  font-size: clamp(2.35rem, 4.25vw, 4rem);
   font-weight: 500;
-  letter-spacing: -0.045em;
-  line-height: 1.05;
+  letter-spacing: -0.018em;
+  line-height: 1.02;
   text-align: start;
+  text-wrap: auto;
   overflow-wrap: break-word;
 }
 
 .ds-audit-hero h1 span {
   display: block;
-  width: 100%;
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
   text-align: start;
-  white-space: normal;
+  white-space: nowrap;
 }
 
 @media (min-width: 1280px) {
@@ -270,19 +274,82 @@
 }
 
 .ds-audit-intro {
-  max-width: 34rem;
-  margin: 1.3rem 0 0;
+  max-width: 31rem;
+  margin: 1.45rem 0 0;
   color: var(--ds-text);
   font-size: clamp(1rem, 1.3vw, 1.12rem);
   line-height: 1.6;
 }
 
 .ds-hero-offer-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   padding: clamp(1.5rem, 2.8vw, 2rem);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 1.15rem;
-  background: rgba(255, 255, 255, 0.045);
-  box-shadow: 0 1.75rem 4.5rem rgba(0, 0, 0, 0.26);
+  --ds-offer-card-1: #3b82f6;
+  --ds-offer-card-2: #bae6fd;
+  background:
+    radial-gradient(circle at 16% 0%, color-mix(in srgb, var(--ds-offer-card-2) 18%, transparent), transparent 12rem),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ds-offer-card-1) 26%, #1d2026) 0%,
+      color-mix(in srgb, var(--ds-offer-card-1) 16%, #1d2026) 46%,
+      color-mix(in srgb, var(--ds-offer-card-1) 10%, #1a1d23) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 0.9rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.ds-hero-offer-card::before,
+.ds-hero-offer-card::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.ds-hero-offer-card::before {
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 36%, rgba(0, 0, 0, 0.18)),
+    radial-gradient(120% 120% at 50% 0%, rgba(255, 255, 255, 0.08), transparent 56%);
+  opacity: 1;
+  transform: none;
+}
+
+.ds-hero-offer-card::after {
+  inset: 0;
+  z-index: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--pathway-glow-angle, 0deg),
+    transparent 0deg,
+    transparent 58deg,
+    rgba(255, 255, 255, 0.18) 82deg,
+    rgba(255, 255, 255, 0.58) 98deg,
+    rgba(255, 255, 255, 0.18) 114deg,
+    transparent 142deg,
+    transparent 360deg
+  );
+  opacity: 0.55;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: pathway-glow-travel 5.5s linear infinite;
+}
+
+.ds-hero-offer-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .ds-hero-offer-label {
@@ -646,19 +713,74 @@
 }
 
 .ds-masterclass {
+  position: relative;
+  overflow: hidden;
   padding: clamp(3rem, 6vw, 5rem) var(--page-padding);
-  background: #e8e7ec;
-  color: #0b0b0c;
+  background: #000000;
+  color: #ffffff;
+}
+
+.ds-masterclass::before,
+.ds-masterclass::after {
+  position: absolute;
+  border-radius: 999px;
+  content: "";
+  filter: blur(42px);
+  opacity: 0.46;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+}
+
+.ds-masterclass::before {
+  top: 12%;
+  left: -8rem;
+  width: 18rem;
+  height: 18rem;
+  background: radial-gradient(circle, rgba(47, 125, 245, 0.72), transparent 68%);
+  animation: dsShaderFloatA 11s ease-in-out infinite;
+}
+
+.ds-masterclass::after {
+  right: -6rem;
+  bottom: 2rem;
+  width: 16rem;
+  height: 16rem;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.58), transparent 70%);
+  animation: dsShaderFloatB 13s ease-in-out infinite;
 }
 
 .ds-masterclass-inner {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(22rem, 0.85fr);
   gap: clamp(2rem, 6vw, 5rem);
   align-items: center;
   padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1.5rem;
-  background: #d9d8de;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(47, 125, 245, 0.18), transparent 34%),
+    radial-gradient(circle at 88% 100%, rgba(139, 92, 246, 0.16), transparent 36%),
+    linear-gradient(145deg, #111114 0%, #060607 68%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2rem 6rem rgba(47, 125, 245, 0.12);
+  isolation: isolate;
+}
+
+.ds-masterclass-inner::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.07) 48%, transparent 58%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 4.5rem);
+  mix-blend-mode: screen;
+  opacity: 0.42;
+  content: "";
+  pointer-events: none;
+  animation: dsShaderSheen 8s ease-in-out infinite;
 }
 
 .ds-masterclass-video {
@@ -666,7 +788,9 @@
   overflow: hidden;
   border-radius: 1rem;
   background: #000;
-  box-shadow: 0 1.5rem 4rem rgba(20, 18, 28, 0.16);
+  box-shadow:
+    0 1.5rem 4rem rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
   aspect-ratio: 16 / 9;
 }
 
@@ -683,12 +807,12 @@
 }
 
 .ds-masterclass .ds-section-kicker {
-  color: rgba(11, 11, 12, 0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .ds-masterclass h2 {
   max-width: none;
-  font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+  font-size: clamp(1.95rem, 3.1vw, 2.9rem);
 }
 
 .ds-masterclass h2 span {
@@ -697,15 +821,16 @@
 }
 
 .ds-masterclass-copy > p:not(.ds-section-kicker, .ds-masterclass-proof) {
-  margin: 1.15rem 0 0;
-  color: rgba(11, 11, 12, 0.68);
-  line-height: 1.62;
+  max-width: 28rem;
+  margin: 1rem 0 0;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.5;
 }
 
 .ds-masterclass-list,
 .ds-price-card ul,
 .ds-fit ul {
-  margin: 1.4rem 0 0;
+  margin: 1.15rem 0 0;
   padding: 0;
   list-style: none;
 }
@@ -733,19 +858,52 @@
   place-items: center;
   margin-top: 0.05rem;
   border-radius: 50%;
-  background: rgba(11, 11, 12, 0.1);
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.68rem;
   font-weight: 800;
 }
 
 .ds-masterclass-copy .ds-conversion-cta {
-  margin-top: 1.65rem;
+  margin-top: 1.35rem;
 }
 
 .ds-masterclass-proof {
   margin: 0.8rem 0 0;
-  color: rgba(11, 11, 12, 0.52);
+  color: rgba(255, 255, 255, 0.52);
   font-size: 0.72rem;
+}
+
+@keyframes dsShaderFloatA {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(3rem, 2rem, 0) scale(1.12);
+  }
+}
+
+@keyframes dsShaderFloatB {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-2rem, -1.4rem, 0) scale(1.08);
+  }
+}
+
+@keyframes dsShaderSheen {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateX(-10%);
+  }
+  50% {
+    opacity: 0.48;
+    transform: translateX(10%);
+  }
 }
 
 .ds-agenda {
@@ -1144,17 +1302,48 @@
 
 @media (max-width: 700px) {
   .ds-agenda h2 span {
-    white-space: normal;
+    white-space: nowrap;
   }
 
   .ds-audit-page {
+    --ds-nav-height: calc(4.2rem + env(safe-area-inset-top));
     --ds-banner-height: 4.75rem;
+    padding-bottom: calc(var(--ds-banner-height) + env(safe-area-inset-bottom));
+  }
+
+  .ds-audit-page .nav {
+    z-index: 90;
+  }
+
+  .ds-audit-page .brand {
+    gap: 0.55rem;
+    font-size: 0.95rem;
+  }
+
+  .ds-audit-page .nav-direct > .nav-direct-link:not(.nav-menu-trigger) {
+    display: inline-flex;
+  }
+
+  .ds-audit-page .nav-direct > .nav-direct-link:nth-child(3) {
+    display: none;
   }
 
   .ds-urgency-bar {
+    top: auto;
+    bottom: 0;
+    z-index: 70;
     padding-inline: max(0.75rem, env(safe-area-inset-left));
-    padding-block: 0.95rem;
+    padding-block: 0.7rem max(0.7rem, env(safe-area-inset-bottom));
+    border-top-color: rgba(255, 255, 255, 0.12);
+    border-bottom: 0;
+    box-shadow:
+      0 -1px 0 rgba(255, 255, 255, 0.04),
+      0 -1.25rem 2.75rem rgba(0, 0, 0, 0.42);
     font-size: 0.8rem;
+  }
+
+  .ds-urgency-spacer {
+    height: var(--ds-nav-height);
   }
 
   .ds-urgency-bar-inner {
@@ -1196,36 +1385,87 @@
   }
 
   .ds-masterclass {
-    padding: 1.25rem var(--page-padding);
+    padding: 1.5rem var(--page-padding);
   }
 
   .ds-masterclass-inner {
-    gap: 1rem;
+    gap: 0.85rem;
     padding: 0.75rem;
     border-radius: 1.1rem;
   }
 
   .ds-masterclass-copy {
-    padding: 1rem 0.35rem 0.5rem;
+    padding: 0.9rem 0.35rem 0.5rem;
+  }
+
+  .ds-masterclass-copy > p:not(.ds-section-kicker, .ds-masterclass-proof) {
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.42;
+  }
+
+  .ds-masterclass-list {
+    margin-top: 1rem;
+  }
+
+  .ds-masterclass-list li {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .ds-masterclass-copy .ds-conversion-cta {
+    margin-top: 1.15rem;
   }
 
   .ds-audit-hero {
-    padding-top: 4.75rem;
+    padding: 4.25rem var(--page-padding) 4.75rem;
+  }
+
+  .ds-audit-hero-inner,
+  .ds-audit-hero-copy,
+  .ds-hero-main {
+    width: 100%;
+    max-width: 100%;
   }
 
   .ds-audit-hero h1 {
     width: 100%;
-    max-width: 100%;
-    font-size: clamp(2.25rem, 9vw, 3.3rem);
-    letter-spacing: -0.052em;
+    max-width: none;
+    font-size: clamp(1.45rem, 6.7vw, 1.88rem);
+    line-height: 1.08;
+    letter-spacing: -0.012em;
     white-space: normal;
   }
 
   .ds-audit-hero h1 span {
+    white-space: nowrap;
+  }
+
+  .ds-audit-intro {
+    max-width: 100%;
+    margin-top: 1.15rem;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    overflow-wrap: break-word;
     white-space: normal;
   }
 
-  .ds-audit-intro,
+  .ds-hero-offer-card {
+    max-width: none;
+    padding: 1.45rem 1.25rem;
+    border-radius: 1.2rem;
+  }
+
+  .ds-hero-offer-card::before {
+    top: -4rem;
+    left: -5rem;
+  }
+
+  .ds-hero-offer-card::after {
+    right: -5.5rem;
+    bottom: -4rem;
+  }
+
   .ds-hero-proof {
     max-width: 100%;
     overflow-wrap: break-word;
@@ -1315,7 +1555,7 @@
   }
 
   .ds-final-choice h2 span {
-    white-space: normal;
+    white-space: nowrap;
   }
 }
 
@@ -1369,6 +1609,23 @@
   .ds-faq h2,
   .ds-final-choice h2 {
     font-size: clamp(1.9rem, 8vw, 2.5rem);
+  }
+
+  .ds-masterclass h2 {
+    font-size: clamp(1.7rem, 7vw, 2.1rem);
+  }
+
+  .ds-masterclass::before {
+    left: -7rem;
+    width: 14rem;
+    height: 14rem;
+  }
+
+  .ds-masterclass::after {
+    right: -8rem;
+    bottom: 6rem;
+    width: 15rem;
+    height: 15rem;
   }
 }
 

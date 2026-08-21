@@ -4,7 +4,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  min-height: clamp(14.5rem, 18vw, 17rem);
   margin-bottom: clamp(0.7rem, 1vw, 0.85rem);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -69,12 +69,13 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  justify-content: space-between;
   padding: clamp(1.15rem, 1.55vw, 1.4rem);
 }
 
 .pricing-card-header-intro {
-  flex: 1 1 auto;
-  min-height: clamp(3.25rem, 5vw, 4.5rem);
+  flex: 0 0 auto;
+  min-height: 0;
 }
 
 .pricing-card-body {
@@ -98,22 +99,22 @@
   display: flex;
   align-items: flex-end;
   gap: 0.25rem;
-  margin: clamp(0.65rem, 0.9vw, 0.8rem) 0 0;
+  margin: 0.45rem 0 0;
 }
 
 .pricing-card-main-price {
-  color: #ffffff;
-  font-size: clamp(1.05rem, 1.45vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(0.92rem, 1.12vw, 1rem);
   font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
+  letter-spacing: 0;
+  line-height: 1.25;
 }
 
 .pricing-card-header .pathway-cta {
   display: flex;
   width: 100%;
   min-height: 2.75rem;
-  margin-top: clamp(0.75rem, 1vw, 0.9rem);
+  margin-top: clamp(1.75rem, 2.8vw, 2.35rem);
   padding: 0.7rem 1rem;
 }
 

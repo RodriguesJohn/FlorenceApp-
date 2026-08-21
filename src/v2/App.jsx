@@ -84,6 +84,28 @@ const bookingAttributes = {
   "data-cal-config": JSON.stringify(bookingConfig)
 };
 
+const problemCardEntrance = {
+  hidden: {
+    opacity: 0,
+    y: 44,
+    scale: 0.92,
+    rotateX: 18,
+    filter: "blur(14px) saturate(0.72)"
+  },
+  visible: (index = 0) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    rotateX: 0,
+    filter: "blur(0px) saturate(1)",
+    transition: {
+      delay: index * 0.12,
+      duration: 0.82,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  })
+};
+
 function openBookingModal(event) {
   if (
     event.defaultPrevented ||
@@ -429,7 +451,7 @@ const workPathways = [
     price: "$500/hour",
     color1: "#3b82f6",
     color2: "#bae6fd",
-    ctaLabel: "Book a 15-minute call",
+    ctaLabel: "Book 15 Min Discovery Call",
     features: [
       "Help build AI workflows",
       "Provide guidance and support",
@@ -442,6 +464,7 @@ const workPathways = [
     featured: true,
     color1: "#8b5cf6",
     color2: "#ddd6fe",
+    ctaLabel: "Book 15 Min Discovery Call",
     features: [
       "End-to-end audits, reports, and analysis",
       "Evals, components, contracts, metadata, intent, and reusability",
@@ -449,7 +472,7 @@ const workPathways = [
     ]
   },
   {
-    name: "AI Ready Design System Workshop",
+    name: "Design Systems Workshop",
     price: "$599/seat",
     color1: "#10b981",
     color2: "#a7f3d0",
@@ -488,7 +511,7 @@ function StudioProcess() {
         <div className="studio-process-layout">
           <EntranceItem className="studio-process-copy">
             <h2 id="studio-process-title" className="studio-process-title">
-              Audit, design, build, ship.
+              Our process
             </h2>
           </EntranceItem>
 
@@ -521,15 +544,15 @@ function WorkPathways() {
                   <PricingCard.PlanName as="h3" className="pathway-name">
                     {plan.name}
                   </PricingCard.PlanName>
+                  {plan.price ? (
+                    <PricingCard.Price>
+                      <PricingCard.MainPrice>{plan.price}</PricingCard.MainPrice>
+                    </PricingCard.Price>
+                  ) : null}
                   {plan.tagline ? (
                     <PricingCard.Description>{plan.tagline}</PricingCard.Description>
                   ) : null}
                 </div>
-                {plan.price ? (
-                  <PricingCard.Price>
-                    <PricingCard.MainPrice>{plan.price}</PricingCard.MainPrice>
-                  </PricingCard.Price>
-                ) : null}
                 {plan.ctaHref ? (
                   <a
                     className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
@@ -697,21 +720,18 @@ const homeProblems = [
   {
     title: "AI slop to on-brand UI.",
     titleLines: ["AI slop →", "on-brand UI."],
-    fadedLabelLines: ["From AI", "Slop"],
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
     title: "Design drift to shared context.",
     titleLines: ["Design drift →", "shared context."],
-    fadedLabelLines: ["From", "Drift"],
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
     title: "Models guessing to models with context.",
     titleLines: ["Models guessing →", "models with context."],
-    fadedLabelLines: ["From", "Guessing"],
     color1: "#10b981",
     color2: "#a7f3d0"
   }
@@ -1228,7 +1248,7 @@ function CohortAcademyProof() {
         </video>
       </div>
       <div className="cohort-proof-trust">
-        <span className="cohort-proof-label">Trusted by builders from</span>
+        <span className="cohort-proof-label">Trusted by designers from</span>
         <div className="cohort-proof-logos">
           {academyProofLogos.map((logo) => (
             <img key={logo.name} src={logo.icon} alt={logo.name} />
@@ -2127,12 +2147,18 @@ function StudioHome({ isHistory = false }) {
             ))}
           </div>
         ) : (
-          <Entrance className="offering-grid v2-flow-grid v2-offer-grid" viewport={{ once: true, amount: 0.12, margin: "0px 0px -8% 0px" }}>
+          <Entrance className="offering-grid v2-flow-grid v2-offer-grid" viewport={{ once: false, amount: 0.22, margin: "0px 0px -10% 0px" }}>
             {cards.map((step, index) => (
               <EntranceItem
                 as={step.link ? "a" : "article"}
-                className="offering-card v2-offering-card"
+                className="offering-card v2-offering-card problem-card"
                 key={step.title}
+                {...(!isHistory
+                  ? {
+                      custom: index,
+                      variants: problemCardEntrance
+                    }
+                  : {})}
                 {...(step.link
                   ? {
                       href: step.link,
@@ -2145,7 +2171,8 @@ function StudioHome({ isHistory = false }) {
                   : {})}
                 style={{
                   "--card-color-1": step.color1,
-                  "--card-color-2": step.color2
+                  "--card-color-2": step.color2,
+                  "--problem-card-index": index
                 }}
               >
                 <div className="offering-thumb">
@@ -2154,15 +2181,6 @@ function StudioHome({ isHistory = false }) {
                     color2={step.color2}
                     seed={index * 3.7 + 1.3}
                   />
-                  {step.fadedLabelLines ? (
-                    <span className="offering-thumb-number" aria-hidden="true">
-                      {step.fadedLabelLines.map((line) => (
-                        <span className="offering-thumb-number-line" key={line}>
-                          {line}
-                        </span>
-                      ))}
-                    </span>
-                  ) : null}
                   <h3 className="offering-thumb-title">
                     {step.titleLines
                       ? step.titleLines.map((line) => (
@@ -2439,9 +2457,8 @@ function StudioHome({ isHistory = false }) {
                 </div>
                 <h3 id="cohort-card-title">Join AI Academy</h3>
                 <p>
-                  Build practical AI fluency through structured learning tracks, a
-                  community of designers and builders, and monthly live sessions
-                  that help you keep learning and shipping.
+                  Build AI fluency through practical tracks, live sessions, and a
+                  community of designers shipping with AI.
                 </p>
                 <div className="cohort-card-actions">
                   <a
@@ -2467,7 +2484,7 @@ function StudioHome({ isHistory = false }) {
               <EntranceItem className="newsletter-copy">
                 <h2 id="v2-cta-title">Newsletter</h2>
                 <p className="final-cta-lede">
-                  Join 4,200+ founders and leaders for business case studies, AI insights, and industry trends.
+                  Behind-the-scenes notes on AI industry shifts, design systems, and how product teams are evolving with AI.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
@@ -2488,7 +2505,7 @@ function StudioHome({ isHistory = false }) {
                       <span className="issue-card-pill">Subscribed</span>
                     </div>
                     <p className="issue-card-body">
-                      Business case studies, insights, and industry trends for founders, business leaders, and designers putting AI to work.
+                      Field notes on AI industry changes, agent-ready design systems, and the workflows shaping modern product teams.
                     </p>
                     <div className="issue-card-foot">
                       <span className="issue-card-foot-label">Read by professionals at</span>
@@ -2524,7 +2541,7 @@ function StudioHome({ isHistory = false }) {
               <div className="newsletter-copy">
                 <h2 id="v2-cta-title">Newsletter</h2>
                 <p className="final-cta-lede">
-                  Join 4,200+ founders and leaders for business case studies, AI insights, and industry trends.
+                  Behind-the-scenes notes on AI industry shifts, design systems, and how product teams are evolving with AI.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
@@ -2545,7 +2562,7 @@ function StudioHome({ isHistory = false }) {
                     <span className="issue-card-pill">Subscribed</span>
                   </div>
                   <p className="issue-card-body">
-                    Original research, case studies, and practical frameworks for founders, designers, and builders creating the next generation of AI products.
+                    Field notes on AI industry changes, agent-ready design systems, and the workflows shaping modern product teams.
                   </p>
                   <div className="issue-card-foot">
                     <span className="issue-card-foot-label">Read by professionals at</span>

@@ -109,7 +109,7 @@ export default function DesignSystemsPage() {
   React.useEffect(() => {
     document.title = "AI-Ready Design System Workshop | Human AI Studio";
     const description =
-      "Everything you need to make your design system agent-ready: the framework, readiness evals, component architecture, and a step-by-step checklist.";
+      "Join the workshop to learn AI-ready design systems: the framework, readiness evals, component architecture, and implementation checklist.";
     let meta = document.querySelector('meta[name="description"]');
     const previous = meta?.getAttribute("content");
     if (!meta) {
@@ -162,12 +162,12 @@ export default function DesignSystemsPage() {
           <div className="ds-audit-hero-copy">
             <div className="ds-hero-main">
               <EntranceItem as="h1" id="ds-audit-title">
-                <span>Everything you need to make</span>
-                <span>your design system agent-ready.</span>
+                <span>Join AI-ready</span>
+                <span>Design Systems Workshop</span>
               </EntranceItem>
               <EntranceItem as="p" className="ds-audit-intro">
-                Learn the framework, evals, component architecture, and step-by-step
-                checklist you can apply to your existing system.
+                Join the workshop to learn the framework, evals, and component
+                architecture your existing system needs.
               </EntranceItem>
             </div>
 
@@ -274,18 +274,16 @@ export default function DesignSystemsPage() {
           </EntranceItem>
           <div className="ds-masterclass-copy">
             <EntranceItem as="h2" id="masterclass-title">
-              <span>Not ready for the</span>
-              <span>workshop yet?</span>
+              <span>Try the framework</span>
+              <span>before the workshop.</span>
             </EntranceItem>
             <EntranceItem as="p">
-              Join the free AI-Ready Design Systems Masterclass. Learn what changes when
-              agents become design system consumers, see the core framework, and decide if
-              the hands-on workshop is right for you.
+              Watch the free masterclass on how design systems change when agents
+              become your next design system consumer.
             </EntranceItem>
             <EntranceItem className="ds-masterclass-list" as="ul">
-              <li><CheckIcon /> Understand what makes a system agent-ready</li>
-              <li><CheckIcon /> See the shift from human docs to agent infrastructure</li>
-              <li><CheckIcon /> Join live on August 18 at 12:00 PM PT</li>
+              <li><CheckIcon /> See the agent-ready framework</li>
+              <li><CheckIcon /> Learn what to change first</li>
             </EntranceItem>
             <EntranceItem>
               <CtaLink href={MASTERCLASS_URL} variant="light">
@@ -303,7 +301,7 @@ export default function DesignSystemsPage() {
         <Entrance className="ds-audit-rail">
           <EntranceItem as="h2" id="agenda-title">
             <span>Four focused hours</span>
-            <span>from framework to implementation.</span>
+            <span>from framework to build.</span>
           </EntranceItem>
           <ol className="ds-agenda-list">
             {agenda.map((item, index) => (
@@ -430,8 +428,8 @@ export default function DesignSystemsPage() {
       <section className="ds-final-choice" aria-labelledby="final-choice-title">
         <Entrance className="ds-final-choice-inner">
           <EntranceItem as="h2" id="final-choice-title">
-            <span>Start with the free masterclass, or</span>
-            <span>go deeper in the live workshop.</span>
+            <span>Start free,</span>
+            <span>go deeper live.</span>
           </EntranceItem>
           <EntranceItem className="ds-audit-actions">
             <CtaLink href={WORKSHOP_URL}>Reserve your workshop seat</CtaLink>

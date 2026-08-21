@@ -650,6 +650,14 @@ a {
     line-height: var(--text-body-line-height);
   }
 
+  .hero__lede-line {
+    white-space: nowrap;
+  }
+
+  .hero__lede .hero__select {
+    white-space: nowrap;
+  }
+
   .hero__giant {
     font-size: min(12vw, 4.5rem);
   }

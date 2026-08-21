@@ -3,7 +3,7 @@
    because long-form reading wants a much narrower column than the site grid. */
 
 :root {
-  --bg: #0c0d0f;
+  --bg: #000000;
   --fg: #ffffff;
   --muted: rgba(255, 255, 255, 0.64);
   --faint: rgba(255, 255, 255, 0.42);
@@ -27,13 +27,43 @@
   -webkit-font-smoothing: antialiased;
 }
 
+.page-bottom-blur {
+  position: fixed;
+  z-index: 40;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: clamp(7rem, 16vh, 11rem);
+  backdrop-filter: blur(22px) saturate(118%);
+  -webkit-backdrop-filter: blur(22px) saturate(118%);
+  mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    rgba(0, 0, 0, 0.92) 24%,
+    rgba(0, 0, 0, 0.68) 44%,
+    rgba(0, 0, 0, 0.38) 62%,
+    rgba(0, 0, 0, 0.15) 80%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    rgba(0, 0, 0, 0.92) 24%,
+    rgba(0, 0, 0, 0.68) 44%,
+    rgba(0, 0, 0, 0.38) 62%,
+    rgba(0, 0, 0, 0.15) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
 /* ---------- nav ----------
    Ported from styles.css / nav-menu.css so the blog carries the same floating
    pill nav as the rest of the site. Keep in sync if the site nav changes. */
 
 .nav {
-  position: sticky;
-  top: 0.85rem;
+  position: relative;
+  top: auto;
   z-index: 50;
   display: flex;
   width: min(calc(100% - 2rem), 78rem);
@@ -44,9 +74,26 @@
   border-radius: 999px;
   box-shadow: var(--nav-shadow);
   background: var(--nav-bg);
+  overflow: hidden;
   backdrop-filter: blur(22px) saturate(170%);
   -webkit-backdrop-filter: blur(22px) saturate(170%);
   color: var(--nav-fg);
+  transition: background 220ms ease, box-shadow 220ms ease, color 220ms ease;
+}
+
+.nav::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 48%),
+    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.12), transparent 34%),
+    radial-gradient(circle at 88% 0%, rgba(255, 255, 255, 0.08), transparent 30%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  content: "";
+  pointer-events: none;
 }
 
 .nav-dark {
@@ -221,7 +268,7 @@
 .article {
   max-width: var(--measure);
   margin: 0 auto;
-  padding: clamp(3.5rem, 9vw, 6.5rem) var(--page-padding) 5rem;
+  padding: clamp(3rem, 8vw, 5.5rem) var(--page-padding) 5rem;
 }
 
 .article__meta {
@@ -236,25 +283,25 @@
 
 .article__head h1 {
   margin: 0;
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(1.85rem, 4.4vw, 2.65rem);
   font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
 .article__standfirst {
-  margin: 1.5rem 0 0;
+  margin: 1.2rem 0 0;
   color: var(--muted);
-  font-size: 1.1875rem;
-  line-height: 1.6;
+  font-size: 1.02rem;
+  line-height: 1.52;
   text-wrap: pretty;
 }
 
 /* Anchor nav — understated, sits between the head and the body */
 .article__toc {
-  margin: 3.5rem 0 0;
-  padding: 1.25rem 1.5rem;
+  margin: 2.5rem 0 0;
+  padding: 1rem 1.15rem;
   border: 1px solid var(--line);
   border-radius: 0.75rem;
 }
@@ -262,7 +309,7 @@
 .article__toc-label {
   margin: 0 0 0.75rem;
   color: var(--faint);
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -277,7 +324,7 @@
 
 .article__toc a {
   color: var(--muted);
-  font-size: 0.9375rem;
+  font-size: 0.86rem;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -287,9 +334,9 @@
 }
 
 .article__body {
-  margin-top: 3.5rem;
-  font-size: 1.0625rem;
-  line-height: 1.75;
+  margin-top: 2.75rem;
+  font-size: 0.96rem;
+  line-height: 1.62;
   color: rgba(255, 255, 255, 0.86);
 }
 
@@ -298,14 +345,14 @@
 }
 
 .article__body p {
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.25rem;
   text-wrap: pretty;
 }
 
 .article__body h2 {
-  margin: 3.5rem 0 1.25rem;
+  margin: 2.75rem 0 1rem;
   color: var(--fg);
-  font-size: 1.5rem;
+  font-size: 1.28rem;
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: -0.02em;
@@ -313,9 +360,9 @@
 }
 
 .article__body h3 {
-  margin: 2.5rem 0 1rem;
+  margin: 2rem 0 0.8rem;
   color: var(--fg);
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: -0.01em;
   scroll-margin-top: 2rem;
@@ -510,6 +557,122 @@
 
 .blog-footer a:hover {
   color: var(--fg);
+}
+
+@media (max-width: 760px) {
+  :root {
+    --page-padding: 1.35rem;
+  }
+
+  .nav {
+    width: calc(100% - 2.7rem);
+    padding: 0.72rem 0.85rem;
+  }
+
+  .brand {
+    gap: 0.55rem;
+    font-size: 0.95rem;
+  }
+
+  .nav-direct {
+    gap: 0.1rem;
+  }
+
+  .nav-direct-link {
+    min-height: 2.4rem;
+    padding: 0.62rem 0.52rem;
+    font-size: 0.78rem;
+  }
+
+  .nav-direct > .nav-direct-link:nth-child(3) {
+    display: none;
+  }
+
+  .nav-menu-trigger--icon {
+    width: 2.35rem;
+    height: 2.35rem;
+    min-height: 2.35rem;
+  }
+
+  .nav-menu-panel {
+    right: 1rem !important;
+    min-width: 9.75rem;
+    max-width: min(11rem, calc(100vw - 2rem));
+    padding: 0.3rem;
+    border-radius: 0.85rem;
+  }
+
+  .nav-menu-item {
+    padding: 0.62rem 0.72rem;
+    border-radius: 0.62rem;
+    font-size: 0.88rem;
+    line-height: 1.15;
+  }
+
+  .nav-menu-item--nested {
+    padding-left: 0.85rem;
+  }
+
+  .nav-menu-divider {
+    margin: 0.22rem 0.45rem;
+  }
+
+  .article {
+    max-width: none;
+    width: 100%;
+    padding: 3rem var(--page-padding) 5rem;
+  }
+
+  .article__meta {
+    margin-bottom: 1.1rem;
+    font-size: 0.72rem;
+  }
+
+  .article__head h1 {
+    font-size: clamp(1.55rem, 7.8vw, 2.15rem);
+    line-height: 1.12;
+    letter-spacing: -0.022em;
+  }
+
+  .article__standfirst {
+    margin-top: 1rem;
+    font-size: clamp(0.88rem, 4vw, 0.98rem);
+    line-height: 1.48;
+  }
+
+  .article__toc {
+    margin-top: 2.1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 0.65rem;
+  }
+
+  .article__toc-label {
+    font-size: 0.62rem;
+  }
+
+  .article__toc ol {
+    gap: 0.4rem;
+  }
+
+  .article__toc a {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .article__body {
+    margin-top: 2.2rem;
+    font-size: clamp(0.86rem, 3.85vw, 0.94rem);
+    line-height: 1.54;
+  }
+
+  .article__body p {
+    margin-bottom: 1.05rem;
+  }
+
+  .article__body h2 {
+    margin-top: 2.2rem;
+    font-size: clamp(1.1rem, 5.2vw, 1.32rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -277,10 +277,24 @@
 
   .nav-menu-panel {
     right: 1rem !important;
+    min-width: 9.75rem;
+    max-width: min(11rem, calc(100vw - 2rem));
+    padding: 0.3rem;
+    border-radius: 0.85rem;
   }
 
   .nav-menu-item {
-    padding-block: 0.9rem;
-    font-size: 1.05rem;
+    padding: 0.62rem 0.72rem;
+    border-radius: 0.62rem;
+    font-size: 0.88rem;
+    line-height: 1.15;
+  }
+
+  .nav-menu-item--nested {
+    padding-left: 0.85rem;
+  }
+
+  .nav-menu-divider {
+    margin: 0.22rem 0.45rem;
   }
 }

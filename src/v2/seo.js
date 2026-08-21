@@ -40,14 +40,14 @@ const pages = {
   "/workshop": {
     title: "AI-Ready Design System Workshop | Human AI Studio",
     description:
-      "Everything you need to make your design system agent-ready: the framework, readiness evals, component architecture, and a step-by-step checklist.",
+      "Join the workshop to learn AI-ready design systems: the framework, readiness evals, component architecture, and implementation checklist.",
     type: "Course"
   },
   "/design-systems": {
     path: "/workshop",
     title: "AI-Ready Design System Workshop | Human AI Studio",
     description:
-      "Everything you need to make your design system agent-ready: the framework, readiness evals, component architecture, and a step-by-step checklist.",
+      "Join the workshop to learn AI-ready design systems: the framework, readiness evals, component architecture, and implementation checklist.",
     type: "Course"
   },
   "/product": {
