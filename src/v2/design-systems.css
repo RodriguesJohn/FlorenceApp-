@@ -148,6 +148,42 @@
   transform: scale(0.96);
 }
 
+/* Desktop: dock the workshop bar to the bottom of the viewport. */
+@media (min-width: 701px) {
+  .ds-urgency-bar {
+    top: auto;
+    bottom: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+    border-bottom: none;
+    padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
+    box-shadow:
+      0 -1px 0 rgba(255, 255, 255, 0.04),
+      0 -1.25rem 2.75rem rgba(0, 0, 0, 0.36);
+  }
+
+  /* Nav is the only thing pinned to the top now. */
+  .ds-urgency-spacer {
+    height: var(--ds-nav-height);
+  }
+
+  /* Keep the footer clear of the docked bar. */
+  .ds-audit-page {
+    padding-bottom: var(--ds-banner-height);
+  }
+
+  .ds-banner-cta {
+    border-color: transparent;
+    background: #fff;
+    color: #050506;
+    box-shadow: 0 0.75rem 2rem rgba(255, 255, 255, 0.12);
+  }
+
+  .ds-urgency-bar:hover .ds-banner-cta {
+    border-color: transparent;
+    background: #e8e8ea;
+  }
+}
+
 .ds-masterclass-countdown,
 .workshop-countdown.is-banner {
   display: inline-flex;
