@@ -7,7 +7,6 @@ import * as THREE from "three";
 import OfferingShader from "./OfferingShader.jsx";
 import * as PricingCard from "./PricingCard.jsx";
 import { Entrance, EntranceItem, entranceChild, entranceViewport } from "./entrance.jsx";
-import { StudioProcessLoop } from "./StudioProcessLoop.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import { WorkshopCountdown } from "./WorkshopCountdown.jsx";
 import profilePicture from "../assets/Profile Picture.jpg";
@@ -484,45 +483,6 @@ const workPathways = [
     ]
   }
 ];
-
-const studioProcessSteps = [
-  {
-    name: "Audit",
-    body: "Find where workflows break, systems drift, and agents lack context."
-  },
-  {
-    name: "Design",
-    body: "Shape the product, UI, and design system humans and agents share."
-  },
-  {
-    name: "Build",
-    body: "Prototype and engineer with AI-native tools in the same loop."
-  },
-  {
-    name: "Ship",
-    body: "Deploy, measure, and tighten what ships in production."
-  }
-];
-
-function StudioProcess() {
-  return (
-    <section className="studio-process" aria-labelledby="studio-process-title" data-nav-theme="dark">
-      <Entrance className="studio-process-inner">
-        <div className="studio-process-layout">
-          <EntranceItem className="studio-process-copy">
-            <h2 id="studio-process-title" className="studio-process-title">
-              Our process
-            </h2>
-          </EntranceItem>
-
-          <EntranceItem className="studio-process-visual">
-            <StudioProcessLoop steps={studioProcessSteps} />
-          </EntranceItem>
-        </div>
-      </Entrance>
-    </section>
-  );
-}
 
 function WorkPathways() {
   return (
@@ -2227,8 +2187,6 @@ function StudioHome({ isHistory = false }) {
       )}
 
       {!isHistory && <WorkPathways />}
-
-      {!isHistory && <StudioProcess />}
 
       <section id="tools" className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
         {isHistory ? (
