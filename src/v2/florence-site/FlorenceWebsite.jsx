@@ -181,10 +181,10 @@ export default function FlorenceWebsite() {
       <div className="hero__copy layout-container-md">
         <p className="hero__lede">
           <span className="hero__lede-line">
-            Florence gives agents <SelectFrame>design context</SelectFrame>.
+            Florence is an <SelectFrame>AI-ready design system</SelectFrame>.
           </span>
           <span className="hero__lede-line">
-            So they ship on-brand UI.
+            So humans and agents ship on-brand product.
           </span>
         </p>
         <div className="hero__actions">

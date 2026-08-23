@@ -382,12 +382,11 @@ function CinematicHero() {
             variants={entranceChild}
           >
             <span className="hero-cinematic-subtitle-line">
-              Agents are drifting and shipping{" "}
-              <span className="motto-emphasis">AI slop</span>.
+              Based in the heart of Silicon Valley, we help teams build{" "}
+              <span className="motto-emphasis">AI-ready design systems</span>.
             </span>
             <span className="hero-cinematic-subtitle-line">
-              We build <span className="motto-emphasis">agent-ready design systems</span> your
-              models understand.
+              Ship fast without the <span className="motto-emphasis">AI slop</span>.
             </span>
           </motion.p>
 

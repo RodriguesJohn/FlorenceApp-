@@ -599,11 +599,11 @@ a {
   }
 
   .hero__lede-line {
-    white-space: normal;
+    white-space: nowrap;
   }
 
   .hero__lede .hero__select {
-    white-space: normal;
+    white-space: nowrap;
   }
 
   .hero__giant {
