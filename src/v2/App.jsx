@@ -386,7 +386,8 @@ function CinematicHero() {
               <span className="motto-emphasis">AI-ready design systems</span>.
             </span>
             <span className="hero-cinematic-subtitle-line">
-              Ship fast without the <span className="motto-emphasis">AI slop</span>.
+              So you can ship fast without the{" "}
+              <span className="motto-emphasis">AI slop</span>.
             </span>
           </motion.p>
 
