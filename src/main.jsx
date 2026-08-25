@@ -72,6 +72,12 @@ async function boot() {
       return;
     }
 
+    if (route === "/beta") {
+      const { default: BetaPage } = await import("./v2/BetaPage.jsx");
+      renderWithAnalytics(root, <BetaPage />);
+      return;
+    }
+
     if (route === "/workshop" || route === "/design-systems") {
       const { default: DesignSystemsPage } = await import("./v2/DesignSystemsPage.jsx");
       renderWithAnalytics(root, <DesignSystemsPage />);

@@ -61,20 +61,21 @@ function ToolGlyph({ name }) {
   return <NotesGlyph />;
 }
 
-export default function ToolsPage() {
+export default function ToolsPage({ embedded = false } = {}) {
   React.useEffect(() => {
+    if (embedded) return;
     const previousBackground = document.body.style.background;
     document.body.style.background = "#050506";
     return () => {
       document.body.style.background = previousBackground;
     };
-  }, []);
+  }, [embedded]);
 
   return (
-    <div className="tools-page">
-      <SiteHeader />
+    <div className={`tools-page${embedded ? " is-embedded" : ""}`}>
+      {embedded ? null : <SiteHeader />}
 
-      <main>
+      <div>
         <section className="tools-hero" aria-labelledby="tools-title">
           <h1 id="tools-title">Tools</h1>
         </section>
@@ -106,28 +107,30 @@ export default function ToolsPage() {
             </article>
           ))}
         </section>
-      </main>
+      </div>
 
-      <footer className="tools-footer">
-        <div>
-          <a className="tools-brand" href="/" aria-label="Human AI Studio home">
-            <span className="tools-brand-mark" aria-hidden="true" />
-            Human AI Studio
-          </a>
-          <p>AI product studio for design systems, agents, and AI-native workflows.</p>
-        </div>
-        <div className="tools-footer-links">
-          <span>Contact</span>
-          <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
-          <address className="tools-footer-address">
-            Human AI Studio<br />
-            455 Market St Ste 1940<br />
-            PMB 769150<br />
-            San Francisco, California 94105-2448 US
-          </address>
-          <a href="/workshop">Workshop</a>
-        </div>
-      </footer>
+      {embedded ? null : (
+        <footer className="tools-footer">
+          <div>
+            <a className="tools-brand" href="/" aria-label="Human AI Studio home">
+              <span className="tools-brand-mark" aria-hidden="true" />
+              Human AI Studio
+            </a>
+            <p>AI product studio for design systems, agents, and AI-native workflows.</p>
+          </div>
+          <div className="tools-footer-links">
+            <span>Contact</span>
+            <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
+            <address className="tools-footer-address">
+              Human AI Studio<br />
+              455 Market St Ste 1940<br />
+              PMB 769150<br />
+              San Francisco, California 94105-2448 US
+            </address>
+            <a href="/workshop">Workshop</a>
+          </div>
+        </footer>
+      )}
     </div>
   );
 }

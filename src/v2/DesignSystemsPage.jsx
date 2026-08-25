@@ -105,8 +105,9 @@ function CtaLink({ href, children, variant = "primary", className = "" }) {
   );
 }
 
-export default function DesignSystemsPage() {
+export default function DesignSystemsPage({ embedded = false } = {}) {
   React.useEffect(() => {
+    if (embedded) return;
     document.title = "AI-Ready Design System Workshop | Human AI Studio";
     const description =
       "Join the workshop to learn AI-ready design systems: the framework, readiness evals, component architecture, and implementation checklist.";
@@ -122,40 +123,49 @@ export default function DesignSystemsPage() {
     return () => {
       if (previous != null) meta.setAttribute("content", previous);
     };
-  }, []);
+  }, [embedded]);
+
+  const Root = embedded ? "div" : "main";
 
   return (
-    <main className="page-shell current-home ds-audit-page" id="main-content">
-      <a className="ds-skip-link" href="#workshop-offer">Skip to workshop offer</a>
+    <Root
+      className={`page-shell current-home ds-audit-page${embedded ? " is-embedded" : ""}`}
+      id={embedded ? undefined : "main-content"}
+    >
+      {embedded ? null : (
+        <>
+          <a className="ds-skip-link" href="#workshop-offer">Skip to workshop offer</a>
 
-      <nav className="nav nav-dark" aria-label="Primary">
-        <a className="brand" href="/" aria-label="Human AI Studio home">
-          <span className="brand-mark" aria-hidden="true" />
-          Human AI Studio
-        </a>
-        <div className="nav-actions">
-          <NavMenu />
-        </div>
-      </nav>
+          <nav className="nav nav-dark" aria-label="Primary">
+            <a className="brand" href="/" aria-label="Human AI Studio home">
+              <span className="brand-mark" aria-hidden="true" />
+              Human AI Studio
+            </a>
+            <div className="nav-actions">
+              <NavMenu />
+            </div>
+          </nav>
 
-      <a
-        className="ds-urgency-bar"
-        href="#workshop-offer"
-        aria-label="Join Workshop for the AI-Ready Design System Workshop on August 29 at 9:00 AM Pacific Time"
-        onClick={() => trackWorkshopClick(WORKSHOP_URL, "Join Workshop", "urgency_bar")}
-      >
-        <span className="ds-urgency-bar-inner">
-          <span className="ds-banner-date">August 29 · 9:00 AM PT</span>
-          <span className="ds-urgency-bar-actions">
-            <WorkshopCountdown className="is-banner" label="Workshop starts in" />
-            <span className="ds-banner-cta">
-              Join Workshop
-              <span className="ds-banner-arrow" aria-hidden="true">↗</span>
+          <a
+            className="ds-urgency-bar"
+            href="#workshop-offer"
+            aria-label="Join Workshop for the AI-Ready Design System Workshop on August 29 at 9:00 AM Pacific Time"
+            onClick={() => trackWorkshopClick(WORKSHOP_URL, "Join Workshop", "urgency_bar")}
+          >
+            <span className="ds-urgency-bar-inner">
+              <span className="ds-banner-date">August 29 · 9:00 AM PT</span>
+              <span className="ds-urgency-bar-actions">
+                <WorkshopCountdown className="is-banner" label="Workshop starts in" />
+                <span className="ds-banner-cta">
+                  Join Workshop
+                  <span className="ds-banner-arrow" aria-hidden="true">↗</span>
+                </span>
+              </span>
             </span>
-          </span>
-        </span>
-      </a>
-      <div className="ds-urgency-spacer" aria-hidden="true" />
+          </a>
+          <div className="ds-urgency-spacer" aria-hidden="true" />
+        </>
+      )}
 
       <section className="ds-audit-hero" aria-labelledby="ds-audit-title">
         <Entrance className="ds-audit-hero-inner" animate="visible">
@@ -438,7 +448,8 @@ export default function DesignSystemsPage() {
         </Entrance>
       </section>
 
-      <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
+      {embedded ? null : (
+        <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
         <div className="site-footer-inner">
           <Entrance className="footer-brand">
             <EntranceItem as="a" className="brand" href="/#top" aria-label="Human AI Studio home">
@@ -473,6 +484,7 @@ export default function DesignSystemsPage() {
           Human AI Studio
         </EntranceItem>
       </footer>
-    </main>
+      )}
+    </Root>
   );
 }

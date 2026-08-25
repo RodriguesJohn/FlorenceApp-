@@ -62,6 +62,13 @@ const pages = {
       "Notes from Human AI Studio on AI-native products, agent-ready design systems, and practical workflows for teams shipping with AI.",
     type: "Blog"
   },
+  "/beta": {
+    title: "AI Design Systems Academy Membership | Human AI Studio",
+    description:
+      "A monthly studio for making your design system agent-ready, so humans and agents ship on-brand product instead of AI slop.",
+    type: "Course",
+    noindex: true
+  },
   "/florence": {
     title: "Florence — AI-ready design systems | Human AI Studio",
     description:

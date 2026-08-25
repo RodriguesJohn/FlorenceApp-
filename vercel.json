@@ -26,6 +26,11 @@
       "permanent": true
     },
     {
+      "source": "/beta/",
+      "destination": "/beta",
+      "permanent": true
+    },
+    {
       "source": "/florence/",
       "destination": "/florence",
       "permanent": true
