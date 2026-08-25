@@ -35,8 +35,8 @@ const modules = [
   {
     id: "florence",
     section: "studio",
-    label: "The Florence design system",
-    title: "The Florence design system",
+    label: "Florence",
+    title: "Florence",
     body: "The reference system. Walk the same files, tokens, and component contracts we use internally."
   }
 ];
@@ -100,7 +100,8 @@ const academyTabs = [
   { id: "figma", label: "Figma" },
   { id: "design", label: "Design" },
   { id: "code", label: "Code" },
-  { id: "skills", label: "Skills" }
+  { id: "skills", label: "Skills" },
+  { id: "ui", label: "UI" }
 ];
 
 const academyLessons = [
@@ -175,6 +176,24 @@ const academyLessons = [
     tab: "skills",
     title: "Agents in the editor",
     body: "Use Cursor and Claude Code against the same contracts, not a new UI invented in chat."
+  },
+  {
+    id: "ui-reuse",
+    tab: "ui",
+    title: "UI the agent can reuse",
+    body: "Name the real component. Show the states. If the model can’t find it, it will draw a cousin."
+  },
+  {
+    id: "ui-states",
+    tab: "ui",
+    title: "States as part of the contract",
+    body: "Hover, empty, error, and loading belong in the system, not as a paragraph in the prompt."
+  },
+  {
+    id: "ui-type-space",
+    tab: "ui",
+    title: "Type and space in the file",
+    body: "Size, leading, and spacing as named values. A screenshot of the canvas is not a source of truth."
   }
 ];
 
@@ -588,7 +607,7 @@ export default function BetaPage() {
 
   React.useEffect(() => {
     const previousBackground = document.body.style.background;
-    document.body.style.background = "#111";
+    document.body.style.background = "#000";
     return () => {
       document.body.style.background = previousBackground;
     };
@@ -646,6 +665,7 @@ export default function BetaPage() {
           </div>
 
           <div className="beta-nav-group">
+            <p className="beta-nav-heading">Studio</p>
             {studioNav.map((item) => (
               <NavButton
                 key={item.id}
