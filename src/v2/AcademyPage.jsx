@@ -680,9 +680,6 @@ function AcademyPage() {
               <span className="brand-mark" aria-hidden="true" />
               Human AI Studio
             </a>
-            <p>
-              AI Academy for industry professionals shipping with AI through live workshops and self-paced tracks.
-            </p>
           </div>
           <div className="academy-footer-column">
             <p>Explore</p>

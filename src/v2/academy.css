@@ -1930,14 +1930,6 @@ a.academy-bonus-card--stack[data-offset="0"]:focus-visible {
   letter-spacing: -0.02em;
 }
 
-.academy-footer-brand > p {
-  max-width: 26rem;
-  margin: 1rem 0 0;
-  color: var(--academy-muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
-}
-
 .academy-footer-column {
   display: grid;
   align-content: start;
