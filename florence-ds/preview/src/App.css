@@ -3376,10 +3376,25 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  min-width: 0;
 }
 
 .pie-chart-preview .chart-frame {
   width: min(100%, 36rem);
+}
+
+.pie-chart-preview .chart-frame__body {
+  display: flex;
+  justify-content: center;
+}
+
+.component-master__canvas:has(.pie-chart-preview) {
+  min-height: 22rem;
+  align-content: center;
+}
+
+.component-master__canvas:has(.bar-chart-preview) {
+  min-height: 20rem;
 }
 
 .bar-chart-preview {
@@ -3400,14 +3415,6 @@
 
 .line-chart-preview .chart-frame {
   width: min(100%, 28rem);
-}
-
-.component-master__canvas:has(.pie-chart-preview) {
-  min-height: 22rem;
-}
-
-.component-master__canvas:has(.bar-chart-preview) {
-  min-height: 20rem;
 }
 
 .component-master__canvas:has(.line-chart-preview) {

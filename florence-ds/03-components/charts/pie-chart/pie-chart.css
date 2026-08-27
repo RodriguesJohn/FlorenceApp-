@@ -15,8 +15,11 @@
 .pie-chart--split .pie-chart__layout {
   grid-template-columns: var(--pie-size, 240px) max-content;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   justify-items: start;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
   gap: var(--space-gap-md);
 }
 
@@ -90,7 +93,7 @@
 .pie-chart__center-value {
   fill: var(--color-text-primary);
   font-family: var(--text-heading-lg-font-family);
-  font-size: var(--text-heading-lg-font-size);
+  font-size: calc(var(--pie-size, 240px) * 0.14);
   font-weight: var(--text-heading-lg-font-weight);
   letter-spacing: var(--text-heading-lg-letter-spacing);
   font-variant-numeric: tabular-nums;
@@ -99,7 +102,7 @@
 .pie-chart__center-label {
   fill: var(--color-text-muted);
   font-family: var(--text-caption-font-family);
-  font-size: var(--text-caption-font-size);
+  font-size: calc(var(--pie-size, 240px) * 0.07);
   font-weight: var(--text-caption-font-weight);
   letter-spacing: var(--text-caption-letter-spacing);
 }
@@ -119,15 +122,23 @@
   text-align: end;
 }
 
-@container pie-chart (max-width: 40rem) {
+@container pie-chart (max-width: 30rem) {
   .pie-chart--split .pie-chart__layout {
-    grid-template-columns: max-content;
-    justify-items: start;
+    grid-template-columns: minmax(0, 1fr);
+    justify-content: center;
+    justify-items: center;
     gap: var(--space-gap-lg);
   }
 
   .pie-chart--split .pie-chart__plot {
-    width: min(var(--pie-size, 240px), 12.5rem);
+    width: min(var(--pie-size, 240px), 100%);
+    justify-self: center;
+  }
+
+  .pie-chart--split .pie-chart__legend.chart-legend--vertical {
+    justify-self: center;
+    width: max-content;
+    max-width: 100%;
   }
 }
 

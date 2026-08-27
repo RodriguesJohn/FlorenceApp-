@@ -194,7 +194,7 @@ export function PieChart({
     const pad = 4
     const outerRadius = size / 2 - pad
     // Thick continuous band - the SaaS donut read, not a thin stroked track.
-    const thickness = isDonut ? Math.max(28, outerRadius * 0.34) : 0
+    const thickness = isDonut ? outerRadius * 0.34 : 0
     const innerRadius = isDonut ? Math.max(0, outerRadius - thickness) : 0
     const midRadius = isDonut ? (outerRadius + innerRadius) / 2 : outerRadius * 0.55
 
@@ -420,8 +420,8 @@ export function PieChart({
                 <text
                   className="pie-chart__center-value"
                   textAnchor="middle"
-                  dominantBaseline="alphabetic"
-                  y={centerLabel ? '-0.2em' : '0.35em'}
+                  dominantBaseline="middle"
+                  y={centerLabel ? '-0.55em' : '0'}
                 >
                   {total < 10000
                     ? formatValue(total, { maximumFractionDigits: 0 })
@@ -431,8 +431,8 @@ export function PieChart({
                   <text
                     className="pie-chart__center-label"
                     textAnchor="middle"
-                    dominantBaseline="hanging"
-                    y="0.45em"
+                    dominantBaseline="middle"
+                    y="0.75em"
                   >
                     {centerLabel}
                   </text>

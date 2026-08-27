@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Play } from 'lucide-react'
-import demoStill from "./assets/demo-still.png";
+import demoReelVideo from "./assets/F2.mp4";
 import { SiteHeader } from "../SiteHeader.jsx";
 import "./florence-website.css";
 
@@ -132,10 +132,10 @@ function DemoReel() {
       <div className="hero__reel-chrome">
         <span className="hero__reel-rec">
           <span className="hero__reel-dot" />
-          Rec
+          Agent Ready
         </span>
-        <span>Demo reel</span>
-        <span>Still</span>
+        <span>For Humans</span>
+        <span>Ship fast</span>
       </div>
       <div className="hero__reel-frame">
         <span className="hero__reel-rule hero__reel-rule--top" aria-hidden="true" />
@@ -143,10 +143,15 @@ function DemoReel() {
         <span className="hero__reel-rule hero__reel-rule--bottom" aria-hidden="true" />
         <span className="hero__reel-rule hero__reel-rule--start" aria-hidden="true" />
         <div className="hero__reel-stage">
-          <img
+          <video
             className="hero__video"
-            src={demoStill}
-            alt="Florence component gallery"
+            src={demoReelVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="Florence demo reel"
           />
           <ProgressiveBlur />
         </div>
