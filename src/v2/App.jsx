@@ -74,6 +74,14 @@ function trackAcademyCtaClick(location, label = "Academy") {
     href: "/academy"
   });
 }
+
+function trackWorkshopPageClick(location, label = "Learn more") {
+  track("Workshop CTA Click", {
+    location,
+    label,
+    href: "/workshop"
+  });
+}
 const bookingConfig = {
   layout: "month_view",
   useSlotsViewOnSmallScreen: "true"
@@ -1163,7 +1171,6 @@ const newsletterCompanies = [
 ];
 
 const newsletterUrl = "https://substack.com/@johnrodrigues";
-const academyUrl = "/academy";
 
 const academyProofVideo = "/academy/hero.mp4?v=hero-cd598d71";
 const academyProofVideoMobile = "/academy/hero-mobile.mp4?v=hero-cd598d71";
@@ -1202,7 +1209,7 @@ function CohortAcademyProof() {
           playsInline
           preload="metadata"
           disablePictureInPicture
-          aria-label="Inside the AI-Ready Design Systems Course"
+          aria-label="Inside the AI-Ready Design Systems Workshop"
         >
           <source src={academyProofVideoMobile} media="(max-width: 768px)" type="video/mp4" />
           <source src={academyProofVideo} type="video/mp4" />
@@ -2412,16 +2419,16 @@ function StudioHome({ isHistory = false }) {
               <div className="cohort-card-copy">
                 <h3 id="cohort-card-title">
                   <span>AI-Ready Design</span>
-                  <span>Systems Course</span>
+                  <span>Systems Workshop</span>
                 </h3>
                 <p>
-                  Build a design system agents can retrieve, not invent from the prompt. Tokens, components, and contracts. So you ship on-brand, not slop.
+                  Join the workshop to learn the framework, evals, and component architecture your existing system needs.
                 </p>
                 <div className="cohort-card-actions">
                   <a
                     className="cohort-card-action cohort-card-action--primary"
-                    href={academyUrl}
-                    onClick={() => trackAcademyCtaClick("cohort_card", "Learn more")}
+                    href="/workshop"
+                    onClick={() => trackWorkshopPageClick("cohort_card", "Learn more")}
                   >
                     Learn more
                   </a>
