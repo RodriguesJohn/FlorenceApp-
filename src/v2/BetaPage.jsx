@@ -3,7 +3,16 @@ import "./beta.css";
 import DesignSystemsPage from "./DesignSystemsPage.jsx";
 import ToolsPage from "./ToolsPage.jsx";
 
+const newsletterUrl = "https://johnrodrigues.substack.com/";
+
 const modules = [
+  {
+    id: "home",
+    section: "membership",
+    label: "Home",
+    title: "Home",
+    body: "Ship without the AI slop."
+  },
   {
     id: "articles",
     section: "membership",
@@ -19,6 +28,19 @@ const modules = [
     body: "Lessons in Figma, design, and code for AI-ready design systems."
   },
   {
+    id: "tools",
+    section: "membership",
+    label: "Tools",
+    title: "Tools",
+    body: "Workflows, MCPs, and plugins for building AI-ready design systems."
+  },
+  {
+    id: "studio",
+    section: "studio",
+    label: "Studio",
+    href: "/"
+  },
+  {
     id: "workshop",
     section: "studio",
     label: "Workshop",
@@ -26,18 +48,10 @@ const modules = [
     body: "The live AI-ready design systems workshop. Framework, evals, and implementation."
   },
   {
-    id: "tools",
-    section: "studio",
-    label: "Tools",
-    title: "Tools",
-    body: "Workflows, MCPs, and plugins for building AI-ready design systems."
-  },
-  {
     id: "florence",
     section: "studio",
     label: "Florence",
-    title: "Florence",
-    body: "The reference system. Walk the same files, tokens, and component contracts we use internally."
+    href: "/design-systems"
   }
 ];
 
@@ -101,7 +115,8 @@ const academyTabs = [
   { id: "design", label: "Design" },
   { id: "code", label: "Code" },
   { id: "skills", label: "Skills" },
-  { id: "ui", label: "UI" }
+  { id: "ui", label: "UI" },
+  { id: "workflows", label: "AI workflows" }
 ];
 
 const academyLessons = [
@@ -194,11 +209,72 @@ const academyLessons = [
     tab: "ui",
     title: "Type and space in the file",
     body: "Size, leading, and spacing as named values. A screenshot of the canvas is not a source of truth."
+  },
+  {
+    id: "workflows-loop",
+    tab: "workflows",
+    title: "A workflow the system can run",
+    body: "The task stays in the prompt. Tokens, components, and rules stay in files the agent retrieves every time."
+  },
+  {
+    id: "workflows-eval",
+    tab: "workflows",
+    title: "Evals in the weekly loop",
+    body: "Score whether the agent found the real component, then rerun it after you change the system."
+  },
+  {
+    id: "workflows-ship",
+    tab: "workflows",
+    title: "Ship a flow without a new UI",
+    body: "Use the existing button, the existing card, and the existing tokens. If it’s missing, add it to the system first."
+  }
+];
+
+const homePlans = [
+  {
+    id: "weekly",
+    kicker: "Free",
+    title: "Weekly notes",
+    price: "Free",
+    cadence: "",
+    body: "A short note each week. What I changed in the system, and what broke.",
+    includes: ["Weekly email", "Unsubscribe anytime"],
+    cta: "Join the newsletter",
+    href: newsletterUrl
+  },
+  {
+    id: "academy",
+    kicker: "Membership",
+    title: "Academy",
+    price: "$99",
+    cadence: "/ month",
+    body: "Lessons, articles, tools, and Florence. The loop for shipping without the AI slop.",
+    includes: ["Articles, included", "All academy lessons", "Tools and Florence", "Cancel anytime"],
+    cta: "Get membership",
+    join: true
+  },
+  {
+    id: "workshop",
+    kicker: "One day",
+    title: "Workshop",
+    price: "$599",
+    cadence: "one day",
+    body: "Live. Framework, evals, and an implementation plan you can run the next morning.",
+    includes: ["Four hours live", "Lifetime recording", "Certificate of completion"],
+    cta: "Join the workshop",
+    view: "workshop"
   }
 ];
 
 function Icon({ name }) {
   const paths = {
+    home: (
+      <>
+        <path d="M4 11 12 4l8 7" />
+        <path d="M6 10.5V20h12V10.5" />
+        <path d="M10 20v-5h4v5" />
+      </>
+    ),
     academy: (
       <>
         <path d="M4 10.5 12 5l8 5.5" />
@@ -226,6 +302,12 @@ function Icon({ name }) {
         <circle cx="12" cy="8" r="3" />
         <path d="M5 19c.8-3.2 3.4-5 7-5s6.2 1.8 7 5" />
       </>
+    ),
+    studio: (
+      <>
+        <circle cx="9.5" cy="12" r="4.5" />
+        <circle cx="14.5" cy="12" r="4.5" />
+      </>
     )
   };
 
@@ -237,6 +319,23 @@ function Icon({ name }) {
 }
 
 function NavButton({ item, active, onOpen }) {
+  const inner = (
+    <>
+      <span className="beta-nav-icon">
+        <Icon name={item.id} />
+      </span>
+      <span className="beta-nav-label">{item.label}</span>
+    </>
+  );
+
+  if (item.href) {
+    return (
+      <a className="beta-nav-item" href={item.href}>
+        {inner}
+      </a>
+    );
+  }
+
   return (
     <button
       type="button"
@@ -244,10 +343,7 @@ function NavButton({ item, active, onOpen }) {
       aria-current={active ? "page" : undefined}
       onClick={() => onOpen(item.id)}
     >
-      <span className="beta-nav-icon">
-        <Icon name={item.id} />
-      </span>
-      <span className="beta-nav-label">{item.label}</span>
+      {inner}
     </button>
   );
 }
@@ -432,8 +528,9 @@ function AuthModal({ mode, onClose, onJoin, onLogin, onSwitch }) {
               <small>/ month</small>
             </p>
             <ul className="beta-join-list">
+              <li>Articles, included</li>
               <li>Figma, design, and code lessons</li>
-              <li>Articles and notes</li>
+              <li>Tools and Florence</li>
               <li>Cancel anytime</li>
             </ul>
             <button type="button" className="beta-cta" onClick={onJoin}>
@@ -474,25 +571,27 @@ function AcademyView() {
             <span>AI Design Systems</span>
             <span>Academy</span>
           </h1>
-          <p className="beta-lede">Ship without the AI slop.</p>
         </div>
-        <div className="beta-welcome-actions">
-          <button
-            type="button"
-            className="beta-cta"
-            aria-haspopup="dialog"
-            onClick={() => setAuthMode("join")}
-          >
-            Get membership
-          </button>
-          <button
-            type="button"
-            className="beta-cta beta-cta--ghost"
-            aria-haspopup="dialog"
-            onClick={() => setAuthMode("login")}
-          >
-            Log in
-          </button>
+        <div className="beta-academy-hero-cta">
+          <p className="beta-lede">Ship without the AI slop.</p>
+          <div className="beta-welcome-actions">
+            <button
+              type="button"
+              className="beta-cta"
+              aria-haspopup="dialog"
+              onClick={() => setAuthMode("join")}
+            >
+              Get membership
+            </button>
+            <button
+              type="button"
+              className="beta-cta beta-cta--ghost"
+              aria-haspopup="dialog"
+              onClick={() => setAuthMode("login")}
+            >
+              Log in
+            </button>
+          </div>
         </div>
       </header>
 
@@ -562,6 +661,134 @@ function AcademyView() {
   );
 }
 
+function HomeView({ onOpen }) {
+  const [authMode, setAuthMode] = React.useState(null);
+  const closeAuth = () => setAuthMode(null);
+
+  return (
+    <div className="beta-home">
+      <header className="beta-home-hero">
+        <h1>
+          <span>AI Design Systems</span>
+          <span>Academy</span>
+        </h1>
+        <p className="beta-lede">
+          Agents invent UI when the system lives in a prompt. The academy puts it in files —
+          so you ship without the AI slop.
+        </p>
+        <div className="beta-welcome-actions">
+          <button
+            type="button"
+            className="beta-cta"
+            aria-haspopup="dialog"
+            onClick={() => setAuthMode("join")}
+          >
+            Get membership
+          </button>
+          <button type="button" className="beta-cta beta-cta--ghost" onClick={() => onOpen("workshop")}>
+            Join the workshop
+          </button>
+        </div>
+        <button
+          type="button"
+          className="beta-home-login"
+          aria-haspopup="dialog"
+          onClick={() => setAuthMode("login")}
+        >
+          Log in
+        </button>
+      </header>
+
+      <section className="beta-home-block" aria-labelledby="beta-included-title">
+        <h2 id="beta-included-title">What’s included</h2>
+        <ol className="beta-home-list">
+          <li>
+            <span>
+              <strong>Articles, included.</strong> The notes on making a system agent-ready. They come
+              with membership.
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Lessons.</strong> Figma, design, code, UI, and AI workflows. The weekly loop.
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Tools.</strong> Apple Notes MCP and Ollie for Figma. Use them the same day.
+            </span>
+          </li>
+          <li>
+            <span>
+              <strong>Florence.</strong> The reference system. Tokens, components, and contracts an
+              agent can retrieve.
+            </span>
+          </li>
+        </ol>
+      </section>
+
+      <section className="beta-home-block is-plans" aria-labelledby="beta-plans-title">
+        <h2 id="beta-plans-title">Join</h2>
+        <div className="beta-plans">
+          {homePlans.map((plan) => (
+            <article className={`beta-plan${plan.join ? " is-membership" : ""}`} key={plan.id}>
+              <p className="beta-card-kicker">{plan.kicker}</p>
+              <h3>{plan.title}</h3>
+              <p className="beta-plan-price">
+                <span>{plan.price}</span>
+                <small>{plan.cadence}</small>
+              </p>
+              <p>{plan.body}</p>
+              <ul>
+                {plan.includes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              {plan.href ? (
+                <a
+                  className="beta-cta beta-cta--ghost"
+                  href={plan.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {plan.cta}
+                </a>
+              ) : plan.join ? (
+                <button
+                  type="button"
+                  className="beta-cta"
+                  aria-haspopup="dialog"
+                  onClick={() => setAuthMode("join")}
+                >
+                  {plan.cta}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="beta-cta beta-cta--ghost"
+                  onClick={() => onOpen(plan.view)}
+                >
+                  {plan.cta}
+                </button>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {authMode ? (
+        <AuthModal
+          mode={authMode}
+          onClose={closeAuth}
+          onJoin={closeAuth}
+          onLogin={closeAuth}
+          onSwitch={() => setAuthMode(authMode === "login" ? "join" : "login")}
+        />
+      ) : null}
+    </div>
+  );
+}
+
 function ArticlesView() {
   const [openId, setOpenId] = React.useState(null);
   const article = articles.find((item) => item.id === openId);
@@ -601,7 +828,7 @@ function ArticlesView() {
 }
 
 export default function BetaPage() {
-  const [view, setView] = React.useState("articles");
+  const [view, setView] = React.useState("home");
   const [navOpen, setNavOpen] = React.useState(false);
   const current = modules.find((item) => item.id === view) ?? modules[0];
 
@@ -641,7 +868,12 @@ export default function BetaPage() {
         className={`beta-sidebar${navOpen ? " is-open" : ""}`}
         aria-label="AI Design Systems"
       >
-        <div className="beta-brand">
+        <button
+          type="button"
+          className="beta-brand"
+          aria-current={view === "home" ? "page" : undefined}
+          onClick={() => openModule("home")}
+        >
           <span className="beta-brand-mark" aria-hidden="true">
             <span />
             <span />
@@ -650,7 +882,7 @@ export default function BetaPage() {
             <strong>AI Design Systems</strong>
             <small>Academy membership</small>
           </div>
-        </div>
+        </button>
 
         <nav className="beta-nav">
           <div className="beta-nav-group">
@@ -665,7 +897,6 @@ export default function BetaPage() {
           </div>
 
           <div className="beta-nav-group">
-            <p className="beta-nav-heading">Studio</p>
             {studioNav.map((item) => (
               <NavButton
                 key={item.id}
@@ -691,8 +922,8 @@ export default function BetaPage() {
           </button>
           <p className="beta-crumb">
             {current.section === "membership" ? (
-              current.id === "academy" ? (
-                <strong>Academy</strong>
+              current.id === "academy" || current.id === "home" ? (
+                <strong>{current.label}</strong>
               ) : (
                 <>
                   Academy <span aria-hidden="true">/</span> <strong>{current.label}</strong>
@@ -708,7 +939,9 @@ export default function BetaPage() {
           id="beta-main"
           className={`beta-main${current.id === "workshop" || current.id === "tools" ? " beta-main--flush" : ""}`}
         >
-          {current.id === "articles" ? (
+          {current.id === "home" ? (
+            <HomeView onOpen={openModule} />
+          ) : current.id === "articles" ? (
             <ArticlesView />
           ) : current.id === "academy" ? (
             <AcademyView />

@@ -53,7 +53,6 @@ import storybookLogo from "../assets/logos/storybook.png";
 import typescriptLogo from "../assets/logos/typescript.webp";
 import ProductPage from "./ProductPage.jsx";
 import AcademyPage from "./AcademyPage.jsx";
-import FlorenceOfferPage from "./FlorenceOfferPage.jsx";
 import tocaCompanyLogo from "../assets/companies/Toca.png";
 import citiCompanyLogo from "../assets/companies/Citi.svg.png";
 import chaseCompanyLogo from "../assets/companies/ChaseLightMOde.png";
@@ -61,6 +60,8 @@ import appleCompanyLogo from "../assets/companies/Apple-Logo.png";
 import googleCompanyLogo from "../assets/companies/GoogleLogog.png";
 import metaCompanyLogo from "../assets/companies/Meta-Emblem.png";
 import "./styles.css";
+
+const FlorenceOfferPage = React.lazy(() => import("./FlorenceOfferPage.jsx"));
 
 const bookingLink = "john-rodrigues-rqt2lg/15min";
 const bookingNamespace = "15min";
@@ -1201,14 +1202,14 @@ function CohortAcademyProof() {
           playsInline
           preload="metadata"
           disablePictureInPicture
-          aria-label="Inside the AI Academy"
+          aria-label="Inside the AI-Ready Design Systems Course"
         >
           <source src={academyProofVideoMobile} media="(max-width: 768px)" type="video/mp4" />
           <source src={academyProofVideo} type="video/mp4" />
         </video>
       </div>
       <div className="cohort-proof-trust">
-        <span className="cohort-proof-label">Trusted by designers from</span>
+        <span className="cohort-proof-label">Resources trusted by designers from</span>
         <div className="cohort-proof-logos">
           {academyProofLogos.map((logo) => (
             <img key={logo.name} src={logo.icon} alt={logo.name} />
@@ -2409,21 +2410,20 @@ function StudioHome({ isHistory = false }) {
                 className="cohort-card-shader"
               />
               <div className="cohort-card-copy">
-                <div className="cohort-card-meta" aria-label="Cohort highlights">
-                  <span>4.6/5 rating</span>
-                </div>
-                <h3 id="cohort-card-title">Join AI Academy</h3>
+                <h3 id="cohort-card-title">
+                  <span>AI-Ready Design</span>
+                  <span>Systems Course</span>
+                </h3>
                 <p>
-                  Build AI fluency through practical tracks, live sessions, and a
-                  community of designers shipping with AI.
+                  Build a design system agents can retrieve, not invent from the prompt. Tokens, components, and contracts. So you ship on-brand, not slop.
                 </p>
                 <div className="cohort-card-actions">
                   <a
                     className="cohort-card-action cohort-card-action--primary"
                     href={academyUrl}
-                    onClick={() => trackAcademyCtaClick("cohort_card", "Join the AI Academy")}
+                    onClick={() => trackAcademyCtaClick("cohort_card", "Learn more")}
                   >
-                    Join the AI Academy
+                    Learn more
                   </a>
                 </div>
               </div>
@@ -2798,7 +2798,9 @@ function App() {
       ) : isAcademy ? (
         <AcademyPage />
       ) : route === "/florence" || offeringSlug === "agent-ready-design-system" ? (
-        <FlorenceOfferPage />
+        <React.Suspense fallback={null}>
+          <FlorenceOfferPage />
+        </React.Suspense>
       ) : offeringSlug ? (
         <OfferingPage slug={offeringSlug} />
       ) : (

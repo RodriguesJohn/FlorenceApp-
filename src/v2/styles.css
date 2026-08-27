@@ -3064,7 +3064,7 @@ h3 {
 
 .cohort-card h3 {
   margin: 0;
-  max-width: 19ch;
+  max-width: 12ch;
   color: #ffffff;
   font-size: clamp(2rem, 2.65vw, 3rem);
   font-weight: 500;
@@ -3072,10 +3072,13 @@ h3 {
   letter-spacing: -0.02em;
 }
 
+.cohort-card h3 span {
+  display: block;
+}
+
 @media (min-width: 1100px) {
   .cohort-card h3 {
     max-width: none;
-    white-space: nowrap;
   }
 }
 

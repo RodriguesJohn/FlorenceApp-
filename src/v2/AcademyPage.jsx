@@ -156,67 +156,73 @@ const logos = [
 ];
 
 const pricingBenefits = [
-  "Claude Code, Cursor, and Codex tracks",
-  "Latest AI research, news, and trends",
-  "Recordings, prompts, and templates",
-  "Skool community access",
-  "Monthly 30-minute group calls"
+  "AI-ready design systems course",
+  "Tokens, components, and contracts",
+  "Figma workflows and building in Cursor",
+  "Community of AI designers",
+  "Async chat support"
 ];
 
 const pathOptions = [
   {
-    title: "Stay ahead of the shift",
-    description: "Build practical AI fluency through real product work.",
-    bullets: [
-      "Claude Code, Cursor, and Codex",
-      "Real product projects",
-      "Prompts, templates, and recordings"
-    ],
+    title: "Join a community of\nAI designers",
     color1: "#38bdf8",
     color2: "#e0f2fe"
   },
   {
-    title: "Learn and grow together",
-    description: "Learn alongside AI-native designers and builders.",
-    bullets: [
-      "Get unstuck with feedback",
-      "Stay accountable",
-      "See what others are shipping"
-    ],
+    title: "Async chat\nsupport",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Monthly live sessions",
-    description: "Join John monthly to unblock your work and keep shipping.",
-    bullets: [
-      "Live Q&A and walkthroughs",
-      "Apply it to real workflows",
-      "Replay anytime"
-    ],
+    title: "Structured learning\ntracks updated regularly",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   }
 ];
 
-const cohortModules = [
+const courseModules = [
   {
-    title: "AI fluency",
-    description: "AI habits that show up in real product work.",
-    color1: "#3b82f6",
-    color2: "#bae6fd"
+    number: "01",
+    title: "Introduction to AI-ready design systems",
+    unlock: "Available after joining",
+    tag: "now",
+    href: "/florence"
   },
   {
-    title: "Tools that ship",
-    description: "Ship full stack apps.",
-    color1: "#8b5cf6",
-    color2: "#ddd6fe"
+    number: "02",
+    title: "Vibe coding with existing design system",
+    unlock: "Unlocks in 20 days",
+    tag: "later",
+    href: "/florence/system"
   },
   {
-    title: "Agents & systems",
-    description: "Agents and systems you can ship and keep iterating on.",
-    color1: "#10b981",
-    color2: "#a7f3d0"
+    number: "03",
+    title: "How to make a design system AI-ready",
+    unlock: "Unlocks in 30 days",
+    tag: "later",
+    href: "/florence/system"
+  },
+  {
+    number: "04",
+    title: "Component\narchitecture",
+    unlock: "Unlocks in 40 days",
+    tag: "later",
+    href: "/florence/system"
+  },
+  {
+    number: "05",
+    title: "Design system in Figma workflows",
+    unlock: "Unlocks in 50 days",
+    tag: "later",
+    href: "/florence/system"
+  },
+  {
+    number: "06",
+    title: "Building design systems in code and Cursor AI",
+    unlock: "Unlocks in 60 days",
+    tag: "later",
+    href: "/florence/system"
   }
 ];
 
@@ -243,61 +249,6 @@ const courses = [
     image: NativeMobileImage
   }
 ];
-
-const bonusResources = [
-  { title: "AI Strategy Track" },
-  { title: "AI Agents Track" },
-  { title: "Project Demos" },
-  { title: "Design Engineering Track" },
-  { title: "Complete Figma Course" },
-  { title: "Tools & Credits" },
-  { title: "Productivity Workflows" },
-  { title: "AI Foundation Track" }
-];
-
-function BonusCardStack() {
-  const [activeIndex, setActiveIndex] = React.useState(0);
-
-  React.useEffect(() => {
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return undefined;
-
-    const interval = window.setInterval(() => {
-      setActiveIndex((index) => (index + 1) % bonusResources.length);
-    }, 2400);
-
-    return () => window.clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="academy-bonus-stack" aria-live="polite">
-      {bonusResources.map((resource, index) => {
-        const offset =
-          (index - activeIndex + bonusResources.length) % bonusResources.length;
-        if (offset > 3) return null;
-
-        return (
-          <article
-            className="academy-bonus-card academy-bonus-card--stack"
-            key={resource.title}
-            data-offset={offset}
-            style={{
-              zIndex: bonusResources.length - offset,
-              "--stack-offset": offset
-            }}
-            aria-hidden={offset !== 0}
-          >
-            <div className="academy-bonus-face">
-              <h3>{resource.title}</h3>
-            </div>
-          </article>
-        );
-      })}
-    </div>
-  );
-}
 
 const testimonials = [
   {
@@ -413,7 +364,7 @@ function PackageTestimonial() {
             />
           ))}
         </div>
-        <p>4.6/5 rating on Maven</p>
+        <p>4.5/5 on Maven from courses I’ve run</p>
       </div>
     </div>
   );
@@ -501,9 +452,9 @@ function AcademyPage() {
   return (
     <div className="academy-page">
       <header className="academy-nav">
-        <a className="academy-brand" href="/">
-          <span className="academy-brand-mark" aria-hidden="true" />
-          <span className="academy-brand-text">AI Academy</span>
+        <a className="brand" href="/" aria-label="Human AI Studio home">
+          <span className="brand-mark" aria-hidden="true" />
+          Human AI Studio
         </a>
         <div className="academy-nav-actions">
           <NavMenu />
@@ -516,8 +467,12 @@ function AcademyPage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1">
-                <span className="academy-hero-line">Learn How to Build Products,</span>
-                <span className="academy-hero-line">Design Systems, and AI Agents.</span>
+                <span className="academy-hero-line">AI-Ready Design</span>
+                <span className="academy-hero-line">Systems Course</span>
+              </EntranceItem>
+              <EntranceItem as="p" className="academy-hero-sub">
+                <span>Build a design system agents can retrieve, not invent from the prompt.</span>
+                <span>Tokens, components, and contracts. So you ship on-brand, not slop.</span>
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
                 <a
@@ -526,7 +481,7 @@ function AcademyPage() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Join AI Academy
+                  Start today
                   <span className="academy-btn-arrow" aria-hidden="true">
                     →
                   </span>
@@ -551,7 +506,7 @@ function AcademyPage() {
               <EntranceItem className="academy-hero-proof-rating">
                 <span
                   className="academy-hero-stars"
-                  aria-label="4.5 out of 5 stars"
+                  aria-hidden="true"
                 >
                   <span>★</span>
                   <span>★</span>
@@ -559,7 +514,7 @@ function AcademyPage() {
                   <span>★</span>
                   <span className="academy-hero-star academy-hero-star--half">★</span>
                 </span>
-                <span>4.6/5 rating on Maven</span>
+                <span>4.5/5 on Maven from courses I’ve run</span>
               </EntranceItem>
               <EntranceItem className="academy-logo-row academy-logo-row--inline">
                 {logos.map((logo) => (
@@ -574,6 +529,33 @@ function AcademyPage() {
           </a>
         </section>
 
+        <section className="academy-section" id="modules">
+          <Entrance className="academy-section-heading">
+            <EntranceItem as="h2">The modules.</EntranceItem>
+          </Entrance>
+          <Entrance className="academy-module-grid">
+            {courseModules.map((module) => (
+              <EntranceItem
+                as="a"
+                className="academy-bonus-card academy-bonus-card--grid"
+                href={module.href}
+                key={module.number}
+                aria-label={`Module ${module.number}. ${module.title.replace(/\n/g, " ")}. ${module.unlock}`}
+              >
+                <div className="academy-bonus-face">
+                  <span className={`academy-module-tag academy-module-tag--${module.tag}`}>
+                    {module.unlock}
+                  </span>
+                  <div className="academy-bonus-face-copy">
+                    <span className="academy-bonus-kicker">Module {module.number}</span>
+                    <h3>{module.title}</h3>
+                  </div>
+                </div>
+              </EntranceItem>
+            ))}
+          </Entrance>
+        </section>
+
         <section className="academy-section">
           <Entrance className="academy-section-heading">
             <EntranceItem as="h2">Why builders join.</EntranceItem>
@@ -583,7 +565,7 @@ function AcademyPage() {
               <EntranceItem
                 as="article"
                 className="academy-path-card"
-                key={path.title}
+                key={path.title.replace("\n", " ")}
                 style={{
                   "--card-color-1": path.color1,
                   "--card-color-2": path.color2
@@ -598,14 +580,6 @@ function AcademyPage() {
                   />
                   <h3 className="academy-path-thumb-title">{path.title}</h3>
                 </div>
-                <div className="academy-path-body">
-                  <p>{path.description}</p>
-                  <ul>
-                    {path.bullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
-                    ))}
-                  </ul>
-                </div>
               </EntranceItem>
             ))}
           </Entrance>
@@ -613,7 +587,7 @@ function AcademyPage() {
 
         <section className="academy-section">
           <Entrance className="academy-section-heading">
-            <EntranceItem as="h2">Tools you’ll actually use.</EntranceItem>
+            <EntranceItem as="h2">Bonus resources and courses.</EntranceItem>
           </Entrance>
           <Entrance className="academy-course-grid">
             {courses.map((course) => (
@@ -637,20 +611,6 @@ function AcademyPage() {
           <Entrance>
             <EntranceItem>
               <TestimonialScroller />
-            </EntranceItem>
-          </Entrance>
-        </section>
-
-        <section className="academy-section academy-section--bonus">
-          <Entrance className="academy-bonus-split">
-            <EntranceItem className="academy-bonus-copy">
-              <h2>
-                <span>More resources and courses</span>
-                <span>to level up your skills.</span>
-              </h2>
-            </EntranceItem>
-            <EntranceItem>
-              <BonusCardStack />
             </EntranceItem>
           </Entrance>
         </section>
@@ -704,45 +664,10 @@ function AcademyPage() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Join the Academy
+                  Start today
                 </a>
               </div>
             </EntranceItem>
-          </Entrance>
-        </section>
-
-        <section className="academy-section" id="cohort">
-          <Entrance className="academy-section-heading">
-            <EntranceItem as="h2">What you get</EntranceItem>
-          </Entrance>
-          <Entrance className="academy-modules">
-            {cohortModules.map((module, index) => (
-              <EntranceItem
-                as="article"
-                className="academy-module-card"
-                key={module.title}
-                style={{
-                  "--card-color-1": module.color1,
-                  "--card-color-2": module.color2
-                }}
-              >
-                <div className="academy-module-thumb">
-                  <OfferingShader
-                    color1={module.color1}
-                    color2={module.color2}
-                    seed={index * 3.7 + 1.3}
-                    className="academy-module-shader"
-                  />
-                  <span className="academy-module-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="academy-module-thumb-title">{module.title}</h3>
-                </div>
-                <div className="academy-module-copy">
-                  <p>{module.description}</p>
-                </div>
-              </EntranceItem>
-            ))}
           </Entrance>
         </section>
 
@@ -751,8 +676,8 @@ function AcademyPage() {
       <footer className="academy-footer" aria-label="Human AI Studio footer">
         <div className="academy-footer-inner">
           <div className="academy-footer-brand">
-            <a className="academy-footer-brand-link" href="/" aria-label="Human AI Studio home">
-              <span className="academy-brand-mark" aria-hidden="true" />
+            <a className="brand" href="/" aria-label="Human AI Studio home">
+              <span className="brand-mark" aria-hidden="true" />
               Human AI Studio
             </a>
             <p>

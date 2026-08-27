@@ -142,6 +142,14 @@ html:has(.beta-app) body {
   font-size: 0.7rem;
 }
 
+.beta-app button.beta-brand {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: start;
+}
+
 .beta-nav {
   display: grid;
   align-content: start;
@@ -160,15 +168,6 @@ html:has(.beta-app) body {
 .beta-nav-group + .beta-nav-group {
   padding-top: 0.85rem;
   border-top: 1px solid var(--beta-line);
-}
-
-.beta-nav-heading {
-  margin: 0 0 0.35rem;
-  padding: 0 0.45rem;
-  color: var(--beta-soft);
-  font-size: 0.72rem;
-  font-weight: 550;
-  letter-spacing: -0.01em;
 }
 
 .beta-nav-item {
@@ -385,16 +384,25 @@ html:has(.beta-app) body {
   font-weight: 450;
 }
 
+.beta-academy-hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.7rem;
+  margin-inline-start: auto;
+}
+
 .beta-academy-hero .beta-lede {
-  max-width: 22rem;
-  margin: 0.7rem 0 0;
+  align-self: stretch;
+  max-width: none;
+  margin: 0;
   font-size: 0.92rem;
   line-height: 1.35;
+  text-align: start;
 }
 
 .beta-academy-hero .beta-welcome-actions {
   margin-top: 0;
-  margin-inline-start: auto;
 }
 
 .beta-main:not(.beta-main--flush) h1 {
@@ -434,7 +442,8 @@ html:has(.beta-app) body {
   margin-top: 1.15rem;
 }
 
-.beta-app button.beta-cta {
+.beta-app button.beta-cta,
+.beta-app a.beta-cta {
   display: inline-flex;
   min-height: 2.6rem;
   align-items: center;
@@ -451,17 +460,20 @@ html:has(.beta-app) body {
   cursor: pointer;
 }
 
-.beta-app button.beta-cta:hover {
+.beta-app button.beta-cta:hover,
+.beta-app a.beta-cta:hover {
   background: #fff;
 }
 
-.beta-app button.beta-cta--ghost {
+.beta-app button.beta-cta--ghost,
+.beta-app a.beta-cta--ghost {
   border: 1px solid var(--beta-line);
   background: transparent;
   color: var(--beta-ink);
 }
 
-.beta-app button.beta-cta--ghost:hover {
+.beta-app button.beta-cta--ghost:hover,
+.beta-app a.beta-cta--ghost:hover {
   background: var(--beta-hover);
 }
 
@@ -475,6 +487,8 @@ html:has(.beta-app) body {
 .beta-modal-close:focus-visible,
 .beta-auth-switch:focus,
 .beta-auth-switch:focus-visible,
+.beta-home-login:focus,
+.beta-home-login:focus-visible,
 .beta-auth-form input:focus,
 .beta-auth-form input:focus-visible {
   outline: none;
@@ -482,7 +496,8 @@ html:has(.beta-app) body {
 
 .beta-cta:focus-visible,
 .beta-modal-close:focus-visible,
-.beta-auth-switch:focus-visible {
+.beta-auth-switch:focus-visible,
+.beta-home-login:focus-visible {
   box-shadow: 0 0 0 2px #0b0c0e, 0 0 0 4px #fff;
 }
 
@@ -557,7 +572,8 @@ html:has(.beta-app) body {
   text-align: start;
 }
 
-button.beta-card {
+button.beta-card,
+a.beta-card {
   cursor: pointer;
 }
 
@@ -615,6 +631,214 @@ button.beta-card {
   font-size: 0.72rem;
   font-style: normal;
   letter-spacing: 0.06em;
+}
+
+.beta-home {
+  display: grid;
+  gap: 3.25rem;
+  padding-bottom: 2.5rem;
+}
+
+.beta-home-hero,
+.beta-home-block:not(.is-plans) {
+  max-width: 44rem;
+}
+
+.beta-home-hero h1 {
+  margin: 0;
+}
+
+.beta-home-hero h1 span {
+  display: block;
+  margin-left: 0;
+  animation: none;
+}
+
+.beta-home-hero h1 span + span {
+  margin-left: 0;
+}
+
+.beta-main:not(.beta-main--flush) .beta-home-hero h1 {
+  margin-inline-start: -0.08em;
+  font-size: clamp(2.35rem, 5vw, 3.7rem);
+  font-weight: 450;
+  letter-spacing: -0.055em;
+  line-height: 0.94;
+}
+
+.beta-home-hero h1 span:last-child {
+  color: var(--beta-muted);
+  font-weight: 450;
+}
+
+.beta-home-hero .beta-lede {
+  max-width: 32rem;
+  margin: 1.1rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.beta-home-hero .beta-welcome-actions {
+  margin-top: 1.35rem;
+}
+
+.beta-home-login {
+  width: fit-content;
+  min-height: 2.25rem;
+  margin-top: 0.55rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--beta-soft);
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+
+.beta-home-login:hover {
+  color: var(--beta-ink);
+}
+
+.beta-home-block h2 {
+  margin: 0 0 1.15rem;
+  font-size: 1.28rem;
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+}
+
+.beta-home-list {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: home-include;
+}
+
+.beta-home-list li {
+  display: grid;
+  grid-template-columns: 2.1rem minmax(0, 1fr);
+  gap: 0.65rem;
+  color: var(--beta-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.beta-home-list li::before {
+  counter-increment: home-include;
+  content: counter(home-include, decimal-leading-zero);
+  color: var(--beta-ink);
+  font-size: 0.78rem;
+  font-weight: 450;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  line-height: 1.55;
+}
+
+.beta-home-list strong {
+  color: var(--beta-ink);
+  font-weight: 560;
+}
+
+.beta-plans {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.beta-plan {
+  display: flex;
+  flex-direction: column;
+  min-height: 26rem;
+  padding: 1.2rem 1.15rem 1.1rem;
+  border: 1px solid var(--beta-line);
+  border-radius: 1rem;
+  background: var(--beta-panel);
+}
+
+.beta-plan.is-membership {
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
+.beta-plan .beta-card-kicker {
+  margin-bottom: 0.7rem;
+}
+
+.beta-plan h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 560;
+  letter-spacing: -0.03em;
+}
+
+.beta-plan > p:not(.beta-plan-price):not(.beta-card-kicker) {
+  margin: 0.55rem 0 0;
+  color: var(--beta-muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.beta-plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin: 0.85rem 0 0;
+}
+
+.beta-plan-price span {
+  font-size: 2.1rem;
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.beta-plan-price small:empty {
+  display: none;
+}
+
+.beta-plan ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.beta-plan li {
+  padding-inline-start: 1.05rem;
+  color: var(--beta-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.beta-plan li::before {
+  content: "";
+  display: inline-block;
+  width: 0.35rem;
+  height: 0.35rem;
+  margin-inline-end: 0.7rem;
+  margin-inline-start: -1.05rem;
+  border-radius: 50%;
+  background: var(--beta-ink);
+  vertical-align: 0.12rem;
+}
+
+.beta-plan .beta-cta {
+  width: 100%;
+  margin-top: auto;
+}
+
+.beta-plan:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: #161616;
+}
+
+.beta-plan.is-membership:hover {
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .beta-lessons {
@@ -920,8 +1144,27 @@ button.beta-card {
     margin-bottom: 1.5rem;
   }
 
-  .beta-main:not(.beta-main--flush) .beta-academy-hero h1 {
+  .beta-academy-hero-cta {
+    align-items: flex-start;
+    width: 100%;
+    margin-inline-start: 0;
+  }
+
+  .beta-academy-hero .beta-lede {
+    text-align: start;
+  }
+
+  .beta-main:not(.beta-main--flush) .beta-academy-hero h1,
+  .beta-main:not(.beta-main--flush) .beta-home-hero h1 {
     font-size: clamp(2.05rem, 11vw, 2.7rem);
+  }
+
+  .beta-plans {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .beta-plan {
+    min-height: 0;
   }
 
   .beta-lesson {

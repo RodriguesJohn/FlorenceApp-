@@ -17,7 +17,6 @@ const bookingAttributes = {
 
 const academyUrl = "/academy";
 const studioUrl = "/";
-const allWorkUrl = "/case-studies";
 const florenceUrl = "/florence";
 const designSystemsUrl = "/workshop";
 const blogUrl = "/blog";
@@ -25,7 +24,7 @@ const blogUrl = "/blog";
 function trackAcademyNavClick() {
   track("Academy CTA Click", {
     location: "primary_navigation",
-    label: "Academy",
+    label: "Course",
     href: academyUrl
   });
 }
@@ -39,7 +38,6 @@ function trackWorkshopNavClick() {
 }
 
 const serviceLinks = [
-  { label: "All work", href: allWorkUrl },
   { label: "Florence", href: florenceUrl },
   { label: "Tools", href: "/tools" },
   { label: "Blog", href: blogUrl }
@@ -47,7 +45,7 @@ const serviceLinks = [
 
 const primaryLinks = [
   { label: "Studio", href: studioUrl },
-  { label: "Academy", href: academyUrl, onClick: trackAcademyNavClick },
+  { label: "Course", href: academyUrl, onClick: trackAcademyNavClick },
   { label: "Workshop", href: designSystemsUrl, onClick: trackWorkshopNavClick }
 ];
 
@@ -139,7 +137,7 @@ export function NavMenu() {
         Studio
       </a>
       <a className="nav-direct-link" href={academyUrl} onClick={trackAcademyNavClick}>
-        Academy
+        Course
       </a>
       <a
         className="nav-direct-link"

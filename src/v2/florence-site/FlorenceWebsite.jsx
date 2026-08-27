@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Play } from 'lucide-react'
-import demoReelVideo from "./assets/F2.mp4";
 import { SiteHeader } from "../SiteHeader.jsx";
 import "./florence-website.css";
+
+const DEMO_VIDEO_SRC = "/florence/F2.mp4";
 
 const MASTERCLASS_URL = '/design-systems'
 const DEMO_URL = '/florence/system'
@@ -145,7 +146,7 @@ function DemoReel() {
         <div className="hero__reel-stage">
           <video
             className="hero__video"
-            src={demoReelVideo}
+            src={DEMO_VIDEO_SRC}
             autoPlay
             muted
             loop
