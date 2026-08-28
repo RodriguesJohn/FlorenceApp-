@@ -17,6 +17,7 @@
     "framer-motion": "^12.42.2",
     "geist": "^1.7.2",
     "gray-matter": "^4.0.3",
+    "localtunnel": "^2.0.2",
     "lucide-react": "^1.31.0",
     "marked": "^18.0.9",
     "motion": "^13.1.0",

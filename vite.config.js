@@ -115,6 +115,11 @@ export default defineConfig({
     host: "127.0.0.1",
     port: 5173,
     strictPort: true,
+    allowedHosts: [
+      ".trycloudflare.com",
+      ".loca.lt",
+      ".serveousercontent.com"
+    ],
     watch: {
       ignored: [
         "**/MyPortfolio/**",
