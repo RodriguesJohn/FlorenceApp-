@@ -15,6 +15,7 @@ const server = await createServer({
     host,
     port,
     strictPort: true,
+    allowedHosts: "all",
     watch: {
       ignored: [
         "**/MyPortfolio/**",
