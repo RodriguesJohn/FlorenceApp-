@@ -456,7 +456,6 @@ function CinematicHero() {
 const workPathways = [
   {
     name: "1:1 Consultation",
-    price: "$500/hour",
     color1: "#3b82f6",
     color2: "#bae6fd",
     ctaLabel: "Book 15 Min Discovery Call",
@@ -468,7 +467,6 @@ const workPathways = [
   },
   {
     name: "Audits and Team Embedded",
-    price: "Contact for pricing",
     featured: true,
     color1: "#8b5cf6",
     color2: "#ddd6fe",
@@ -481,7 +479,6 @@ const workPathways = [
   },
   {
     name: "Design Systems Workshop",
-    price: "$599/seat",
     color1: "#10b981",
     color2: "#a7f3d0",
     ctaLabel: "Join Workshop",
