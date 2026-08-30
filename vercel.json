@@ -39,6 +39,21 @@
       "source": "/florence/system/",
       "destination": "/florence/system",
       "permanent": true
+    },
+    {
+      "source": "/workshop/complete/",
+      "destination": "/workshop/complete",
+      "permanent": true
+    },
+    {
+      "source": "/workshop/playbook/",
+      "destination": "/workshop/playbook",
+      "permanent": true
+    },
+    {
+      "source": "/playbook/",
+      "destination": "/playbook",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -57,6 +72,18 @@
     {
       "source": "/tools",
       "destination": "/tools.html"
+    },
+    {
+      "source": "/workshop/complete",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/workshop/playbook",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/playbook",
+      "destination": "/index.html"
     },
     {
       "source": "/workshop",

@@ -37,6 +37,25 @@ const pages = {
       "Open-source tools from Human AI Studio for connecting everyday workflows with AI agents.",
     type: "CollectionPage"
   },
+  "/workshop/playbook": {
+    title: "AI-ready design system playbook | Human AI Studio",
+    description:
+      "The August 29 workshop playbook: framework, contracts, AGENTS.md, Figma MCP setup, evals, and the Monday checklist.",
+    type: "WebPage"
+  },
+  "/playbook": {
+    path: "/workshop/playbook",
+    title: "AI-ready design system playbook | Human AI Studio",
+    description:
+      "The August 29 workshop playbook: framework, contracts, AGENTS.md, Figma MCP setup, evals, and the Monday checklist.",
+    type: "WebPage"
+  },
+  "/workshop/complete": {
+    title: "You finished the workshop | Human AI Studio",
+    description:
+      "Congratulations to the August 29 cohort of the AI-Ready Design Systems Workshop. A note from John, what you completed, and what to do next.",
+    type: "WebPage"
+  },
   "/workshop": {
     title: "AI-Ready Design System Workshop | Human AI Studio",
     description:

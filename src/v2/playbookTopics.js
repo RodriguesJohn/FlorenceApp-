@@ -1,0 +1,642 @@
+export const links = {
+  figjam: "https://www.figma.com/board/1xln4qdWM0IJxKxkMG0TWY/AI-Ready-Design-System-Workshop",
+  florenceFigma: "https://www.figma.com/design/77QvCREDydE2GWU5JGFIHK/Florence-DS-Demo",
+  figmaMcp: "https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server",
+  consoleMcp: "https://github.com/southleft/figma-console-mcp",
+  benchmarks:
+    "https://github.com/RodriguesJohn/ai-ready-design-system-workshop-skills-library/tree/main/agent-ready-benchmarks",
+  maven: "https://maven.com/humanaistudio/ai-ready-design-system-workshop",
+  slack: "https://join.slack.com/t/aidesigncommunity/shared_invite/zt-3akgd78mu-UZqBz_9GOzrKlHGoQrnngA",
+  shadcn: "https://ui.shadcn.com/docs/installation",
+  designMd: "https://getdesign.md/",
+  skills: "https://www.skills.sh/"
+};
+
+export const modules = [
+  {
+    id: "foundations",
+    number: "01",
+    label: "Foundations",
+    kicker: "Definitions and differences",
+    title: "What is an AI-ready design system",
+    color1: "#38bdf8",
+    color2: "#0284c7",
+    lede: "A design system that agents can understand and retrieve. Humans were the first audience. Agents are the second.",
+    outcome:
+      "You can say exactly what agent-ready means, and spot the difference between a system an agent can build from and one it cannot.",
+    chapters: [
+      {
+        id: "what-is",
+        title: "What is an AI-ready design system?",
+        body: [
+          "An AI-ready design system is a design system that agents can understand and retrieve.",
+          "Design systems were built for one audience: humans. There is another layer now. Agents. To Claude Code, Cursor, or Codex, the design system is a context layer. It is what the agent reads before it builds.",
+          "Most systems cannot be read that way. Agents cannot understand them and cannot retrieve them, which defeats the purpose of having a system at all. The result is prototypes and products with no connection to the brand, and teams prompting their way around the system instead of through it.",
+          "An AI-ready design system closes that gap with clear guardrails, architecture, and structure an agent can follow.",
+          "What the agent actually reads is structure: component names, type signatures, token roles, contracts, and AGENTS.md. It does not browse a docs site. It retrieves. If the rule lives only in prose, it cannot reach it."
+        ]
+      },
+      {
+        id: "difference",
+        title: "What is the difference between an AI-ready system and one that is not?",
+        table: {
+          title: "The same team, the same components, two very different outcomes.",
+          offLabel: "Not AI-ready",
+          onLabel: "AI-ready",
+          rows: [
+            {
+              label: "Where it lives",
+              offLead: "Scattered",
+              off: "Across files, tools, and people’s heads",
+              onLead: "One repo",
+              on: "Documented, in one place"
+            },
+            {
+              label: "Retrieval",
+              offLead: "Guesswork",
+              off: "The agent works from whatever it can see",
+              onLead: "Exact",
+              on: "It pulls the record it needs"
+            },
+            {
+              label: "Prompting",
+              offLead: "More",
+              off: "You re-explain the system every time",
+              onLead: "Less",
+              on: "The system carries the context"
+            },
+            {
+              label: "Component contracts",
+              offLead: "Implied",
+              off: "No written rules. The team just knows",
+              onLead: "Defined",
+              on: "What it is for, its states, when to use it"
+            },
+            {
+              label: "Accessibility",
+              offLead: "Absent",
+              off: "Not written on the component",
+              onLead: "In the contract",
+              on: "It ships accessible"
+            },
+            {
+              label: "Consistency",
+              offLead: "Drift",
+              off: "Every screen walks a little further off",
+              onLead: "Same system",
+              on: "Every build resolves to the same components"
+            },
+            {
+              label: "Missing from the catalog",
+              offLead: "Invented",
+              off: "The agent paints generic UI",
+              onLead: "Asked",
+              on: "The agent stops instead of inventing"
+            },
+            {
+              label: "What you get",
+              offLead: "Slop",
+              off: "Generic, off-brand UI",
+              onLead: "Yours",
+              on: "On-brand UI from components you own"
+            }
+          ]
+        },
+        body: [
+          "The agent starts to drift when context is scattered. Something lives in Storybook. Something lives in Figma. Something lives in the GitHub repo. A ready system has one source of truth. The recommendation is the repo. Figma is the surface. Some teams flip that. Figma leads, the repo follows. That is a company choice. Agents still understand the repo better.",
+          "Not ready means low retrieval. The agent cannot pull the right component. It generates slop. Ready means high retrieval. Florence hit 73% retrievability on the first shot of prompting.",
+          "Not ready means more prompting. You describe the system every time. Ready means less prompting. The system carries the context. That also cuts token cost. That is a real sell inside a company.",
+          "On the not-ready side, component contracts almost do not exist. Consistency is weak. The output is generic UI. On the ready side you get UI connected to the brand, and the path from Figma to code gets faster because the team can actually get the component.",
+          "AI is probabilistic. It makes things up. The job is to make the system deterministic. When you say build a checkout, it comes from the design system. Guardrails, architecture, and structure the agent can follow."
+        ]
+      },
+      {
+        id: "terms",
+        title: "What do the key terms actually mean?",
+        body: [
+          "These words are not decoration. Mix them up and you fix the wrong layer. Use this as the glossary for the rest of the playbook."
+        ],
+        glossary: [
+          {
+            term: "System",
+            meaning:
+              "Purpose, interconnectedness, and elements. Not one component. Content guidelines, accessibility, tokens, and components, connected so people can build on them."
+          },
+          {
+            term: "Context layer",
+            meaning:
+              "What Claude Code, Cursor, or Codex reads before it builds. The design system is that layer for agents. Humans were the first audience. Agents are the second."
+          },
+          {
+            term: "Ambiguity",
+            meaning:
+              "Humans handle a gap by asking someone. Agents do not. If the rule is not written, they invent."
+          },
+          {
+            term: "Probabilistic",
+            meaning:
+              "AI makes things up. It hallucinates. It generates what was not asked for. That is the default."
+          },
+          {
+            term: "Deterministic",
+            meaning:
+              "When you say build a checkout, it comes from the design system. Guardrails, architecture, and structure the agent can follow."
+          },
+          {
+            term: "Source of truth",
+            meaning:
+              "One place the system lives. The recommendation is the GitHub repo. Figma is the surface. Some teams flip that. Agents still understand the repo better."
+          },
+          {
+            term: "Retrieval",
+            meaning:
+              "Can the agent pull the right component. Low retrieval generates slop. High retrieval is the point. Florence hit 73% on the first shot of prompting."
+          },
+          {
+            term: "Slop",
+            meaning:
+              "Generic UI that is not yours. What you get when the agent cannot retrieve."
+          },
+          {
+            term: "Catalog",
+            meaning:
+              "The set of components that exist and should be retrieved. If it is not in the catalog, the agent should not invent a twin with a similar name."
+          },
+          {
+            term: "Component contract",
+            meaning:
+              "The file for one component. What it is for. When to use it. When not to use it. Its states. In Florence that is the JSON next to the component. Start with Button. Do not write twenty files on day one."
+          },
+          {
+            term: "Primitive",
+            meaning:
+              "The raw scale. Gray steps, spacing steps, radius steps. Paint. Agents should not pick from here."
+          },
+          {
+            term: "Semantic token",
+            meaning:
+              "Names the job, not the swatch. Text secondary. Border subtle. Surface raised. A gray number is a primitive. Only the job survives a rebrand."
+          },
+          {
+            term: "AGENTS.md",
+            meaning:
+              "House rules at the root of the repo. How we retrieve. What we never invent. Which folder is source of truth. The agent should read it without you pasting it."
+          },
+          {
+            term: "Drift",
+            meaning:
+              "The agent left the system and painted from the prompt. Scattered context causes it. Two sources of truth cause it."
+          },
+          {
+            term: "Eval",
+            meaning:
+              "You score a generated screen, not the repo. Same prompts, same model, fresh session. Then you go back to the repo and fix what broke."
+          },
+          {
+            term: "MCP",
+            meaning:
+              "How the agent reads Figma or the repo without you pasting frames into chat. Retrieval dies when it cannot see the file the humans use."
+          },
+          {
+            term: "Token cost",
+            meaning:
+              "Not-ready means more prompting. You describe the system every time. Ready means the system carries the context. That is a real sell inside a company."
+          }
+        ]
+      },
+      {
+        id: "framework",
+        title: "What does the AI-ready framework actually look like?",
+        framework: {
+          title: "The framework",
+          lede: "Four moves, nine steps. The order matters: each one makes the next cheaper.",
+          loop: "the score tells you what to fix next",
+          moves: [
+            {
+              name: "Measure",
+              kicker: "where you are",
+              steps: [
+                {
+                  n: "01",
+                  title: "Audit and baseline",
+                  body: "Run the five prompts once. Write down S.",
+                  done: "done when a number you can beat"
+                }
+              ]
+            },
+            {
+              name: "Structure",
+              kicker: "make it legible",
+              steps: [
+                {
+                  n: "02",
+                  title: "Rename",
+                  body: "Semantic names on both surfaces.",
+                  done: "done when the name says what it is"
+                },
+                {
+                  n: "03",
+                  title: "Tokenise",
+                  body: "Raw values out of the UI layer.",
+                  done: "done when no literals left in components"
+                },
+                {
+                  n: "04",
+                  title: "Write the contract",
+                  body: "One JSON per component.",
+                  done: "done when Button, Link, Input all have one"
+                }
+              ]
+            },
+            {
+              name: "Connect",
+              kicker: "make it reachable",
+              steps: [
+                {
+                  n: "05",
+                  title: "Mirror it in Figma",
+                  body: "The same JSON in component config.",
+                  done: "done when both sides, one card"
+                },
+                {
+                  n: "06",
+                  title: "Add the harness",
+                  body: "AGENTS.md at the root of the repo.",
+                  done: "done when the agent reads it unprompted"
+                },
+                {
+                  n: "07",
+                  title: "Expose it",
+                  body: "MCP, Code Connect, an index it can query.",
+                  done: "done when it retrieves instead of reading"
+                }
+              ]
+            },
+            {
+              name: "Prove",
+              kicker: "keep it true",
+              steps: [
+                {
+                  n: "08",
+                  title: "Re-run the eval",
+                  body: "Same prompts, same model, fresh session.",
+                  done: "done when retrieved up, invented down"
+                },
+                {
+                  n: "09",
+                  title: "Enforce",
+                  body: "Lint, fail the build, re-run on release.",
+                  done: "done when the build catches drift, not a person"
+                }
+              ]
+            }
+          ]
+        },
+        body: [
+          "A system is purpose, interconnectedness, and elements. Not one component. Content guidelines, accessibility, tokens, components. One cohesive thing people build on.",
+          "The stack under those nine steps is what the agent reads. Primitives are the raw scale: gray steps, spacing steps, radius steps. Semantics are the jobs: text primary, border subtle, surface raised. Components consume semantics. Contracts tell the agent when a component is the answer. AGENTS.md holds the house rules. Skills hold the jobs you do not want to re-prompt every Monday.",
+          "Agents should consume semantics. If they consume primitives they are picking paint, and you will get a different gray every generation. Components should have one canonical path.",
+          "You do not run the eval on the repo and guess what to fix. You generate a screen the way a team would, score retrieval, then go back to the repo and fix what broke. Application layer first. Repo second.",
+          "If those layers disagree, the agent picks the loudest file. Keep one story. A pretty docs site that repeats rules the code does not enforce will train humans and fail agents."
+        ]
+      },
+      {
+        id: "video-series",
+        title: "Three-part AI-ready design system video series",
+        body: [
+          "Watch these, then read the chapters. Same ideas, spoken."
+        ],
+        videos: [
+          {
+            part: "01",
+            title: "Agentic Design Systems",
+            youtubeId: "OqrxSgWpRvs"
+          },
+          {
+            part: "02",
+            title: "Agentic Design Systems",
+            youtubeId: "O-F7nxE2IEo"
+          },
+          {
+            part: "03",
+            title: "Scattered context is breaking systems",
+            youtubeId: "2IYfsPch3a8"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "existing",
+    number: "02",
+    label: "Existing system",
+    kicker: "Work with what you have",
+    title: "Working with an existing design system",
+    color1: "#f59e0b",
+    color2: "#d97706",
+    lede: "Figma, code, and the gap between them. You walk into a library that already ships. You do not start from a blank file.",
+    outcome:
+      "You can walk into any existing design system, in Figma or in code, and start fixing, extending, and shipping from it faster.",
+    chapters: [
+      {
+        id: "figma",
+        title: "How do you work with what you already have in Figma?",
+        body: [
+          "Open the library you actually ship. Not a clean demo. Map the names. Find the duplicates. Find the component that looks like a button and is named something else. That map is the start of the audit, even before you write a contract.",
+          "Work from a file you can inspect. If it is locked, get access. You cannot encode what you cannot open. Screenshots are not a system.",
+          "Start on a personal or sandbox file. Get retrieve, one contract, and MCP working. Then touch work files. Enterprise libraries have permissions, existing names, and people who will feel a rename.",
+          "The workshop FigJam and the Florence demo are the model files if you want a shared board. Do not invent a second library in a private file nobody else can see."
+        ]
+      },
+      {
+        id: "code",
+        title: "How do you work with a design system when it is in code?",
+        body: [
+          "Find the exports. Find the deprecated ones that still compile. If three cards are legal, the agent will pick at random. Humans have a Slack channel that says “use the new card.” The agent does not.",
+          "Look at types the way you would look at a token name. A spacing prop typed as number invites invention. Typed as a scale, it teaches the system without a docs page. The test from foundations still applies: could someone violate the rule without anything breaking.",
+          "shadcn is a public code model for how variants get encoded when a library is mature. Inspect the install notes and the chart examples. Then look at your own exports with the same eyes. This studio does not have to look like shadcn."
+        ]
+      },
+      {
+        id: "bridge",
+        title: "How do you bridge the gap between Figma and code?",
+        body: [
+          "Figma can connect to a git repo. That is the job. Figma is not the source of truth by itself.",
+          "Git holds tokens, contracts, and components. Figma mirrors them, or generates from them. MCP is how the agent reads the file the humans still design in. If Figma and git disagree, the agent will pick one and drift the other.",
+          "Same names. Same roles. Same constraints. If Figma has Button and code has BtnPrimary and CTA, the agent invents a fourth. The bridge is not a plugin you install and forget. It is a naming and ownership decision you keep making.",
+          "The encoding does not change from enterprise to a solo file. The blast radius does. Own the contract in git so the next agent does not restyle a brand from a prompt."
+        ]
+      }
+    ]
+  },
+  {
+    id: "making-ready",
+    number: "03",
+    label: "Making it AI-ready",
+    kicker: "Audit, architecture, evals",
+    title: "Making a design system AI-ready",
+    color1: "#10b981",
+    color2: "#059669",
+    lede: "Audit the system you have. Restructure components and tokens. Run the eval. Hand the agent one source of truth.",
+    outcome:
+      "You can audit your own system, restructure its components and tokens, run the eval, and hand AI a single source of truth it builds from without drift.",
+    chapters: [
+      {
+        id: "audit",
+        title: "How do you audit a design system for AI readiness?",
+        body: [
+          "Walk the catalog with an agent in the loop, not only with your eyes. Your eyes already know which button is current. The agent does not.",
+          "The checklist is short on purpose. Can it find the component you already have. Is there a contract, or only a docs page. Are tokens semantic, or swatches. Is there one path, or three. Does the Figma name match the git export. Does AGENTS.md point at the contract, or repeat it.",
+          "Write the misses down in those labels: retrieval, empty contract, duplicate path, hardcoded color. That list is the audit. You do not need a forty-page report to start fixing.",
+          "A system can look agent-ready in a demo and fail the eval the moment the prompt leaves the happy path. Measure before you rewrite the whole library because one screen looked fine."
+        ]
+      },
+      {
+        id: "architecture",
+        title: "What does good component architecture look like?",
+        body: [
+          "Good architecture is boring to describe and strict in the file. One intent. When not to use it. An enum, not a free string. The Florence Button contract is the model: one primary path per view, quieter variants for secondary work, do not use it for in-page navigation or a switch.",
+          "It lives the same way in Figma and in code. Same name. Same variants. Same constraints. The workflows that help are the ones that remove choice: rename until they match, delete the extra, write the contract next to the component so retrieval has a place to land.",
+          "Connect Figma and GitHub so a rename in one place is a rename in the other. If only Figma moves, the agent will retrieve yesterday’s code.",
+          "AGENTS.md is the house rules. How we retrieve. What we never invent. Which folder is source of truth. A contract is the law for one component. Start the rule in AGENTS.md if it applies everywhere. Move it into the contract when you can name the component. Then point AGENTS.md at that file. Do not keep two copies.",
+          "Tell the agent which file to edit. If you do not, it will pad AGENTS.md until the file is useless.",
+          "Write contracts for templates and pages when the composition repeats. A settings page is a header, a form, a primary save, a quiet cancel. That is a recipe. Skip it when the page is a one-off marketing layout. Do not write a contract for every screen you might ship once.",
+          "The agent does not need every contract to build a screen. Dumping the library into the prompt burns tokens. Retrieve the contracts for the components on that screen. Index the rest. A catalog with intent and path is cheap. Twenty full contracts in every chat is not."
+        ]
+      },
+      {
+        id: "evals",
+        title: "What are evals and benchmarks, and how do you run them?",
+        body: [
+          "An eval scores a generation against your catalog. Not “does it look nice.” Four labels matter: retrieved, invented, wrong component, hardcoded.",
+          "Retrieved means it used what you have. Invented means it made a twin. Wrong component means it found the catalog and picked the neighbor. Hardcoded means it skipped tokens and wrote a hex.",
+          "The one number is catalog match on prompts that are not the demo. A strong score holds after you change the ask. A weak score only works on the happy path.",
+          "The eval and benchmark skill is a markdown file you drop into Cursor or Claude Code so the agent scores its own output against your catalog. It lives in the workshop skills library. Use that file. Do not rebuild the skill from memory."
+        ]
+      },
+      {
+        id: "drift",
+        title: "What causes drift, and how do you prevent it?",
+        body: [
+          "Drift is what it looks like when the agent left your system. Two sources of truth cause it. Empty contracts cause it. Deprecated exports cause it. A Storybook page that holds a rule the code does not enforce causes it. An AGENTS.md that disagrees with the Button contract causes it.",
+          "Prevent it by encoding the rule once and pointing everything else at that file. Then run the eval when you change a name. Drift is not a model problem first. It is a catalog problem.",
+          "If you only test the demo prompt, you do not have prevention. You have a demo."
+        ]
+      },
+      {
+        id: "source-of-truth",
+        title: "Where does your single source of truth live?",
+        body: [
+          "Git for tokens, contracts, and code. Figma as the working file the team can see. Storybook or a preview as the human viewing surface. Not three laws.",
+          "Storybook is a visual documentation tool. In a world of agents you still need a place humans can see states. That can be Storybook. It can be a preview app. The repo can be the viewing surface.",
+          "Florence preview is the repo expressed as a gallery. The agent does not need Storybook to retrieve. It needs the contract. Do not make Storybook the only place the rule lives.",
+          "Other visual layers — Paper, shaders, the marketing site — get a DESIGN.md if you do not want the look invented. They do not become a second component catalog.",
+          "DESIGN.md is needed when the visual language is its own surface. DESIGN.md says how it should look here. AGENTS.md says how to work. getdesign.md is the pattern. Florence has foundations. They are not the same file. Do not paste Florence primitives into a marketing site."
+        ]
+      }
+    ]
+  },
+  {
+    id: "tooling",
+    number: "04",
+    label: "Tooling and demo",
+    kicker: "Cursor + Figma",
+    title: "Tooling and a full system end to end",
+    color1: "#818cf8",
+    color2: "#6366f1",
+    lede: "The tools are how the agent reaches the system you encoded. Setup, MCP, and what a complete system looks like when you ship it.",
+    outcome:
+      "You have seen a full system built end to end in Cursor and Figma, and you leave with the setup and structure to ship your own.",
+    chapters: [
+      {
+        id: "tools",
+        title: "Which tools do we use, and why?",
+        body: [
+          "Figma, because that is where the team already has a library. Cursor or Claude Code, because that is where the agent retrieves and writes. MCP, because that is the bridge.",
+          "Paper is a canvas when the work is not Figma. shadcn is a public code model you can inspect without a seat. Florence is the end-to-end model: tokens, contracts, preview. Browse Florence and inspect shadcn for how a public library encodes variants.",
+          "The tool is not the readiness. A messy catalog with MCP attached is still a messy catalog."
+        ]
+      },
+      {
+        id: "setup",
+        title: "Claude Code and Cursor setup",
+        body: [
+          "Open the FigJam. Open the Florence demo as the model file. Read Figma’s MCP guide. Install figma-console-mcp from GitHub if plugin search does not show a desktop bridge. Point the agent at a sandbox file you own. Not the company library.",
+          "In the repo: AGENTS.md with house rules, one component contract, then generate one screen. Score it with the four labels. Only then rename tokens or delete a deprecated export.",
+          "A 1:1 is useful after you have a miss in front of you. Not before you have tried a sandbox."
+        ]
+      },
+      {
+        id: "mcp",
+        title: "What is MCP, and why does it matter here?",
+        body: [
+          "MCP is how the agent reads Figma or a console without you pasting frames. Retrieval dies when the agent cannot see the file the humans use.",
+          "Use Figma’s own MCP guide first. The console MCP is a GitHub install, not a Community plugin search. Clone the repo if search does not show a desktop bridge.",
+          "Figma’s roadmap for MCP can move. Encode in git anyway. If a bridge moves, the contract should still be in the repo."
+        ]
+      },
+      {
+        id: "full-system",
+        title: "What does a full design system look like end to end?",
+        body: [
+          "Florence is the end-to-end model. Token-first. Contracts next to components. A preview so humans can browse. Agents retrieve the same source. Primitives, semantics, components, contracts, AGENTS.md, a preview. You ship from git.",
+          "Florence contracts live next to each component. Use those as the model. Then write the contract for your Button. Do not copy every Florence file on day one.",
+          "Skills and benchmarks live in the workshop skills library. This playbook is the written guide.",
+          "The marketing site is not the system. Do not flatten Florence into site styles. How you set it up is the stack in foundations. How you ship it is git, with Figma as the working file the team can still open."
+        ]
+      }
+    ]
+  },
+  {
+    id: "evals",
+    number: "05",
+    label: "Evals",
+    kicker: "Score the output",
+    title: "Evals for design systems",
+    color1: "#94a3b8",
+    color2: "#64748b",
+    lede: "You do not eval the repo and guess. You generate a screen, score retrieval, then go back and fix what broke.",
+    outcome:
+      "You can run an eval on a generated screen and know what to fix in the system.",
+    chapters: [
+      {
+        id: "what-evals-are",
+        title: "What are evals for a design system?",
+        body: [
+          "An eval scores one generated design against the design system. It is not a test of whether the team adopted the system. It is a test of whether this screen used what you already have.",
+          "You run it on the application layer. A dashboard. A checkout. The way a team would prompt. Then you take the misses back to the repo and fix them. You do not run the eval on the repo and guess what to change.",
+          "That is how you know where it is breaking. If you only look at the library, you do not know what to fix."
+        ]
+      },
+      {
+        id: "what-you-score",
+        title: "What do you score?",
+        body: [
+          "Not “does it look nice.” Four labels. Retrieved. Invented. Wrong component. Hardcoded."
+        ],
+        glossary: [
+          {
+            term: "Retrieved",
+            meaning: "It used a component you already have."
+          },
+          {
+            term: "Invented",
+            meaning: "It made a twin. Slop. A new card, a new gray, a second primary."
+          },
+          {
+            term: "Wrong component",
+            meaning: "It found the catalog and picked the neighbor."
+          },
+          {
+            term: "Hardcoded",
+            meaning: "It skipped tokens and wrote a hex."
+          }
+        ]
+      },
+      {
+        id: "how-to-run",
+        title: "How do you run them?",
+        body: [
+          "Same prompts. Same model. Fresh session. Write down the score. That is the baseline. Done when you have a number you can beat.",
+          "Then you change the system. Rename. Tokenise. Write a contract. Expose it. Re-run. Retrieved should go up. Invented should go down.",
+          "The eval and benchmark skill is a markdown file in the workshop skills library. Drop it into Cursor or Claude Code. Do not rebuild it from memory.",
+          "If you only test the demo prompt, you do not have an eval. You have a demo."
+        ]
+      },
+      {
+        id: "what-good-looks-like",
+        title: "What does a good score look like?",
+        body: [
+          "Florence hit 73% retrievability on the first shot of prompting. That is a starting number, not a finish line.",
+          "A strong score holds after you change the ask. A weak score only works on the happy path.",
+          "The score tells you what to fix next. Prove returns to Structure."
+        ]
+      }
+    ]
+  },
+  {
+    id: "workflows",
+    number: "06",
+    label: "AI Workflows",
+    kicker: "How you actually work",
+    title: "AI workflows",
+    color1: "#c4b5fd",
+    color2: "#7c3aed",
+    lede: "The system is the context layer. The workflow is how you and the agent use it every week without re-explaining the catalog.",
+    outcome:
+      "You can run a weekly loop: sandbox, generate, score, fix the repo, then teach the team the same path.",
+    chapters: [
+      {
+        id: "what-workflow-is",
+        title: "What is an AI workflow here?",
+        body: [
+          "A workflow is not a new tool. It is a path the team can repeat. Open the repo. The agent reads AGENTS.md. It retrieves a contract. It builds a screen. You score it. You fix the miss in the system, not in the prompt.",
+          "Cursor, Claude Code, or Codex is where the agent writes. Figma is the surface the humans still design in. Git is the source of truth. MCP is how the agent sees the file without you pasting frames.",
+          "Some of this bends tools that are not ready. Figma still has to catch up. You still run the path. Practical today. Ready for tomorrow."
+        ]
+      },
+      {
+        id: "monday-loop",
+        title: "What is the weekly loop?",
+        body: [
+          "Skills hold the jobs you do not want to re-prompt every Monday. The eval skill. The audit. The contract write. Drop the file in. Do not rebuild it from memory.",
+          "Start in a sandbox file you own. Get retrieve, one contract, and MCP working. Then touch work files. Enterprise libraries have permissions and people who will feel a rename.",
+          "Generate one screen. Score it with the four labels. Only then rename tokens or delete a deprecated export. The score tells you what to fix next."
+        ]
+      },
+      {
+        id: "figma-claude-code",
+        title: "Figma and Claude Code workflow",
+        body: [
+          "Watch this first. Then run the path below.",
+          "Figma is where the library already lives. Claude Code is where the agent retrieves and writes. Git is the source of truth. MCP is the bridge. Without the bridge, you paste frames into chat and retrieval dies.",
+          "Open a sandbox file you own. Not the company library. Point Claude Code at the repo. Point MCP at that Figma file. AGENTS.md at the root. One component contract next to the component.",
+          "Ask for one screen. Claude Code should retrieve the contract, not invent a twin. If it cannot see Figma, it will guess from the prompt.",
+          "Score the screen. Retrieved, invented, wrong component, hardcoded. Then fix the miss in the repo or in the Figma name. Same names on both sides. Then run it again.",
+          "Use Figma’s MCP guide first. The console MCP is a GitHub install if desktop search does not show a bridge. Encode in git anyway. If the bridge moves, the contract should still be in the repo."
+        ],
+        videos: [
+          {
+            part: "Watch",
+            title: "Claude Code + Figma Workflow",
+            youtubeId: "ktEXKpIg1_8"
+          }
+        ]
+      },
+      {
+        id: "figma-to-code",
+        title: "How do you go from Figma to code with an agent?",
+        body: [
+          "Same names. Same variants. Same constraints. If Figma has Button and code has something else, the agent invents a third.",
+          "Connect Figma and the repo so a rename in one place is a rename in the other. If only Figma moves, the agent retrieves yesterday’s code.",
+          "The time from Figma to code gets faster when the team can actually get the component. That is the workflow. Not a plugin you install and forget.",
+          "Designers are expected to go between design and code. You do not have to become an engineer. You have to own the path the agent takes."
+        ]
+      },
+      {
+        id: "teach-the-team",
+        title: "How do you teach this to a team?",
+        body: [
+          "Give them the playbook and the skills library. Not screenshots. The recording is there if they need the day again.",
+          "Do not invent a second library in a private file nobody else can see. The FigJam and the Florence demo are the model files.",
+          "A 1:1 is useful after someone has a miss in front of them. Not before they have tried a sandbox."
+        ]
+      }
+    ]
+  }
+];
+
+export function findLocation(hash) {
+  const raw = (hash || "").replace(/^#/, "");
+  if (!raw) return { module: null, chapter: null };
+  const [moduleId, chapterId] = raw.split("/");
+  const module = modules.find((item) => item.id === moduleId) || null;
+  if (!module) return { module: null, chapter: null };
+  const resolvedId = chapterId === "second-audience" ? "what-is" : chapterId;
+  const chapter = resolvedId ? module.chapters.find((item) => item.id === resolvedId) || null : null;
+  return { module, chapter };
+}
+
+export function hrefFor(moduleId, chapterId) {
+  return chapterId ? `#${moduleId}/${chapterId}` : `#${moduleId}`;
+}

@@ -510,11 +510,6 @@ function WorkPathways() {
                   <PricingCard.PlanName as="h3" className="pathway-name">
                     {plan.name}
                   </PricingCard.PlanName>
-                  {plan.price ? (
-                    <PricingCard.Price>
-                      <PricingCard.MainPrice>{plan.price}</PricingCard.MainPrice>
-                    </PricingCard.Price>
-                  ) : null}
                   {plan.tagline ? (
                     <PricingCard.Description>{plan.tagline}</PricingCard.Description>
                   ) : null}

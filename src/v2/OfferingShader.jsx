@@ -13,6 +13,8 @@ export default function OfferingShader({
   color1 = "#38bdf8",
   color2 = "#0b1220",
   seed = 0,
+  mono = false,
+  speed = 1,
   className = "offering-shader"
 }) {
   const containerRef = React.useRef(null);
@@ -50,11 +52,13 @@ export default function OfferingShader({
       uniform float seed;
       uniform vec3 color1;
       uniform vec3 color2;
+      uniform float mono;
+      uniform float speed;
       varying vec2 vUv;
 
       void main() {
         vec2 uv = vUv;
-        float t = time * 1.15 + seed * 12.0;
+        float t = time * 1.15 * speed + seed * 12.0;
 
         vec2 w = uv;
         w.x += sin(uv.y * 3.0 + t * 0.9 + seed * 4.0) * 0.30;
@@ -64,12 +68,13 @@ export default function OfferingShader({
         noise += sin(w.x * 4.8 - t * 1.4 + seed) * cos(w.y * 3.6 + t * 1.2) * 0.5;
         noise *= 0.5;
 
-        vec3 color = mix(color1, color2, noise * 0.5 + 0.5);
-        color = mix(color, vec3(1.0), 0.42);
-        color = mix(color, vec3(1.0), pow(abs(noise), 2.0) * intensity * 0.45);
+        vec3 blended = mix(color2, color1, noise * 0.5 + 0.5);
+        vec3 multi = mix(blended, vec3(1.0), 0.42);
+        multi = mix(multi, vec3(1.0), pow(abs(noise), 2.0) * intensity * 0.45);
+        vec3 color = mix(multi, blended, mono);
 
         float shade = smoothstep(0.0, 0.6, vUv.y);
-        color *= mix(0.42, 1.0, shade);
+        color *= mix(mix(0.42, 0.82, mono), 1.0, shade);
 
         gl_FragColor = vec4(color, 1.0);
       }
@@ -80,7 +85,9 @@ export default function OfferingShader({
       intensity: { value: 1.0 },
       seed: { value: seed },
       color1: { value: new THREE.Color(color1) },
-      color2: { value: new THREE.Color(color2) }
+      color2: { value: new THREE.Color(color2) },
+      mono: { value: mono ? 1.0 : 0.0 },
+      speed: { value: speed }
     };
 
     const material = new THREE.ShaderMaterial({
@@ -107,7 +114,7 @@ export default function OfferingShader({
     renderer.setAnimationLoop(() => {
       const t = clock.getElapsedTime();
       uniforms.time.value = t;
-      uniforms.intensity.value = 1.0 + Math.sin(t * 2.0) * 0.3;
+      uniforms.intensity.value = 1.0 + Math.sin(t * 2.0 * speed) * 0.3;
       renderer.render(scene, camera);
     });
 
@@ -121,7 +128,7 @@ export default function OfferingShader({
       mesh.geometry.dispose();
       renderer.dispose();
     };
-  }, [color1, color2, seed]);
+  }, [color1, color2, seed, mono, speed]);
 
   return <div ref={containerRef} className={className} aria-hidden="true" />;
 }

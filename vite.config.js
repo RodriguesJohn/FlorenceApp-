@@ -61,6 +61,9 @@ function blogPlugin() {
 
 function htmlAliases() {
   const aliases = {
+    "/workshop/playbook": "/index.html",
+    "/playbook": "/index.html",
+    "/workshop/complete": "/index.html",
     "/workshop": "/design-systems.html",
     "/florence": "/florence.html",
     "/florence/system": "/florence-system.html"

@@ -78,6 +78,18 @@ async function boot() {
       return;
     }
 
+    if (route === "/workshop/playbook" || route === "/playbook") {
+      const { default: PlaybookPage } = await import("./v2/PlaybookPage.jsx");
+      renderWithAnalytics(root, <PlaybookPage />);
+      return;
+    }
+
+    if (route === "/workshop/complete") {
+      const { default: WorkshopCompletePage } = await import("./v2/WorkshopCompletePage.jsx");
+      renderWithAnalytics(root, <WorkshopCompletePage />);
+      return;
+    }
+
     if (route === "/workshop" || route === "/design-systems") {
       const { default: DesignSystemsPage } = await import("./v2/DesignSystemsPage.jsx");
       renderWithAnalytics(root, <DesignSystemsPage />);
