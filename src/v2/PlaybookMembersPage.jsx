@@ -80,7 +80,7 @@ function MembersLogin() {
         <p className="playbook-login-kicker">Workshop playbook</p>
         <h1 className="playbook-gate-title">For workshop attendees</h1>
         <p className="playbook-gate-lede">
-          Notes, links, and resources from the AI-ready design systems workshop — everything shared in the session. If you attended, log in with that email.
+          Notes, links, and resources from the AI-ready design systems workshop. Everything shared in the session. If you attended, log in with that email.
         </p>
         <div className="playbook-gate-actions">
           <button

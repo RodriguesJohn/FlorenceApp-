@@ -763,8 +763,6 @@ Things I owe you, and things you can take.
 - **Building the sync agent.** The cron job from Part 08. It diffs Figma, the repo and Storybook every morning and posts what's out of sync.
 - **Storybook.** How the repo pushes to it, and where it fits now.
 - **Building a production component** properly, in Figma and in code.
-- **Case studies.** Client migrations, including the mobile system.
-- **Florence source**, once the launch decision is made.
 
 ### Yours already
 
