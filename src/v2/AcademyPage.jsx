@@ -190,24 +190,19 @@ const pricingBenefits = [
 
 const pathOptions = [
   {
-    title: "Product\ndesigners",
+    title: "Access to\nin-depth lessons",
     color1: "#38bdf8",
     color2: "#e0f2fe"
   },
   {
-    title: "Design\nengineers",
+    title: "Slack community\nhelp",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Design system\nops",
+    title: "A community of\nAI designers",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
-  },
-  {
-    title: "Design system\nspecialists",
-    color1: "#6366f1",
-    color2: "#c7d2fe"
   }
 ];
 

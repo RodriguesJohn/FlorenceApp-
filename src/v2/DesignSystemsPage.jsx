@@ -224,7 +224,6 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
               }}
             />
             <div>
-              <span>Florence · Built by Human AI Studio</span>
               <a href="/florence">
                 See the system behind the workshop <ArrowIcon />
               </a>

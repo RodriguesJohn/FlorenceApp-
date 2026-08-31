@@ -679,6 +679,37 @@ html:has(.academy-page) {
   pointer-events: none;
 }
 
+@media (max-width: 860px) {
+  .playbook-page.academy-workspace {
+    display: flex;
+    min-height: 0;
+  }
+
+  .playbook-page.academy-workspace .playbook-body {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .playbook-page.academy-workspace .playbook-sidebar {
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: 1;
+    display: flex;
+    flex: 0 0 15.5rem;
+    width: 15.5rem;
+    height: auto;
+    transform: none;
+    box-shadow: none;
+    border-bottom: 0;
+  }
+
+  .academy-workspace .playbook-module-grid,
+  .academy-workspace-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .playbook-page.academy-workspace {
   position: relative;
   min-height: 0;
@@ -1051,7 +1082,8 @@ html:has(.academy-page) {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem 2.25rem;
+  column-gap: 2.85rem;
+  row-gap: 1.65rem;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -1103,7 +1135,7 @@ html:has(.academy-page) {
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  gap: 0.5rem;
+  gap: 0.85rem;
 }
 
 .academy-reviews-copy h2 {
@@ -1304,10 +1336,24 @@ html:has(.academy-page) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.15rem;
-  margin: 0 0 2.35rem;
-  padding: 0 0 1.65rem;
+  gap: 1.65rem;
+  margin: 0 0 2.85rem;
+  padding: 0 0 2.15rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.academy-reviews-trust .academy-hero-logos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-items: center;
+  align-items: center;
+  gap: 1.75rem 2rem;
+  width: 100%;
+  max-width: 36rem;
+}
+
+.academy-reviews-trust .academy-hero-logos img {
+  max-width: 100%;
 }
 
 .academy-reviews-trust p {
@@ -3071,9 +3117,57 @@ a.academy-bonus-card--stack[data-offset="0"]:focus-visible {
     margin-bottom: 0;
   }
 
+  .academy-hero-app-scaler {
+    --preview-width: 70rem;
+    --preview-height: 38rem;
+    --preview-scale: min(1, calc(100cqi / var(--preview-width)));
+    container-type: inline-size;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    height: calc(2.35rem + var(--preview-height) * var(--preview-scale));
+  }
+
+  .academy-hero-app-frame {
+    position: absolute;
+    top: 2.35rem;
+    left: 0;
+    width: var(--preview-width);
+    height: var(--preview-height);
+    transform: scale(var(--preview-scale));
+    transform-origin: top left;
+  }
+
+  .academy-workspace.playbook-page {
+    height: var(--preview-height);
+    min-height: var(--preview-height);
+  }
+
+  .playbook-page.academy-workspace .playbook-body {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+  }
+
+  .playbook-page.academy-workspace .playbook-sidebar {
+    display: flex;
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: 1;
+    flex: 0 0 15.5rem;
+    width: 15.5rem;
+    height: auto;
+    transform: none;
+    box-shadow: none;
+  }
+
   .academy-hero-shot {
     width: calc(100% - var(--page-padding) * 2);
     max-width: 100%;
+    min-width: 0;
     margin: 2.75rem auto 0;
     padding-inline: 0;
     perspective: none;
@@ -3092,20 +3186,6 @@ a.academy-bonus-card--stack[data-offset="0"]:focus-visible {
     border-radius: 1rem;
   }
 
-  .academy-workspace.playbook-page {
-    height: auto;
-  }
-
-  .academy-workspace .playbook-sidebar {
-    display: none;
-  }
-
-  .academy-workspace .playbook-module-grid,
-  .academy-workspace-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.5rem;
-  }
-
   .academy-hero-proof--product,
   .academy-hero-trust,
   .academy-hero-quotes,
@@ -3120,12 +3200,16 @@ a.academy-bonus-card--stack[data-offset="0"]:focus-visible {
   }
 
   .academy-reviews {
-    margin-top: 1.35rem;
+    margin-top: 2.15rem;
   }
 
   .academy-reviews-grid {
     grid-template-columns: 1fr;
-    gap: 1.15rem;
+    gap: 1.65rem;
+  }
+
+  .academy-reviews-copy {
+    gap: 0.95rem;
   }
 
   .academy-reviews-copy h2 {
@@ -3135,16 +3219,24 @@ a.academy-bonus-card--stack[data-offset="0"]:focus-visible {
 
   .academy-reviews-card {
     min-height: 22rem;
-    padding: 1.65rem 1.45rem 1.5rem;
+    gap: 1.85rem;
+    padding: 2rem 1.55rem 1.75rem;
   }
 
   .academy-reviews-trust {
-    margin-bottom: 1.75rem;
-    padding-bottom: 1.35rem;
+    gap: 1.55rem;
+    margin-bottom: 2.35rem;
+    padding-bottom: 1.85rem;
   }
 
   .academy-hero-logos {
-    gap: 1.1rem 1.5rem;
+    column-gap: 2rem;
+    row-gap: 1.5rem;
+  }
+
+  .academy-reviews-trust .academy-hero-logos {
+    gap: 1.6rem 1.5rem;
+    max-width: 100%;
   }
 
   .academy-hero-wrap--product .academy-hero {
@@ -3289,7 +3381,7 @@ a.academy-bonus-card--stack[data-offset="0"]:focus-visible {
   .academy-module-grid,
   .academy-packages,
   .academy-course-grid {
-    gap: 0.9rem;
+    gap: 1.15rem;
   }
 
   .academy-path-card {
@@ -3475,7 +3567,7 @@ a.academy-bonus-card--stack[data-offset="0"]:focus-visible {
   }
 
   .academy-path-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .academy-packages {
