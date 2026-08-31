@@ -4,12 +4,12 @@ description: "The complete playbook from the AI-Ready Design System Workshop, gr
 author: "John Rodrigues"
 organization: "Human AI Studio"
 source: "AI-Ready Design System Workshop"
-date: 2026-08-29
+date: 2026-09-12
 ---
 
 # AI-Ready Design System Playbook
 
-**Human AI Studio · AI-Ready Design System Workshop · 29 August 2026**
+**Human AI Studio · AI-Ready Design System Workshop · 12 September 2026**
 
 Everything from the four hours: the definitions, the eval, the two guardrails, the workflows, and the honest limits. Grouped by what you're trying to do, not by the order we covered it.
 

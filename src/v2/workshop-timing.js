@@ -1,5 +1,5 @@
-export const WORKSHOP_START = new Date("2026-08-29T16:00:00Z").getTime();
-export const WORKSHOP_END = new Date("2026-08-29T20:00:00Z").getTime();
+export const WORKSHOP_START = new Date("2026-09-12T16:00:00Z").getTime();
+export const WORKSHOP_END = new Date("2026-09-12T20:00:00Z").getTime();
 
 export function getWorkshopCountdown(now = Date.now()) {
   if (now >= WORKSHOP_END) return { status: "Workshop ended" };

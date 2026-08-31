@@ -157,11 +157,11 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
           <a
             className="ds-urgency-bar"
             href="#workshop-offer"
-            aria-label="Join Workshop for the AI-Ready Design System Workshop on August 29 at 9:00 AM Pacific Time"
+            aria-label="Join Workshop for the AI-Ready Design System Workshop on September 12 at 9:00 AM Pacific Time"
             onClick={() => trackWorkshopClick(WORKSHOP_URL, "Join Workshop", "urgency_bar")}
           >
             <span className="ds-urgency-bar-inner">
-              <span className="ds-banner-date">August 29 · 9:00 AM PT</span>
+              <span className="ds-banner-date">September 12 · 9:00 AM PT</span>
               <span className="ds-urgency-bar-actions">
                 <WorkshopCountdown className="is-banner" label="Workshop starts in" />
                 <span className="ds-banner-cta">
@@ -192,7 +192,7 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
             <EntranceItem as="aside" className="ds-hero-offer-card" aria-label="Workshop details">
               <p className="ds-hero-offer-label">Live workshop</p>
               <dl className="ds-hero-meta">
-                <div><dt>Date</dt><dd>August 29</dd></div>
+                <div><dt>Date</dt><dd>September 12</dd></div>
                 <div><dt>Time</dt><dd>9:00 AM–1:00 PM PT</dd></div>
                 <div><dt>Format</dt><dd>Live on Maven</dd></div>
               </dl>
@@ -390,7 +390,7 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
               and implementation roadmap.
             </EntranceItem>
             <EntranceItem className="ds-offer-meta">
-              <div><span>Date</span><strong>August 29, 2026</strong></div>
+              <div><span>Date</span><strong>September 12, 2026</strong></div>
               <div><span>Time</span><strong>9:00 AM–1:00 PM PT</strong></div>
               <div><span>Format</span><strong>Live on Maven</strong></div>
             </EntranceItem>

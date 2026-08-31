@@ -1,6 +1,6 @@
 # AI-ready design system playbook
 
-Depth guide for the August 29 cohort. Open a module, then read the chapter. Live at /workshop/playbook.
+Depth guide for the September 12 cohort. Open a module, then read the chapter. Live at /workshop/playbook.
 
 ---
 

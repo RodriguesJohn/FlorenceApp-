@@ -2060,10 +2060,10 @@ function StudioHome({ isHistory = false }) {
         <a
           className="home-workshop-bar"
           href="/workshop#workshop-offer"
-          aria-label="Join Workshop for the AI-Ready Design System Workshop on August 29 at 9:00 AM Pacific Time"
+          aria-label="Join Workshop for the AI-Ready Design System Workshop on September 12 at 9:00 AM Pacific Time"
         >
           <span className="home-workshop-bar-inner">
-            <span className="home-workshop-date">August 29 · 9:00 AM PT</span>
+            <span className="home-workshop-date">September 12 · 9:00 AM PT</span>
             <span className="home-workshop-actions">
               <WorkshopCountdown className="is-home-banner" label="Workshop starts in" />
               <span className="home-workshop-cta">
