@@ -212,6 +212,7 @@ const chrome = (inner) => `<!doctype html>
               <a class="nav-menu-item" href="/academy" role="menuitem">Academy</a>
               <a class="nav-menu-item" href="/workshop" role="menuitem">Workshop</a>
               <div class="nav-menu-divider" role="separator" aria-hidden="true"></div>
+              <a class="nav-menu-item nav-menu-item--nested" href="/playbook" role="menuitem">Playbook</a>
               <a class="nav-menu-item nav-menu-item--nested" href="/case-studies" role="menuitem">All work</a>
               <a class="nav-menu-item nav-menu-item--nested" href="/florence" role="menuitem">Florence</a>
               <a class="nav-menu-item nav-menu-item--nested" href="/tools" role="menuitem">Tools</a>

@@ -40,10 +40,10 @@ const nextSteps = [
     external: true
   },
   {
-    title: "Read the playbook",
+    title: "Open the app",
     body: "The sequence from the room. Contracts, AGENTS.md, Figma setup, evals, Monday checklist.",
-    href: "/workshop/playbook",
-    label: "Open playbook"
+    href: "/app",
+    label: "Open app"
   },
   {
     title: "Continue on the course",
@@ -207,7 +207,7 @@ export default function WorkshopCompletePage() {
           </a>
           <div className="wc-footer-links">
             <a href="/">Studio</a>
-            <a href="/academy">Course</a>
+            <a href="/academy">Academy</a>
             <a href="/workshop">Workshop</a>
             <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
           </div>

@@ -21,10 +21,12 @@ const florenceUrl = "/florence";
 const designSystemsUrl = "/workshop";
 const blogUrl = "/blog";
 
+const playbookUrl = "/playbook";
+
 function trackAcademyNavClick() {
   track("Academy CTA Click", {
     location: "primary_navigation",
-    label: "Course",
+    label: "Academy",
     href: academyUrl
   });
 }
@@ -38,6 +40,7 @@ function trackWorkshopNavClick() {
 }
 
 const serviceLinks = [
+  { label: "Playbook", href: playbookUrl },
   { label: "Florence", href: florenceUrl },
   { label: "Tools", href: "/tools" },
   { label: "Blog", href: blogUrl }
@@ -45,7 +48,7 @@ const serviceLinks = [
 
 const primaryLinks = [
   { label: "Studio", href: studioUrl },
-  { label: "Course", href: academyUrl, onClick: trackAcademyNavClick },
+  { label: "Academy", href: academyUrl, onClick: trackAcademyNavClick },
   { label: "Workshop", href: designSystemsUrl, onClick: trackWorkshopNavClick }
 ];
 
@@ -137,7 +140,7 @@ export function NavMenu() {
         Studio
       </a>
       <a className="nav-direct-link" href={academyUrl} onClick={trackAcademyNavClick}>
-        Course
+        Academy
       </a>
       <a
         className="nav-direct-link"

@@ -52,13 +52,46 @@ html:has(.academy-page) {
   max-width: 100%;
 }
 
+.academy-soon-banner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 2.35rem;
+  padding: 0.45rem var(--page-padding);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(5, 5, 6, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.academy-soon-banner-label {
+  color: #ffffff;
+}
+
+.academy-soon-banner-copy {
+  color: rgba(255, 255, 255, 0.52);
+  font-weight: 450;
+  letter-spacing: 0.08em;
+}
+
 .academy-nav {
   --nav-mark-fill: #ffffff;
   --nav-mark-fill-alt: #000000;
   --nav-mark-stroke: rgba(255, 255, 255, 0.88);
   --nav-link-ring: rgba(255, 255, 255, 0.34);
   position: absolute;
-  top: 0;
+  top: 2.35rem;
   right: 0;
   left: 0;
   z-index: 40;
@@ -146,7 +179,7 @@ html:has(.academy-page) {
 }
 
 .academy-nav-cta:hover,
-.academy-btn--primary:hover {
+.academy-btn--primary:hover:not(.academy-btn--soon) {
   background: #ffffff;
 }
 
@@ -167,6 +200,12 @@ html:has(.academy-page) {
 
 .academy-btn--full {
   width: 100%;
+}
+
+.academy-btn--soon {
+  pointer-events: none;
+  cursor: default;
+  color: rgba(10, 10, 10, 0.78);
 }
 
 .academy-newsletter-modal {
@@ -2007,6 +2046,10 @@ a.academy-bonus-card--stack[data-offset="0"]:focus-visible {
   .academy-page {
     --page-padding: 1.35rem;
     overflow-x: clip;
+  }
+
+  .academy-soon-banner-copy {
+    display: none;
   }
 
   .academy-nav {

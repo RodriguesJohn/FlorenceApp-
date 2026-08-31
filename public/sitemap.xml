@@ -73,8 +73,14 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.humanaistudio.io/workshop/playbook</loc>
+    <loc>https://www.humanaistudio.io/app</loc>
     <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.humanaistudio.io/playbook</loc>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

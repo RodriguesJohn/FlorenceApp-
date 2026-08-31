@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.80",
+    "@supabase/supabase-js": "^2.112.4",
     "@vercel/analytics": "^2.0.1",
     "@vitejs/plugin-react": "^5.0.0",
     "framer-motion": "^12.42.2",

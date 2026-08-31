@@ -34,6 +34,12 @@ export const modules = [
           "Most systems cannot be read that way. Agents cannot understand them and cannot retrieve them, which defeats the purpose of having a system at all. The result is prototypes and products with no connection to the brand, and teams prompting their way around the system instead of through it.",
           "An AI-ready design system closes that gap with clear guardrails, architecture, and structure an agent can follow.",
           "What the agent actually reads is structure: component names, type signatures, token roles, contracts, and AGENTS.md. It does not browse a docs site. It retrieves. If the rule lives only in prose, it cannot reach it."
+        ],
+        videos: [
+          {
+            title: "What are AI-ready design systems",
+            muxPlaybackId: "vfMZNsS00d35vSwRzDBlwtVeWVE7J8NdAFUSfmw5eSgs"
+          }
         ]
       },
       {
@@ -108,6 +114,12 @@ export const modules = [
           "Not ready means more prompting. You describe the system every time. Ready means less prompting. The system carries the context. That also cuts token cost. That is a real sell inside a company.",
           "On the not-ready side, component contracts almost do not exist. Consistency is weak. The output is generic UI. On the ready side you get UI connected to the brand, and the path from Figma to code gets faster because the team can actually get the component.",
           "AI is probabilistic. It makes things up. The job is to make the system deterministic. When you say build a checkout, it comes from the design system. Guardrails, architecture, and structure the agent can follow."
+        ],
+        videos: [
+          {
+            title: "Difference between AI-ready design systems and when they are not",
+            muxPlaybackId: "G74Gxr6fKr8ZQ7H01H2B85W4enoyO8sS9APXKxgBWlA8"
+          }
         ]
       },
       {
@@ -205,6 +217,93 @@ export const modules = [
         ]
       },
       {
+        id: "video-series",
+        title: "Three-part AI-ready design system video series",
+        body: [
+          "Watch these, then read the chapters. Same ideas, spoken."
+        ],
+        videos: [
+          {
+            part: "01",
+            title: "Agentic Design Systems",
+            youtubeId: "OqrxSgWpRvs"
+          },
+          {
+            part: "02",
+            title: "Agentic Design Systems",
+            youtubeId: "O-F7nxE2IEo"
+          },
+          {
+            part: "03",
+            title: "Scattered context is breaking systems",
+            youtubeId: "2IYfsPch3a8"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "existing",
+    number: "02",
+    label: "Existing system",
+    kicker: "Work with what you have",
+    title: "Working with an existing design system",
+    color1: "#f59e0b",
+    color2: "#d97706",
+    lede: "Figma, code, and the gap between them. You walk into a library that already ships. You do not start from a blank file.",
+    outcome:
+      "You can walk into any existing design system, in Figma or in code, and start fixing, extending, and shipping from it faster.",
+    chapters: [
+      {
+        id: "figma",
+        title: "How to build with an existing design system",
+        body: [
+          "Not everybody is building a design system from scratch. You connect to one that already exists and you build from it. In the workshop that model was shadcn. A public library you can install and open in Cursor.",
+          "Step one is install. Use the shadcn install. Get the components into a project you own. Do not skip this and paste a screenshot of the docs.",
+          "Drop that project into Cursor. Then vibe. Prompt from the catalog that is already there. Use @ to point at the right components. @ the button you mean. @ the card you ship. Do not describe the catalog in the prompt and hope it finds it.",
+          "Install. Vibe. Point. That is the path for an existing system. Your company library is the same idea later. First you learn it on a system you can actually open."
+        ],
+        videos: [
+          {
+            title: "Working with existing design systems",
+            muxPlaybackId: "cviunpyWJhF3e8OqjgDEiQDO8qyzi6G32nFhvTiT7tY"
+          }
+        ]
+      },
+      {
+        id: "code",
+        title: "How do you work with a design system when it is in code?",
+        body: [
+          "Find the exports. Find the deprecated ones that still compile. If three cards are legal, the agent will pick at random. Humans have a Slack channel that says “use the new card.” The agent does not.",
+          "Look at types the way you would look at a token name. A spacing prop typed as number invites invention. Typed as a scale, it teaches the system without a docs page. The test from foundations still applies: could someone violate the rule without anything breaking.",
+          "After you have installed and pointed with @, look at the exports. Find the deprecated ones that still compile. Inspect how variants are encoded. Then look at your own repo with the same eyes. This studio does not have to look like shadcn."
+        ]
+      },
+      {
+        id: "bridge",
+        title: "How do you bridge the gap between Figma and code?",
+        body: [
+          "Figma can connect to a git repo. That is the job. Figma is not the source of truth by itself.",
+          "Git holds tokens, contracts, and components. Figma mirrors them, or generates from them. MCP is how the agent reads the file the humans still design in. If Figma and git disagree, the agent will pick one and drift the other.",
+          "Same names. Same roles. Same constraints. If Figma has Button and code has BtnPrimary and CTA, the agent invents a fourth. The bridge is not a plugin you install and forget. It is a naming and ownership decision you keep making.",
+          "The encoding does not change from enterprise to a solo file. The blast radius does. Own the contract in git so the next agent does not restyle a brand from a prompt."
+        ]
+      }
+    ]
+  },
+  {
+    id: "making-ready",
+    number: "03",
+    label: "Making it AI-ready",
+    kicker: "Audit, architecture, evals",
+    title: "Making a design system AI-ready",
+    color1: "#10b981",
+    color2: "#059669",
+    lede: "Audit the system you have. Restructure components and tokens. Run the eval. Hand the agent one source of truth.",
+    outcome:
+      "You can audit your own system, restructure its components and tokens, run the eval, and hand AI a single source of truth it builds from without drift.",
+    chapters: [
+      {
         id: "framework",
         title: "What does the AI-ready framework actually look like?",
         framework: {
@@ -300,87 +399,6 @@ export const modules = [
           "If those layers disagree, the agent picks the loudest file. Keep one story. A pretty docs site that repeats rules the code does not enforce will train humans and fail agents."
         ]
       },
-      {
-        id: "video-series",
-        title: "Three-part AI-ready design system video series",
-        body: [
-          "Watch these, then read the chapters. Same ideas, spoken."
-        ],
-        videos: [
-          {
-            part: "01",
-            title: "Agentic Design Systems",
-            youtubeId: "OqrxSgWpRvs"
-          },
-          {
-            part: "02",
-            title: "Agentic Design Systems",
-            youtubeId: "O-F7nxE2IEo"
-          },
-          {
-            part: "03",
-            title: "Scattered context is breaking systems",
-            youtubeId: "2IYfsPch3a8"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: "existing",
-    number: "02",
-    label: "Existing system",
-    kicker: "Work with what you have",
-    title: "Working with an existing design system",
-    color1: "#f59e0b",
-    color2: "#d97706",
-    lede: "Figma, code, and the gap between them. You walk into a library that already ships. You do not start from a blank file.",
-    outcome:
-      "You can walk into any existing design system, in Figma or in code, and start fixing, extending, and shipping from it faster.",
-    chapters: [
-      {
-        id: "figma",
-        title: "How do you work with what you already have in Figma?",
-        body: [
-          "Open the library you actually ship. Not a clean demo. Map the names. Find the duplicates. Find the component that looks like a button and is named something else. That map is the start of the audit, even before you write a contract.",
-          "Work from a file you can inspect. If it is locked, get access. You cannot encode what you cannot open. Screenshots are not a system.",
-          "Start on a personal or sandbox file. Get retrieve, one contract, and MCP working. Then touch work files. Enterprise libraries have permissions, existing names, and people who will feel a rename.",
-          "The workshop FigJam and the Florence demo are the model files if you want a shared board. Do not invent a second library in a private file nobody else can see."
-        ]
-      },
-      {
-        id: "code",
-        title: "How do you work with a design system when it is in code?",
-        body: [
-          "Find the exports. Find the deprecated ones that still compile. If three cards are legal, the agent will pick at random. Humans have a Slack channel that says “use the new card.” The agent does not.",
-          "Look at types the way you would look at a token name. A spacing prop typed as number invites invention. Typed as a scale, it teaches the system without a docs page. The test from foundations still applies: could someone violate the rule without anything breaking.",
-          "shadcn is a public code model for how variants get encoded when a library is mature. Inspect the install notes and the chart examples. Then look at your own exports with the same eyes. This studio does not have to look like shadcn."
-        ]
-      },
-      {
-        id: "bridge",
-        title: "How do you bridge the gap between Figma and code?",
-        body: [
-          "Figma can connect to a git repo. That is the job. Figma is not the source of truth by itself.",
-          "Git holds tokens, contracts, and components. Figma mirrors them, or generates from them. MCP is how the agent reads the file the humans still design in. If Figma and git disagree, the agent will pick one and drift the other.",
-          "Same names. Same roles. Same constraints. If Figma has Button and code has BtnPrimary and CTA, the agent invents a fourth. The bridge is not a plugin you install and forget. It is a naming and ownership decision you keep making.",
-          "The encoding does not change from enterprise to a solo file. The blast radius does. Own the contract in git so the next agent does not restyle a brand from a prompt."
-        ]
-      }
-    ]
-  },
-  {
-    id: "making-ready",
-    number: "03",
-    label: "Making it AI-ready",
-    kicker: "Audit, architecture, evals",
-    title: "Making a design system AI-ready",
-    color1: "#10b981",
-    color2: "#059669",
-    lede: "Audit the system you have. Restructure components and tokens. Run the eval. Hand the agent one source of truth.",
-    outcome:
-      "You can audit your own system, restructure its components and tokens, run the eval, and hand AI a single source of truth it builds from without drift.",
-    chapters: [
       {
         id: "audit",
         title: "How do you audit a design system for AI readiness?",
@@ -632,6 +650,11 @@ export function findLocation(hash) {
   const [moduleId, chapterId] = raw.split("/");
   const module = modules.find((item) => item.id === moduleId) || null;
   if (!module) return { module: null, chapter: null };
+  if (moduleId === "foundations" && chapterId === "framework") {
+    const making = modules.find((item) => item.id === "making-ready");
+    const chapter = making?.chapters.find((item) => item.id === "framework") || null;
+    return { module: making || null, chapter };
+  }
   const resolvedId = chapterId === "second-audience" ? "what-is" : chapterId;
   const chapter = resolvedId ? module.chapters.find((item) => item.id === resolvedId) || null : null;
   return { module, chapter };

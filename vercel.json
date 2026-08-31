@@ -46,8 +46,18 @@
       "permanent": true
     },
     {
+      "source": "/app/",
+      "destination": "/app",
+      "permanent": true
+    },
+    {
+      "source": "/workshop/playbook",
+      "destination": "/app",
+      "permanent": true
+    },
+    {
       "source": "/workshop/playbook/",
-      "destination": "/workshop/playbook",
+      "destination": "/app",
       "permanent": true
     },
     {
@@ -75,6 +85,10 @@
     },
     {
       "source": "/workshop/complete",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/app",
       "destination": "/index.html"
     },
     {

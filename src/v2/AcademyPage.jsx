@@ -407,6 +407,14 @@ function TestimonialScroller() {
   );
 }
 
+function AcademySoonCta({ className = "" }) {
+  return (
+    <span className={`academy-btn academy-btn--primary academy-btn--soon ${className}`.trim()} aria-disabled="true">
+      Coming soon
+    </span>
+  );
+}
+
 function AcademyPage() {
   const [isNewsletterOpen, setIsNewsletterOpen] = React.useState(false);
   const newsletterTriggerRef = React.useRef(null);
@@ -451,6 +459,10 @@ function AcademyPage() {
 
   return (
     <div className="academy-page">
+      <div className="academy-soon-banner" role="status">
+        <span className="academy-soon-banner-label">Coming soon</span>
+        <span className="academy-soon-banner-copy">Enrollment isn’t open yet.</span>
+      </div>
       <header className="academy-nav">
         <a className="brand" href="/" aria-label="Human AI Studio home">
           <span className="brand-mark" aria-hidden="true" />
@@ -475,17 +487,7 @@ function AcademyPage() {
                 <span>Tokens, components, and contracts. So you ship on-brand, not slop.</span>
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
-                <a
-                  className="academy-btn academy-btn--primary"
-                  href={ACADEMY_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Start today
-                  <span className="academy-btn-arrow" aria-hidden="true">
-                    →
-                  </span>
-                </a>
+                <AcademySoonCta />
                 <button
                   ref={newsletterTriggerRef}
                   type="button"
@@ -658,14 +660,7 @@ function AcademyPage() {
                     <li key={benefit}>{benefit}</li>
                   ))}
                 </ul>
-                <a
-                  className="academy-btn academy-btn--primary academy-btn--full"
-                  href={ACADEMY_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Start today
-                </a>
+                <AcademySoonCta className="academy-btn--full" />
               </div>
             </EntranceItem>
           </Entrance>

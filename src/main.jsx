@@ -4,7 +4,11 @@ import { Analytics } from "@vercel/analytics/react";
 import { applyPageSeo, setupSeoTracking } from "./v2/seo.js";
 import "./v2/styles.css";
 
-const route = window.location.pathname.replace(/\/+$/, "") || "/";
+let route = window.location.pathname.replace(/\/+$/, "") || "/";
+if (route === "/workshop/playbook") {
+  route = "/app";
+  window.history.replaceState(null, "", `${route}${window.location.search}${window.location.hash}`);
+}
 
 setupSeoTracking();
 applyPageSeo(route);
@@ -72,13 +76,13 @@ async function boot() {
       return;
     }
 
-    if (route === "/beta") {
-      const { default: BetaPage } = await import("./v2/BetaPage.jsx");
-      renderWithAnalytics(root, <BetaPage />);
+    if (route === "/playbook") {
+      const { default: PlaybookMembersPage } = await import("./v2/PlaybookMembersPage.jsx");
+      renderWithAnalytics(root, <PlaybookMembersPage />);
       return;
     }
 
-    if (route === "/workshop/playbook" || route === "/playbook") {
+    if (route === "/app" || route === "/workshop/playbook") {
       const { default: PlaybookPage } = await import("./v2/PlaybookPage.jsx");
       renderWithAnalytics(root, <PlaybookPage />);
       return;
