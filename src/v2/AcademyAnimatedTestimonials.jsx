@@ -88,24 +88,6 @@ export function AcademyAnimatedTestimonials({
             </p>
           ) : null}
           <h2 id="academy-reviews-title">{title}</h2>
-          <p className="academy-reviews-sub">{subtitle}</p>
-          <div className="academy-reviews-dots" role="tablist" aria-label="Reviews">
-            {testimonials.map((item, index) => (
-              <button
-                key={item.id}
-                type="button"
-                role="tab"
-                aria-selected={activeIndex === index}
-                aria-label={`Show review from ${item.name}`}
-                className="academy-reviews-dot"
-                data-active={activeIndex === index ? "true" : undefined}
-                onClick={() => {
-                  setPaused(true);
-                  setActiveIndex(index);
-                }}
-              />
-            ))}
-          </div>
         </motion.div>
 
         <motion.div
@@ -155,6 +137,23 @@ export function AcademyAnimatedTestimonials({
               </div>
             </motion.article>
           </AnimatePresence>
+          <div className="academy-reviews-dots" role="tablist" aria-label="Reviews">
+            {testimonials.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                role="tab"
+                aria-selected={activeIndex === index}
+                aria-label={`Show review from ${item.name}`}
+                className="academy-reviews-dot"
+                data-active={activeIndex === index ? "true" : undefined}
+                onClick={() => {
+                  setPaused(true);
+                  setActiveIndex(index);
+                }}
+              />
+            ))}
+          </div>
         </motion.div>
       </motion.div>
     </section>

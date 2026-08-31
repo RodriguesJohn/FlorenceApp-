@@ -1947,6 +1947,11 @@ h3 {
 
 .current-home .approach h2 {
   max-width: none;
+  white-space: normal;
+}
+
+.current-home .approach h2 span {
+  display: block;
   white-space: nowrap;
 }
 

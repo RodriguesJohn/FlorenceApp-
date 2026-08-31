@@ -2248,7 +2248,10 @@ function StudioHome({ isHistory = false }) {
         ) : (
           <Entrance className="approach-inner">
             <EntranceItem>
-              <h2 id="v2-approach-title">Built for your existing stack.</h2>
+              <h2 id="v2-approach-title">
+                <span>Built for your</span>
+                <span>existing stack.</span>
+              </h2>
             </EntranceItem>
             <EntranceItem className="approach-details">
               <div className="stack-card" aria-label="Tool stack">
