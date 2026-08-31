@@ -23,6 +23,11 @@
   background: transparent;
 }
 .saas-preview-embedded .saas-device { width: 100%; }
+.saas-preview-locked {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
 
 .saas-preview-heading {
   width: var(--home-rail, min(100% - var(--page-padding, 2.5rem) * 2, 74rem));
@@ -95,16 +100,16 @@
 .saas-main { min-width: 0; background: #111316; }
 .saas-topbar { height: 3.65rem; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.07); background: rgba(17,19,22,.88); }
 .saas-breadcrumb { display: flex; gap: .45rem; align-items: center; color: rgba(255,255,255,.3); font-size: .58rem; }.saas-breadcrumb i { color: rgba(255,255,255,.14); }.saas-breadcrumb strong { color: rgba(255,255,255,.75); font-weight: 520; }
-.saas-top-actions { display: flex; align-items: center; gap: .55rem; }.saas-top-actions button,.saas-content-title button,.saas-library-head button { color: inherit; font: inherit; cursor: default; }
-.saas-icon-button { width: 1.75rem; height: 1.75rem; border: 1px solid rgba(255,255,255,.09); border-radius: .35rem; background: rgba(255,255,255,.025); color: rgba(255,255,255,.5)!important; }
-.saas-share { height: 1.75rem; padding: 0 .7rem; border: 0; border-radius: .35rem; background: #f1f2f3; color: #111!important; font-size: .52rem!important; font-weight: 650!important; }
+.saas-top-actions { display: flex; align-items: center; gap: .55rem; }.saas-top-actions button,.saas-top-actions .saas-icon-button,.saas-top-actions .saas-share,.saas-content-title button,.saas-content-title > span:last-child,.saas-library-head button { color: inherit; font: inherit; cursor: default; }
+.saas-icon-button { width: 1.75rem; height: 1.75rem; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.09); border-radius: .35rem; background: rgba(255,255,255,.025); color: rgba(255,255,255,.5)!important; }
+.saas-share { height: 1.75rem; padding: 0 .7rem; display: inline-flex; align-items: center; border: 0; border-radius: .35rem; background: #f1f2f3; color: #111!important; font-size: .52rem!important; font-weight: 650!important; }
 
 .saas-content { position: relative; min-height: calc(39rem - 3.65rem); padding: clamp(1.4rem,2.6vw,2.5rem); overflow: hidden; }
 .saas-content::before { position: absolute; width: 24rem; height: 24rem; top: -14rem; right: -7rem; border-radius: 50%; background: rgba(59,130,246,.05); filter: blur(40px); content:""; }
 .saas-content-title { position: relative; display: flex; align-items: end; justify-content: space-between; margin-bottom: 1.55rem; }
 .saas-content-title p { margin: 0 0 .36rem; color: rgba(255,255,255,.3); font-size: .53rem; text-transform: uppercase; letter-spacing: .11em; }
 .saas-content-title h3 { margin: 0; color: rgba(255,255,255,.94); font-size: clamp(1.35rem,2.4vw,2.2rem); font-weight: 530; letter-spacing: -.04em; }
-.saas-content-title button { height: 2rem; padding: 0 .8rem; display: flex; align-items: center; gap: .45rem; border: 1px solid rgba(255,255,255,.1); border-radius: .4rem; background: rgba(255,255,255,.05); color: rgba(255,255,255,.72); font-size: .54rem; }.saas-content-title button span { font-size: .8rem; }
+.saas-content-title button,.saas-content-title > span:last-child { height: 2rem; padding: 0 .8rem; display: flex; align-items: center; gap: .45rem; border: 1px solid rgba(255,255,255,.1); border-radius: .4rem; background: rgba(255,255,255,.05); color: rgba(255,255,255,.72); font-size: .54rem; }.saas-content-title button span,.saas-content-title > span:last-child span { font-size: .8rem; }
 .saas-ops-title { margin-bottom: 1rem; }
 .saas-ops-title > div > span { display: block; margin-top: .32rem; color: rgba(255,255,255,.34); font-size: .5rem; }
 
@@ -149,12 +154,12 @@
 .saas-chat-day { margin: .55rem 0; color: rgba(255,255,255,.2); font-size: .34rem; text-align: center; text-transform: uppercase; letter-spacing: .1em; }
 .saas-chat-message { width: fit-content; max-width: 88%; margin-bottom: .48rem; padding: .52rem .58rem; border-radius: .52rem; font-size: .39rem; line-height: 1.48; }.saas-chat-message.agent { align-self: flex-start; background: rgba(255,255,255,.055); color: rgba(255,255,255,.56); border-bottom-left-radius: .16rem; }.saas-chat-message.user { align-self: flex-end; background: rgba(59,130,246,.18); color: rgba(219,234,254,.78); border-bottom-right-radius: .16rem; }
 .saas-agent-actions { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .15rem; }.saas-agent-actions span { padding: .28rem .38rem; border: 1px solid rgba(16,185,129,.15); border-radius: 999px; background: rgba(16,185,129,.06); color: var(--mock-green-soft); font-size: .32rem; }
-.saas-chat-input { min-height: 2.15rem; margin-top: auto; padding: .35rem .38rem .35rem .55rem; display: grid; grid-template-columns: 1fr auto; align-items: center; border: 1px solid rgba(255,255,255,.09); border-radius: .5rem; background: rgba(0,0,0,.16); }.saas-chat-input p { margin:0;color:rgba(255,255,255,.24);font-size:.4rem}.saas-chat-input button{width:1.45rem;height:1.45rem;border:0;border-radius:.38rem;background:#f3f4f4;color:#111;font-size:.58rem}
+.saas-chat-input { min-height: 2.15rem; margin-top: auto; padding: .35rem .38rem .35rem .55rem; display: grid; grid-template-columns: 1fr auto; align-items: center; border: 1px solid rgba(255,255,255,.09); border-radius: .5rem; background: rgba(0,0,0,.16); }.saas-chat-input p { margin:0;color:rgba(255,255,255,.24);font-size:.4rem}.saas-chat-input button,.saas-chat-input > span:last-child{width:1.45rem;height:1.45rem;display:grid;place-items:center;border:0;border-radius:.38rem;background:#f3f4f4;color:#111;font-size:.58rem}
 
 .saas-summary-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: .9rem; }
 .saas-health-card,.saas-activity-card,.saas-system-card { border: 1px solid rgba(255,255,255,.075); border-radius: .7rem; background: linear-gradient(150deg,rgba(255,255,255,.045),rgba(255,255,255,.018)); box-shadow: inset 0 1px 0 rgba(255,255,255,.025),0 .8rem 2rem rgba(0,0,0,.13); }
 .saas-health-card,.saas-activity-card { min-height: 11.8rem; padding: 1rem; }
-.saas-card-head { display: flex; justify-content: space-between; }.saas-card-head > div { display: grid; gap: .24rem; }.saas-card-head p { margin: 0; color: rgba(255,255,255,.76); font-size: .62rem; font-weight: 570; }.saas-card-head span { color: rgba(255,255,255,.27); font-size: .47rem; }.saas-card-head button { border: 0; background: transparent; color: rgba(255,255,255,.25); font-size: .6rem; letter-spacing: .1em; }
+.saas-card-head { display: flex; justify-content: space-between; }.saas-card-head > div { display: grid; gap: .24rem; }.saas-card-head p { margin: 0; color: rgba(255,255,255,.76); font-size: .62rem; font-weight: 570; }.saas-card-head span { color: rgba(255,255,255,.27); font-size: .47rem; }.saas-card-head button,.saas-card-head > span:last-child { border: 0; background: transparent; color: rgba(255,255,255,.25); font-size: .6rem; letter-spacing: .1em; }
 .saas-health-body { height: 8rem; display: flex; align-items: center; gap: clamp(.8rem,2vw,1.6rem); }
 .saas-score { position: relative; width: 7.3rem; height: 7.3rem; display: grid; place-items: center; flex: 0 0 auto; }.saas-score svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }.saas-score circle { fill: none; stroke: rgba(255,255,255,.06); stroke-width: 6; }.saas-score circle.score-progress { stroke: var(--mock-blue); stroke-linecap: round; stroke-dasharray: 302; stroke-dashoffset: 42; filter: drop-shadow(0 0 4px rgba(59,130,246,.45)); }.saas-score > div { display: flex; align-items: baseline; }.saas-score strong { font-size: 1.8rem; font-weight: 520; letter-spacing: -.06em; }.saas-score span { margin-left: .2rem; color: rgba(255,255,255,.27); font-size: .48rem; }
 .saas-health-meta { max-width: 12rem; }.saas-health-meta .ready { display: flex; align-items: center; gap: .35rem; color: var(--mock-blue-soft); font-size: .54rem; font-weight: 570; }.saas-health-meta .ready i { width: .35rem; height: .35rem; border-radius: 50%; background: var(--mock-blue); box-shadow: 0 0 8px rgba(59,130,246,.65); }.saas-health-meta p { margin: .65rem 0; color: rgba(255,255,255,.35); font-size: .5rem; line-height: 1.55; }.saas-health-meta a { display: flex; gap: .3rem; color: rgba(255,255,255,.68); font-size: .5rem; }

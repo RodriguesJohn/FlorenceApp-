@@ -85,6 +85,58 @@ These words are not decoration. Mix them up and you fix the wrong layer. Use thi
 
 **Token cost.** Not-ready means more prompting. You describe the system every time. Ready means the system carries the context. That is a real sell inside a company.
 
+### Three-part AI-ready design system video series
+
+Watch these, then read the chapters. Same ideas, spoken.
+
+01 Agentic Design Systems — https://youtu.be/OqrxSgWpRvs
+02 Agentic Design Systems — https://youtu.be/O-F7nxE2IEo
+03 Scattered context is breaking systems — https://youtu.be/2IYfsPch3a8
+
+---
+
+## 02 Working with an existing design system
+
+Figma, code, and the gap between them. You walk into a library that already ships. You do not start from a blank file.
+
+**Key outcome.** You can walk into any existing design system, in Figma or in code, and start fixing, extending, and shipping from it faster.
+
+### How to build with an existing design system
+
+Not everybody is building a design system from scratch. You connect to one that already exists and you build from it. In the workshop that model was shadcn. A public library you can install and open in Cursor.
+
+Step one is install. Use the shadcn install. Get the components into a project you own. Do not skip this and paste a screenshot of the docs.
+
+Drop that project into Cursor. Then vibe. Prompt from the catalog that is already there. Use @ to point at the right components. @ the button you mean. @ the card you ship. Do not describe the catalog in the prompt and hope it finds it.
+
+Install. Vibe. Point. That is the path for an existing system. Your company library is the same idea later. First you learn it on a system you can actually open.
+
+### How do you work with a design system when it is in code?
+
+Find the exports. Find the deprecated ones that still compile. If three cards are legal, the agent will pick at random. Humans have a Slack channel that says “use the new card.” The agent does not.
+
+Look at types the way you would look at a token name. A spacing prop typed as number invites invention. Typed as a scale, it teaches the system without a docs page. The test from foundations still applies: could someone violate the rule without anything breaking.
+
+I pointed the room at shadcn as a public code model. Not because this studio should look like shadcn. Because you can see how variants get encoded when a library is mature. Install notes and the chart examples are what I pasted in chat. Inspect them. Then look at your own exports with the same eyes.
+
+### How do you bridge the gap between Figma and code?
+
+Kelly asked if we can connect the Figma design system to a git repo. Yes. That is the job. Figma is not the source of truth by itself.
+
+Git holds tokens, contracts, and components. Figma mirrors them, or generates from them. MCP is how the agent reads the file the humans still design in. If Figma and git disagree, the agent will pick one and drift the other.
+
+Same names. Same roles. Same constraints. If Figma has Button and code has BtnPrimary and CTA, the agent invents a fourth. The bridge is not a plugin you install and forget. It is a naming and ownership decision you keep making.
+
+Jake is moving from enterprise teams to a solo agency. The encoding does not change. The blast radius does. You still own the contract in git so the next agent does not restyle a client brand from a prompt. You just do not need a committee to delete a deprecated card.
+
+---
+
+## 03 Making a design system AI-ready
+
+Audit the system you have. Restructure components and tokens. Run the eval. Hand the agent one source of truth.
+
+**Key outcome.** You can audit your own system, restructure its components and tokens, run the eval, and hand AI a single source of truth it builds from without drift.
+
 ### What does the AI-ready framework actually look like?
 
 Four moves, nine steps. The order matters: each one makes the next cheaper.
@@ -117,60 +169,6 @@ Agents should consume semantics. If they consume primitives they are picking pai
 You do not run the eval on the repo and guess what to fix. You generate a screen the way a team would, score retrieval, then go back to the repo and fix what broke. Application layer first. Repo second.
 
 If those layers disagree, the agent picks the loudest file. Keep one story. A pretty docs site that repeats rules the code does not enforce will train humans and fail agents.
-
-### Three-part AI-ready design system video series
-
-Watch these, then read the chapters. Same ideas, spoken.
-
-01 Agentic Design Systems — https://youtu.be/OqrxSgWpRvs
-02 Agentic Design Systems — https://youtu.be/O-F7nxE2IEo
-03 Scattered context is breaking systems — https://youtu.be/2IYfsPch3a8
-
----
-
-## 02 Working with an existing design system
-
-Figma, code, and the gap between them. You walk into a library that already ships. You do not start from a blank file.
-
-**Key outcome.** You can walk into any existing design system, in Figma or in code, and start fixing, extending, and shipping from it faster.
-
-### How do you work with what you already have in Figma?
-
-Open the library you actually ship. Not a clean demo. Map the names. Find the duplicates. Find the component that looks like a button and is named something else. That map is the start of the audit, even before you write a contract.
-
-In the room we stayed on a FigJam so people could follow the same board. Jake asked me to share it. Kara and Patricia wanted it too. Use that board when you replay this. Do not invent a second workshop in a private file nobody else can see.
-
-Jake asked for anonymous access. I dropped the FigJam and the Florence demo in chat. If a file is locked, ask. Do not screenshot your way through a system you cannot inspect. You cannot encode what you cannot open.
-
-Kara’s sequence is the sequence I want you to keep. Try this on a personal file first. Get retrieve, one contract, and MCP working. Then touch work files. Enterprise libraries have permissions, existing names, and people who will feel a rename.
-
-If you are leading this for a client, zoom the artboards. Jake asked me to go bigger. Assume someone is on a laptop.
-
-### How do you work with a design system when it is in code?
-
-Find the exports. Find the deprecated ones that still compile. If three cards are legal, the agent will pick at random. Humans have a Slack channel that says “use the new card.” The agent does not.
-
-Look at types the way you would look at a token name. A spacing prop typed as number invites invention. Typed as a scale, it teaches the system without a docs page. The test from foundations still applies: could someone violate the rule without anything breaking.
-
-I pointed the room at shadcn as a public code model. Not because this studio should look like shadcn. Because you can see how variants get encoded when a library is mature. Install notes and the chart examples are what I pasted in chat. Inspect them. Then look at your own exports with the same eyes.
-
-### How do you bridge the gap between Figma and code?
-
-Kelly asked if we can connect the Figma design system to a git repo. Yes. That is the job. Figma is not the source of truth by itself.
-
-Git holds tokens, contracts, and components. Figma mirrors them, or generates from them. MCP is how the agent reads the file the humans still design in. If Figma and git disagree, the agent will pick one and drift the other.
-
-Same names. Same roles. Same constraints. If Figma has Button and code has BtnPrimary and CTA, the agent invents a fourth. The bridge is not a plugin you install and forget. It is a naming and ownership decision you keep making.
-
-Jake is moving from enterprise teams to a solo agency. The encoding does not change. The blast radius does. You still own the contract in git so the next agent does not restyle a client brand from a prompt. You just do not need a committee to delete a deprecated card.
-
----
-
-## 03 Making a design system AI-ready
-
-Audit the system you have. Restructure components and tokens. Run the eval. Hand the agent one source of truth.
-
-**Key outcome.** You can audit your own system, restructure its components and tokens, run the eval, and hand AI a single source of truth it builds from without drift.
 
 ### How do you audit a design system for AI readiness?
 

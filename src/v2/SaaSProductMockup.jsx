@@ -40,11 +40,32 @@ const agentTeam = [
   { initials: "CP", name: "Content Producer", task: "Creating Nova assets", tone: "green" }
 ];
 
-function SaaSProductMockup({ embedded = false }) {
+function Chrome({ locked, className, children, ...rest }) {
+  if (locked) {
+    return (
+      <span className={className} aria-hidden="true">
+        {children}
+      </span>
+    );
+  }
+
+  return (
+    <button type="button" className={className} {...rest}>
+      {children}
+    </button>
+  );
+}
+
+function SaaSProductMockup({ embedded = false, locked = false }) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className={`saas-preview${embedded ? " saas-preview-embedded" : ""}`} aria-labelledby={embedded ? undefined : "saas-preview-title"} data-nav-theme="dark">
+    <section
+      className={`saas-preview${embedded ? " saas-preview-embedded" : ""}${locked ? " saas-preview-locked" : ""}`}
+      aria-labelledby={embedded || locked ? undefined : "saas-preview-title"}
+      aria-hidden={locked ? "true" : undefined}
+      data-nav-theme="dark"
+    >
       {!embedded && <div className="saas-preview-heading reveal">
         <div>
           <p className="eyebrow">Product Preview</p>
@@ -95,13 +116,17 @@ function SaaSProductMockup({ embedded = false }) {
           <div className="saas-main">
             <header className="saas-topbar">
               <div className="saas-breadcrumb"><span>Northstar Creative</span><i>/</i><strong>Overview</strong></div>
-              <div className="saas-top-actions"><button className="saas-icon-button" aria-label="Search">⌕</button><button className="saas-share">Share</button><span className="saas-avatar">JR</span></div>
+              <div className="saas-top-actions">
+                <Chrome locked={locked} className="saas-icon-button" aria-label="Search">⌕</Chrome>
+                <Chrome locked={locked} className="saas-share">Share</Chrome>
+                <span className="saas-avatar">JR</span>
+              </div>
             </header>
 
             <div className="saas-content">
               <div className="saas-content-title saas-ops-title">
                 <div><p>Creative business OS</p><h3>Good morning, Alex.</h3><span>Here’s how your studio is performing today.</span></div>
-                <button><span>+</span>New project</button>
+                <Chrome locked={locked}><span>+</span>New project</Chrome>
               </div>
 
               <div className="saas-command-grid">
@@ -113,7 +138,7 @@ function SaaSProductMockup({ embedded = false }) {
                   <div className="saas-operations-grid">
                     <div className="saas-operations-main">
                       <article className="saas-revenue-card">
-                        <div className="saas-card-head"><div><p>Revenue overview</p><span>January – June</span></div><button>•••</button></div>
+                        <div className="saas-card-head"><div><p>Revenue overview</p><span>January – June</span></div><Chrome locked={locked}>•••</Chrome></div>
                         <div className="saas-revenue-total"><strong>$1.84M</strong><span>+18.4% vs last period</span></div>
                         <div className="saas-chart" aria-hidden="true"><span style={{height:"34%"}} /><span style={{height:"48%"}} /><span style={{height:"42%"}} /><span style={{height:"61%"}} /><span style={{height:"72%"}} /><span style={{height:"88%"}} /><i /></div>
                         <div className="saas-chart-labels"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
@@ -121,12 +146,12 @@ function SaaSProductMockup({ embedded = false }) {
 
                       <div className="saas-workforce-row">
                         <article className="saas-projects-card">
-                          <div className="saas-card-head"><div><p>Active work</p><span>Priority projects</span></div><button>View all →</button></div>
+                          <div className="saas-card-head"><div><p>Active work</p><span>Priority projects</span></div><Chrome locked={locked}>View all →</Chrome></div>
                           {activeProjects.map((project) => <div className="saas-project-row" key={project.client}><span className="saas-project-logo">{project.client.slice(0,1)}</span><div><strong>{project.client}</strong><small>{project.project}</small></div><em>{project.status}</em><i><b style={{width:project.progress}} /></i><span>{project.progress}</span></div>)}
                         </article>
 
                         <article className="saas-agent-team-card">
-                          <div className="saas-card-head"><div><p>Agent team</p><span>3 agents working</span></div><button>Manage →</button></div>
+                          <div className="saas-card-head"><div><p>Agent team</p><span>3 agents working</span></div><Chrome locked={locked}>Manage →</Chrome></div>
                           {agentTeam.map((agent) => <div className="saas-agent-member" key={agent.name}><span className={`agent-orb ${agent.tone}`}>{agent.initials}</span><div><strong>{agent.name}</strong><small>{agent.task}</small></div><i aria-label="Online" /></div>)}
                         </article>
                       </div>
@@ -135,13 +160,13 @@ function SaaSProductMockup({ embedded = false }) {
                 </div>
 
                 <aside className="saas-agent-chat">
-                  <header><span className="agent-orb violet">AI</span><div><strong>Studio Agent</strong><small><i />Online · has full context</small></div><button>•••</button></header>
+                  <header><span className="agent-orb violet">AI</span><div><strong>Studio Agent</strong><small><i />Online · has full context</small></div><Chrome locked={locked}>•••</Chrome></header>
                   <div className="saas-chat-day">Today</div>
                   <div className="saas-chat-message agent">Morning Alex. Three deliverables are due this week and the Nova campaign is waiting on client approval.</div>
                   <div className="saas-chat-message user">Move the campaign forward and prepare the next client update.</div>
                   <div className="saas-chat-message agent">Done. I advanced the production tasks, drafted the update, and scheduled it for your review at 2 PM.</div>
                   <div className="saas-agent-actions"><span>✓ 4 tasks updated</span><span>✦ Draft ready</span></div>
-                  <div className="saas-chat-input"><p>Ask your studio agent…</p><button>↑</button></div>
+                  <div className="saas-chat-input"><p>Ask your studio agent…</p><Chrome locked={locked}>↑</Chrome></div>
                 </aside>
               </div>
             </div>

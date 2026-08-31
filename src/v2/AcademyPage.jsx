@@ -2,6 +2,8 @@ import React from "react";
 import OfferingShader from "./OfferingShader.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
+import AcademyWorkspacePreview from "./AcademyWorkspacePreview.jsx";
+import { AcademyAnimatedTestimonials } from "./AcademyAnimatedTestimonials.jsx";
 import "./academy.css";
 
 const ACADEMY_URL = "https://www.skool.com/ai-design-academy-6114/about";
@@ -13,6 +15,7 @@ const GoogleLogo = "/academy/Google.svg.png";
 const ChaseLogo = "/academy/Chase.png";
 const HubspotLogo = "/academy/Hubspot.svg.png";
 const IntercomLogo = "/academy/intercom-1-logo-png-transparent.png";
+const SalesforceLogo = "/academy/Salesforce.svg";
 const CursorBlogImage = "/academy/CursorBlog.png";
 const ClaudeCodeBlog = "/academy/ClaudeCodeBlog.png";
 const NativeMobileImage = "/academy/NativeMobile.jpg";
@@ -152,7 +155,29 @@ const logos = [
   { src: GoogleLogo, alt: "Google" },
   { src: ChaseLogo, alt: "JPMorgan Chase" },
   { src: HubspotLogo, alt: "HubSpot" },
-  { src: IntercomLogo, alt: "Intercom" }
+  { src: IntercomLogo, alt: "Intercom" },
+  { src: SalesforceLogo, alt: "Salesforce" }
+];
+
+const surveyQuotes = [
+  {
+    id: 1,
+    name: "Jake Barrow",
+    role: "Product Designer",
+    company: "",
+    content:
+      "John is very knowledgeable and enthusiastic about building quality design systems that allow us to get the most from AI. The course was informative, and there were many opportunities to ask questions.",
+    rating: 4
+  },
+  {
+    id: 2,
+    name: "Kelly Redznak",
+    role: "Sr. Product Designer",
+    company: "Optimum",
+    content:
+      "He packed in a lot of valuable insight on building industry-standard AI-ready design systems, how to structure them, maintain them, and test them so agents produce reliable, on-brand output.",
+    rating: 5
+  }
 ];
 
 const pricingBenefits = [
@@ -178,51 +203,6 @@ const pathOptions = [
     title: "Structured learning\ntracks updated regularly",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
-  }
-];
-
-const courseModules = [
-  {
-    number: "01",
-    title: "Introduction to AI-ready design systems",
-    unlock: "Available after joining",
-    tag: "now",
-    href: "/florence"
-  },
-  {
-    number: "02",
-    title: "Vibe coding with existing design system",
-    unlock: "Unlocks in 20 days",
-    tag: "later",
-    href: "/florence/system"
-  },
-  {
-    number: "03",
-    title: "How to make a design system AI-ready",
-    unlock: "Unlocks in 30 days",
-    tag: "later",
-    href: "/florence/system"
-  },
-  {
-    number: "04",
-    title: "Component\narchitecture",
-    unlock: "Unlocks in 40 days",
-    tag: "later",
-    href: "/florence/system"
-  },
-  {
-    number: "05",
-    title: "Design system in Figma workflows",
-    unlock: "Unlocks in 50 days",
-    tag: "later",
-    href: "/florence/system"
-  },
-  {
-    number: "06",
-    title: "Building design systems in code and Cursor AI",
-    unlock: "Unlocks in 60 days",
-    tag: "later",
-    href: "/florence/system"
   }
 ];
 
@@ -415,13 +395,34 @@ function AcademySoonCta({ className = "" }) {
   );
 }
 
+function AcademyLockedApp() {
+  return (
+    <figure className="academy-hero-app">
+      <div className="academy-hero-app-scaler">
+        <div className="academy-hero-chrome">
+          <span className="academy-hero-chrome-lights" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </span>
+          <span className="academy-hero-chrome-title">Academy</span>
+          <span className="academy-hero-chrome-status">Preview only</span>
+        </div>
+        <div className="academy-hero-app-frame">
+          <AcademyWorkspacePreview />
+        </div>
+      </div>
+    </figure>
+  );
+}
+
 function AcademyPage() {
   const [isNewsletterOpen, setIsNewsletterOpen] = React.useState(false);
   const newsletterTriggerRef = React.useRef(null);
   const newsletterCloseRef = React.useRef(null);
 
   React.useEffect(() => {
-    document.title = "AI Academy | Human AI Studio";
+    document.title = "AI Design System Academy | Human AI Studio";
     const html = document.documentElement;
     const body = document.body;
     const prevHtml = html.style.background;
@@ -459,39 +460,43 @@ function AcademyPage() {
 
   return (
     <div className="academy-page">
-      <div className="academy-soon-banner" role="status">
-        <span className="academy-soon-banner-label">Coming soon</span>
-        <span className="academy-soon-banner-copy">Enrollment isn’t open yet.</span>
-      </div>
       <header className="academy-nav">
         <a className="brand" href="/" aria-label="Human AI Studio home">
           <span className="brand-mark" aria-hidden="true" />
-          Human AI Studio
+          <span className="academy-brand-text">
+            Human AI Studio
+            <span className="academy-nav-product">Academy</span>
+          </span>
         </a>
         <div className="academy-nav-actions">
+          <span className="academy-nav-soon">
+            <span className="academy-nav-soon-dot" aria-hidden="true" />
+            Coming soon
+          </span>
           <NavMenu />
         </div>
       </header>
 
       <main>
-        <section className="academy-hero-wrap academy-hero-wrap--cinematic academy-hero-wrap--editorial">
-          <AcademyHeroVideo />
+        <section className="academy-hero-wrap academy-hero-wrap--product" aria-labelledby="academy-hero-title">
+          <div className="academy-hero-rays" aria-hidden="true" />
+          <div className="academy-hero-glow" aria-hidden="true" />
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
-              <EntranceItem as="h1">
-                <span className="academy-hero-line">AI-Ready Design</span>
-                <span className="academy-hero-line">Systems Course</span>
+              <EntranceItem as="h1" id="academy-hero-title">
+                AI Design System Academy
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
-                <span>Build a design system agents can retrieve, not invent from the prompt.</span>
-                <span>Tokens, components, and contracts. So you ship on-brand, not slop.</span>
+                The same Academy app members use: foundations, the existing system, evals, and workflows. Look through it here. The lessons stay locked until enrollment opens.
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
-                <AcademySoonCta />
+                <div className="academy-hero-cta-ring">
+                  <AcademySoonCta />
+                </div>
                 <button
                   ref={newsletterTriggerRef}
                   type="button"
-                  className="academy-btn academy-btn--ghost"
+                  className="academy-btn academy-btn--ghost academy-hero-cta-ghost"
                   onClick={() => setIsNewsletterOpen(true)}
                   aria-haspopup="dialog"
                 >
@@ -499,63 +504,26 @@ function AcademyPage() {
                 </button>
               </EntranceItem>
             </Entrance>
-
-            <Entrance
-              className="academy-hero-proof"
-              aria-label="Professionals from leading companies"
-              animate="visible"
-            >
-              <EntranceItem className="academy-hero-proof-rating">
-                <span
-                  className="academy-hero-stars"
-                  aria-hidden="true"
-                >
-                  <span>★</span>
-                  <span>★</span>
-                  <span>★</span>
-                  <span>★</span>
-                  <span className="academy-hero-star academy-hero-star--half">★</span>
-                </span>
-                <span>4.5/5 on Maven from courses I’ve run</span>
-              </EntranceItem>
-              <EntranceItem className="academy-logo-row academy-logo-row--inline">
-                {logos.map((logo) => (
-                  <img key={logo.alt} src={logo.src} alt={logo.alt} />
-                ))}
-              </EntranceItem>
-            </Entrance>
           </div>
 
-          <a className="academy-hero-scroll" href="#membership" aria-label="Scroll to enrollment">
-            <span aria-hidden="true">↓</span>
-          </a>
-        </section>
-
-        <section className="academy-section" id="modules">
-          <Entrance className="academy-section-heading">
-            <EntranceItem as="h2">The modules.</EntranceItem>
-          </Entrance>
-          <Entrance className="academy-module-grid">
-            {courseModules.map((module) => (
-              <EntranceItem
-                as="a"
-                className="academy-bonus-card academy-bonus-card--grid"
-                href={module.href}
-                key={module.number}
-                aria-label={`Module ${module.number}. ${module.title.replace(/\n/g, " ")}. ${module.unlock}`}
-              >
-                <div className="academy-bonus-face">
-                  <span className={`academy-module-tag academy-module-tag--${module.tag}`}>
-                    {module.unlock}
-                  </span>
-                  <div className="academy-bonus-face-copy">
-                    <span className="academy-bonus-kicker">Module {module.number}</span>
-                    <h3>{module.title}</h3>
-                  </div>
+          <Entrance className="academy-hero-shot" animate="visible">
+            <EntranceItem>
+              <div className="academy-hero-shot-glow" aria-hidden="true" />
+              <div className="academy-hero-shot-stage">
+                <div className="academy-hero-shot-frame">
+                  <AcademyLockedApp />
                 </div>
-              </EntranceItem>
-            ))}
+              </div>
+            </EntranceItem>
           </Entrance>
+
+          <AcademyAnimatedTestimonials
+            title="What practitioners say."
+            subtitle="From industry designers already shipping. Their reviews. Their ratings."
+            badgeText="Popular courses on Maven"
+            testimonials={surveyQuotes}
+            logos={logos}
+          />
         </section>
 
         <section className="academy-section">

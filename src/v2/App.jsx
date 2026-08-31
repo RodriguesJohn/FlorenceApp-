@@ -292,7 +292,7 @@ function HomeWorkHighlightVideo() {
     <video
       ref={videoRef}
       className="home-florence-video"
-      src="/workshop/workshop.mp4"
+      src="/florence/F2.mp4"
       autoPlay
       muted
       defaultMuted
@@ -303,7 +303,7 @@ function HomeWorkHighlightVideo() {
       controls={false}
       controlsList="nodownload noplaybackrate noremoteplayback"
       disablePictureInPicture
-      aria-label="Workshop highlight"
+      aria-label="Florence demo reel"
     />
   );
 }

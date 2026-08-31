@@ -13,9 +13,9 @@ const pages = {
     type: "WebSite"
   },
   "/academy": {
-    title: "AI Academy | Human AI Studio",
+    title: "AI Design System Academy | Human AI Studio",
     description:
-      "Learn to build AI-native products and agentic systems through practical workshops, self-paced training, and a community of designers, founders, and builders.",
+      "AI Design System Academy: foundations, design systems, evals, and workflows for making a system agents can retrieve.",
     image: `${SITE_URL}/academy/og.jpg`,
     type: "Course"
   },
