@@ -2215,12 +2215,6 @@ function StudioHome({ isHistory = false }) {
             </EntranceItem>
             <div className="home-florence-media">
               <HomeWorkHighlightVideo />
-              <div>
-                <span>Florence · Built by Human AI Studio</span>
-                <a href="/florence">
-                  See the system behind the workshop <span aria-hidden="true">↗</span>
-                </a>
-              </div>
             </div>
           </Entrance>
         </section>

@@ -223,12 +223,6 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
                 event.currentTarget.play().catch(() => {});
               }}
             />
-            <div>
-              <span>Florence · Built by Human AI Studio</span>
-              <a href="/florence">
-                See the system behind the workshop <ArrowIcon />
-              </a>
-            </div>
           </div>
         </Entrance>
       </section>
