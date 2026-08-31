@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /app
+Disallow: /playbook
+Disallow: /workshop/playbook
+
+Sitemap: https://www.humanaistudio.io/sitemap.xml
 
 Sitemap: https://www.humanaistudio.io/sitemap.xml
