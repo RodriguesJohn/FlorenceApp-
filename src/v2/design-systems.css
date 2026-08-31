@@ -617,6 +617,13 @@
   opacity: 0.72;
 }
 
+.ds-trust-logos img[alt="Salesforce"] {
+  height: 1.75rem;
+  max-width: 6.75rem;
+  filter: none;
+  opacity: 0.95;
+}
+
 .ds-audit-problem,
 .ds-why-section,
 .ds-agenda,

@@ -504,15 +504,16 @@ html:has(.playbook-members-page .playbook-body) body {
 
 .playbook-gate {
   display: grid;
-  grid-template-columns: minmax(18rem, 26rem) minmax(0, 1fr);
+  grid-template-columns: minmax(18rem, 28rem) minmax(22rem, 1fr);
   align-items: center;
   gap: clamp(2.5rem, 6vw, 5.5rem);
+  width: 100%;
 }
 
 .playbook-gate-visual {
   display: flex;
-  min-width: 0;
-  justify-content: center;
+  min-width: 22rem;
+  justify-content: flex-end;
 }
 
 .playbook-gate-panel {
@@ -522,9 +523,9 @@ html:has(.playbook-members-page .playbook-body) body {
   align-items: flex-start;
 }
 
-.playbook-gate-title {
+.playbook-members-page .playbook-gate-title {
   width: 100%;
-  max-width: 14ch;
+  max-width: 12ch;
   margin: 0 0 1rem;
   color: #ffffff;
   font-size: clamp(2rem, 3.6vw, 2.85rem);
@@ -618,16 +619,21 @@ html:has(.playbook-members-page .playbook-body) body {
 
 .playbook-artifact {
   position: relative;
-  width: min(100%, 26rem);
+  flex: 0 0 auto;
+  width: 26rem;
+  max-width: 100%;
   height: 32rem;
   margin: 0;
 }
 
 .playbook-artifact-page {
   position: absolute;
-  inset: 0 auto auto 0;
-  width: 88%;
+  top: 0;
+  left: 0;
+  width: 23rem;
+  max-width: 100%;
   height: 100%;
+  overflow: hidden;
   border-radius: 0.2rem 0.85rem 0.85rem 0.2rem;
 }
 
@@ -712,16 +718,20 @@ html:has(.playbook-members-page .playbook-body) body {
   }
 
   .playbook-gate-visual {
+    min-width: 0;
     justify-content: center;
   }
 
   .playbook-artifact {
     width: min(100%, 22rem);
-    height: 24rem;
-    margin: 0.25rem 0 0.5rem;
+    height: 26rem;
   }
 
-  .playbook-gate-title {
+  .playbook-artifact-page {
+    width: min(19.5rem, 100%);
+  }
+
+  .playbook-members-page .playbook-gate-title {
     max-width: none;
   }
 }

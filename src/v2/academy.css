@@ -1067,6 +1067,13 @@ html:has(.academy-page) {
   opacity: 0.72;
 }
 
+.academy-hero-logos img[alt="Salesforce"] {
+  height: 1.75rem;
+  max-width: 6.75rem;
+  filter: none;
+  opacity: 0.95;
+}
+
 .academy-hero-quotes {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3463,9 +3470,12 @@ a.academy-bonus-card--stack[data-offset="0"]:focus-visible {
 
 @media (min-width: 960px) {
   .academy-modules,
-  .academy-module-grid,
-  .academy-path-grid {
+  .academy-module-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .academy-path-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .academy-packages {

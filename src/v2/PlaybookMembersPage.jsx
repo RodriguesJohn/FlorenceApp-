@@ -78,9 +78,9 @@ function MembersLogin() {
     <div className="playbook-gate">
       <div className="playbook-gate-panel">
         <p className="playbook-login-kicker">Workshop playbook</p>
-        <h1 className="playbook-gate-title">For people who were in the room</h1>
+        <h1 className="playbook-gate-title">For workshop attendees</h1>
         <p className="playbook-gate-lede">
-          This is the written playbook from the AI-ready design systems workshop. If you joined, log in with that email. If you haven’t, the workshop is how you get it.
+          Notes, links, and resources from the AI-ready design systems workshop — everything shared in the session. If you attended, log in with that email.
         </p>
         <div className="playbook-gate-actions">
           <button

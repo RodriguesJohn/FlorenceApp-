@@ -190,19 +190,24 @@ const pricingBenefits = [
 
 const pathOptions = [
   {
-    title: "Join a community of\nAI designers",
+    title: "Product\ndesigners",
     color1: "#38bdf8",
     color2: "#e0f2fe"
   },
   {
-    title: "Async chat\nsupport",
+    title: "Design\nengineers",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Structured learning\ntracks updated regularly",
+    title: "Design system\nops",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
+  },
+  {
+    title: "Design system\nspecialists",
+    color1: "#6366f1",
+    color2: "#c7d2fe"
   }
 ];
 
@@ -528,14 +533,14 @@ function AcademyPage() {
 
         <section className="academy-section">
           <Entrance className="academy-section-heading">
-            <EntranceItem as="h2">Why builders join.</EntranceItem>
+            <EntranceItem as="h2">Who it's for.</EntranceItem>
           </Entrance>
           <Entrance className="academy-path-grid">
             {pathOptions.map((path, index) => (
               <EntranceItem
                 as="article"
                 className="academy-path-card"
-                key={path.title.replace("\n", " ")}
+                key={path.title.replaceAll("\n", " ")}
                 style={{
                   "--card-color-1": path.color1,
                   "--card-color-2": path.color2
@@ -571,17 +576,6 @@ function AcademyPage() {
                 </div>
               </EntranceItem>
             ))}
-          </Entrance>
-        </section>
-
-        <section className="academy-section">
-          <Entrance className="academy-section-heading">
-            <EntranceItem as="h2">Professionals already shipping.</EntranceItem>
-          </Entrance>
-          <Entrance>
-            <EntranceItem>
-              <TestimonialScroller />
-            </EntranceItem>
           </Entrance>
         </section>
 
@@ -630,6 +624,17 @@ function AcademyPage() {
                 </ul>
                 <AcademySoonCta className="academy-btn--full" />
               </div>
+            </EntranceItem>
+          </Entrance>
+        </section>
+
+        <section className="academy-section">
+          <Entrance className="academy-section-heading">
+            <EntranceItem as="h2">Trusted by industry professionals.</EntranceItem>
+          </Entrance>
+          <Entrance>
+            <EntranceItem>
+              <TestimonialScroller />
             </EntranceItem>
           </Entrance>
         </section>
