@@ -41,20 +41,23 @@ const pages = {
     title: "App | Human AI Studio",
     description:
       "The Human AI Studio app for AI-ready design systems: framework, contracts, AGENTS.md, Figma MCP setup, evals, and the weekly loop.",
-    type: "WebPage"
+    type: "WebPage",
+    noindex: true
   },
   "/workshop/playbook": {
     path: "/app",
     title: "App | Human AI Studio",
     description:
       "The Human AI Studio app for AI-ready design systems: framework, contracts, AGENTS.md, Figma MCP setup, evals, and the weekly loop.",
-    type: "WebPage"
+    type: "WebPage",
+    noindex: true
   },
   "/playbook": {
     title: "Playbook | Human AI Studio",
     description:
       "The Human AI Studio playbook. Members sign in to read the written guide.",
-    type: "WebPage"
+    type: "WebPage",
+    noindex: true
   },
   "/workshop/complete": {
     title: "You finished the workshop | Human AI Studio",

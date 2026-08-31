@@ -5,6 +5,7 @@ import { findLocation, hrefFor, modules } from "./playbookTopics.js";
 import { AuthProvider, useAuth } from "./AuthContext.jsx";
 import "./styles.css";
 import "./playbook.css";
+import "./playbook-members.css";
 
 function videoKey(video) {
   return video.muxPlaybackId || video.youtubeId || "";
@@ -329,17 +330,9 @@ function readTheme() {
   return "dark";
 }
 
-function PlaybookAccount({ onLogin }) {
+function PlaybookAccount() {
   const { user, signOut } = useAuth();
-
-  if (!user) {
-    return (
-      <button type="button" className="playbook-account-out" onClick={onLogin}>
-        Log in
-      </button>
-    );
-  }
-
+  if (!user) return null;
   const initial = (user.email?.[0] || "A").toUpperCase();
 
   return (
@@ -354,24 +347,10 @@ function PlaybookAccount({ onLogin }) {
   );
 }
 
-function PlaybookLogin({ onClose, onSuccess }) {
+function PlaybookLogin() {
   const { signIn, configured } = useAuth();
   const [pending, setPending] = React.useState(false);
   const [error, setError] = React.useState("");
-  const dialogRef = React.useRef(null);
-
-  React.useEffect(() => {
-    const previous = document.activeElement;
-    dialogRef.current?.querySelector("input")?.focus();
-    const onKey = (event) => {
-      if (event.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      if (previous instanceof HTMLElement) previous.focus();
-    };
-  }, [onClose]);
 
   const submit = async (event) => {
     event.preventDefault();
@@ -386,27 +365,14 @@ function PlaybookLogin({ onClose, onSuccess }) {
 
     if (signInError) {
       setError(signInError.message || "Could not log in with that email and password.");
-      return;
     }
-
-    onSuccess();
   };
 
   return (
-    <div className="playbook-login-layer">
-      <button type="button" className="playbook-login-backdrop" aria-label="Close login" onClick={onClose} />
-      <section
-        className="playbook-login"
-        aria-labelledby="playbook-login-title"
-        role="dialog"
-        aria-modal="true"
-        ref={dialogRef}
-      >
-      <p className="playbook-login-kicker">Members</p>
-      <h2 id="playbook-login-title">Log in</h2>
-      <p className="playbook-intro">
-        Use the email you joined with. First-time setup comes later.
-      </p>
+    <section className="playbook-login playbook-members-login" aria-labelledby="playbook-login-title">
+      <p className="playbook-login-kicker">Academy</p>
+      <h1 id="playbook-login-title">Log in</h1>
+      <p className="playbook-intro">Members only. Use the email you joined with.</p>
       <form className="playbook-login-form" onSubmit={submit}>
         <label htmlFor="playbook-email">Email</label>
         <input
@@ -439,13 +405,12 @@ function PlaybookLogin({ onClose, onSuccess }) {
           {pending ? "Signing in…" : "Log in"}
         </button>
       </form>
-      </section>
-    </div>
+    </section>
   );
 }
 
 function PlaybookApp() {
-  const [loginOpen, setLoginOpen] = React.useState(false);
+  const { ready, user } = useAuth();
   const [open, setOpen] = React.useState(false);
   const [theme, setTheme] = React.useState(readTheme);
   const [{ module, chapter }, setLocation] = React.useState(() => findLocation(window.location.hash));
@@ -496,6 +461,34 @@ function PlaybookApp() {
   const moduleIndex = module ? modules.findIndex((item) => item.id === module.id) : -1;
   const nextModule = !nextChapter && moduleIndex > -1 ? modules[moduleIndex + 1] : null;
 
+  if (!ready || !user) {
+    return (
+      <main className="page-shell current-home playbook-page playbook-members-page" data-theme={theme} id="main-content">
+        <a className="playbook-skip" href="#playbook">
+          Skip to app
+        </a>
+        <nav className={theme === "light" ? "nav nav-light" : "nav nav-dark"} aria-label="Primary">
+          <a className="brand" href="/" aria-label="Human AI Studio home">
+            <span className="brand-mark" aria-hidden="true" />
+            Human AI Studio
+          </a>
+          <div className="nav-actions">
+            <NavMenu />
+          </div>
+        </nav>
+        <div className="playbook-members-stage" id="playbook">
+          {!ready ? (
+            <p className="playbook-intro" role="status">
+              Loading
+            </p>
+          ) : (
+            <PlaybookLogin />
+          )}
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="page-shell current-home playbook-page" data-theme={theme} id="main-content">
       <a className="playbook-skip" href="#playbook">
@@ -531,12 +524,7 @@ function PlaybookApp() {
             <small>AI-ready design systems</small>
           </span>
         </a>
-        <PlaybookAccount
-          onLogin={() => {
-            setOpen(false);
-            setLoginOpen(true);
-          }}
-        />
+        <PlaybookAccount />
         </div>
         <nav className="playbook-sidebar-nav" aria-label="Academy">
           {modules.map((item) => (
@@ -658,13 +646,6 @@ function PlaybookApp() {
         </div>
       </div>
       </div>
-
-      {loginOpen ? (
-        <PlaybookLogin
-          onClose={() => setLoginOpen(false)}
-          onSuccess={() => setLoginOpen(false)}
-        />
-      ) : null}
     </main>
   );
 }
