@@ -264,6 +264,50 @@ function NewsletterModal({ open, onClose }) {
   );
 }
 
+function HomeWorkHighlightVideo() {
+  const videoRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return undefined;
+
+    v.muted = true;
+    v.defaultMuted = true;
+
+    const tryPlay = () => {
+      v.muted = true;
+      const play = v.play();
+      if (play && typeof play.catch === "function") play.catch(() => {});
+    };
+
+    tryPlay();
+    const events = ["loadedmetadata", "loadeddata", "canplay", "canplaythrough"];
+    events.forEach((event) => v.addEventListener(event, tryPlay));
+    return () => {
+      events.forEach((event) => v.removeEventListener(event, tryPlay));
+    };
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      className="home-florence-video"
+      src="/workshop/workshop.mp4"
+      autoPlay
+      muted
+      defaultMuted
+      loop
+      playsInline
+      webkit-playsinline="true"
+      preload="auto"
+      controls={false}
+      controlsList="nodownload noplaybackrate noremoteplayback"
+      disablePictureInPicture
+      aria-label="Workshop highlight"
+    />
+  );
+}
+
 function CinematicHero() {
   const [newsletterOpen, setNewsletterOpen] = React.useState(false);
   const videoRef = React.useRef(null);
@@ -2169,19 +2213,15 @@ function StudioHome({ isHistory = false }) {
                 Explore Florence <span aria-hidden="true">↗</span>
               </a>
             </EntranceItem>
-            <EntranceItem className="home-florence-media">
-              <img
-                src={florenceWorkImage}
-                alt="Florence agent-ready design system showing a structured component library"
-                loading="lazy"
-              />
+            <div className="home-florence-media">
+              <HomeWorkHighlightVideo />
               <div>
                 <span>Florence · Built by Human AI Studio</span>
                 <a href="/florence">
                   See the system behind the workshop <span aria-hidden="true">↗</span>
                 </a>
               </div>
-            </EntranceItem>
+            </div>
           </Entrance>
         </section>
       )}

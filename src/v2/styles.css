@@ -1217,6 +1217,7 @@ h2 {
   width: var(--home-rail);
   max-width: 100%;
   margin-inline: auto;
+  transform: none !important;
 }
 
 .home-florence-header {
@@ -1300,13 +1301,16 @@ h2 {
   border-radius: clamp(1rem, 1.4vw, 1.2rem);
   background: #111114;
   box-shadow: 0 3rem 7rem rgba(0, 0, 0, 0.5);
+  transform: none;
 }
 
-.home-florence-media > img {
+.home-florence-media > img,
+.home-florence-media > video {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  transform: none;
   outline: 1px solid oklch(1 0 0 / 0.1);
   outline-offset: -1px;
 }
@@ -1320,8 +1324,8 @@ h2 {
   align-items: end;
   justify-content: space-between;
   gap: 1rem;
-  padding: 4rem 1.4rem 1.3rem;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.88));
+  padding: 2.4rem 1.4rem 1.3rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
   font-size: 0.78rem;
 }
 
@@ -1345,7 +1349,8 @@ h2 {
     min-height: 22rem;
   }
 
-  .home-florence-media > img {
+  .home-florence-media > img,
+  .home-florence-media > video {
     height: 22rem;
     aspect-ratio: auto;
     object-fit: contain;

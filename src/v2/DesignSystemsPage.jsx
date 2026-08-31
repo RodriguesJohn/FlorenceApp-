@@ -4,7 +4,6 @@ import { Entrance, EntranceItem } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import { WorkshopCountdown } from "./WorkshopCountdown.jsx";
 import profilePicture from "../assets/Profile Picture.jpg";
-import florenceWorkImage from "../assets/work/Florence.png";
 import "./styles.css";
 import "./design-systems.css";
 
@@ -12,6 +11,15 @@ const WORKSHOP_URL = "https://maven.com/humanaistudio/ai-ready-design-system-wor
 const MASTERCLASS_URL = "https://maven.com/p/7ff349/ai-ready-design-systems-masterclass";
 const BOOKING_URL = "https://cal.com/john-rodrigues-rqt2lg/15min";
 const newsletterUrl = "https://substack.com/@johnrodrigues";
+
+const companyLogos = [
+  { src: "/academy/Apple.png", alt: "Apple" },
+  { src: "/academy/Google.svg.png", alt: "Google" },
+  { src: "/academy/Chase.png", alt: "JPMorgan Chase" },
+  { src: "/academy/Hubspot.svg.png", alt: "HubSpot" },
+  { src: "/academy/intercom-1-logo-png-transparent.png", alt: "Intercom" },
+  { src: "/academy/Salesforce.svg", alt: "Salesforce" }
+];
 
 const outcomes = [
   {
@@ -172,8 +180,8 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
           <div className="ds-audit-hero-copy">
             <div className="ds-hero-main">
               <EntranceItem as="h1" id="ds-audit-title">
-                <span>Join AI-ready</span>
-                <span>Design Systems Workshop</span>
+                <span>Join AI Design</span>
+                <span>System Workshop</span>
               </EntranceItem>
               <EntranceItem as="p" className="ds-audit-intro">
                 Join the workshop to learn the framework, evals, and component
@@ -198,10 +206,22 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
             </EntranceItem>
           </div>
 
-          <EntranceItem className="ds-audit-hero-media">
-            <img
-              src={florenceWorkImage}
-              alt="Florence agent-ready design system showing a structured component library"
+          <div className="ds-audit-hero-media">
+            <video
+              className="ds-audit-hero-video"
+              src="/workshop/workshop.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              controlsList="nodownload noplaybackrate noremoteplayback"
+              disablePictureInPicture
+              aria-label="Workshop highlight"
+              onCanPlay={(event) => {
+                event.currentTarget.muted = true;
+                event.currentTarget.play().catch(() => {});
+              }}
             />
             <div>
               <span>Florence · Built by Human AI Studio</span>
@@ -209,17 +229,16 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
                 See the system behind the workshop <ArrowIcon />
               </a>
             </div>
-          </EntranceItem>
+          </div>
         </Entrance>
       </section>
 
-      <section className="ds-trust-strip" aria-label="Instructor experience">
-        <p>Built from 10+ years of product and design experience</p>
-        <div aria-label="Previously worked with">
-          <span>JPMorgan</span>
-          <span>Citi</span>
-          <span>TOCA</span>
-          <span>4.8/5 Maven rating</span>
+      <section className="ds-trust-strip" aria-label="Companies represented">
+        <p>Trusted by designers from</p>
+        <div className="ds-trust-logos">
+          {companyLogos.map((logo) => (
+            <img key={logo.alt} src={logo.src} alt={logo.alt} />
+          ))}
         </div>
       </section>
 

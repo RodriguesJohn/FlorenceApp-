@@ -533,7 +533,8 @@
   box-shadow: 0 3rem 7rem rgba(0, 0, 0, 0.5);
 }
 
-.ds-audit-hero-media > img {
+.ds-audit-hero-media > img,
+.ds-audit-hero-media > video {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -584,12 +585,13 @@
   line-height: 1.45;
 }
 
-.ds-trust-strip div {
+.ds-trust-strip div,
+.ds-trust-logos {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: end;
-  gap: clamp(1.25rem, 4vw, 3.4rem);
+  gap: clamp(1.25rem, 4vw, 2.4rem);
 }
 
 .ds-trust-strip div span {
@@ -598,6 +600,16 @@
   font-weight: 600;
   letter-spacing: -0.02em;
   white-space: nowrap;
+}
+
+.ds-trust-logos img {
+  display: block;
+  height: 1.35rem;
+  width: auto;
+  max-width: 5.5rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.72;
 }
 
 .ds-audit-problem,
@@ -1486,7 +1498,8 @@
     flex-direction: column;
   }
 
-  .ds-trust-strip div {
+  .ds-trust-strip div,
+  .ds-trust-logos {
     justify-content: start;
     gap: 1rem 1.4rem;
   }
