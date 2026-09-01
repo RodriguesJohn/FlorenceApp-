@@ -22,6 +22,7 @@ const barLinks = [
 ];
 
 const menuLinks = [
+  { label: "Case studies", href: "/case-studies" },
   { label: "Tools", href: "/tools" },
   { label: "Blog", href: blogUrl }
 ];
@@ -75,6 +76,9 @@ export function NavMenu() {
   }, [open, updatePanelPosition]);
 
   const close = () => setOpen(false);
+
+  const isCurrent = (href) =>
+    currentPath === href || (href !== "/" && currentPath.startsWith(`${href}/`));
 
   const toggle = () => {
     if (open) {
@@ -155,10 +159,10 @@ export function NavMenu() {
             {menuLinks.map((item) => (
               <a
                 key={item.label}
-                className={`nav-menu-item${currentPath === item.href ? " is-active" : ""}`}
+                className={`nav-menu-item${isCurrent(item.href) ? " is-active" : ""}`}
                 href={item.href}
                 role="menuitem"
-                aria-current={currentPath === item.href ? "page" : undefined}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
                 onClick={() => {
                   close();
                   item.onClick?.();

@@ -16,6 +16,11 @@
       "permanent": true
     },
     {
+      "source": "/case-studies/florence/",
+      "destination": "/case-studies/florence",
+      "permanent": true
+    },
+    {
       "source": "/blog/",
       "destination": "/blog",
       "permanent": true
@@ -77,6 +82,10 @@
     },
     {
       "source": "/case-studies",
+      "destination": "/case-studies.html"
+    },
+    {
+      "source": "/case-studies/florence",
       "destination": "/case-studies.html"
     },
     {

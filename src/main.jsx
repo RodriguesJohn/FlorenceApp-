@@ -58,6 +58,12 @@ async function boot() {
       return;
     }
 
+    if (route === "/case-studies/florence") {
+      const { default: FlorenceCaseStudyPage } = await import("./v2/FlorenceCaseStudyPage.jsx");
+      renderWithAnalytics(root, <FlorenceCaseStudyPage />);
+      return;
+    }
+
     if (route === "/case-studies") {
       const { default: CaseStudiesPage } = await import("./v2/CaseStudiesPage.jsx");
       renderWithAnalytics(root, <CaseStudiesPage />);

@@ -31,6 +31,12 @@ const pages = {
       "Selected AI systems, product design, design engineering, and growth work by Human AI Studio for startups and enterprise teams.",
     type: "CollectionPage"
   },
+  "/case-studies/florence": {
+    title: "Florence · AI-Ready Design System Case Study | Human AI Studio",
+    description:
+      "I built Florence so humans and coding agents ship from the same components instead of inventing parallel UI.",
+    type: "Article"
+  },
   "/tools": {
     title: "Tools | Human AI Studio",
     description:

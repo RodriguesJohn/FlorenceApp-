@@ -67,7 +67,8 @@ function htmlAliases() {
     "/workshop/complete": "/index.html",
     "/workshop": "/design-systems.html",
     "/florence": "/florence.html",
-    "/florence/system": "/florence-system.html"
+    "/florence/system": "/florence-system.html",
+    "/case-studies/florence": "/case-studies.html"
   };
 
   return {
