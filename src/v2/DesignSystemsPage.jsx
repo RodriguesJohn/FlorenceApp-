@@ -1,16 +1,22 @@
 import React from "react";
 import { track } from "@vercel/analytics";
+import { Star } from "lucide-react";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import { WorkshopCountdown } from "./WorkshopCountdown.jsx";
 import AcademyWorkspacePreview from "./AcademyWorkspacePreview.jsx";
+import { AcademyAnimatedTestimonials } from "./AcademyAnimatedTestimonials.jsx";
+import { modules as trainingModules } from "./playbookTopics.js";
 import profilePicture from "../assets/Profile Picture.jpg";
 import "./styles.css";
 import "./design-systems.css";
 import "./academy.css";
 
+const SHOW_PLAYBOOK_SECTION = false;
+const SHOW_TRAINING_SECTION = false;
+
 const WORKSHOP_URL = "https://maven.com/humanaistudio/ai-ready-design-system-workshop";
-const MASTERCLASS_URL = "https://maven.com/p/7ff349/ai-ready-design-systems-masterclass";
+const TRAINING_URL = "/academy";
 const BOOKING_URL = "https://cal.com/john-rodrigues-rqt2lg/15min";
 const newsletterUrl = "https://substack.com/@johnrodrigues";
 
@@ -64,14 +70,43 @@ const agenda = [
   }
 ];
 
-const included = [
-  "Four-hour live, hands-on workshop",
-  "Agent-ready design system playbook",
-  "Readiness evaluation framework",
-  "Implementation checklist and roadmap",
+const workshopIncluded = [
+  "Live one-day workshop",
+  "Live Q&A",
+  "Certificate of completion",
   "Lifetime access to the recording",
-  "Human AI Studio peer community",
-  "Certificate of completion"
+  "Agent-ready design system playbook",
+  "Implementation checklist"
+];
+
+const trainingIncluded = [
+  "Access to the lesson library",
+  "Self-paced lessons you can replay",
+  "Tokens, components, and contracts",
+  "Figma workflows and building in Cursor",
+  "Community of AI designers",
+  "Async chat support"
+];
+
+const workshopQuotes = [
+  {
+    id: 1,
+    name: "Jake Barrow",
+    role: "Product Designer",
+    company: "",
+    content:
+      "John is very knowledgeable and enthusiastic about building quality design systems that allow us to get the most from AI. The course was informative, and there were many opportunities to ask questions.",
+    rating: 4
+  },
+  {
+    id: 2,
+    name: "Kelly Redznak",
+    role: "Sr. Product Designer",
+    company: "Optimum",
+    content:
+      "He packed in a lot of valuable insight on building industry-standard AI-ready design systems, how to structure them, maintain them, and test them so agents produce reliable, on-brand output.",
+    rating: 5
+  }
 ];
 
 const audience = [
@@ -90,12 +125,19 @@ function CheckIcon() {
 }
 
 function trackWorkshopClick(href, label, location) {
-  track(href === WORKSHOP_URL ? "Workshop CTA Click" : "Masterclass CTA Click", {
-    route: "/workshop",
-    label,
-    location,
-    href
-  });
+  track(
+    href === WORKSHOP_URL
+      ? "Workshop CTA Click"
+      : href === TRAINING_URL
+        ? "Academy CTA Click"
+        : "Workshop Page CTA Click",
+    {
+      route: "/workshop",
+      label,
+      location,
+      href
+    }
+  );
 }
 
 function CtaLink({ href, children, variant = "primary", className = "" }) {
@@ -107,20 +149,110 @@ function CtaLink({ href, children, variant = "primary", className = "" }) {
       className={`ds-conversion-cta is-${variant} ${className}`.trim()}
       href={href}
       {...(isExternal ? { target: "_blank", rel: "noreferrer" } : {})}
-      onClick={() =>
-        isExternal
-          ? trackWorkshopClick(href, label, "workshop_page")
-          : track("Playbook CTA Click", {
-              route: "/workshop",
-              label,
-              location: "workshop_page",
-              href
-            })
-      }
+      onClick={() => trackWorkshopClick(href, label, "workshop_page")}
     >
       <span>{children}</span>
       <ArrowIcon />
     </a>
+  );
+}
+
+function PriceCard({
+  featured = false,
+  comingSoon = false,
+  badge,
+  label,
+  amount,
+  term,
+  note,
+  items,
+  ctaHref,
+  ctaLabel,
+  ctaVariant = "light",
+  footer = null
+}) {
+  return (
+    <article
+      className={`ds-price-card${featured ? " is-featured" : ""}${comingSoon ? " is-soon" : ""}`}
+    >
+      <header className="ds-price-head">
+        <p className="ds-price-label">{label}</p>
+        {badge ? (
+          <span className={`ds-price-badge${comingSoon ? " is-soon" : " is-popular"}`}>
+            {badge}
+          </span>
+        ) : null}
+      </header>
+      <p className="ds-price">
+        {amount}
+        {term ? <small className="ds-price-term">{term}</small> : null}
+      </p>
+      <p className={`ds-seat-note${note ? "" : " is-empty"}`}>
+        {note || "\u00a0"}
+      </p>
+      <ul>
+        {items.map((item) => (
+          <li key={item}><CheckIcon /> {item}</li>
+        ))}
+      </ul>
+      <div className="ds-price-cta">
+        {comingSoon ? (
+          <span className="ds-conversion-cta is-soon" aria-disabled="true">
+            Coming soon
+          </span>
+        ) : (
+          <CtaLink href={ctaHref} variant={ctaVariant} className="ds-offer-cta">
+            {ctaLabel}
+          </CtaLink>
+        )}
+      </div>
+      <div className="ds-price-extra">
+        {footer || <p className="ds-discount-note is-empty" aria-hidden="true">&nbsp;</p>}
+      </div>
+    </article>
+  );
+}
+
+const sampleLesson = trainingModules[0]?.chapters[0];
+const sampleVideo = sampleLesson?.videos?.[0];
+const sampleMuxSrc = sampleVideo?.muxPlaybackId
+  ? `https://player.mux.com/${sampleVideo.muxPlaybackId}?autoplay=true&muted=true&loop=true`
+  : "";
+
+function TrainingLessonModule() {
+  if (!sampleLesson) return null;
+
+  return (
+    <div className="ds-training-module">
+      <aside className="ds-training-nav" aria-hidden="true">
+        <p>
+          <strong>Training</strong>
+          <small>AI-ready design systems</small>
+        </p>
+        <ul>
+          {trainingModules.map((item, index) => (
+            <li key={item.id} className={index === 0 ? "is-active" : undefined}>
+              {item.label}
+            </li>
+          ))}
+        </ul>
+      </aside>
+      <article className="ds-training-lesson">
+        <p className="ds-training-back">Back</p>
+        <h3>{sampleLesson.title.replaceAll("AI-ready", "AI\u2011ready")}</h3>
+        <p>{sampleLesson.body[0]}</p>
+        {sampleMuxSrc ? (
+          <div className="ds-training-video">
+            <iframe
+              src={sampleMuxSrc}
+              title={sampleVideo.title}
+              allow="autoplay; encrypted-media; picture-in-picture"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </div>
+        ) : null}
+      </article>
+    </div>
   );
 }
 
@@ -190,6 +322,10 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
         <Entrance className="ds-audit-hero-inner" animate="visible">
           <div className="ds-audit-hero-copy">
             <div className="ds-hero-main">
+              <EntranceItem as="p" className="academy-reviews-badge ds-hero-badge">
+                <Star aria-hidden="true" />
+                Popular courses on Maven
+              </EntranceItem>
               <EntranceItem as="h1" id="ds-audit-title">
                 <span>Join AI Design</span>
                 <span>System Workshop</span>
@@ -209,8 +345,8 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
               </dl>
               <div className="ds-audit-actions">
                 <CtaLink href={WORKSHOP_URL}>Reserve your seat for $599</CtaLink>
-                <CtaLink href={MASTERCLASS_URL} variant="secondary">
-                  Join the free masterclass
+                <CtaLink href={TRAINING_URL} variant="secondary">
+                  Join self-paced training
                 </CtaLink>
               </div>
               <p className="ds-hero-proof">20 seats · Certificate · Lifetime recording</p>
@@ -242,10 +378,20 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
         <p>Trusted by designers from</p>
         <div className="ds-trust-logos">
           {companyLogos.map((logo) => (
-            <img key={logo.alt} src={logo.src} alt={logo.alt} />
+            <span className="ds-trust-logo" key={logo.alt}>
+              <img src={logo.src} alt={logo.alt} />
+            </span>
           ))}
         </div>
       </section>
+
+      <div className="ds-reviews">
+        <AcademyAnimatedTestimonials
+          title=""
+          badgeText=""
+          testimonials={workshopQuotes}
+        />
+      </div>
 
       <section className="ds-audit-problem" aria-labelledby="ds-audit-problem-title">
         <Entrance className="ds-audit-rail">
@@ -268,6 +414,7 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
         </Entrance>
       </section>
 
+      {SHOW_PLAYBOOK_SECTION ? (
       <section className="ds-playbook" id="playbook" aria-labelledby="playbook-title">
         <Entrance className="ds-playbook-inner">
           <EntranceItem className="ds-playbook-visual">
@@ -307,6 +454,7 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
           </div>
         </Entrance>
       </section>
+      ) : null}
 
       <section className="ds-why-section" aria-labelledby="ds-why-title">
         <Entrance className="ds-audit-rail ds-why-layout">
@@ -334,42 +482,52 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
         </Entrance>
       </section>
 
-      <section className="ds-masterclass" id="free-masterclass" aria-labelledby="masterclass-title">
-        <Entrance className="ds-masterclass-inner">
-          <EntranceItem className="ds-masterclass-video">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/OqrxSgWpRvs?rel=0"
-              title="What are agentic design systems?"
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </EntranceItem>
-          <div className="ds-masterclass-copy">
-            <EntranceItem as="h2" id="masterclass-title">
-              <span>Try the framework</span>
-              <span>before the workshop.</span>
-            </EntranceItem>
-            <EntranceItem as="p">
-              Watch the free masterclass on how design systems change when agents
-              become your next design system consumer.
-            </EntranceItem>
-            <EntranceItem className="ds-masterclass-list" as="ul">
-              <li><CheckIcon /> See the agent-ready framework</li>
-              <li><CheckIcon /> Learn what to change first</li>
-            </EntranceItem>
-            <EntranceItem>
-              <CtaLink href={MASTERCLASS_URL} variant="light">
-                Join the free masterclass
-              </CtaLink>
-            </EntranceItem>
-            <EntranceItem as="p" className="ds-masterclass-proof">
-              Free on Maven · Live August 18 · 60 minutes
-            </EntranceItem>
+      <div className="academy-page ds-training-hero">
+        <section
+          className="academy-hero-wrap academy-hero-wrap--product"
+          aria-labelledby="training-hero-title"
+        >
+          <div className="academy-hero-rays" aria-hidden="true" />
+          <div className="academy-hero-glow" aria-hidden="true" />
+          <div className="academy-hero">
+            <Entrance className="academy-hero-copy" animate="visible">
+              <EntranceItem as="h2" id="training-hero-title">
+                A structured way to level up your skill.
+              </EntranceItem>
+              <EntranceItem as="p" className="academy-hero-sub">
+                Make AI skills a top priority at the organization level. Level up how
+                your team builds with Cursor, Claude Code, and agentic workflows — not
+                just one person.
+              </EntranceItem>
+            </Entrance>
           </div>
-        </Entrance>
-      </section>
+
+          <Entrance className="academy-hero-shot" animate="visible">
+            <EntranceItem>
+              <div className="academy-hero-shot-glow" aria-hidden="true" />
+              <div className="academy-hero-shot-stage">
+                <div className="academy-hero-shot-frame">
+                  <figure className="academy-hero-app">
+                    <div className="academy-hero-app-scaler">
+                      <div className="academy-hero-chrome">
+                        <span className="academy-hero-chrome-lights" aria-hidden="true">
+                          <i />
+                          <i />
+                          <i />
+                        </span>
+                        <span className="academy-hero-chrome-title">Training</span>
+                      </div>
+                      <div className="academy-hero-app-frame">
+                        <AcademyWorkspacePreview />
+                      </div>
+                    </div>
+                  </figure>
+                </div>
+              </div>
+            </EntranceItem>
+          </Entrance>
+        </section>
+      </div>
 
       <section className="ds-agenda" aria-labelledby="agenda-title">
         <Entrance className="ds-audit-rail">
@@ -437,37 +595,45 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
               Learn how to make your design system AI-ready.
             </EntranceItem>
             <EntranceItem as="p">
-              One hands-on day to move from confusion to a concrete framework, evaluation,
-              and implementation roadmap.
-            </EntranceItem>
-            <EntranceItem className="ds-offer-meta">
-              <div><span>Date</span><strong>September 12, 2026</strong></div>
-              <div><span>Time</span><strong>9:00 AM–1:00 PM PT</strong></div>
-              <div><span>Format</span><strong>Live on Maven</strong></div>
+              Join the live one-day workshop. Self-paced training is coming soon.
             </EntranceItem>
           </div>
 
-          <div className="ds-price-card">
-            <EntranceItem as="p" className="ds-price-label">One-time enrollment</EntranceItem>
-            <EntranceItem as="p" className="ds-price">$599</EntranceItem>
-            <EntranceItem as="p" className="ds-seat-note">Limited to 20 seats</EntranceItem>
-            <EntranceItem as="ul">
-              {included.map((item) => <li key={item}><CheckIcon /> {item}</li>)}
+          <div className="ds-price-grid">
+            <EntranceItem className="ds-price-cell">
+              <PriceCard
+                featured
+                badge="Most popular"
+                label="Workshop"
+                amount="$599"
+                note="Limited to 20 seats"
+                items={workshopIncluded}
+                ctaHref={WORKSHOP_URL}
+                ctaLabel="Reserve your workshop seat"
+                footer={
+                  <p className="ds-discount-note">
+                    <a
+                      href="https://help.maven.com/en/articles/6723771-getting-your-course-reimbursed"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Get Your Course Reimbursed <span aria-hidden="true">↗</span>
+                    </a>
+                    <span>Your employer’s 2026 learning and development budget may cover this workshop.</span>
+                  </p>
+                }
+              />
             </EntranceItem>
-            <EntranceItem>
-              <CtaLink href={WORKSHOP_URL} variant="light" className="ds-offer-cta">
-                Reserve your workshop seat
-              </CtaLink>
-            </EntranceItem>
-            <EntranceItem as="p" className="ds-discount-note">
-              <a
-                href="https://help.maven.com/en/articles/6723771-getting-your-course-reimbursed"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Get Your Course Reimbursed <span aria-hidden="true">↗</span>
-              </a>
-              <span>Your employer’s 2026 learning and development budget may cover this workshop.</span>
+            <EntranceItem className="ds-price-cell">
+              <PriceCard
+                comingSoon
+                badge="Coming soon"
+                label="Self-paced"
+                amount="$149"
+                term="/ mo"
+                note="Library access"
+                items={trainingIncluded}
+              />
             </EntranceItem>
           </div>
         </Entrance>
@@ -481,7 +647,10 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
           <div>
             <EntranceItem as="details">
               <summary>What if I can’t attend live?</summary>
-              <p>You’ll receive lifetime access to the workshop recording on Maven.</p>
+              <p>
+                Join the self-paced training for library access on your own time.
+                Workshop seats also include lifetime access to the recording.
+              </p>
             </EntranceItem>
             <EntranceItem as="details">
               <summary>Do I need to be a design system expert?</summary>
@@ -499,18 +668,30 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
         </Entrance>
       </section>
 
-      <section className="ds-final-choice" aria-labelledby="final-choice-title">
-        <Entrance className="ds-final-choice-inner">
-          <EntranceItem as="h2" id="final-choice-title">
-            <span>Start free,</span>
-            <span>go deeper live.</span>
+      {SHOW_TRAINING_SECTION ? (
+      <section className="ds-playbook" id="training" aria-labelledby="training-title">
+        <Entrance className="ds-training-wrap">
+          <div className="ds-training-intro">
+            <EntranceItem as="h2" id="training-title">
+              Can&apos;t join the live workshop?
+            </EntranceItem>
+            <EntranceItem as="p">
+              Join the self-paced training. Get access to the lesson library,
+              Cursor and Claude Code workflows, and the community — on your
+              schedule.
+            </EntranceItem>
+          </div>
+          <EntranceItem>
+            <TrainingLessonModule />
           </EntranceItem>
-          <EntranceItem className="ds-audit-actions">
-            <CtaLink href={WORKSHOP_URL}>Reserve your workshop seat</CtaLink>
-            <CtaLink href={MASTERCLASS_URL} variant="secondary">Join the free masterclass</CtaLink>
+          <EntranceItem>
+            <CtaLink href={TRAINING_URL} variant="light">
+              Join the self-paced training
+            </CtaLink>
           </EntranceItem>
         </Entrance>
       </section>
+      ) : null}
 
       {embedded ? null : (
         <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">

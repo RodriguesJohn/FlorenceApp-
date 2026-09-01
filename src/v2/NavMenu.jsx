@@ -2,19 +2,10 @@ import React from "react";
 import { track } from "@vercel/analytics";
 import "./nav-menu.css";
 
-const academyUrl = "/academy";
 const studioUrl = "/";
 const florenceUrl = "/florence";
 const designSystemsUrl = "/workshop";
 const blogUrl = "/blog";
-
-function trackAcademyNavClick() {
-  track("Academy CTA Click", {
-    location: "primary_navigation",
-    label: "Training",
-    href: academyUrl
-  });
-}
 
 function trackWorkshopNavClick() {
   track("Workshop Page Click", {
@@ -31,7 +22,6 @@ const barLinks = [
 ];
 
 const menuLinks = [
-  { label: "Training", href: academyUrl, onClick: trackAcademyNavClick },
   { label: "Tools", href: "/tools" },
   { label: "Blog", href: blogUrl }
 ];

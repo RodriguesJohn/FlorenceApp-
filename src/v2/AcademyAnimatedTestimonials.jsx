@@ -47,7 +47,8 @@ export function AcademyAnimatedTestimonials({
     <section
       ref={sectionRef}
       className="academy-reviews"
-      aria-labelledby="academy-reviews-title"
+      aria-labelledby={title ? "academy-reviews-title" : undefined}
+      aria-label={title ? undefined : "What practitioners say"}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -74,6 +75,7 @@ export function AcademyAnimatedTestimonials({
           }
         }}
       >
+        {title || badgeText ? (
         <motion.div
           className="academy-reviews-copy"
           variants={{
@@ -87,8 +89,9 @@ export function AcademyAnimatedTestimonials({
               {badgeText}
             </p>
           ) : null}
-          <h2 id="academy-reviews-title">{title}</h2>
+          {title ? <h2 id="academy-reviews-title">{title}</h2> : null}
         </motion.div>
+        ) : null}
 
         <motion.div
           className="academy-reviews-stage"
