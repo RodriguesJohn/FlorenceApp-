@@ -1117,20 +1117,15 @@
   .nav-toggle {
     display: grid;
     place-items: center;
-    position: fixed;
-    inset-inline-start: 0;
-    inset-block-start: calc(3.5rem + var(--space-stack-md));
-    z-index: 45;
-    width: var(--space-section-sm);
-    height: var(--space-section-sm);
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
     margin: 0;
     padding: 0;
     border: var(--border-control) solid var(--color-border-default);
-    border-inline-start: 0;
-    border-radius: 0 var(--radius-control-sm) var(--radius-control-sm) 0;
+    border-radius: var(--radius-pill);
     background: var(--color-bg-surface);
     color: var(--color-text-primary);
-    box-shadow: var(--shadow-raised-depth);
     cursor: pointer;
   }
 
@@ -1142,13 +1137,6 @@
   .nav-toggle:focus-visible {
     outline: var(--border-focus) solid var(--color-focus-ring);
     outline-offset: var(--space-stack-2xs);
-  }
-
-  .shell--nav-open .nav-toggle {
-    border-inline-start: var(--border-control) solid var(--color-border-default);
-    border-radius: var(--radius-pill);
-    inset-inline-start: max(var(--layout-margin-sm), env(safe-area-inset-left));
-    inset-block-start: calc(3.5rem + var(--space-stack-sm));
   }
 
   .scrim {
@@ -1165,6 +1153,7 @@
   }
 
   .topbar {
+    z-index: 40;
     min-width: 0;
     gap: var(--space-inline-sm);
     padding-inline: max(var(--layout-margin-sm), env(safe-area-inset-left))
@@ -1202,13 +1191,6 @@
     border-inline-end: 0;
   }
 
-  .shell--nav-open .nav-toggle {
-    inset-block-start: calc(3.5rem + var(--space-stack-xs));
-  }
-
-  .shell--nav-open .sidebar__nav {
-    padding-inline-start: calc(var(--space-section-sm) + var(--space-inline-sm));
-  }
 
   .component-example,
   .component-grid .component-example {

@@ -100,10 +100,10 @@ export function Pricing({
   return (
     <section
       id="pricing"
-      className="pricing layout-container-lg"
+      className="pricing"
       aria-labelledby="pricing-heading"
     >
-      <div className="layout-split--thirds pricing__layout">
+      <div className="pricing__layout">
         <header className="pricing__intro">
           <h2 id="pricing-heading" className="pricing__title">
             Pricing

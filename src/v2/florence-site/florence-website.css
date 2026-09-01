@@ -65,10 +65,10 @@ a {
 }
 
 .florence-visitors {
-  position: absolute;
-  top: 1.15rem;
-  right: var(--layout-margin-md, clamp(1rem, 3vw, 2.5rem));
+  position: relative;
   z-index: 4;
+  justify-self: center;
+  margin-block-start: var(--space-stack-md);
   display: inline-flex;
   align-items: center;
   gap: 0.32rem;
@@ -177,12 +177,12 @@ a {
 
 .hero__lede-line {
   display: block;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .hero__lede .hero__select {
   padding: 0 var(--space-inset-2xs);
-  white-space: nowrap;
+  white-space: normal;
   vertical-align: baseline;
   line-height: 1;
 }
@@ -654,12 +654,9 @@ a {
     width: 100%;
   }
 
-  .hero__lede-line {
-    white-space: nowrap;
-  }
-
+  .hero__lede-line,
   .hero__lede .hero__select {
-    white-space: nowrap;
+    white-space: normal;
   }
 
   .hero__giant {
@@ -691,8 +688,7 @@ a {
   }
 
   .florence-visitors {
-    top: 0.85rem;
-    right: var(--layout-margin-sm);
+    margin-block-start: var(--space-stack-sm);
     padding-left: 0.52rem;
     font-size: 0.52rem;
   }
@@ -719,12 +715,9 @@ a {
     line-height: var(--text-body-line-height);
   }
 
-  .hero__lede-line {
-    white-space: nowrap;
-  }
-
+  .hero__lede-line,
   .hero__lede .hero__select {
-    white-space: nowrap;
+    white-space: normal;
   }
 
   .hero__giant {

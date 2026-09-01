@@ -1,17 +1,22 @@
 .pricing {
   position: relative;
   z-index: 3;
+  box-sizing: border-box;
+  width: min(100%, var(--layout-container-lg));
   margin-inline: auto;
   margin-block-start: var(--space-stack-2xl);
   margin-block-end: var(--layout-margin-lg);
   padding-block-start: var(--space-section-lg);
   padding-block-end: var(--space-section-lg);
-  padding-inline: var(--layout-margin-lg);
+  padding-inline: max(var(--layout-margin-md), env(safe-area-inset-left))
+    max(var(--layout-margin-md), env(safe-area-inset-right));
   border-top: var(--border-divider) solid var(--color-border-default);
   scroll-margin-block-start: var(--space-stack-xl);
 }
 
 .pricing__layout {
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: stretch;
   gap: var(--layout-gutter-xl);
 }
@@ -118,7 +123,7 @@
   display: grid;
   height: 100%;
   min-width: 0;
-  overflow: visible;
+  overflow: hidden;
   padding: var(--space-inset-xl);
   border: var(--border-control) solid var(--color-border-strong);
   border-radius: var(--radius-surface-lg);
@@ -340,6 +345,10 @@
 }
 
 @media (min-width: 64rem) {
+  .pricing__layout {
+    grid-template-columns: minmax(12rem, 0.9fr) repeat(2, minmax(0, 1fr));
+  }
+
   .pricing__intro {
     position: sticky;
     top: var(--space-stack-xl);
@@ -352,13 +361,18 @@
   }
 
   .pricing__agent-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
   }
 }
 
 @media (max-width: 40rem) {
   .pricing {
-    padding-inline: var(--layout-margin-sm);
+    width: 100%;
+    padding-inline: max(var(--layout-margin-sm), env(safe-area-inset-left))
+      max(var(--layout-margin-sm), env(safe-area-inset-right));
     margin-block-end: calc(
       var(--layout-margin-sm) + env(safe-area-inset-bottom)
     );
@@ -366,5 +380,9 @@
 
   .pricing-card {
     padding: var(--space-inset-lg);
+  }
+
+  .pricing-card__cta {
+    min-block-size: var(--space-section-sm);
   }
 }

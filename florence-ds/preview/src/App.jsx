@@ -8665,6 +8665,15 @@ export default function App() {
       }`}
     >
       <header className="topbar">
+        <button
+          type="button"
+          className="nav-toggle"
+          onClick={() => setNavOpen((open) => !open)}
+          aria-expanded={navOpen}
+          aria-label={navOpen ? 'Close menu' : 'Open menu'}
+        >
+          {navOpen ? <X strokeWidth={1.75} /> : <Menu strokeWidth={1.75} />}
+        </button>
         <div className="topbar__brand">
           <strong>Florence</strong>
           <span>AI-ready design system</span>
@@ -8714,15 +8723,6 @@ export default function App() {
       </aside>
 
       <div className="main">
-        <button
-          type="button"
-          className="nav-toggle"
-          onClick={() => setNavOpen((open) => !open)}
-          aria-expanded={navOpen}
-          aria-label={navOpen ? 'Close menu' : 'Open menu'}
-        >
-          {navOpen ? <X strokeWidth={1.75} /> : <Menu strokeWidth={1.75} />}
-        </button>
         {content}
       </div>
 
