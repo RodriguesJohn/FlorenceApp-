@@ -26,7 +26,7 @@ const playbookUrl = "/playbook";
 function trackAcademyNavClick() {
   track("Academy CTA Click", {
     location: "primary_navigation",
-    label: "Academy",
+    label: "Training",
     href: academyUrl
   });
 }
@@ -48,7 +48,7 @@ const serviceLinks = [
 
 const primaryLinks = [
   { label: "Studio", href: studioUrl },
-  { label: "Academy", href: academyUrl, onClick: trackAcademyNavClick },
+  { label: "Training", href: academyUrl, onClick: trackAcademyNavClick },
   { label: "Workshop", href: designSystemsUrl, onClick: trackWorkshopNavClick }
 ];
 
@@ -140,7 +140,7 @@ export function NavMenu() {
         Studio
       </a>
       <a className="nav-direct-link" href={academyUrl} onClick={trackAcademyNavClick}>
-        Academy
+        Training
       </a>
       <a
         className="nav-direct-link"

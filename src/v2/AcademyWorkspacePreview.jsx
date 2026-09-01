@@ -157,7 +157,7 @@ function AcademyWorkspacePreview() {
                 <SidebarIcon name="home" />
               </span>
               <span>
-                <strong>Academy</strong>
+                <strong>Training</strong>
                 <small>AI-ready design systems</small>
               </span>
             </span>
@@ -226,7 +226,7 @@ function AcademyWorkspacePreview() {
                 transition={{ duration: 0.2 }}
               >
                 <section className="playbook-index">
-                  <p className="academy-workspace-kicker">Academy</p>
+                  <p className="academy-workspace-kicker">Training</p>
                   <h1>Lessons</h1>
                   <div className="playbook-module-grid academy-workspace-grid">
                     {previewCards.map((entry, index) => {
