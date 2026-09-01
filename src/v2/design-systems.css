@@ -33,8 +33,16 @@
   outline-offset: 4px;
 }
 
-.ds-skip-link {
-  position: fixed;
+.ds-audit-page .site-footer-inner {
+  width: var(--home-rail);
+  max-width: none;
+  grid-template-columns: minmax(16rem, 1fr) auto;
+  align-items: start;
+}
+
+.ds-audit-page .footer-wordmark {
+  max-width: var(--home-rail);
+}
   top: 0.75rem;
   left: 0.75rem;
   z-index: 1000;
@@ -285,7 +293,11 @@
 }
 
 .ds-hero-badge {
-  margin: 0 0 0.85rem;
+  margin: -0.85rem 0 1.55rem;
+  padding-block: 0.12rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
 }
 
 .ds-audit-hero h1 {
@@ -2023,25 +2035,6 @@
   .ds-price-head {
     flex-wrap: wrap;
     row-gap: 0.45rem;
-  }
-
-  .ds-audit-page .site-footer {
-    padding-inline: 1.25rem;
-  }
-
-  .ds-audit-page .site-footer-inner {
-    width: 100%;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .ds-audit-page .footer-brand,
-  .ds-audit-page .footer-column {
-    grid-column: auto;
-  }
-
-  .ds-audit-page .footer-wordmark {
-    font-size: clamp(1.5rem, 9vw, 3rem);
   }
 
   .ds-final-choice h2 span {

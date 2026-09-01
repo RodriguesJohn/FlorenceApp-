@@ -1,7 +1,7 @@
 import React from "react";
 import { track } from "@vercel/analytics";
 import { Star } from "lucide-react";
-import { Entrance, EntranceItem } from "./entrance.jsx";
+import { Entrance, EntranceItem, entranceViewport } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import { WorkshopCountdown } from "./WorkshopCountdown.jsx";
 import AcademyWorkspacePreview from "./AcademyWorkspacePreview.jsx";
@@ -496,7 +496,7 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
                 Make AI skills a top priority at the organization level. Level up how
-                your team builds with Cursor, Claude Code, and agentic workflows — not
+                your team builds with Cursor, Claude Code, and agentic workflows, not
                 just one person.
               </EntranceItem>
             </Entrance>
@@ -725,7 +725,14 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
             </EntranceItem>
           </Entrance>
         </div>
-        <EntranceItem as="div" className="footer-wordmark" aria-hidden="true">
+        <EntranceItem
+          as="div"
+          className="footer-wordmark"
+          aria-hidden="true"
+          initial={false}
+          whileInView="visible"
+          viewport={entranceViewport}
+        >
           Human AI Studio
         </EntranceItem>
       </footer>
