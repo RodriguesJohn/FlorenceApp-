@@ -395,6 +395,73 @@ function AcademySoonCta({ className = "" }) {
   );
 }
 
+function MembershipPricingCard() {
+  const [billing, setBilling] = React.useState("monthly");
+  const monthly = billing === "monthly";
+
+  return (
+    <article
+      className="academy-package"
+      style={{
+        "--card-color-1": "#10b981",
+        "--card-color-2": "#a7f3d0"
+      }}
+    >
+      <div className="academy-package-thumb">
+        <OfferingShader
+          color1="#10b981"
+          color2="#a7f3d0"
+          seed={2.4}
+          className="academy-package-shader"
+        />
+        <div className="academy-package-thumb-copy">
+          <div className="academy-price-block">
+            <div className="academy-price academy-price--thumb">
+              <span>{monthly ? "$149" : "$1,499"}</span>
+              <small>{monthly ? "/ per month" : "one-time annual"}</small>
+            </div>
+            {monthly ? null : (
+              <p className="academy-price-save">Save $289 vs $1,788 billed monthly</p>
+            )}
+          </div>
+          <fieldset className="academy-billing">
+            <legend className="academy-billing-legend">Billing</legend>
+            <label className={`academy-billing-option${monthly ? " is-selected" : ""}`}>
+              <input
+                type="radio"
+                name="academy-billing"
+                value="monthly"
+                checked={monthly}
+                onChange={() => setBilling("monthly")}
+              />
+              <span>Monthly</span>
+            </label>
+            <label className={`academy-billing-option${!monthly ? " is-selected" : ""}`}>
+              <input
+                type="radio"
+                name="academy-billing"
+                value="annual"
+                checked={!monthly}
+                onChange={() => setBilling("annual")}
+              />
+              <span>Annually</span>
+              <em>Save $289</em>
+            </label>
+          </fieldset>
+        </div>
+      </div>
+      <div className="academy-package-body">
+        <ul className="academy-check-list">
+          {pricingBenefits.map((benefit) => (
+            <li key={benefit}>{benefit}</li>
+          ))}
+        </ul>
+        <AcademySoonCta className="academy-btn--full" />
+      </div>
+    </article>
+  );
+}
+
 function AcademyLockedApp() {
   return (
     <figure className="academy-hero-app">
@@ -405,8 +472,7 @@ function AcademyLockedApp() {
             <i />
             <i />
           </span>
-          <span className="academy-hero-chrome-title">Academy</span>
-          <span className="academy-hero-chrome-status">Preview only</span>
+          <span className="academy-hero-chrome-title">Training</span>
         </div>
         <div className="academy-hero-app-frame">
           <AcademyWorkspacePreview />
@@ -422,7 +488,7 @@ function AcademyPage() {
   const newsletterCloseRef = React.useRef(null);
 
   React.useEffect(() => {
-    document.title = "AI Design System Academy | Human AI Studio";
+    document.title = "AI Design Systems Training | Human AI Studio";
     const html = document.documentElement;
     const body = document.body;
     const prevHtml = html.style.background;
@@ -465,14 +531,10 @@ function AcademyPage() {
           <span className="brand-mark" aria-hidden="true" />
           <span className="academy-brand-text">
             Human AI Studio
-            <span className="academy-nav-product">Academy</span>
+            <span className="academy-nav-product">Training</span>
           </span>
         </a>
         <div className="academy-nav-actions">
-          <span className="academy-nav-soon">
-            <span className="academy-nav-soon-dot" aria-hidden="true" />
-            Coming soon
-          </span>
           <NavMenu />
         </div>
       </header>
@@ -484,10 +546,10 @@ function AcademyPage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1" id="academy-hero-title">
-                AI Design System Academy
+                AI Design Systems Training
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
-                The same Academy app members use: foundations, the existing system, evals, and workflows. Look through it here. The lessons stay locked until enrollment opens.
+                Self-paced training for designers and design system teams. Level up how you build systems with Cursor, Claude Code, and agentic workflows. The modern stack that makes design systems AI-ready.
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
                 <div className="academy-hero-cta-ring">
@@ -589,36 +651,8 @@ function AcademyPage() {
             >
               <PackageTestimonial />
             </EntranceItem>
-            <EntranceItem
-              as="article"
-              className="academy-package"
-              style={{
-                "--card-color-1": "#10b981",
-                "--card-color-2": "#a7f3d0"
-              }}
-            >
-              <div className="academy-package-thumb">
-                <OfferingShader
-                  color1="#10b981"
-                  color2="#a7f3d0"
-                  seed={2.4}
-                  className="academy-package-shader"
-                />
-                <div className="academy-package-thumb-copy">
-                  <div className="academy-price academy-price--thumb">
-                    <span>$149</span>
-                    <small>/ per month</small>
-                  </div>
-                </div>
-              </div>
-              <div className="academy-package-body">
-                <ul className="academy-check-list">
-                  {pricingBenefits.map((benefit) => (
-                    <li key={benefit}>{benefit}</li>
-                  ))}
-                </ul>
-                <AcademySoonCta className="academy-btn--full" />
-              </div>
+            <EntranceItem>
+              <MembershipPricingCard />
             </EntranceItem>
           </Entrance>
         </section>
