@@ -10,6 +10,7 @@ export function Modal({
   description,
   size = 'md',
   contained = false,
+  dismissible = true,
   children,
   footer,
   className = '',
@@ -28,14 +29,22 @@ export function Modal({
     }
 
     const frame = requestAnimationFrame(() => {
-      dialogRef.current?.focus()
+      const dialog = dialogRef.current
+      if (!(dialog instanceof HTMLElement)) return
+      const firstFocusable = dialog.querySelector(
+        '.modal-card__body input:not([disabled]), .modal-card__body textarea:not([disabled]), .modal-card__body select:not([disabled])',
+      )
+      if (firstFocusable instanceof HTMLElement) {
+        firstFocusable.focus()
+        return
+      }
+      dialog.focus()
     })
 
     function handleKeyDown(event) {
-      if (event.key === 'Escape') {
-        event.preventDefault()
-        onOpenChange?.(false)
-      }
+      if (!dismissible || event.key !== 'Escape') return
+      event.preventDefault()
+      onOpenChange?.(false)
     }
 
     document.addEventListener('keydown', handleKeyDown)
@@ -52,7 +61,7 @@ export function Modal({
         previouslyFocused.current.focus()
       }
     }
-  }, [open, onOpenChange, contained])
+  }, [dismissible, open, onOpenChange, contained])
 
   if (!open) return null
 
@@ -63,12 +72,16 @@ export function Modal({
         .join(' ')}
     >
       {!contained ? (
-        <button
-          type="button"
-          className="modal__scrim"
-          aria-label="Close dialog"
-          onClick={() => onOpenChange?.(false)}
-        />
+        dismissible ? (
+          <button
+            type="button"
+            className="modal__scrim"
+            aria-label="Close dialog"
+            onClick={() => onOpenChange?.(false)}
+          />
+        ) : (
+          <div className="modal__scrim modal__scrim--locked" aria-hidden="true" />
+        )
       ) : null}
       <ModalCard
         ref={dialogRef}
@@ -80,7 +93,7 @@ export function Modal({
         size={size}
         title={title}
         description={description}
-        onClose={() => onOpenChange?.(false)}
+        onClose={dismissible ? () => onOpenChange?.(false) : undefined}
         footer={footer}
         className={className}
       >

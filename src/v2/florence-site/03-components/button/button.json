@@ -56,18 +56,30 @@
       {
         "name": "disabled",
         "type": "boolean",
-        "default": false
+        "default": false,
+        "description": "Removes the control from interaction"
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "default": false,
+        "description": "Shows a spinner, sets aria-busy, and blocks activation"
       },
       {
         "name": "children",
         "type": "ReactNode",
         "required": true,
-        "description": "Label content"
+        "description": "Visible label. Icon-only buttons still need aria-label on the element."
       },
       {
         "name": "className",
         "type": "string",
         "default": ""
+      },
+      {
+        "name": "aria-label",
+        "type": "string",
+        "description": "Required when children are icon-only"
       }
     ]
   },
@@ -92,7 +104,8 @@
       "--space-inline-*"
     ],
     "radius": [
-      "--radius-control-*"
+      "--radius-control-*",
+      "--radius-pill"
     ],
     "border": [
       "--border-control",
@@ -102,13 +115,18 @@
       "--motion-interaction-*"
     ],
     "opacity": [
-      "--opacity-disabled"
+      "--opacity-disabled",
+      "--opacity-muted"
     ]
   },
   "a11y": [
-    "Native button element",
-    "Focus-visible ring via --color-focus-ring",
-    "Disabled uses opacity-disabled and removes pointer events"
+    "Native <button> — keyboard (Enter/Space), implicit button role, form submit support",
+    "Visible label in children, or aria-label when icon-only — never an unnamed icon control",
+    ":focus-visible ring via --color-focus-ring and --border-focus (keyboard only, not mouse click)",
+    "disabled and loading set aria-disabled, remove pointer events, and use --opacity-disabled",
+    "loading sets aria-busy and shows a decorative spinner marked aria-hidden",
+    "Decorative icons inside the label should use aria-hidden=\"true\"",
+    "prefers-reduced-motion: reduce removes scale feedback and spinner rotation"
   ],
   "examples": [
     {
@@ -116,8 +134,12 @@
       "code": "<Button variant=\"primary\">Save changes</Button>"
     },
     {
-      "title": "Quiet action",
-      "code": "<Button variant=\"secondary\" size=\"sm\">Export</Button>"
+      "title": "Icon-only",
+      "code": "<Button variant=\"secondary\" size=\"sm\" aria-label=\"Search\">\n  <Search aria-hidden=\"true\" />\n</Button>"
+    },
+    {
+      "title": "Loading submit",
+      "code": "<Button type=\"submit\" loading>Saving…</Button>"
     },
     {
       "title": "Destructive",

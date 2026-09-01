@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Play } from 'lucide-react'
 import { SiteHeader } from "../SiteHeader.jsx";
+import { FlorenceVisitors } from "./FlorenceVisitors.jsx";
+import { Pricing } from "./components/Pricing.jsx";
+import { startFlorenceCheckout } from "./stripeCheckout.js";
 import "./florence-website.css";
 
 const DEMO_VIDEO_SRC = "/florence/F2.mp4";
 
-const MASTERCLASS_URL = '/design-systems'
 const DEMO_URL = '/florence/system'
 const GIANT_WORD = 'FLORENCE'
 const ASCII_GLYPHS = '█▓▒░#@*+=-:/\\'
@@ -180,6 +182,7 @@ export default function FlorenceWebsite() {
       <SiteHeader />
       <div className="hero">
       <div className="hero__bloom" aria-hidden="true" />
+      <FlorenceVisitors />
       <div className="hero__mast">
         <GiantMark />
       </div>
@@ -187,30 +190,35 @@ export default function FlorenceWebsite() {
       <div className="hero__copy layout-container-md">
         <p className="hero__lede">
           <span className="hero__lede-line">
-            Florence is an <SelectFrame>AI-ready design system</SelectFrame>.
+            Florence is an <SelectFrame>AI-ready design system</SelectFrame>
           </span>
           <span className="hero__lede-line">
-            So humans and agents ship on-brand product.
+            for humans and agents so you can ship fast without shipping AI
+            slop.
           </span>
         </p>
         <div className="hero__actions">
           <a className="btn btn--primary btn--lg hero__btn" href={DEMO_URL}>
-            View the design system
+            Browse all components
             <Play aria-hidden="true" />
           </a>
-          <a
+          <button
+            type="button"
             className="btn btn--secondary btn--lg hero__btn hero__btn--ghost"
-            href={MASTERCLASS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => startFlorenceCheckout()}
           >
-            Join the upcoming workshop
+            Upgrade to Pro
             <ArrowUpRight aria-hidden="true" />
-          </a>
+          </button>
         </div>
       </div>
 
       <DemoReel />
+
+      <Pricing
+        demoUrl={DEMO_URL}
+        onUpgradeToPro={() => startFlorenceCheckout()}
+      />
       </div>
     </>
   )

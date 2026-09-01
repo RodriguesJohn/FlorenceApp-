@@ -89,7 +89,8 @@ function htmlAliases() {
 export default defineConfig({
   plugins: [react(), htmlAliases(), blogPlugin()],
   optimizeDeps: {
-    entries: ["index.html", "academy.html", "florence.html", "florence-system.html"]
+    entries: ["index.html", "academy.html", "florence.html", "florence-system.html"],
+    include: ["@clerk/react", "@clerk/react/experimental"]
   },
   build: {
     rollupOptions: {

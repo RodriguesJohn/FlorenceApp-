@@ -1,0 +1,60 @@
+.account-page {
+  display: grid;
+  gap: var(--space-stack-lg);
+  padding-block-end: var(--space-section-md);
+}
+
+.account-page__card {
+  display: grid;
+  gap: var(--space-stack-md);
+  padding: var(--space-inset-lg);
+  border: var(--border-surface) solid var(--color-border-default);
+  border-radius: var(--radius-surface-md);
+  background: var(--color-bg-surface);
+}
+
+.account-page__heading {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--text-heading-sm-font-family);
+  font-size: var(--text-heading-sm-font-size);
+  font-weight: var(--text-heading-sm-font-weight);
+  line-height: var(--text-heading-sm-line-height);
+}
+
+.account-page__copy {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-body-sm-font-weight);
+  line-height: var(--text-body-sm-line-height);
+}
+
+.account-page__details {
+  display: grid;
+  gap: var(--space-stack-md);
+  margin: 0;
+}
+
+.account-page__details div {
+  display: grid;
+  gap: var(--space-stack-2xs);
+}
+
+.account-page__details dt {
+  color: var(--color-text-muted);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+}
+
+.account-page__details dd {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--text-body-font-family);
+  font-size: var(--text-body-font-size);
+  font-weight: var(--text-body-font-weight);
+  line-height: var(--text-body-line-height);
+}

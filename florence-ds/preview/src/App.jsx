@@ -112,7 +112,12 @@ import { BarChart } from '../../03-components/charts/bar-chart/BarChart.jsx'
 import { LineChart } from '../../03-components/charts/line-chart/LineChart.jsx'
 import './App.css'
 import { ComponentsGallery } from './ComponentsGallery.jsx'
+import { isProComponent } from './proAccess.js'
+import { FLORENCE_VISIT_HOME_EVENT, useFlorenceAuth } from './FlorenceAuth.jsx'
+import { AccountPage } from './AccountPage.jsx'
+import { TopbarAccount } from './TopbarAccount.jsx'
 import { LIBRARY } from './libraryInventory.js'
+import { getComponentAccess } from './componentAccessCatalog.js'
 import { PlaygroundPage } from './PlaygroundPage.jsx'
 import { LiquidMetal, liquidMetalPresets } from './components/ui/liquid-metal.jsx'
 
@@ -1290,7 +1295,7 @@ function highlightCode(code, lang = 'auto') {
   return escapeHtml(code)
 }
 
-function CopyableCode({ children, lang = 'auto' }) {
+function CopyableCode({ children, lang = 'auto', showCopy = true }) {
   const [copied, setCopied] = useState(false)
   const source = String(children)
 
@@ -1306,9 +1311,110 @@ function CopyableCode({ children, lang = 'auto' }) {
         className="docs__code"
         dangerouslySetInnerHTML={{ __html: highlightCode(source, lang) }}
       />
-      <button type="button" className="docs__copy" onClick={copy}>
-        {copied ? 'Copied' : 'Copy'}
-      </button>
+      {showCopy ? (
+        <Button
+          variant="secondary"
+          size="sm"
+          className="docs__copy"
+          onClick={copy}
+          aria-live="polite"
+        >
+          {copied ? (
+            <Check aria-hidden="true" strokeWidth={1.75} />
+          ) : (
+            <Copy aria-hidden="true" strokeWidth={1.75} />
+          )}
+          {copied ? 'Copied' : 'Copy'}
+        </Button>
+      ) : null}
+    </div>
+  )
+}
+
+function AccessSnippet({ id, title, description, lang = 'auto', children }) {
+  return (
+    <section className="component-access__panel" aria-labelledby={id}>
+      <div className="component-example__header">
+        <h2 id={id}>{title}</h2>
+        {description ? <p>{description}</p> : null}
+      </div>
+      <CopyableCode lang={lang}>{children}</CopyableCode>
+    </section>
+  )
+}
+
+function ComponentAccessLayout({ componentId, title, lede, children }) {
+  const access = getComponentAccess(componentId)
+  const { isPro, setCheckoutOpen } = useFlorenceAuth()
+  const locked = isProComponent(componentId) && !isPro
+  const [tab, setTab] = useState('view')
+
+  function onValueChange(next) {
+    if (locked && next !== 'view') {
+      setCheckoutOpen(true)
+      return
+    }
+    setTab(next)
+  }
+
+  return (
+    <div className="content-block">
+      <header className="hero">
+        <h1>{title}</h1>
+        {lede ? <p className="lede">{lede}</p> : null}
+      </header>
+
+      <Tabs
+        className="component-access"
+        value={tab}
+        onValueChange={onValueChange}
+        size="lg"
+        variant="line"
+      >
+        <TabsList aria-label={`${title} access`}>
+          <TabsTrigger value="view">
+            <AccessTabLabel>View</AccessTabLabel>
+          </TabsTrigger>
+          <TabsTrigger value="prompt">
+            <AccessTabLabel locked={locked}>Prompt</AccessTabLabel>
+          </TabsTrigger>
+          <TabsTrigger value="code">
+            <AccessTabLabel locked={locked}>Code</AccessTabLabel>
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="view">{children}</TabsContent>
+
+        <TabsContent value="prompt">
+          <AccessSnippet
+            id={`${componentId}-prompt`}
+            title="Prompt"
+            description="Paste this with Code. It is the contract: files, tokens, fonts, and View behavior."
+          >
+            {access.prompt}
+          </AccessSnippet>
+        </TabsContent>
+
+        <TabsContent value="code">
+          <AccessSnippet
+            id={`${componentId}-code`}
+            title="Code"
+            description="Exact source: Florence foundations, the component and its deps, and a demo. Do not rewrite."
+            lang="jsx"
+          >
+            {access.code}
+          </AccessSnippet>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}
+
+function CodeFile({ filename, lang = 'auto', children }) {
+  return (
+    <div className="component-access__file">
+      <p className="component-access__filename">{filename}</p>
+      <CopyableCode lang={lang}>{children}</CopyableCode>
     </div>
   )
 }
@@ -1391,41 +1497,68 @@ npm run flowrix -- validate`}</CopyableCode>
   )
 }
 
-function InstallationPage({ onNavigate }) {
+function InstallationPage({ onNavigate, onUpgradeToPro }) {
   return (
     <div className="content-block">
       <header className="hero">
         <h1>Installation</h1>
-        <p className="lede">
-          This preview is for demo purposes only, built for the masterclass
-          and workshop. It is not a public install kit yet.
-        </p>
+        <p className="lede">Florence is retrieved.</p>
       </header>
 
       <div className="docs">
         <section className="docs__section">
-          <h2>Look around</h2>
-          <p>
-            Feel free to browse the foundations, open any component, and walk
-            the playground. Same tokens, same rules, just a workshop build so
-            you can see how Florence is meant to be retrieved and composed.
-          </p>
+          <h2>How to use it</h2>
+          <ol className="docs__list">
+            <li>
+              <strong>Step 1.</strong> View a component in the gallery.
+            </li>
+            <li>
+              <strong>Step 2.</strong> Copy the prompt or copy the code.
+            </li>
+            <li>
+              <strong>Step 3.</strong> Drop it in your coding agent. That is
+              enough to start building.
+            </li>
+          </ol>
           <div className="statement__actions">
             <button
               type="button"
               className="statement__btn statement__btn--primary"
               onClick={() => onNavigate('gallery')}
             >
-              Browse components
+              Browse all components
             </button>
             <button
               type="button"
               className="statement__btn statement__btn--secondary"
-              onClick={() => onNavigate('playground')}
+              onClick={onUpgradeToPro}
             >
-              Join the workshop
+              {FLORENCE_PRO_COPY.cta}
             </button>
           </div>
+        </section>
+
+        <section className="docs__section">
+          <h2>Complete system</h2>
+          <p>
+            If you want a complete repo, the full design system, and
+            customization, that is a deeper install than copy-paste. We set
+            that up with you.
+          </p>
+          <p className="statement__meta">
+            All the components are available, with code snippets and copy
+            prompts. If you want the complete design system and more embedded
+            support,{' '}
+            <a
+              className="statement__meta-link"
+              href="https://www.humanaistudio.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              book a discovery call
+            </a>
+            .
+          </p>
         </section>
       </div>
     </div>
@@ -1679,8 +1812,8 @@ const FLORENCE_ROADMAP = [
   {
     status: 'next',
     phase: 'Next',
-    title: 'Retrieval accuracy',
-    body: 'Raise how reliably agents find the right tokens, components, and rules - and keep improving the components they retrieve.',
+    title: 'V2 for coding agents',
+    body: 'Components you drop into Cursor, Claude Code, or Codex — copy-paste prompts, snippets, and chat-ready code.',
   },
   {
     status: 'next',
@@ -1696,7 +1829,7 @@ const FLORENCE_ROADMAP = [
   },
 ]
 
-function AboutPage({ onNavigate }) {
+function AboutPage({ onNavigate, onUpgradeToPro }) {
   return (
     <div className="content-block content-block--statement">
       <div className="layout-page home-stage">
@@ -1719,19 +1852,31 @@ function AboutPage({ onNavigate }) {
               className="statement__btn statement__btn--primary"
               onClick={() => onNavigate('gallery')}
             >
-              Open view components
+              Browse all components
             </button>
-            <a
+            <button
+              type="button"
               className="statement__btn statement__btn--secondary"
-              href="https://www.humanaistudio.io/design-systems"
+              onClick={onUpgradeToPro}
+            >
+              {FLORENCE_PRO_COPY.cta}
+            </button>
+          </div>
+
+          <p className="statement__meta">
+            All the components are available, with code snippets and copy
+            prompts. If you want the complete design system and more embedded
+            support,{' '}
+            <a
+              className="statement__meta-link"
+              href="https://www.humanaistudio.io/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Join the free masterclass
+              book a discovery call
             </a>
-          </div>
-
-          <p className="statement__meta">Currently in beta</p>
+            .
+          </p>
         </article>
 
         <Timeline
@@ -3327,6 +3472,28 @@ function ComponentsIndex({ onNavigate }) {
   )
 }
 
+const FLORENCE_PRO_COPY = {
+  title: 'Unlock Pro components',
+  body: 'Pro components, React snippets, and prompts you can drop into your coding agent and save tokens.',
+  cta: 'Upgrade to Pro',
+}
+
+
+function AccessTabLabel({ children, locked = false }) {
+  return (
+    <span className="component-access__label">
+      {children}
+      {locked ? (
+        <Lock
+          className="component-access__lock"
+          aria-hidden="true"
+          strokeWidth={1.75}
+        />
+      ) : null}
+    </span>
+  )
+}
+
 function ComponentDoc({
   id,
   title,
@@ -3462,6 +3629,7 @@ function ButtonsPage() {
   const [size, setSize] = useState('md')
   const [variant, setVariant] = useState('primary')
   const [disabled, setDisabled] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const masterLabels = {
     primary: 'Continue',
@@ -3475,6 +3643,7 @@ function ButtonsPage() {
     `  variant="${variant}"`,
     `  size="${size}"`,
     disabled ? `  disabled` : null,
+    loading ? `  loading` : null,
     `>`,
     `  ${masterLabels[variant]}`,
     `</Button>`,
@@ -3522,24 +3691,26 @@ function ButtonsPage() {
   ]
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Buttons</h1>
-        <p className="lede">
-          Action hierarchy across primary, secondary, tertiary, and danger -
-          each in lg, md, and sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="button"
+      title="Buttons"
+      lede="Action hierarchy across primary, secondary, tertiary, and danger - each in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
           id="button-master"
-          summary="Toggle size, variant, and disabled to preview every Button combination."
-          about="Use one Primary per view. Secondary for quieter paths, Tertiary for low-emphasis actions, and Danger only for irreversible work."
+          summary="Toggle size, variant, disabled, and loading to preview every Button combination."
+          about="Use one Primary per view. Secondary for quieter paths, Tertiary for low-emphasis actions, and Danger only for irreversible work. Accessibility is built in — native button, focus-visible ring, loading/disabled states, and icon-only naming via aria-label. See button.json → a11y for the contract."
           code={masterCode}
           preview={
             <div className="button-preview">
-              <Button variant={variant} size={size} disabled={disabled}>
+              <Button
+                variant={variant}
+                size={size}
+                disabled={disabled}
+                loading={loading}
+              >
                 {masterLabels[variant]}
               </Button>
             </div>
@@ -3590,12 +3761,73 @@ function ButtonsPage() {
                     checked={disabled}
                     onCheckedChange={setDisabled}
                   />
+                  <Switch
+                    label="Loading"
+                    size="lg"
+                    checked={loading}
+                    onCheckedChange={setLoading}
+                  />
                 </div>
               </div>
             </aside>
           }
           variants={
             <div className="component-grid">
+              <ComponentDoc
+                id="button-a11y"
+                title="Accessibility"
+                aboutTitle="Built in"
+                about="Rules live in button.json → a11y. The component uses a native button, a keyboard-only focus ring, loading/disabled states, and requires aria-label for icon-only controls. Tab to the first button to see the focus ring."
+                lang="jsx"
+                code={`// Icon-only — name the action
+<Button variant="secondary" size="sm" aria-label="Search">
+  <Search aria-hidden="true" />
+</Button>
+
+// Loading — busy + inactive
+<Button loading>Saving…</Button>
+
+// Contract (button.json → a11y)
+// - Native <button>
+// - :focus-visible via --color-focus-ring
+// - aria-busy when loading
+// - prefers-reduced-motion honored`}
+                preview={
+                  <div className="button-preview button-preview--a11y">
+                    <div className="button-a11y-demo">
+                      <span className="button-a11y-demo__hint text-caption">
+                        Tab here — focus ring
+                      </span>
+                      <Button variant="primary">Continue</Button>
+                    </div>
+                    <div className="button-a11y-demo">
+                      <span className="button-a11y-demo__hint text-caption">
+                        aria-label names icon-only
+                      </span>
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        aria-label="Search"
+                      >
+                        <Search aria-hidden="true" />
+                      </Button>
+                    </div>
+                    <div className="button-a11y-demo">
+                      <span className="button-a11y-demo__hint text-caption">
+                        aria-busy + spinner
+                      </span>
+                      <Button loading>Saving…</Button>
+                    </div>
+                    <div className="button-a11y-demo">
+                      <span className="button-a11y-demo__hint text-caption">
+                        disabled + aria-disabled
+                      </span>
+                      <Button disabled>Unavailable</Button>
+                    </div>
+                  </div>
+                }
+              />
+
               {sections.map((section) => (
                 <ComponentDoc
                   key={section.id}
@@ -3629,7 +3861,7 @@ function ButtonsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 function InputsPage() {
@@ -3661,14 +3893,11 @@ function InputsPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Inputs</h1>
-        <p className="lede">
-          Text fields with label, hint, and error support across lg, md, and
-          sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="input"
+      title="Inputs"
+      lede="Text fields with label, hint, and error support across lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -3837,7 +4066,7 @@ function InputsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 function SwitchesPage() {
@@ -3859,14 +4088,11 @@ function SwitchesPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Switches</h1>
-        <p className="lede">
-          Binary toggles for settings and feature flags - each in lg, md, and
-          sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="switch"
+      title="Switches"
+      lede="Binary toggles for settings and feature flags - each in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -4000,7 +4226,7 @@ function SwitchesPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -4035,14 +4261,11 @@ function RadiosPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Radios</h1>
-        <p className="lede">
-          Single-select choices for settings and forms - each in lg, md, and
-          sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="radio"
+      title="Radios"
+      lede="Single-select choices for settings and forms - each in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -4242,7 +4465,7 @@ function RadiosPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -4279,13 +4502,11 @@ function CheckboxesPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Checkboxes</h1>
-        <p className="lede">
-          Multi-select choices and confirmations - each in lg, md, and sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="checkbox"
+      title="Checkboxes"
+      lede="Multi-select choices and confirmations - each in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -4470,7 +4691,7 @@ function CheckboxesPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -4506,13 +4727,11 @@ function SelectsPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Selects</h1>
-        <p className="lede">
-          Single choice from a list - each in lg, md, and sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="select"
+      title="Selects"
+      lede="Single choice from a list - each in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -4746,7 +4965,7 @@ function SelectsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -4782,14 +5001,11 @@ function TabsPage() {
   }
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Tabs</h1>
-        <p className="lede">
-          Switch between related views in place - segmented or line, in lg,
-          md, and sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="tabs"
+      title="Tabs"
+      lede="Switch between related views in place - segmented or line, in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -4988,7 +5204,7 @@ function TabsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -5021,13 +5237,11 @@ function TextareasPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Textareas</h1>
-        <p className="lede">
-          Multi-line fields for notes and messages - each in lg, md, and sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="textarea"
+      title="Textareas"
+      lede="Multi-line fields for notes and messages - each in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -5203,7 +5417,7 @@ function TextareasPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -5234,14 +5448,11 @@ function ModalsPage() {
   ].join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Modals</h1>
-        <p className="lede">
-          Focused dialogs for confirmations and short tasks - each in lg, md,
-          and sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="modal"
+      title="Modals"
+      lede="Focused dialogs for confirmations and short tasks - each in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -5469,7 +5680,7 @@ function ModalsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -5547,14 +5758,11 @@ function ModalCardsPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Modal cards</h1>
-        <p className="lede">
-          The dialog surface used inside Modals with title, body copy, and actions
-          in lg, md, and sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="modal-card"
+      title="Modal cards"
+      lede="The dialog surface used inside Modals with title, body copy, and actions in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -5716,7 +5924,7 @@ function ModalCardsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -5749,14 +5957,11 @@ function KpiCardsPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>KPI cards</h1>
-        <p className="lede">
-          Metric surfaces for dashboards with a label, value, and trend in lg,
-          md, and sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="kpi-card"
+      title="KPI cards"
+      lede="Metric surfaces for dashboards with a label, value, and trend in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -5941,7 +6146,7 @@ function KpiCardsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -5976,14 +6181,11 @@ function InsightCardsPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Insight cards</h1>
-        <p className="lede">
-          Dedicated surfaces for AI recommendations and analytical findings -
-          one idea per card, with optional confidence and actions.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="insight-card"
+      title="Insight cards"
+      lede="Dedicated surfaces for AI recommendations and analytical findings - one idea per card, with optional confidence and actions."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -6184,7 +6386,7 @@ function InsightCardsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -6241,15 +6443,11 @@ function PieChartsPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Pie charts</h1>
-        <p className="lede">
-          Part-to-whole share for a handful of segments, as a donut or a solid
-          pie. Reach for it when the reader needs a rough share at a glance -
-          not when they need to rank close values.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="pie-chart"
+      title="Pie charts"
+      lede="Part-to-whole share for a handful of segments, as a donut or a solid pie. Reach for it when the reader needs a rough share at a glance - not when they need to rank close values."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -6360,7 +6558,7 @@ function PieChartsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -6385,14 +6583,11 @@ function BarChartsPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Bar charts</h1>
-        <p className="lede">
-          Compare magnitudes across categories. Reach for it when the reader
-          needs to rank values - close numbers read instantly as bar length.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="bar-chart"
+      title="Bar charts"
+      lede="Compare magnitudes across categories. Reach for it when the reader needs to rank values - close numbers read instantly as bar length."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -6512,7 +6707,7 @@ function BarChartsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -6550,14 +6745,11 @@ function LineChartsPage() {
   ]
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Line charts</h1>
-        <p className="lede">
-          Change and progress over time. Reach for it when the reader needs to
-          follow a trajectory - not compare unrelated magnitudes at one moment.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="line-chart"
+      title="Line charts"
+      lede="Change and progress over time. Reach for it when the reader needs to follow a trajectory - not compare unrelated magnitudes at one moment."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -6680,7 +6872,7 @@ function LineChartsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -6707,13 +6899,11 @@ function CalendarsPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Calendars</h1>
-        <p className="lede">
-          Month view for picking a single date in lg, md, and sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="calendar"
+      title="Calendars"
+      lede="Month view for picking a single date in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -6835,7 +7025,7 @@ function CalendarsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -6844,21 +7034,18 @@ function TimelinesPage() {
   label="Florence roadmap"
   items={[
     { status: "now", phase: "Now", title: "V1 shipped", body: "MVP design system, React components with component contracts, and architecture that’s retrievable by agents." },
-    { status: "next", phase: "Next", title: "Retrieval accuracy", body: "Agents find the right tokens, components, and rules." },
+    { status: "next", phase: "Next", title: "V2 for coding agents", body: "Copy-paste prompts, snippets, and chat-ready code." },
     { status: "next", phase: "Next", title: "Figma file launch", body: "Design and code share one system." },
     { status: "later", phase: "Later", title: "More agentic", body: "Agents that compose, review, and ship against Florence." },
   ]}
 />`
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Timelines</h1>
-        <p className="lede">
-          A vertical sequence of now, next, and later - for roadmaps and
-          multi-stage work, not for charts.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="timeline"
+      title="Timelines"
+      lede="A vertical sequence of now, next, and later - for roadmaps and multi-stage work, not for charts."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -6876,7 +7063,7 @@ function TimelinesPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -6903,13 +7090,11 @@ function TagsPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Tags</h1>
-        <p className="lede">
-          Compact labels for categories, filters, and status.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="tag"
+      title="Tags"
+      lede="Compact labels for categories, filters, and status."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -7079,7 +7264,7 @@ function TagsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -7095,13 +7280,11 @@ function TooltipsPage() {
   ].join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Tooltips</h1>
-        <p className="lede">
-          Short labels that appear on hover and focus to clarify a control.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="tooltip"
+      title="Tooltips"
+      lede="Short labels that appear on hover and focus to clarify a control."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -7235,7 +7418,7 @@ function TooltipsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -7264,14 +7447,11 @@ function ToastsPage() {
     .join('\n')
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Toasts</h1>
-        <p className="lede">
-          Short feedback messages that appear without blocking the page, in lg,
-          md, and sm.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="toast"
+      title="Toasts"
+      lede="Short feedback messages that appear without blocking the page, in lg, md, and sm."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -7479,7 +7659,7 @@ function ToastsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -7584,77 +7764,60 @@ function ChatPatternPage() {
   }
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Chat Pattern</h1>
-        <p className="lede">
-          A reusable conversation surface for assistants, copilots, and
-          task-oriented agents.
-        </p>
-      </header>
-
-      <div className="component-stack">
-        <ComponentDoc
-          id="chat-pattern-default"
-          title="Interactive chat"
-          summary="Send a message or choose a suggested prompt."
-          aboutTitle="Usage"
-          about="Use Chat Pattern when the agent needs an ongoing conversational workspace. Keep suggested prompts specific, useful, and easy to scan."
-          lang="jsx"
-          code={`<ChatPattern
-  title="Workspace assistant"
-  status="Ready"
-  messages={messages}
-  suggestions={['Create a task', 'Draft an update']}
-  menuItems={[
-    { id: 'new', label: 'New conversation', onSelect: startNewConversation },
-    { id: 'reset', label: 'Reset example', onSelect: resetExample },
-  ]}
-  onSend={handleSend}
-/>`}
-          preview={
-            <div className="chat-pattern-preview">
-              <ChatPattern
-                title="Workspace assistant"
-                status="Ready"
-                messages={messages}
-                suggestions={
-                  showSuggestions ? ['Create a task', 'Draft an update'] : []
-                }
-                isThinking={isThinking}
-                disabled={isThinking}
-                menuItems={[
-                  {
-                    id: 'new',
-                    label: 'New conversation',
-                    onSelect: startNewConversation,
-                  },
-                  {
-                    id: 'reset',
-                    label: 'Reset example',
-                    onSelect: resetExample,
-                  },
-                ]}
-                onSend={handleSend}
-              />
-            </div>
-          }
-        />
-      </div>
-    </div>
+    <ComponentAccessLayout
+      componentId="chat-pattern"
+      title="Chat Pattern"
+      lede="A reusable conversation surface for assistants, copilots, and task-oriented agents."
+    >
+          <div className="component-stack">
+            <ComponentDoc
+              id="chat-pattern-default"
+              title="Interactive chat"
+              summary="Send a message or choose a suggested prompt."
+              aboutTitle="Usage"
+              about="Use Chat Pattern when the agent needs an ongoing conversational workspace. Keep suggested prompts specific, useful, and easy to scan."
+              preview={
+                <div className="chat-pattern-preview">
+                  <ChatPattern
+                    title="Workspace assistant"
+                    status="Ready"
+                    messages={messages}
+                    suggestions={
+                      showSuggestions
+                        ? ['Create a task', 'Draft an update']
+                        : []
+                    }
+                    isThinking={isThinking}
+                    disabled={isThinking}
+                    menuItems={[
+                      {
+                        id: 'new',
+                        label: 'New conversation',
+                        onSelect: startNewConversation,
+                      },
+                      {
+                        id: 'reset',
+                        label: 'Reset example',
+                        onSelect: resetExample,
+                      },
+                    ]}
+                    onSend={handleSend}
+                  />
+                </div>
+              }
+            />
+          </div>
+    </ComponentAccessLayout>
   )
 }
 
 function ThinkingAnimationPage() {
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Thinking Animation</h1>
-        <p className="lede">
-          A calm processing indicator for assistants, agents, and short system
-          waits.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="thinking-animation"
+      title="Thinking Animation"
+      lede="A calm processing indicator for assistants, agents, and short system waits."
+    >
 
       <div className="component-stack">
         <ComponentDoc
@@ -7676,7 +7839,7 @@ function ThinkingAnimationPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -7686,13 +7849,11 @@ function ShimmerTextPage() {
   const masterCode = `<ShimmerText speed={${Number(speed.toFixed(2))}}>Generating response…</ShimmerText>`
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Shimmer Text</h1>
-        <p className="lede">
-          Animated text for short, indeterminate processing states.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="shimmer-text"
+      title="Shimmer Text"
+      lede="Animated text for short, indeterminate processing states."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -7739,7 +7900,7 @@ function ShimmerTextPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -7759,13 +7920,11 @@ function LoadingAnimationPage() {
 />`
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Loading Animation</h1>
-        <p className="lede">
-          Configurable dot-grid indicators for active loading states.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="loading-animation"
+      title="Loading Animation"
+      lede="Configurable dot-grid indicators for active loading states."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -7834,7 +7993,7 @@ function LoadingAnimationPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -7899,13 +8058,11 @@ function NumberTransitionPage() {
   }, [])
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Number Transition</h1>
-        <p className="lede">
-          Spring-like rolling transitions for changing numeric values.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="number-transition"
+      title="Number Transition"
+      lede="Spring-like rolling transitions for changing numeric values."
+    >
 
       <div className="component-stack">
         <div ref={previewSectionRef}>
@@ -7955,7 +8112,7 @@ function NumberTransitionPage() {
           />
         </div>
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -8005,14 +8162,11 @@ function DataTablesPage() {
   ]
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Data Tables</h1>
-        <p className="lede">
-          Responsive structured data with search, filters, column settings, and
-          clear empty states.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="data-table"
+      title="Data Tables"
+      lede="Responsive structured data with search, filters, column settings, and clear empty states."
+    >
 
       <div className="component-stack">
         <ComponentDoc
@@ -8084,7 +8238,7 @@ function DataTablesPage() {
           />
         </div>
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -8122,14 +8276,11 @@ function SidebarsPage() {
 </Sidebar>`
 
   return (
-    <div className="content-block">
-      <header className="hero">
-        <h1>Sidebars</h1>
-        <p className="lede">
-          App navigation with grouped destinations, active context, badges,
-          and a persistent footer.
-        </p>
-      </header>
+    <ComponentAccessLayout
+      componentId="sidebar"
+      title="Sidebars"
+      lede="App navigation with grouped destinations, active context, badges, and a persistent footer."
+    >
 
       <div className="component-stack">
         <ComponentMaster
@@ -8317,7 +8468,7 @@ function SidebarsPage() {
           }
         />
       </div>
-    </div>
+    </ComponentAccessLayout>
   )
 }
 
@@ -8346,16 +8497,17 @@ function ThemeToggle({ theme, onChange }) {
       <span className="theme-toggle__icon" aria-hidden="true">
         {isDark ? <Sun size={16} /> : <Moon size={16} />}
       </span>
-      <span className="theme-toggle__label">
-        {isDark ? 'Light' : 'Dark'}
-      </span>
     </button>
   )
 }
 
 export default function App() {
-  const [activeId, setActiveId] = useState('about')
+  const [activeId, setActiveId] = useState('gallery')
   const [navOpen, setNavOpen] = useState(false)
+  const {
+    user,
+    setCheckoutOpen,
+  } = useFlorenceAuth()
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') return 'dark'
     return window.localStorage.getItem('flowrix-theme') || 'dark'
@@ -8371,11 +8523,36 @@ export default function App() {
     setNavOpen(false)
   }
 
+  useEffect(() => {
+    function handleVisitHome() {
+      select('about')
+    }
+    window.addEventListener(FLORENCE_VISIT_HOME_EVENT, handleVisitHome)
+    return () =>
+      window.removeEventListener(FLORENCE_VISIT_HOME_EVENT, handleVisitHome)
+  }, [])
+
   let content = <Placeholder title="Page" />
-  if (activeId === 'overview' || activeId === 'getting-started') {
-    content = <InstallationPage onNavigate={select} />
+  if (activeId === 'account') {
+    content = <AccountPage />
+  } else if (activeId === 'overview' || activeId === 'getting-started') {
+    content = (
+      <InstallationPage
+        onNavigate={select}
+        onUpgradeToPro={() =>
+          setCheckoutOpen(true)
+        }
+      />
+    )
   } else if (activeId === 'about') {
-    content = <AboutPage onNavigate={select} />
+    content = (
+      <AboutPage
+        onNavigate={select}
+        onUpgradeToPro={() =>
+          setCheckoutOpen(true)
+        }
+      />
+    )
   } else if (activeId === 'agents' || activeId === 'agents-overview') {
     content = <AgentsOverviewPage onNavigate={select} />
   } else if (activeId === 'agents-guidelines') {
@@ -8493,6 +8670,9 @@ export default function App() {
           <span>AI-ready design system</span>
         </div>
         <div className="topbar__actions">
+          <div className="topbar__account">
+            <TopbarAccount />
+          </div>
           <ThemeToggle theme={theme} onChange={setTheme} />
         </div>
       </header>
@@ -8501,26 +8681,36 @@ export default function App() {
         <nav className="sidebar__nav" aria-label="Design system">
           <NavItems items={NAV} activeId={activeId} onSelect={select} />
         </nav>
-        <aside className="sidebar__upsell" aria-label="AI-ready design systems workshop">
-          <div className="sidebar__upsell-icon" aria-hidden="true">
-            <StatementVisual theme={theme} />
+        {user ? (
+          <div className="sidebar__manage">
+            <Button
+              variant="tertiary"
+              size="md"
+              className="sidebar__manage-btn"
+              onClick={() => select('account')}
+            >
+              <Settings aria-hidden="true" />
+              Settings
+            </Button>
           </div>
-          <p className="sidebar__upsell-title">
-            AI-ready design systems workshop
-          </p>
-          <p className="sidebar__upsell-body">
-            A session with John on making your system something agents can
-            actually use.
-          </p>
-          <a
-            href="https://www.humanaistudio.io/design-systems"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn--secondary btn--sm sidebar__upsell-cta"
-          >
-            View the workshop
-          </a>
-        </aside>
+        ) : (
+          <aside className="sidebar__upsell" aria-label="Florence Pro">
+            <div className="sidebar__upsell-icon" aria-hidden="true">
+              <StatementVisual theme={theme} />
+            </div>
+            <p className="sidebar__upsell-eyebrow">Pro</p>
+            <p className="sidebar__upsell-title">{FLORENCE_PRO_COPY.title}</p>
+            <p className="sidebar__upsell-body">{FLORENCE_PRO_COPY.body}</p>
+            <Button
+              variant="primary"
+              size="md"
+              className="sidebar__upsell-cta topbar__btn topbar__btn--upgrade"
+              onClick={() => setCheckoutOpen(true)}
+            >
+              {FLORENCE_PRO_COPY.cta}
+            </Button>
+          </aside>
+        )}
       </aside>
 
       <div className="main">

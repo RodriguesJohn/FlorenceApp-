@@ -1,0 +1,36 @@
+/* Clerk overlays default to align-items: flex-start — center in the viewport. */
+.cl-modalBackdrop {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: var(--space-inset-lg) !important;
+}
+
+.cl-modalContent {
+  margin: 0 !important;
+  max-height: min(90dvh, 100%) !important;
+  max-width: 100% !important;
+}
+
+/* Sign-in / sign-up stay compact. */
+.cl-modalContent:has(.cl-signIn-root),
+.cl-modalContent:has(.cl-signUp-root) {
+  width: min(100%, 25rem) !important;
+}
+
+/* Account + billing need the full sidebar layout. */
+.cl-modalContent:has(.cl-userProfile-root) {
+  width: min(100%, 56rem) !important;
+}
+
+.cl-userProfile-root,
+.cl-userProfile-root .cl-cardBox {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cl-modalContent {
+    animation: none !important;
+  }
+}

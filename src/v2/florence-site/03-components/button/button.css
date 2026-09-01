@@ -131,6 +131,32 @@
   outline-offset: var(--space-inset-2xs);
 }
 
+.btn__label {
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+}
+
+.btn--loading .btn__label {
+  opacity: var(--opacity-muted);
+}
+
+.btn__spinner {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  border: var(--border-control) solid currentcolor;
+  border-top-color: transparent;
+  border-radius: var(--radius-pill);
+  animation: btn-spin var(--motion-interaction-duration) linear infinite;
+}
+
+@keyframes btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn {
     transition: none;
@@ -140,5 +166,11 @@
   .btn:hover:not(:disabled):not([aria-disabled='true']),
   .btn:active:not(:disabled):not([aria-disabled='true']) {
     transform: none;
+  }
+
+  .btn__spinner {
+    animation: none;
+    border-top-color: currentcolor;
+    opacity: var(--opacity-muted);
   }
 }

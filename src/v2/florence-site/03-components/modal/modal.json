@@ -55,6 +55,12 @@
         "description": "Render within a container instead of viewport"
       },
       {
+        "name": "dismissible",
+        "type": "boolean",
+        "default": true,
+        "description": "When false, hides close control and blocks scrim click and Escape"
+      },
+      {
         "name": "className",
         "type": "string",
         "default": ""

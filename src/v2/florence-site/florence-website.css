@@ -17,6 +17,8 @@
 @import './02-foundations/opacity/primitives.css';
 @import './02-foundations/opacity/semantics.css';
 @import './03-components/button/button.css';
+@import './03-components/modal/modal.css';
+@import './03-components/modal-card/modal-card.css';
 
 :root {
   color-scheme: dark;
@@ -50,8 +52,9 @@ a {
   position: relative;
   isolation: isolate;
   display: grid;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto auto auto;
   align-content: start;
+  gap: var(--space-stack-md);
   min-width: 0;
   min-height: 100vh;
   min-height: 100dvh;
@@ -59,6 +62,59 @@ a {
   background: var(--color-overlay-scrim);
   container-type: inline-size;
   container-name: hero;
+}
+
+.florence-visitors {
+  position: absolute;
+  top: 1.15rem;
+  right: var(--layout-margin-md, clamp(1rem, 3vw, 2.5rem));
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  margin: 0;
+  padding: 0.14rem 0.14rem 0.14rem 0.62rem;
+  border: var(--border-control) solid
+    color-mix(in srgb, var(--color-text-primary) 14%, transparent);
+  border-radius: var(--radius-pill);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-text-primary) 8%, transparent),
+      color-mix(in srgb, var(--color-text-primary) 3%, transparent)
+    );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-text-primary) 12%, transparent),
+    0 0.35rem 1rem color-mix(in srgb, var(--color-overlay-scrim) 55%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: color-mix(in srgb, var(--color-text-primary) 62%, transparent);
+  font-family: var(--text-label-font-family);
+  font-size: 0.58rem;
+  font-weight: var(--text-label-font-weight);
+  letter-spacing: 0.07em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.florence-visitors-label {
+  padding-block: 0.18rem;
+}
+
+.florence-visitors-count {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.2rem;
+  padding: 0 0.48rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-text-primary);
+  color: var(--color-overlay-scrim);
+  font-size: 0.62rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .hero__bloom {
@@ -632,6 +688,19 @@ a {
   .hero {
     padding-block-start: env(safe-area-inset-top);
     padding-block-end: env(safe-area-inset-bottom);
+  }
+
+  .florence-visitors {
+    top: 0.85rem;
+    right: var(--layout-margin-sm);
+    padding-left: 0.52rem;
+    font-size: 0.52rem;
+  }
+
+  .florence-visitors-count {
+    min-height: 1.08rem;
+    padding-inline: 0.42rem;
+    font-size: 0.56rem;
   }
 
   .hero__mast {
