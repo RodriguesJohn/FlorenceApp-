@@ -88,7 +88,7 @@ function wait(ms) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
-function AcademyWorkspacePreview() {
+function AcademyWorkspacePreview({ product = "Training" } = {}) {
   const reduceMotion = useReducedMotion();
   const [phase, setPhase] = React.useState(reduceMotion ? "open" : "idle");
 
@@ -157,7 +157,7 @@ function AcademyWorkspacePreview() {
                 <SidebarIcon name="home" />
               </span>
               <span>
-                <strong>Training</strong>
+                <strong>{product}</strong>
                 <small>AI-ready design systems</small>
               </span>
             </span>
@@ -226,7 +226,7 @@ function AcademyWorkspacePreview() {
                 transition={{ duration: 0.2 }}
               >
                 <section className="playbook-index">
-                  <p className="academy-workspace-kicker">Training</p>
+                  <p className="academy-workspace-kicker">{product}</p>
                   <h1>Lessons</h1>
                   <div className="playbook-module-grid academy-workspace-grid">
                     {previewCards.map((entry, index) => {

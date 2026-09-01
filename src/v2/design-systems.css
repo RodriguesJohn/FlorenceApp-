@@ -592,38 +592,35 @@
   text-align: center;
 }
 
-.ds-trust-strip div,
 .ds-trust-logos {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-items: center;
   align-items: center;
-  gap: 1.75rem 2rem;
-  width: 100%;
-  max-width: 36rem;
-  margin: 0 auto;
-}
-
-.ds-trust-strip div span {
-  color: rgba(255, 255, 255, 0.76);
-  font-size: clamp(0.82rem, 1.35vw, 1.05rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
+  gap: 1.5rem 1.75rem;
+  width: min(34rem, 100%);
+  margin-inline: auto;
+  flex: 0 0 auto;
 }
 
 .ds-trust-logos img {
   display: block;
-  height: 1.35rem;
   width: auto;
-  max-width: 5.5rem;
+  max-width: 6rem;
+  height: 2rem;
+  margin-inline: auto;
   object-fit: contain;
+  object-position: center;
   opacity: 0.85;
 }
 
+.ds-trust-logos img[alt="Apple"] {
+  filter: brightness(2.4);
+}
+
 .ds-trust-logos img[alt="Salesforce"] {
-  height: 1.75rem;
-  max-width: 6.75rem;
+  height: 2rem;
+  max-width: 6.25rem;
 }
 
 .ds-audit-problem,
@@ -884,6 +881,80 @@
   margin: 0.8rem 0 0;
   color: rgba(255, 255, 255, 0.52);
   font-size: 0.72rem;
+}
+
+.ds-playbook {
+  padding: clamp(3rem, 6vw, 5rem) var(--page-padding);
+  background: #000;
+  color: #fff;
+}
+
+.ds-playbook-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  width: min(100%, 74rem);
+  margin: 0 auto;
+}
+
+.ds-playbook-visual {
+  min-width: 0;
+}
+
+.ds-playbook-app {
+  overflow: hidden;
+  border-radius: 0.95rem;
+  box-shadow:
+    0 1.5rem 4rem rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.ds-playbook-app .academy-hero-app-scaler {
+  --preview-width: 62rem;
+  --preview-height: 34rem;
+  --preview-scale: min(1, calc(100cqi / var(--preview-width)));
+  container-type: inline-size;
+  height: calc(2.35rem + var(--preview-height) * var(--preview-scale));
+}
+
+.ds-playbook-app .academy-hero-app-frame {
+  position: absolute;
+  top: 2.35rem;
+  left: 0;
+  width: var(--preview-width);
+  height: var(--preview-height);
+  transform: scale(var(--preview-scale));
+  transform-origin: top left;
+}
+
+.ds-playbook-app .academy-workspace.playbook-page {
+  height: var(--preview-height);
+  min-height: var(--preview-height);
+}
+
+.ds-playbook-copy {
+  padding: 0.4rem 0;
+}
+
+.ds-playbook h2 {
+  max-width: none;
+  font-size: clamp(1.95rem, 3.1vw, 2.9rem);
+}
+
+.ds-playbook h2 span {
+  display: block;
+}
+
+.ds-playbook-copy > p {
+  max-width: 28rem;
+  margin: 1rem 0 0;
+  color: rgba(255, 255, 255, 0.68);
+  line-height: 1.5;
+}
+
+.ds-playbook-copy .ds-conversion-cta {
+  margin-top: 1.35rem;
 }
 
 @keyframes dsShaderFloatA {
@@ -1274,6 +1345,7 @@
   .ds-audit-hero-copy,
   .ds-why-layout,
   .ds-masterclass-inner,
+  .ds-playbook-inner,
   .ds-fit-grid,
   .ds-instructor-inner,
   .ds-offer-card,
@@ -1379,6 +1451,7 @@
 
   .ds-audit-problem,
   .ds-why-section,
+  .ds-playbook,
   .ds-agenda,
   .ds-fit,
   .ds-instructor,
@@ -1505,10 +1578,9 @@
     padding-bottom: 1.85rem;
   }
 
-  .ds-trust-strip div,
   .ds-trust-logos {
     gap: 1.6rem 1.5rem;
-    max-width: 100%;
+    width: 100%;
   }
 
   .ds-outcome-grid {
@@ -1608,6 +1680,7 @@
   .ds-audit-problem h2,
   .ds-why-section h2,
   .ds-masterclass h2,
+  .ds-playbook h2,
   .ds-agenda h2,
   .ds-fit h2,
   .ds-instructor h2,

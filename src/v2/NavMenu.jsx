@@ -8,8 +8,6 @@ const florenceUrl = "/florence";
 const designSystemsUrl = "/workshop";
 const blogUrl = "/blog";
 
-const playbookUrl = "/playbook";
-
 function trackAcademyNavClick() {
   track("Academy CTA Click", {
     location: "primary_navigation",
@@ -34,7 +32,6 @@ const barLinks = [
 
 const menuLinks = [
   { label: "Training", href: academyUrl, onClick: trackAcademyNavClick },
-  { label: "Playbook", href: playbookUrl },
   { label: "Tools", href: "/tools" },
   { label: "Blog", href: blogUrl }
 ];

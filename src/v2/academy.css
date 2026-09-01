@@ -1299,21 +1299,35 @@ html:has(.academy-page) {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   justify-items: center;
   align-items: center;
-  gap: 1.75rem 2rem;
-  width: 100%;
-  max-width: 36rem;
+  gap: 1.5rem 1.75rem;
+  width: min(34rem, 100%);
+  margin-inline: auto;
+  flex: 0 0 auto;
 }
 
 .academy-reviews-trust .academy-hero-logos img {
-  max-width: 100%;
+  display: block;
+  width: auto;
+  max-width: 6rem;
+  height: 2rem;
+  margin-inline: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.academy-reviews-trust .academy-hero-logos img[alt="Salesforce"] {
+  height: 2rem;
+  max-width: 6.25rem;
 }
 
 .academy-reviews-trust p {
   margin: 0;
+  width: min(34rem, 100%);
   color: rgba(255, 255, 255, 0.48);
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.08em;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -3296,7 +3310,7 @@ a.academy-bonus-card--stack[data-offset="0"]:focus-visible {
 
   .academy-reviews-trust .academy-hero-logos {
     gap: 1.6rem 1.5rem;
-    max-width: 100%;
+    width: 100%;
   }
 
   .academy-hero-wrap--product .academy-hero {

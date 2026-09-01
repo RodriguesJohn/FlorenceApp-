@@ -3,9 +3,11 @@ import { track } from "@vercel/analytics";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import { WorkshopCountdown } from "./WorkshopCountdown.jsx";
+import AcademyWorkspacePreview from "./AcademyWorkspacePreview.jsx";
 import profilePicture from "../assets/Profile Picture.jpg";
 import "./styles.css";
 import "./design-systems.css";
+import "./academy.css";
 
 const WORKSHOP_URL = "https://maven.com/humanaistudio/ai-ready-design-system-workshop";
 const MASTERCLASS_URL = "https://maven.com/p/7ff349/ai-ready-design-systems-masterclass";
@@ -98,14 +100,23 @@ function trackWorkshopClick(href, label, location) {
 
 function CtaLink({ href, children, variant = "primary", className = "" }) {
   const label = typeof children === "string" ? children : "Workshop CTA";
+  const isExternal = /^https?:/i.test(href);
 
   return (
     <a
       className={`ds-conversion-cta is-${variant} ${className}`.trim()}
       href={href}
-      target="_blank"
-      rel="noreferrer"
-      onClick={() => trackWorkshopClick(href, label, "workshop_page")}
+      {...(isExternal ? { target: "_blank", rel: "noreferrer" } : {})}
+      onClick={() =>
+        isExternal
+          ? trackWorkshopClick(href, label, "workshop_page")
+          : track("Playbook CTA Click", {
+              route: "/workshop",
+              label,
+              location: "workshop_page",
+              href
+            })
+      }
     >
       <span>{children}</span>
       <ArrowIcon />
@@ -253,6 +264,46 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
                 <p>{outcome.body}</p>
               </Entrance>
             ))}
+          </div>
+        </Entrance>
+      </section>
+
+      <section className="ds-playbook" id="playbook" aria-labelledby="playbook-title">
+        <Entrance className="ds-playbook-inner">
+          <EntranceItem className="ds-playbook-visual">
+            <figure className="academy-hero-app ds-playbook-app">
+              <div className="academy-hero-app-scaler">
+                <div className="academy-hero-chrome">
+                  <span className="academy-hero-chrome-lights" aria-hidden="true">
+                    <i />
+                    <i />
+                    <i />
+                  </span>
+                  <span className="academy-hero-chrome-title">Playbook</span>
+                </div>
+                <div className="academy-hero-app-frame">
+                  <AcademyWorkspacePreview product="Playbook" />
+                </div>
+              </div>
+            </figure>
+          </EntranceItem>
+          <div className="ds-playbook-copy">
+            <EntranceItem as="h2" id="playbook-title">
+              <span>Get the playbook</span>
+            </EntranceItem>
+            <EntranceItem as="p">
+              The written guide from the workshop: the agent-ready framework, evals,
+              component architecture, and the weekly loop to keep the system current.
+            </EntranceItem>
+            <EntranceItem className="ds-masterclass-list" as="ul">
+              <li><CheckIcon /> Framework, contracts, and naming</li>
+              <li><CheckIcon /> Readiness evals and the weekly loop</li>
+            </EntranceItem>
+            <EntranceItem>
+              <CtaLink href="/playbook" variant="light">
+                Open the playbook
+              </CtaLink>
+            </EntranceItem>
           </div>
         </Entrance>
       </section>
