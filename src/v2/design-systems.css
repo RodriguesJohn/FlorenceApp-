@@ -1332,14 +1332,6 @@
     font-size: 0.95rem;
   }
 
-  .ds-audit-page .nav-direct > .nav-direct-link:not(.nav-menu-trigger) {
-    display: inline-flex;
-  }
-
-  .ds-audit-page .nav-direct > .nav-direct-link:nth-child(3) {
-    display: none;
-  }
-
   .ds-urgency-bar {
     top: auto;
     bottom: 0;

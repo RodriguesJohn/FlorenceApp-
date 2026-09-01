@@ -499,37 +499,39 @@ function CinematicHero() {
 
 const workPathways = [
   {
-    name: "1:1 Consultation",
+    name: "Florence design system",
     color1: "#3b82f6",
     color2: "#bae6fd",
-    ctaLabel: "Book 15 Min Discovery Call",
+    ctaLabel: "Get Florence",
+    ctaHref: "/florence",
     features: [
-      "Help build AI workflows",
-      "Provide guidance and support",
-      "Consultation and advisory"
+      "AI-ready tokens, components, and contracts",
+      "Built for humans and agents",
+      "The system behind the workshop"
     ]
   },
   {
-    name: "Audits and Team Embedded",
-    featured: true,
-    color1: "#8b5cf6",
-    color2: "#ddd6fe",
-    ctaLabel: "Book 15 Min Discovery Call",
-    features: [
-      "End-to-end audits, reports, and analysis",
-      "Evals, components, contracts, metadata, intent, and reusability",
-      "Deliverables across Figma, code, animation, and foundations"
-    ]
-  },
-  {
-    name: "Design Systems Workshop",
+    name: "Design system workshop",
     color1: "#10b981",
     color2: "#a7f3d0",
     ctaLabel: "Join Workshop",
     ctaHref: "/workshop",
     features: [
-      "Hands-on workshop to audit and build AI-ready design systems",
-      "Practical tooling and workflows"
+      "Hands-on audit and build of an AI-ready system",
+      "Practical tooling and workflows",
+      "Tokens, evals, and implementation"
+    ]
+  },
+  {
+    name: "Embedded team work",
+    featured: true,
+    color1: "#8b5cf6",
+    color2: "#ddd6fe",
+    ctaLabel: "Book 15 Min Discovery Call",
+    features: [
+      "Sit with your team on live product work",
+      "Audits, reports, and implementation",
+      "Figma, code, and foundations"
     ]
   }
 ];
@@ -565,7 +567,9 @@ function WorkPathways() {
                     onClick={
                       plan.ctaHref === "/academy"
                         ? () => trackAcademyCtaClick("work_pathways", plan.ctaLabel)
-                        : undefined
+                        : plan.ctaHref === "/workshop"
+                          ? () => trackWorkshopPageClick("work_pathways", plan.ctaLabel)
+                          : undefined
                     }
                   >
                     {plan.ctaLabel}

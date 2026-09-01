@@ -46,14 +46,6 @@
     gap: 0.55rem;
     font-size: 0.95rem;
   }
-
-  .blog-page .nav-direct > .nav-direct-link:not(.nav-menu-trigger) {
-    display: inline-flex;
-  }
-
-  .blog-page .nav-direct > .nav-direct-link:nth-child(3) {
-    display: none;
-  }
 }
 
 .blog-nav,

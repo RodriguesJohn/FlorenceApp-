@@ -2,19 +2,6 @@ import React from "react";
 import { track } from "@vercel/analytics";
 import "./nav-menu.css";
 
-const bookingLink = "john-rodrigues-rqt2lg/15min";
-const bookingNamespace = "15min";
-const bookingUrl = `https://cal.com/${bookingLink}`;
-const bookingConfig = {
-  layout: "month_view",
-  useSlotsViewOnSmallScreen: "true"
-};
-const bookingAttributes = {
-  "data-cal-link": bookingLink,
-  "data-cal-namespace": bookingNamespace,
-  "data-cal-config": JSON.stringify(bookingConfig)
-};
-
 const academyUrl = "/academy";
 const studioUrl = "/";
 const florenceUrl = "/florence";
@@ -39,40 +26,18 @@ function trackWorkshopNavClick() {
   });
 }
 
-const serviceLinks = [
+const barLinks = [
+  { label: "Studio", href: studioUrl },
+  { label: "Workshop", href: designSystemsUrl, onClick: trackWorkshopNavClick },
+  { label: "Florence", href: florenceUrl }
+];
+
+const menuLinks = [
+  { label: "Training", href: academyUrl, onClick: trackAcademyNavClick },
   { label: "Playbook", href: playbookUrl },
-  { label: "Florence", href: florenceUrl },
   { label: "Tools", href: "/tools" },
   { label: "Blog", href: blogUrl }
 ];
-
-const primaryLinks = [
-  { label: "Studio", href: studioUrl },
-  { label: "Training", href: academyUrl, onClick: trackAcademyNavClick },
-  { label: "Workshop", href: designSystemsUrl, onClick: trackWorkshopNavClick }
-];
-
-function openBookingModal(event) {
-  if (
-    event.defaultPrevented ||
-    event.button !== 0 ||
-    event.metaKey ||
-    event.ctrlKey ||
-    event.shiftKey ||
-    event.altKey
-  ) {
-    return;
-  }
-
-  const calApi = window.Cal?.ns?.[bookingNamespace] || window.Cal;
-  if (!calApi) return;
-
-  event.preventDefault();
-  calApi("modal", {
-    calLink: bookingLink,
-    config: bookingConfig
-  });
-}
 
 export function NavMenu() {
   const [open, setOpen] = React.useState(false);
@@ -136,20 +101,17 @@ export function NavMenu() {
 
   return (
     <nav className="nav-direct" aria-label="Site navigation">
-      <a className="nav-direct-link" href={studioUrl}>
-        Studio
-      </a>
-      <a className="nav-direct-link" href={academyUrl} onClick={trackAcademyNavClick}>
-        Training
-      </a>
-      <a
-        className="nav-direct-link"
-        href={designSystemsUrl}
-        aria-current={currentPath === designSystemsUrl ? "page" : undefined}
-        onClick={trackWorkshopNavClick}
-      >
-        Workshop
-      </a>
+      {barLinks.map((item) => (
+        <a
+          key={item.label}
+          className="nav-direct-link"
+          href={item.href}
+          aria-current={currentPath === item.href ? "page" : undefined}
+          onClick={item.onClick}
+        >
+          {item.label}
+        </a>
+      ))}
 
       <div className={`nav-menu${open ? " is-open" : ""}`} ref={rootRef}>
         <button
@@ -185,7 +147,25 @@ export function NavMenu() {
             role="menu"
             style={panelStyle}
           >
-            {primaryLinks.map((item) => (
+            {barLinks.map((item) => (
+              <a
+                key={`menu-${item.label}`}
+                className={`nav-menu-item nav-menu-item--bar${
+                  currentPath === item.href ? " is-active" : ""
+                }`}
+                href={item.href}
+                role="menuitem"
+                aria-current={currentPath === item.href ? "page" : undefined}
+                onClick={() => {
+                  close();
+                  item.onClick?.();
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+            <div className="nav-menu-divider nav-menu-divider--bar" role="separator" aria-hidden="true" />
+            {menuLinks.map((item) => (
               <a
                 key={item.label}
                 className={`nav-menu-item${currentPath === item.href ? " is-active" : ""}`}
@@ -200,34 +180,6 @@ export function NavMenu() {
                 {item.label}
               </a>
             ))}
-            <div className="nav-menu-divider" role="separator" aria-hidden="true" />
-            {serviceLinks.map((service) => (
-              <a
-                key={service.label}
-                className={`nav-menu-item nav-menu-item--nested${
-                  currentPath === service.href ? " is-active" : ""
-                }`}
-                href={service.href}
-                role="menuitem"
-                aria-current={currentPath === service.href ? "page" : undefined}
-                onClick={close}
-              >
-                {service.label}
-              </a>
-            ))}
-            <div className="nav-menu-divider" role="separator" aria-hidden="true" />
-            <a
-              className="nav-menu-item"
-              href={bookingUrl}
-              role="menuitem"
-              {...bookingAttributes}
-              onClick={(event) => {
-                close();
-                openBookingModal(event);
-              }}
-            >
-              Book a call
-            </a>
           </div>
         ) : null}
       </div>

@@ -244,31 +244,31 @@
   --nav-link-ring: rgba(255, 255, 255, 0.34);
 }
 
+.nav-menu-item--bar,
+.nav-menu-divider--bar {
+  display: none;
+}
+
 @media (max-width: 719px) {
   .nav-direct {
-    gap: 0.1rem;
-  }
-
-  .nav-direct > .nav-direct-link:not(.nav-menu-trigger),
-  .nav-direct > .nav-direct-book {
-    display: none;
+    gap: 0;
   }
 
   .nav-direct-link,
   .nav-direct-book,
   .nav-menu-trigger {
-    min-height: 2.4rem;
-    font-size: 0.78rem;
+    min-height: 2.25rem;
+    font-size: 0.72rem;
   }
 
   .nav-menu-trigger--icon {
-    width: 2.35rem;
-    height: 2.35rem;
-    min-height: 2.35rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    min-height: 2.2rem;
   }
 
   .nav-direct-link {
-    padding: 0.62rem 0.52rem;
+    padding: 0.5rem 0.42rem;
   }
 
   .nav-direct-book {

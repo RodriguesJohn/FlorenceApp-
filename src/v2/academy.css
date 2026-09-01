@@ -3134,7 +3134,11 @@ a.academy-bonus-card--stack[data-offset="0"]:focus-visible {
 
   .academy-nav .brand {
     font-size: 0.8rem;
-    max-width: calc(100% - 8.5rem);
+    max-width: min(42vw, 9.5rem);
+  }
+
+  .academy-nav-product {
+    display: none;
   }
 
   .academy-brand-by {
