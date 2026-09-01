@@ -148,7 +148,6 @@ export default function FlorenceCaseStudyPage() {
                   <h3>Off-brand UI that leads to an inconsistent experience</h3>
                   <p>Agents could see components. They still had no rules for a complete product.</p>
                   <p className="fcs-impact">
-                    <span>Impact</span>
                     Users hit a different product in every flow. The brand
                     stops holding.
                   </p>
@@ -162,7 +161,6 @@ export default function FlorenceCaseStudyPage() {
                   <h3>Scattered context that agents cannot retrieve</h3>
                   <p>Some of it lived in GitHub. Some in Figma. A lot of it was never written down.</p>
                   <p className="fcs-impact">
-                    <span>Impact</span>
                     Every session starts from zero. The agent burns tokens
                     relearning the product.
                   </p>
@@ -176,7 +174,6 @@ export default function FlorenceCaseStudyPage() {
                   <h3>Token cost that climbs with every guessed screen</h3>
                   <p>The hole was product context. The agent restated what the system never said once.</p>
                   <p className="fcs-impact">
-                    <span>Impact</span>
                     The bill goes up. The screens still need a rewrite.
                   </p>
                 </div>
@@ -189,7 +186,6 @@ export default function FlorenceCaseStudyPage() {
                   <h3>Shipping that slows while humans clean up every pass</h3>
                   <p>One screen can look fine. Across flows, review becomes the bottleneck.</p>
                   <p className="fcs-impact">
-                    <span>Impact</span>
                     Velocity looks high until the cleanup starts. The product
                     ships later, and less on-brand.
                   </p>
