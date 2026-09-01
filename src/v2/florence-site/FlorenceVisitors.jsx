@@ -7,7 +7,7 @@ export function FlorenceVisitors() {
 
   return (
     <p className="florence-visitors">
-      <span className="florence-visitors-label">Total visitor</span>
+      <span className="florence-visitors-label">Visitors</span>
       <span className="florence-visitors-count">
         {count.toLocaleString("en-US")}
       </span>

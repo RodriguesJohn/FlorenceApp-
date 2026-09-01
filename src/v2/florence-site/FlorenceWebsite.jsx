@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Play } from 'lucide-react'
 import { SiteHeader } from "../SiteHeader.jsx";
+import { Entrance, EntranceItem, entranceViewport } from "../entrance.jsx";
 import { FlorenceVisitors } from "./FlorenceVisitors.jsx";
 import { Pricing } from "./components/Pricing.jsx";
 import { startFlorenceCheckout } from "./stripeCheckout.js";
@@ -9,15 +10,22 @@ import "./florence-website.css";
 const DEMO_VIDEO_SRC = "/florence/F2.mp4";
 
 const DEMO_URL = '/florence/system'
+const BOOKING_URL = 'https://cal.com/john-rodrigues-rqt2lg/15min'
+const NEWSLETTER_URL = 'https://substack.com/@johnrodrigues'
 const GIANT_WORD = 'FLORENCE'
 const ASCII_GLYPHS = '█▓▒░#@*+=-:/\\'
+
+const CODING_AGENTS = [
+  { id: 'cursor', name: 'Cursor', logo: '/logos/cursor.png' },
+  { id: 'claude-code', name: 'Claude Code', logo: '/logos/claude-code.png' },
+  { id: 'codex', name: 'Codex', logo: '/logos/codex.png' },
+]
 
 function GiantMark() {
   const [chars, setChars] = useState(GIANT_WORD.split(''))
   const [burst, setBurst] = useState(false)
   const scrambleRef = useRef(null)
   const burstRef = useRef(null)
-  const loopRef = useRef(null)
 
   function prefersReducedMotion() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -57,12 +65,10 @@ function GiantMark() {
   useEffect(() => {
     if (prefersReducedMotion()) return undefined
 
-    const kickoff = window.setTimeout(playBurst, 1600)
-    loopRef.current = window.setInterval(playBurst, 5600)
+    const kickoff = window.setTimeout(playBurst, 2200)
 
     return () => {
       window.clearTimeout(kickoff)
-      if (loopRef.current) window.clearInterval(loopRef.current)
       if (burstRef.current) window.clearTimeout(burstRef.current)
       stopScramble(false)
     }
@@ -163,6 +169,55 @@ function DemoReel() {
   )
 }
 
+function FlorenceFooter() {
+  return (
+    <div className="current-home">
+      <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
+        <div className="site-footer-inner">
+          <Entrance className="footer-brand">
+            <EntranceItem as="a" className="brand" href="/#top" aria-label="Human AI Studio home">
+              <span className="brand-mark" aria-hidden="true" />
+              Human AI Studio
+            </EntranceItem>
+            <EntranceItem as="p">
+              AI product studio for design systems, agents, and AI-native workflows.
+            </EntranceItem>
+          </Entrance>
+
+          <Entrance className="footer-column">
+            <EntranceItem as="p">Contact</EntranceItem>
+            <EntranceItem as="a" href={NEWSLETTER_URL} target="_blank" rel="noreferrer">
+              Publication
+            </EntranceItem>
+            <EntranceItem as="a" href="mailto:john@humanaistudio.ai">
+              john@humanaistudio.ai
+            </EntranceItem>
+            <EntranceItem as="address" className="footer-address">
+              Human AI Studio<br />
+              455 Market St Ste 1940<br />
+              PMB 769150<br />
+              San Francisco, California 94105-2448 US
+            </EntranceItem>
+            <EntranceItem as="a" href={BOOKING_URL} target="_blank" rel="noreferrer">
+              Book a call
+            </EntranceItem>
+          </Entrance>
+        </div>
+        <EntranceItem
+          as="div"
+          className="footer-wordmark"
+          aria-hidden="true"
+          initial={false}
+          whileInView="visible"
+          viewport={entranceViewport}
+        >
+          Human AI Studio
+        </EntranceItem>
+      </footer>
+    </div>
+  )
+}
+
 export default function FlorenceWebsite() {
   useEffect(() => {
     const html = document.documentElement;
@@ -178,24 +233,38 @@ export default function FlorenceWebsite() {
   }, []);
 
   return (
-    <>
+    <div className="florence-site">
       <SiteHeader />
-      <div className="hero">
+      <main className="florence-main">
+      <section className="hero" aria-label="Florence">
       <div className="hero__bloom" aria-hidden="true" />
-      <FlorenceVisitors />
       <div className="hero__mast">
+        <FlorenceVisitors />
         <GiantMark />
       </div>
 
       <div className="hero__copy layout-container-md">
         <p className="hero__lede">
-          <span className="hero__lede-line">
-            Florence is an <SelectFrame>AI-ready design system</SelectFrame>
-          </span>
-          <span className="hero__lede-line">
-            for humans and agents so you can ship fast without shipping AI
-            slop.
-          </span>
+          Florence is an <SelectFrame>AI-ready design system</SelectFrame>{' '}
+          for humans and agents so you can ship fast without shipping AI slop.
+          Copy and paste into{' '}
+          {CODING_AGENTS.map((agent, index) => {
+            const last = index === CODING_AGENTS.length - 1
+            return (
+              <span key={agent.id} className="hero__inline-agent">
+                {index > 0 && (last ? ' or ' : ', ')}
+                <img
+                  src={agent.logo}
+                  alt=""
+                  width={18}
+                  height={18}
+                  decoding="async"
+                />
+                {agent.name}
+              </span>
+            )
+          })}
+          .
         </p>
         <div className="hero__actions">
           <a className="btn btn--primary btn--lg hero__btn" href={DEMO_URL}>
@@ -214,12 +283,14 @@ export default function FlorenceWebsite() {
       </div>
 
       <DemoReel />
+      </section>
 
       <Pricing
         demoUrl={DEMO_URL}
         onUpgradeToPro={() => startFlorenceCheckout()}
       />
-      </div>
-    </>
+      </main>
+      <FlorenceFooter />
+    </div>
   )
 }

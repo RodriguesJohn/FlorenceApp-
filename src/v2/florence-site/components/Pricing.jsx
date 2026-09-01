@@ -14,51 +14,14 @@ const PRO_FEATURES = [
   'New components on every launch',
 ]
 
-const CODING_AGENTS = [
-  {
-    id: 'cursor',
-    name: 'Cursor',
-    logo: '/logos/cursor.png',
-  },
-  {
-    id: 'claude-code',
-    name: 'Claude Code',
-    logo: '/logos/claude-code.png',
-  },
-  {
-    id: 'codex',
-    name: 'Codex',
-    logo: '/logos/codex.png',
-  },
+const STUDIO_FEATURES = [
+  'Full Florence access',
+  'Embedded support with your team',
+  'Audits, implementation, and foundations',
+  '15-minute discovery call',
 ]
 
-function AgentStrip() {
-  return (
-    <div className="pricing__agents">
-      <p className="pricing__agents-label">
-        Drop it straight into your coding agent
-      </p>
-      <ul className="pricing__agent-list">
-        {CODING_AGENTS.map(({ id, name, logo }) => (
-          <li key={id}>
-            <span className="pricing__agent">
-              <img
-                className="pricing__agent-logo"
-                src={logo}
-                alt=""
-                width={24}
-                height={24}
-                loading="lazy"
-                decoding="async"
-              />
-              <span className="pricing__agent-name">{name}</span>
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
+const BOOKING_URL = 'https://cal.com/john-rodrigues-rqt2lg/15min'
 
 function FeatureList({ items }) {
   return (
@@ -109,11 +72,11 @@ export function Pricing({
             Pricing
           </h2>
           <p className="pricing__lede">
-            Start with free components, prompts, and snippets. Pro unlocks
-            premium drops built for agent-first workflows.
+            Start free. Pro unlocks premium drops for agent-first workflows.
+            For full Florence access and embedded support, book a 15-minute
+            discovery call.
           </p>
           <CheckoutNotice />
-          <AgentStrip />
         </header>
 
         <article className="pricing-card">
@@ -151,7 +114,6 @@ export function Pricing({
               <header className="pricing-card__header">
                 <div className="pricing-card__tier-row">
                   <p className="pricing-card__tier">Pro</p>
-                  <span className="pricing-card__badge">Full access</span>
                 </div>
                 <p className="pricing-card__price">
                   <span className="pricing-card__amount">$49</span>
@@ -170,6 +132,35 @@ export function Pricing({
               >
                 Upgrade to Pro
               </button>
+            </div>
+          </article>
+
+        <article className="pricing-card">
+            <span className="pricing-card__sheen" aria-hidden="true" />
+
+            <div className="pricing-card__inner">
+              <header className="pricing-card__header">
+                <div className="pricing-card__tier-row">
+                  <p className="pricing-card__tier">Studio</p>
+                  <span className="pricing-card__badge">Contact</span>
+                </div>
+                <p className="pricing-card__price">
+                  <span className="pricing-card__amount pricing-card__amount--text">Custom</span>
+                </p>
+              </header>
+
+              <hr className="pricing-card__rule" />
+
+              <FeatureList items={STUDIO_FEATURES} />
+
+              <a
+                className="btn btn--secondary btn--lg pricing-card__cta pricing-card__cta--ghost"
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Book a discovery call
+              </a>
             </div>
           </article>
       </div>
