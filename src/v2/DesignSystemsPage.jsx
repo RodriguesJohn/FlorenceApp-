@@ -4,6 +4,11 @@ import { Star } from "lucide-react";
 import { Entrance, EntranceItem, entranceViewport } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import { WorkshopCountdown } from "./WorkshopCountdown.jsx";
+import {
+  MASTERCLASS_ARIA,
+  MASTERCLASS_DATE_LABEL,
+  MASTERCLASS_URL
+} from "./workshop-timing.js";
 import AcademyWorkspacePreview from "./AcademyWorkspacePreview.jsx";
 import { AcademyAnimatedTestimonials } from "./AcademyAnimatedTestimonials.jsx";
 import { modules as trainingModules } from "./playbookTopics.js";
@@ -126,7 +131,9 @@ function CheckIcon() {
 
 function trackWorkshopClick(href, label, location) {
   track(
-    href === WORKSHOP_URL
+    href === MASTERCLASS_URL
+      ? "Masterclass CTA Click"
+      : href === WORKSHOP_URL
       ? "Workshop CTA Click"
       : href === TRAINING_URL
         ? "Academy CTA Click"
@@ -259,9 +266,9 @@ function TrainingLessonModule() {
 export default function DesignSystemsPage({ embedded = false } = {}) {
   React.useEffect(() => {
     if (embedded) return;
-    document.title = "AI-Ready Design System Workshop | Human AI Studio";
+    document.title = "AI Native Design Systems Masterclass | Human AI Studio";
     const description =
-      "Join the workshop to learn AI-ready design systems: the framework, readiness evals, component architecture, and implementation checklist.";
+      "Free 45-minute masterclass on September 9: what an AI-ready design system is, why it matters now, and a live demo of Florence.";
     let meta = document.querySelector('meta[name="description"]');
     const previous = meta?.getAttribute("content");
     if (!meta) {
@@ -285,7 +292,9 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
     >
       {embedded ? null : (
         <>
-          <a className="ds-skip-link" href="#workshop-offer">Skip to workshop offer</a>
+          <a className="ds-skip-link" href={MASTERCLASS_URL} target="_blank" rel="noreferrer">
+            Skip to masterclass registration
+          </a>
 
           <nav className="nav nav-dark" aria-label="Primary">
             <a className="brand" href="/" aria-label="Human AI Studio home">
@@ -299,16 +308,18 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
 
           <a
             className="ds-urgency-bar"
-            href="#workshop-offer"
-            aria-label="Join Workshop for the AI-Ready Design System Workshop on September 12 at 9:00 AM Pacific Time"
-            onClick={() => trackWorkshopClick(WORKSHOP_URL, "Join Workshop", "urgency_bar")}
+            href={MASTERCLASS_URL}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={MASTERCLASS_ARIA}
+            onClick={() => trackWorkshopClick(MASTERCLASS_URL, "Register free", "urgency_bar")}
           >
             <span className="ds-urgency-bar-inner">
-              <span className="ds-banner-date">September 12 · 9:00 AM PT</span>
+              <span className="ds-banner-date">{MASTERCLASS_DATE_LABEL}</span>
               <span className="ds-urgency-bar-actions">
-                <WorkshopCountdown className="is-banner" label="Workshop starts in" />
+                <WorkshopCountdown className="is-banner" label="Masterclass starts in" />
                 <span className="ds-banner-cta">
-                  Join Workshop
+                  Register free
                   <span className="ds-banner-arrow" aria-hidden="true">↗</span>
                 </span>
               </span>
@@ -327,29 +338,29 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
                 Popular courses on Maven
               </EntranceItem>
               <EntranceItem as="h1" id="ds-audit-title">
-                <span>Join AI Design</span>
-                <span>System Workshop</span>
+                <span>AI Native Design</span>
+                <span>Systems Masterclass</span>
               </EntranceItem>
               <EntranceItem as="p" className="ds-audit-intro">
-                Join the workshop to learn the framework, evals, and component
-                architecture your existing system needs.
+                Free 45 minutes on Maven. What an AI-ready design system is,
+                why it matters now, and a live demo of Florence.
               </EntranceItem>
             </div>
 
-            <EntranceItem as="aside" className="ds-hero-offer-card" aria-label="Workshop details">
-              <p className="ds-hero-offer-label">Live workshop</p>
+            <EntranceItem as="aside" className="ds-hero-offer-card" aria-label="Masterclass details">
+              <p className="ds-hero-offer-label">Free masterclass</p>
               <dl className="ds-hero-meta">
-                <div><dt>Date</dt><dd>September 12</dd></div>
-                <div><dt>Time</dt><dd>9:00 AM–1:00 PM PT</dd></div>
-                <div><dt>Format</dt><dd>Live on Maven</dd></div>
+                <div><dt>Date</dt><dd>September 9</dd></div>
+                <div><dt>Time</dt><dd>12:00 PM PDT · 45 min</dd></div>
+                <div><dt>Format</dt><dd>Live on Zoom</dd></div>
               </dl>
               <div className="ds-audit-actions">
-                <CtaLink href={WORKSHOP_URL}>Reserve your seat for $599</CtaLink>
-                <CtaLink href={TRAINING_URL} variant="secondary">
-                  Join self-paced training
+                <CtaLink href={MASTERCLASS_URL}>Register free</CtaLink>
+                <CtaLink href="#workshop-offer" variant="secondary">
+                  Full workshop
                 </CtaLink>
               </div>
-              <p className="ds-hero-proof">20 seats · Certificate · Lifetime recording</p>
+              <p className="ds-hero-proof">Free · Recording after · Florence demo</p>
             </EntranceItem>
           </div>
 

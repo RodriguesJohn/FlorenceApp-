@@ -9,6 +9,11 @@ import * as PricingCard from "./PricingCard.jsx";
 import { Entrance, EntranceItem, entranceChild, entranceViewport } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import { WorkshopCountdown } from "./WorkshopCountdown.jsx";
+import {
+  MASTERCLASS_ARIA,
+  MASTERCLASS_DATE_LABEL,
+  MASTERCLASS_URL
+} from "./workshop-timing.js";
 import profilePicture from "../assets/Profile Picture.jpg";
 import studioAbstract from "../assets/studio-abstract.png";
 import caseStudiesHeroVideo from "../assets/case-studies-hero.mp4";
@@ -75,11 +80,11 @@ function trackAcademyCtaClick(location, label = "Academy") {
   });
 }
 
-function trackWorkshopPageClick(location, label = "Learn more") {
-  track("Workshop CTA Click", {
+function trackWorkshopPageClick(location, label = "Learn more", href = "/workshop") {
+  track(href === MASTERCLASS_URL ? "Masterclass CTA Click" : "Workshop CTA Click", {
     location,
     label,
-    href: "/workshop"
+    href
   });
 }
 const bookingConfig = {
@@ -2063,15 +2068,17 @@ function StudioHome({ isHistory = false }) {
       {!isHistory && (
         <a
           className="home-workshop-bar"
-          href="/workshop#workshop-offer"
-          aria-label="Join Workshop for the AI-Ready Design System Workshop on September 12 at 9:00 AM Pacific Time"
+          href={MASTERCLASS_URL}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={MASTERCLASS_ARIA}
         >
           <span className="home-workshop-bar-inner">
-            <span className="home-workshop-date">September 12 · 9:00 AM PT</span>
+            <span className="home-workshop-date">{MASTERCLASS_DATE_LABEL}</span>
             <span className="home-workshop-actions">
-              <WorkshopCountdown className="is-home-banner" label="Workshop starts in" />
+              <WorkshopCountdown className="is-home-banner" label="Masterclass starts in" />
               <span className="home-workshop-cta">
-                Join Workshop
+                Register free
                 <span className="home-workshop-arrow" aria-hidden="true">↗</span>
               </span>
             </span>
@@ -2451,19 +2458,24 @@ function StudioHome({ isHistory = false }) {
               />
               <div className="cohort-card-copy">
                 <h3 id="cohort-card-title">
-                  <span>AI-Ready Design</span>
-                  <span>Systems Workshop</span>
+                  <span>AI Native Design</span>
+                  <span>Systems Masterclass</span>
                 </h3>
                 <p>
-                  Join the workshop to learn the framework, evals, and component architecture your existing system needs.
+                  Free 45 minutes on September 9. What an AI-ready design system
+                  is, why it matters now, and a live demo of Florence.
                 </p>
                 <div className="cohort-card-actions">
                   <a
                     className="cohort-card-action cohort-card-action--primary"
-                    href="/workshop"
-                    onClick={() => trackWorkshopPageClick("cohort_card", "Learn more")}
+                    href={MASTERCLASS_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() =>
+                      trackWorkshopPageClick("cohort_card", "Register free", MASTERCLASS_URL)
+                    }
                   >
-                    Learn more
+                    Register free
                   </a>
                 </div>
               </div>

@@ -72,16 +72,16 @@ const pages = {
     type: "WebPage"
   },
   "/workshop": {
-    title: "AI-Ready Design System Workshop | Human AI Studio",
+    title: "AI Native Design Systems Masterclass | Human AI Studio",
     description:
-      "Join the workshop to learn AI-ready design systems: the framework, readiness evals, component architecture, and implementation checklist.",
+      "Free 45-minute masterclass on September 9: what an AI-ready design system is, why it matters now, and a live demo of Florence.",
     type: "Course"
   },
   "/design-systems": {
     path: "/workshop",
-    title: "AI-Ready Design System Workshop | Human AI Studio",
+    title: "AI Native Design Systems Masterclass | Human AI Studio",
     description:
-      "Join the workshop to learn AI-ready design systems: the framework, readiness evals, component architecture, and implementation checklist.",
+      "Free 45-minute masterclass on September 9: what an AI-ready design system is, why it matters now, and a live demo of Florence.",
     type: "Course"
   },
   "/product": {
