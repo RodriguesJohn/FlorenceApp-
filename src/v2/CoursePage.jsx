@@ -234,9 +234,9 @@ export default function CoursePage() {
                 </div>
                 <a
                   className="academy-btn academy-btn--ghost academy-hero-cta-ghost"
-                  href="#curriculum"
+                  href="/playbook"
                 >
-                  See the curriculum
+                  Log in
                 </a>
               </EntranceItem>
             </Entrance>
