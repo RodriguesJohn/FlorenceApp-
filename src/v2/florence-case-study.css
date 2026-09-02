@@ -142,7 +142,7 @@
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.15;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .fcs-block > p {
@@ -271,6 +271,8 @@
 }
 
 .fcs-cta.button {
+  box-sizing: border-box;
+  max-width: 100%;
   min-height: 3rem;
   padding: 0 1.35rem;
   border-radius: 999px;
@@ -312,7 +314,13 @@
   }
 
   .fcs-cta.button {
-    display: grid;
-    place-items: center;
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .fcs-ghost {
+    justify-content: center;
+    min-height: 2.75rem;
   }
 }
