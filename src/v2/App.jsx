@@ -504,15 +504,15 @@ function CinematicHero() {
 
 const workPathways = [
   {
-    name: "Florence design system",
+    name: "Self-paced training",
     color1: "#3b82f6",
     color2: "#bae6fd",
-    ctaLabel: "Get Florence",
-    ctaHref: "/florence",
+    ctaLabel: "See the course",
+    ctaHref: "/course",
     features: [
-      "AI-ready tokens, components, and contracts",
-      "Built for humans and agents",
-      "The system behind the workshop"
+      "Tokens, contracts, and retrieval",
+      "Figma, Cursor, and Claude Code workflows",
+      "Evals so you can score the system"
     ]
   },
   {
@@ -574,7 +574,14 @@ function WorkPathways() {
                         ? () => trackAcademyCtaClick("work_pathways", plan.ctaLabel)
                         : plan.ctaHref === "/workshop"
                           ? () => trackWorkshopPageClick("work_pathways", plan.ctaLabel)
-                          : undefined
+                          : plan.ctaHref === "/course"
+                            ? () =>
+                                track("Course CTA Click", {
+                                  location: "work_pathways",
+                                  label: plan.ctaLabel,
+                                  href: "/course"
+                                })
+                            : undefined
                     }
                   >
                     {plan.ctaLabel}
