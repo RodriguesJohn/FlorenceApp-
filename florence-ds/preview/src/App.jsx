@@ -112,14 +112,17 @@ import { BarChart } from '../../03-components/charts/bar-chart/BarChart.jsx'
 import { LineChart } from '../../03-components/charts/line-chart/LineChart.jsx'
 import './App.css'
 import { ComponentsGallery } from './ComponentsGallery.jsx'
-import { isProComponent } from './proAccess.js'
-import { FLORENCE_VISIT_HOME_EVENT, useFlorenceAuth } from './FlorenceAuth.jsx'
-import { AccountPage } from './AccountPage.jsx'
-import { TopbarAccount } from './TopbarAccount.jsx'
+import { FLORENCE_VISIT_HOME_EVENT } from './FlorenceAuth.jsx'
+import { WorkshopCountdown } from '../../../src/v2/WorkshopCountdown.jsx'
+import {
+  MASTERCLASS_ARIA,
+  MASTERCLASS_URL,
+} from '../../../src/v2/workshop-timing.js'
 import { LIBRARY } from './libraryInventory.js'
-import { getComponentAccess } from './componentAccessCatalog.js'
 import { PlaygroundPage } from './PlaygroundPage.jsx'
 import { LiquidMetal, liquidMetalPresets } from './components/ui/liquid-metal.jsx'
+
+const BOOKING_URL = 'https://cal.com/john-rodrigues-rqt2lg/15min'
 
 const STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]
 
@@ -1331,81 +1334,14 @@ function CopyableCode({ children, lang = 'auto', showCopy = true }) {
   )
 }
 
-function AccessSnippet({ id, title, description, lang = 'auto', children }) {
-  return (
-    <section className="component-access__panel" aria-labelledby={id}>
-      <div className="component-example__header">
-        <h2 id={id}>{title}</h2>
-        {description ? <p>{description}</p> : null}
-      </div>
-      <CopyableCode lang={lang}>{children}</CopyableCode>
-    </section>
-  )
-}
-
-function ComponentAccessLayout({ componentId, title, lede, children }) {
-  const access = getComponentAccess(componentId)
-  const { isPro, setCheckoutOpen } = useFlorenceAuth()
-  const locked = isProComponent(componentId) && !isPro
-  const [tab, setTab] = useState('view')
-
-  function onValueChange(next) {
-    if (locked && next !== 'view') {
-      setCheckoutOpen(true)
-      return
-    }
-    setTab(next)
-  }
-
+function ComponentAccessLayout({ title, lede, children }) {
   return (
     <div className="content-block">
       <header className="hero">
         <h1>{title}</h1>
         {lede ? <p className="lede">{lede}</p> : null}
       </header>
-
-      <Tabs
-        className="component-access"
-        value={tab}
-        onValueChange={onValueChange}
-        size="lg"
-        variant="line"
-      >
-        <TabsList aria-label={`${title} access`}>
-          <TabsTrigger value="view">
-            <AccessTabLabel>View</AccessTabLabel>
-          </TabsTrigger>
-          <TabsTrigger value="prompt">
-            <AccessTabLabel locked={locked}>Prompt</AccessTabLabel>
-          </TabsTrigger>
-          <TabsTrigger value="code">
-            <AccessTabLabel locked={locked}>Code</AccessTabLabel>
-          </TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="view">{children}</TabsContent>
-
-        <TabsContent value="prompt">
-          <AccessSnippet
-            id={`${componentId}-prompt`}
-            title="Prompt"
-            description="Paste this with Code. It is the contract: files, tokens, fonts, and View behavior."
-          >
-            {access.prompt}
-          </AccessSnippet>
-        </TabsContent>
-
-        <TabsContent value="code">
-          <AccessSnippet
-            id={`${componentId}-code`}
-            title="Code"
-            description="Exact source: Florence foundations, the component and its deps, and a demo. Do not rewrite."
-            lang="jsx"
-          >
-            {access.code}
-          </AccessSnippet>
-        </TabsContent>
-      </Tabs>
+      {children}
     </div>
   )
 }
@@ -1497,68 +1433,39 @@ npm run flowrix -- validate`}</CopyableCode>
   )
 }
 
-function InstallationPage({ onNavigate, onUpgradeToPro }) {
+function InstallationPage({ onNavigate }) {
   return (
     <div className="content-block">
       <header className="hero">
         <h1>Installation</h1>
-        <p className="lede">Florence is retrieved.</p>
+        <p className="lede">There is no public install.</p>
       </header>
 
       <div className="docs">
         <section className="docs__section">
-          <h2>How to use it</h2>
-          <ol className="docs__list">
-            <li>
-              <strong>Step 1.</strong> View a component in the gallery.
-            </li>
-            <li>
-              <strong>Step 2.</strong> Copy the prompt or copy the code.
-            </li>
-            <li>
-              <strong>Step 3.</strong> Drop it in your coding agent. That is
-              enough to start building.
-            </li>
-          </ol>
+          <h2>How you get Florence</h2>
+          <p>
+            This is a showcase, not a kit you drop into a repo. Browse the
+            system here. If you want a complete design system customized to
+            your product, book a call and we set that up with you.
+          </p>
           <div className="statement__actions">
+            <a
+              className="statement__btn statement__btn--primary"
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Book a call
+            </a>
             <button
               type="button"
-              className="statement__btn statement__btn--primary"
+              className="statement__btn statement__btn--secondary"
               onClick={() => onNavigate('gallery')}
             >
               Browse all components
             </button>
-            <button
-              type="button"
-              className="statement__btn statement__btn--secondary"
-              onClick={onUpgradeToPro}
-            >
-              {FLORENCE_PRO_COPY.cta}
-            </button>
           </div>
-        </section>
-
-        <section className="docs__section">
-          <h2>Complete system</h2>
-          <p>
-            If you want a complete repo, the full design system, and
-            customization, that is a deeper install than copy-paste. We set
-            that up with you.
-          </p>
-          <p className="statement__meta">
-            All the components are available, with code snippets and copy
-            prompts. If you want the complete design system and more embedded
-            support,{' '}
-            <a
-              className="statement__meta-link"
-              href="https://www.humanaistudio.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              book a discovery call
-            </a>
-            .
-          </p>
         </section>
       </div>
     </div>
@@ -1812,8 +1719,8 @@ const FLORENCE_ROADMAP = [
   {
     status: 'next',
     phase: 'Next',
-    title: 'V2 for coding agents',
-    body: 'Components you drop into Cursor, Claude Code, or Codex — copy-paste prompts, snippets, and chat-ready code.',
+    title: 'Component optimization',
+    body: 'Tighten the library for real product work: contracts, states, and how agents retrieve it.',
   },
   {
     status: 'next',
@@ -1829,7 +1736,7 @@ const FLORENCE_ROADMAP = [
   },
 ]
 
-function AboutPage({ onNavigate, onUpgradeToPro }) {
+function AboutPage({ onNavigate }) {
   return (
     <div className="content-block content-block--statement">
       <div className="layout-page home-stage">
@@ -1841,9 +1748,9 @@ function AboutPage({ onNavigate, onUpgradeToPro }) {
           </h1>
 
           <p className="statement__body text-body">
-            Florence is an AI-ready design system that is designed for agents
-            to understand better so humans can ship faster. This is developed
-            by Human AI Studio.
+            Florence is an AI-ready design system for agents to retrieve and
+            humans to ship with. This is a showcase. If you want a complete
+            system customized to your product, book a call.
           </p>
 
           <div className="statement__actions">
@@ -1854,29 +1761,15 @@ function AboutPage({ onNavigate, onUpgradeToPro }) {
             >
               Browse all components
             </button>
-            <button
-              type="button"
-              className="statement__btn statement__btn--secondary"
-              onClick={onUpgradeToPro}
-            >
-              {FLORENCE_PRO_COPY.cta}
-            </button>
-          </div>
-
-          <p className="statement__meta">
-            All the components are available, with code snippets and copy
-            prompts. If you want the complete design system and more embedded
-            support,{' '}
             <a
-              className="statement__meta-link"
-              href="https://www.humanaistudio.io/"
+              className="statement__btn statement__btn--secondary"
+              href={BOOKING_URL}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noreferrer"
             >
-              book a discovery call
+              Book a call
             </a>
-            .
-          </p>
+          </div>
         </article>
 
         <Timeline
@@ -3472,26 +3365,10 @@ function ComponentsIndex({ onNavigate }) {
   )
 }
 
-const FLORENCE_PRO_COPY = {
-  title: 'Unlock Pro components',
-  body: 'Pro components, React snippets, and prompts you can drop into your coding agent and save tokens.',
-  cta: 'Upgrade to Pro',
-}
-
-
-function AccessTabLabel({ children, locked = false }) {
-  return (
-    <span className="component-access__label">
-      {children}
-      {locked ? (
-        <Lock
-          className="component-access__lock"
-          aria-hidden="true"
-          strokeWidth={1.75}
-        />
-      ) : null}
-    </span>
-  )
+const FLORENCE_MASTERCLASS_COPY = {
+  title: 'Free masterclass',
+  body: '45 minutes on AI-native design systems, with a live look at Florence.',
+  cta: 'Join the free masterclass',
 }
 
 function ComponentDoc({
@@ -7034,7 +6911,7 @@ function TimelinesPage() {
   label="Florence roadmap"
   items={[
     { status: "now", phase: "Now", title: "V1 shipped", body: "MVP design system, React components with component contracts, and architecture that’s retrievable by agents." },
-    { status: "next", phase: "Next", title: "V2 for coding agents", body: "Copy-paste prompts, snippets, and chat-ready code." },
+    { status: "next", phase: "Next", title: "Component optimization", body: "Tighten the library for real product work: contracts, states, and how agents retrieve it." },
     { status: "next", phase: "Next", title: "Figma file launch", body: "Design and code share one system." },
     { status: "later", phase: "Later", title: "More agentic", body: "Agents that compose, review, and ship against Florence." },
   ]}
@@ -8504,10 +8381,6 @@ function ThemeToggle({ theme, onChange }) {
 export default function App() {
   const [activeId, setActiveId] = useState('gallery')
   const [navOpen, setNavOpen] = useState(false)
-  const {
-    user,
-    setCheckoutOpen,
-  } = useFlorenceAuth()
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') return 'dark'
     return window.localStorage.getItem('flowrix-theme') || 'dark'
@@ -8533,26 +8406,10 @@ export default function App() {
   }, [])
 
   let content = <Placeholder title="Page" />
-  if (activeId === 'account') {
-    content = <AccountPage />
-  } else if (activeId === 'overview' || activeId === 'getting-started') {
-    content = (
-      <InstallationPage
-        onNavigate={select}
-        onUpgradeToPro={() =>
-          setCheckoutOpen(true)
-        }
-      />
-    )
+  if (activeId === 'overview' || activeId === 'getting-started') {
+    content = <InstallationPage onNavigate={select} />
   } else if (activeId === 'about') {
-    content = (
-      <AboutPage
-        onNavigate={select}
-        onUpgradeToPro={() =>
-          setCheckoutOpen(true)
-        }
-      />
-    )
+    content = <AboutPage onNavigate={select} />
   } else if (activeId === 'agents' || activeId === 'agents-overview') {
     content = <AgentsOverviewPage onNavigate={select} />
   } else if (activeId === 'agents-guidelines') {
@@ -8679,9 +8536,6 @@ export default function App() {
           <span>AI-ready design system</span>
         </div>
         <div className="topbar__actions">
-          <div className="topbar__account">
-            <TopbarAccount />
-          </div>
           <ThemeToggle theme={theme} onChange={setTheme} />
         </div>
       </header>
@@ -8690,36 +8544,24 @@ export default function App() {
         <nav className="sidebar__nav" aria-label="Design system">
           <NavItems items={NAV} activeId={activeId} onSelect={select} />
         </nav>
-        {user ? (
-          <div className="sidebar__manage">
-            <Button
-              variant="tertiary"
-              size="md"
-              className="sidebar__manage-btn"
-              onClick={() => select('account')}
-            >
-              <Settings aria-hidden="true" />
-              Settings
-            </Button>
-          </div>
-        ) : (
-          <aside className="sidebar__upsell" aria-label="Florence Pro">
+        <aside className="sidebar__upsell" aria-label="Free masterclass">
             <div className="sidebar__upsell-icon" aria-hidden="true">
               <StatementVisual theme={theme} />
             </div>
-            <p className="sidebar__upsell-eyebrow">Pro</p>
-            <p className="sidebar__upsell-title">{FLORENCE_PRO_COPY.title}</p>
-            <p className="sidebar__upsell-body">{FLORENCE_PRO_COPY.body}</p>
-            <Button
-              variant="primary"
-              size="md"
-              className="sidebar__upsell-cta topbar__btn topbar__btn--upgrade"
-              onClick={() => setCheckoutOpen(true)}
+            <p className="sidebar__upsell-eyebrow">Live session</p>
+            <p className="sidebar__upsell-title">{FLORENCE_MASTERCLASS_COPY.title}</p>
+            <p className="sidebar__upsell-body">{FLORENCE_MASTERCLASS_COPY.body}</p>
+            <WorkshopCountdown className="is-florence-upsell" label="Starts in" />
+            <a
+              className="btn btn--primary btn--md sidebar__upsell-cta topbar__btn topbar__btn--upgrade"
+              href={MASTERCLASS_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={MASTERCLASS_ARIA}
             >
-              {FLORENCE_PRO_COPY.cta}
-            </Button>
+              <span className="btn__label">{FLORENCE_MASTERCLASS_COPY.cta}</span>
+            </a>
           </aside>
-        )}
       </aside>
 
       <div className="main">

@@ -225,6 +225,61 @@ a {
   width: 100%;
 }
 
+.workshop-countdown.is-florence-hero,
+.workshop-countdown.is-florence-pricing {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-gap-sm);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.workshop-countdown.is-florence-hero {
+  justify-self: center;
+}
+
+.workshop-countdown.is-florence-hero .workshop-countdown-label,
+.workshop-countdown.is-florence-pricing .workshop-countdown-label {
+  color: var(--color-text-muted);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.workshop-countdown.is-florence-hero .workshop-countdown-unit,
+.workshop-countdown.is-florence-pricing .workshop-countdown-unit {
+  display: inline-flex;
+  min-width: 2.5rem;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.08rem;
+  padding: 0.4rem 0.5rem;
+  border: var(--border-control) solid var(--color-border-default);
+  border-radius: var(--radius-control);
+  background: var(--color-bg-subtle);
+}
+
+.workshop-countdown.is-florence-hero .workshop-countdown-unit strong,
+.workshop-countdown.is-florence-pricing .workshop-countdown-unit strong {
+  font-size: var(--text-body-sm-font-size);
+  font-weight: 620;
+  line-height: 1;
+}
+
+.workshop-countdown.is-florence-hero .workshop-countdown-unit small,
+.workshop-countdown.is-florence-pricing .workshop-countdown-unit small {
+  color: var(--color-text-muted);
+  font-size: 0.58rem;
+}
+
+.workshop-countdown.is-florence-pricing {
+  justify-content: flex-start;
+  margin-block-start: var(--space-stack-sm);
+}
+
 .hero__btn {
   position: relative;
   overflow: hidden;

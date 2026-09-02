@@ -295,8 +295,8 @@
   text-transform: uppercase;
 }
 
-.ds-hero-badge {
-  margin: -0.85rem 0 1.55rem;
+.ds-hero-main .ds-hero-badge {
+  margin: -0.5rem 0 0.7rem;
   padding-block: 0.12rem;
   font-size: 0.72rem;
   line-height: 1.4;
@@ -1495,6 +1495,11 @@
   display: flex;
   align-items: baseline;
   gap: 0.2rem;
+}
+
+.ds-price.is-word {
+  font-variant-numeric: normal;
+  letter-spacing: -0.04em;
 }
 
 .ds-price-term {

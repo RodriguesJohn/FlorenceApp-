@@ -33,10 +33,10 @@ export default defineConfig({
     port: 4721,
     strictPort: true,
     fs: {
-      allow: [path.resolve(__dirname, '..')],
+      allow: [
+        path.resolve(__dirname, '..'),
+        path.resolve(__dirname, '../..'),
+      ],
     },
-  },
-  optimizeDeps: {
-    include: ['@clerk/react', '@clerk/react/experimental'],
   },
 })

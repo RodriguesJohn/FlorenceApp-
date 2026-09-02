@@ -1,4 +1,4 @@
-import { Button } from '../../03-components/button/Button.jsx'
+import { Button } from '../../../../03-components/button/Button.jsx'
 import { useFlorenceAuth } from './FlorenceAuth.jsx'
 import './account-page.css'
 

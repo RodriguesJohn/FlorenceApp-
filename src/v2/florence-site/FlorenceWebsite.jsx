@@ -4,7 +4,11 @@ import { SiteHeader } from "../SiteHeader.jsx";
 import { Entrance, EntranceItem, entranceViewport } from "../entrance.jsx";
 import { FlorenceVisitors } from "./FlorenceVisitors.jsx";
 import { Pricing } from "./components/Pricing.jsx";
-import { startFlorenceCheckout } from "./stripeCheckout.js";
+import { WorkshopCountdown } from "../WorkshopCountdown.jsx";
+import {
+  MASTERCLASS_ARIA,
+  MASTERCLASS_URL,
+} from "../workshop-timing.js";
 import "./florence-website.css";
 
 const DEMO_VIDEO_SRC = "/florence/F2.mp4";
@@ -247,12 +251,12 @@ export default function FlorenceWebsite() {
         <p className="hero__lede">
           Florence is an <SelectFrame>AI-ready design system</SelectFrame>{' '}
           for humans and agents so you can ship fast without shipping AI slop.
-          Copy and paste into{' '}
+          Built for{' '}
           {CODING_AGENTS.map((agent, index) => {
             const last = index === CODING_AGENTS.length - 1
             return (
               <span key={agent.id} className="hero__inline-agent">
-                {index > 0 && (last ? ' or ' : ', ')}
+                {index > 0 && (last ? ' and ' : ', ')}
                 <img
                   src={agent.logo}
                   alt=""
@@ -264,31 +268,31 @@ export default function FlorenceWebsite() {
               </span>
             )
           })}
-          .
+          . A complete system for your product starts with a call.
         </p>
         <div className="hero__actions">
           <a className="btn btn--primary btn--lg hero__btn" href={DEMO_URL}>
             Browse all components
             <Play aria-hidden="true" />
           </a>
-          <button
-            type="button"
+          <a
             className="btn btn--secondary btn--lg hero__btn hero__btn--ghost"
-            onClick={() => startFlorenceCheckout()}
+            href={MASTERCLASS_URL}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={MASTERCLASS_ARIA}
           >
-            Upgrade to Pro
+            Join the free masterclass
             <ArrowUpRight aria-hidden="true" />
-          </button>
+          </a>
         </div>
+        <WorkshopCountdown className="is-florence-hero" label="Masterclass starts in" />
       </div>
 
       <DemoReel />
       </section>
 
-      <Pricing
-        demoUrl={DEMO_URL}
-        onUpgradeToPro={() => startFlorenceCheckout()}
-      />
+      <Pricing demoUrl={DEMO_URL} />
       </main>
       <FlorenceFooter />
     </div>

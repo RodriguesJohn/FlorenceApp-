@@ -296,9 +296,24 @@
   color: var(--color-overlay-scrim);
 }
 
-@media (min-width: 72rem) {
+.pricing-card__demo {
+  display: block;
+  margin-block-start: var(--space-stack-sm);
+  color: var(--color-text-muted);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.pricing-card__demo:hover {
+  color: var(--color-text-secondary);
+}
+
+@media (min-width: 48rem) {
   .pricing__layout {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   }
 
   .pricing__intro {
@@ -308,19 +323,9 @@
   }
 }
 
-@media (max-width: 71.99rem) {
+@media (max-width: 47.99rem) {
   .pricing__intro {
     text-align: center;
-  }
-}
-
-@media (min-width: 48rem) and (max-width: 71.99rem) {
-  .pricing__layout {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .pricing__intro {
-    grid-column: 1 / -1;
   }
 }
 

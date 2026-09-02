@@ -347,7 +347,7 @@ function GalleryPreview({ id }) {
               {
                 status: 'next',
                 phase: 'Next',
-                title: 'V2 for coding agents',
+                title: 'Component optimization',
               },
               {
                 status: 'next',

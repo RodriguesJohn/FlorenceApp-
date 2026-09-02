@@ -1,22 +1,21 @@
-import { Check } from 'lucide-react'
+import { ArrowUpRight, Check } from 'lucide-react'
+import { WorkshopCountdown } from '../../WorkshopCountdown.jsx'
+import {
+  MASTERCLASS_ARIA,
+  MASTERCLASS_DATE_LABEL,
+  MASTERCLASS_URL,
+} from '../../workshop-timing.js'
 import './pricing.css'
 
-const FREE_FEATURES = [
-  'Free components',
-  'Free prompts',
-  'Free code snippets',
-]
-
-const PRO_FEATURES = [
-  'Premium components',
-  'Drop-in agent prompts',
-  'Code actions ready to paste',
-  'New components on every launch',
+const MASTERCLASS_FEATURES = [
+  'What an AI-ready design system actually is',
+  'Live look at Florence',
+  '45 minutes, no pitch for a subscription',
 ]
 
 const STUDIO_FEATURES = [
-  'Full Florence access',
-  'Embedded support with your team',
+  'Custom design system for your product',
+  'Embedded with your team',
   'Audits, implementation, and foundations',
   '15-minute discovery call',
 ]
@@ -36,30 +35,7 @@ function FeatureList({ items }) {
   )
 }
 
-function CheckoutNotice() {
-  const params = new URLSearchParams(window.location.search)
-  const status = params.get('checkout')
-  if (status === 'success') {
-    return (
-      <p className="pricing__notice" role="status">
-        Payment received. Pro is unlocking on your Florence account.
-      </p>
-    )
-  }
-  if (status === 'cancel') {
-    return (
-      <p className="pricing__notice" role="status">
-        Checkout was canceled. No charge was made.
-      </p>
-    )
-  }
-  return null
-}
-
-export function Pricing({
-  demoUrl = 'http://localhost:4721/',
-  onUpgradeToPro,
-}) {
+export function Pricing({ demoUrl = '/florence/system' }) {
   return (
     <section
       id="pricing"
@@ -69,42 +45,13 @@ export function Pricing({
       <div className="pricing__layout">
         <header className="pricing__intro">
           <h2 id="pricing-heading" className="pricing__title">
-            Pricing
+            Next
           </h2>
           <p className="pricing__lede">
-            Start free. Pro unlocks premium drops for agent-first workflows.
-            For full Florence access and embedded support, book a 15-minute
-            discovery call.
+            Florence is a showcase. Join the free masterclass, or book a call
+            if you need a custom system for your team.
           </p>
-          <CheckoutNotice />
         </header>
-
-        <article className="pricing-card">
-            <span className="pricing-card__sheen" aria-hidden="true" />
-
-            <div className="pricing-card__inner">
-              <header className="pricing-card__header">
-                <div className="pricing-card__tier-row">
-                  <p className="pricing-card__tier">Free</p>
-                </div>
-                <p className="pricing-card__price">
-                  <span className="pricing-card__amount">$0</span>
-                  <span className="pricing-card__term">/ mo</span>
-                </p>
-              </header>
-
-              <hr className="pricing-card__rule" />
-
-              <FeatureList items={FREE_FEATURES} />
-
-              <a
-                className="btn btn--secondary btn--lg pricing-card__cta pricing-card__cta--ghost"
-                href={demoUrl}
-              >
-                Start for free
-              </a>
-            </div>
-          </article>
 
         <article className="pricing-card pricing-card--featured">
             <span className="pricing-card__glow" aria-hidden="true" />
@@ -113,25 +60,31 @@ export function Pricing({
             <div className="pricing-card__inner">
               <header className="pricing-card__header">
                 <div className="pricing-card__tier-row">
-                  <p className="pricing-card__tier">Pro</p>
+                  <p className="pricing-card__tier">Masterclass</p>
+                  <span className="pricing-card__badge">Free</span>
                 </div>
                 <p className="pricing-card__price">
-                  <span className="pricing-card__amount">$49</span>
-                  <span className="pricing-card__term">/ mo</span>
+                  <span className="pricing-card__amount pricing-card__amount--text">
+                    {MASTERCLASS_DATE_LABEL}
+                  </span>
                 </p>
+                <WorkshopCountdown className="is-florence-pricing" label="Starts in" />
               </header>
 
               <hr className="pricing-card__rule" />
 
-              <FeatureList items={PRO_FEATURES} />
+              <FeatureList items={MASTERCLASS_FEATURES} />
 
-              <button
-                type="button"
+              <a
                 className="btn btn--primary btn--lg pricing-card__cta pricing-card__cta--featured"
-                onClick={onUpgradeToPro}
+                href={MASTERCLASS_URL}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={MASTERCLASS_ARIA}
               >
-                Upgrade to Pro
-              </button>
+                Join the free masterclass
+                <ArrowUpRight aria-hidden="true" />
+              </a>
             </div>
           </article>
 
@@ -142,10 +95,10 @@ export function Pricing({
               <header className="pricing-card__header">
                 <div className="pricing-card__tier-row">
                   <p className="pricing-card__tier">Studio</p>
-                  <span className="pricing-card__badge">Contact</span>
+                  <span className="pricing-card__badge">Custom</span>
                 </div>
                 <p className="pricing-card__price">
-                  <span className="pricing-card__amount pricing-card__amount--text">Custom</span>
+                  <span className="pricing-card__amount pricing-card__amount--text">Project</span>
                 </p>
               </header>
 
@@ -160,6 +113,9 @@ export function Pricing({
                 rel="noreferrer"
               >
                 Book a discovery call
+              </a>
+              <a className="pricing-card__demo" href={demoUrl}>
+                Or browse the Florence showcase
               </a>
             </div>
           </article>

@@ -84,13 +84,12 @@ const workshopIncluded = [
   "Implementation checklist"
 ];
 
-const trainingIncluded = [
-  "Access to the lesson library",
-  "Self-paced lessons you can replay",
-  "Tokens, components, and contracts",
-  "Figma workflows and building in Cursor",
-  "Community of AI designers",
-  "Async chat support"
+const masterclassIncluded = [
+  "What an AI-ready design system actually is",
+  "Why they matter now",
+  "How agents use your system",
+  "Live look at Florence",
+  "45 minutes, live Q&A"
 ];
 
 const workshopQuotes = [
@@ -190,7 +189,7 @@ function PriceCard({
           </span>
         ) : null}
       </header>
-      <p className="ds-price">
+      <p className={`ds-price${String(amount).startsWith("$") ? "" : " is-word"}`}>
         {amount}
         {term ? <small className="ds-price-term">{term}</small> : null}
       </p>
@@ -266,9 +265,9 @@ function TrainingLessonModule() {
 export default function DesignSystemsPage({ embedded = false } = {}) {
   React.useEffect(() => {
     if (embedded) return;
-    document.title = "AI Native Design Systems Masterclass | Human AI Studio";
+    document.title = "AI-Ready Design System Workshop | Human AI Studio";
     const description =
-      "Free 45-minute masterclass on September 9: what an AI-ready design system is, why it matters now, and a live demo of Florence.";
+      "Join the workshop to learn AI-ready design systems: the framework, readiness evals, component architecture, and implementation checklist.";
     let meta = document.querySelector('meta[name="description"]');
     const previous = meta?.getAttribute("content");
     if (!meta) {
@@ -292,9 +291,7 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
     >
       {embedded ? null : (
         <>
-          <a className="ds-skip-link" href={MASTERCLASS_URL} target="_blank" rel="noreferrer">
-            Skip to masterclass registration
-          </a>
+          <a className="ds-skip-link" href="#workshop-offer">Skip to workshop offer</a>
 
           <nav className="nav nav-dark" aria-label="Primary">
             <a className="brand" href="/" aria-label="Human AI Studio home">
@@ -338,29 +335,29 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
                 Popular courses on Maven
               </EntranceItem>
               <EntranceItem as="h1" id="ds-audit-title">
-                <span>AI Native Design</span>
-                <span>Systems Masterclass</span>
+                <span>Join AI Design</span>
+                <span>System Workshop</span>
               </EntranceItem>
               <EntranceItem as="p" className="ds-audit-intro">
-                Free 45 minutes on Maven. What an AI-ready design system is,
-                why it matters now, and a live demo of Florence.
+                Join the workshop to learn the framework, evals, and component
+                architecture your existing system needs.
               </EntranceItem>
             </div>
 
-            <EntranceItem as="aside" className="ds-hero-offer-card" aria-label="Masterclass details">
-              <p className="ds-hero-offer-label">Free masterclass</p>
+            <EntranceItem as="aside" className="ds-hero-offer-card" aria-label="Workshop details">
+              <p className="ds-hero-offer-label">Live workshop</p>
               <dl className="ds-hero-meta">
-                <div><dt>Date</dt><dd>September 9</dd></div>
-                <div><dt>Time</dt><dd>12:00 PM PDT · 45 min</dd></div>
-                <div><dt>Format</dt><dd>Live on Zoom</dd></div>
+                <div><dt>Date</dt><dd>September 12</dd></div>
+                <div><dt>Time</dt><dd>9:00 AM–1:00 PM PT</dd></div>
+                <div><dt>Format</dt><dd>Live on Maven</dd></div>
               </dl>
               <div className="ds-audit-actions">
-                <CtaLink href={MASTERCLASS_URL}>Register free</CtaLink>
-                <CtaLink href="#workshop-offer" variant="secondary">
-                  Full workshop
+                <CtaLink href={WORKSHOP_URL}>Join the workshop</CtaLink>
+                <CtaLink href={MASTERCLASS_URL} variant="secondary">
+                  Join the free masterclass
                 </CtaLink>
               </div>
-              <p className="ds-hero-proof">Free · Recording after · Florence demo</p>
+              <p className="ds-hero-proof">20 seats · Certificate · Lifetime recording</p>
             </EntranceItem>
           </div>
 
@@ -606,7 +603,7 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
               Learn how to make your design system AI-ready.
             </EntranceItem>
             <EntranceItem as="p">
-              Join the live one-day workshop. Self-paced training is coming soon.
+              Join the live one-day workshop, or start with the free 45-minute masterclass.
             </EntranceItem>
           </div>
 
@@ -637,13 +634,14 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
             </EntranceItem>
             <EntranceItem className="ds-price-cell">
               <PriceCard
-                comingSoon
-                badge="Coming soon"
-                label="Self-paced"
-                amount="$149"
-                term="/ mo"
-                note="Library access"
-                items={trainingIncluded}
+                badge="Free"
+                label="Masterclass"
+                amount="Free"
+                note={MASTERCLASS_DATE_LABEL}
+                items={masterclassIncluded}
+                ctaHref={MASTERCLASS_URL}
+                ctaLabel="Join the free masterclass"
+                ctaVariant="secondary"
               />
             </EntranceItem>
           </div>
@@ -659,8 +657,8 @@ export default function DesignSystemsPage({ embedded = false } = {}) {
             <EntranceItem as="details">
               <summary>What if I can’t attend live?</summary>
               <p>
-                Join the self-paced training for library access on your own time.
-                Workshop seats also include lifetime access to the recording.
+                Start with the free 45-minute masterclass. Workshop seats include
+                lifetime access to the recording if you miss the live session.
               </p>
             </EntranceItem>
             <EntranceItem as="details">
