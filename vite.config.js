@@ -66,6 +66,7 @@ function htmlAliases() {
     "/playbook": "/index.html",
     "/workshop/complete": "/index.html",
     "/workshop": "/design-systems.html",
+    "/course": "/course.html",
     "/florence": "/florence.html",
     "/florence/system": "/florence-system.html",
     "/case-studies/florence": "/case-studies.html"
@@ -90,8 +91,7 @@ function htmlAliases() {
 export default defineConfig({
   plugins: [react(), htmlAliases(), blogPlugin()],
   optimizeDeps: {
-    entries: ["index.html", "academy.html", "florence.html", "florence-system.html"],
-    include: ["@clerk/react", "@clerk/react/experimental"]
+    entries: ["index.html", "academy.html", "course.html", "florence.html", "florence-system.html"]
   },
   build: {
     rollupOptions: {
@@ -104,6 +104,7 @@ export default defineConfig({
           ["websites", "websites.html"],
           ["caseStudies", "case-studies.html"],
           ["tools", "tools.html"],
+          ["course", "course.html"],
           ["designSystems", "design-systems.html"],
           ["product", "product.html"],
           ["offeringDesignEngineering", "offering-design-engineering.html"],

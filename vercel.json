@@ -36,6 +36,11 @@
       "permanent": true
     },
     {
+      "source": "/course/",
+      "destination": "/course",
+      "permanent": true
+    },
+    {
       "source": "/florence/",
       "destination": "/florence",
       "permanent": true
@@ -147,6 +152,10 @@
     {
       "source": "/offerings/agent-ready-design-system",
       "destination": "/offering-agent-ready-design-system.html"
+    },
+    {
+      "source": "/course",
+      "destination": "/course.html"
     },
     {
       "source": "/florence",

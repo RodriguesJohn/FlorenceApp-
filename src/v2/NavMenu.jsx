@@ -3,7 +3,7 @@ import { track } from "@vercel/analytics";
 import "./nav-menu.css";
 
 const studioUrl = "/";
-const florenceUrl = "/florence";
+const courseUrl = "/course";
 const designSystemsUrl = "/workshop";
 const blogUrl = "/blog";
 
@@ -18,7 +18,7 @@ function trackWorkshopNavClick() {
 const barLinks = [
   { label: "Studio", href: studioUrl },
   { label: "Workshop", href: designSystemsUrl, onClick: trackWorkshopNavClick },
-  { label: "Florence", href: florenceUrl }
+  { label: "Course", href: courseUrl }
 ];
 
 const menuLinks = [

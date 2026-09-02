@@ -106,6 +106,12 @@ async function boot() {
       return;
     }
 
+    if (route === "/course") {
+      const { default: CoursePage } = await import("./v2/CoursePage.jsx");
+      renderWithAnalytics(root, <CoursePage />);
+      return;
+    }
+
     if (route === "/florence" || route === "/offerings/agent-ready-design-system") {
       const { default: FlorenceOfferPage } = await import("./v2/FlorenceOfferPage.jsx");
       renderWithAnalytics(root, <FlorenceOfferPage />);

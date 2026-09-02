@@ -72,16 +72,16 @@ const pages = {
     type: "WebPage"
   },
   "/workshop": {
-    title: "AI Native Design Systems Masterclass | Human AI Studio",
+    title: "AI-Ready Design System Workshop | Human AI Studio",
     description:
-      "Free 45-minute masterclass on September 9: what an AI-ready design system is, why it matters now, and a live demo of Florence.",
+      "Join the workshop to learn AI-ready design systems: the framework, readiness evals, component architecture, and implementation checklist.",
     type: "Course"
   },
   "/design-systems": {
     path: "/workshop",
-    title: "AI Native Design Systems Masterclass | Human AI Studio",
+    title: "AI-Ready Design System Workshop | Human AI Studio",
     description:
-      "Free 45-minute masterclass on September 9: what an AI-ready design system is, why it matters now, and a live demo of Florence.",
+      "Join the workshop to learn AI-ready design systems: the framework, readiness evals, component architecture, and implementation checklist.",
     type: "Course"
   },
   "/product": {
@@ -102,6 +102,11 @@ const pages = {
       "A monthly studio for making your design system agent-ready, so humans and agents ship on-brand product instead of AI slop.",
     type: "Course",
     noindex: true
+  },
+  "/course": {
+    title: "AI Ready Design System course | Human AI Studio",
+    description: "AI Ready Design System course from Human AI Studio.",
+    type: "Course"
   },
   "/florence": {
     title: "Florence — AI-ready design systems | Human AI Studio",
