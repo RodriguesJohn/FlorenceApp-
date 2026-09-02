@@ -1,10 +1,10 @@
-import { Show, UserButton } from '@clerk/react'
+import { UserButton } from '@clerk/react'
 import { Button } from '../../03-components/button/Button.jsx'
 import { clerkAppearance, clerkConfigured, clerkProfileAppearance } from './clerkConfig.js'
 import { useFlorenceAuth } from './FlorenceAuth.jsx'
 
 export function TopbarAccount() {
-  const { setLoginOpen, setCheckoutOpen } = useFlorenceAuth()
+  const { user, isPro, setLoginOpen, setCheckoutOpen } = useFlorenceAuth()
 
   if (!clerkConfigured) {
     return (
@@ -33,7 +33,7 @@ export function TopbarAccount() {
 
   return (
     <>
-      <Show when="signed-out">
+      {!user ? (
         <Button
           variant="tertiary"
           size="md"
@@ -42,6 +42,8 @@ export function TopbarAccount() {
         >
           Log in
         </Button>
+      ) : null}
+      {!isPro ? (
         <Button
           variant="primary"
           size="md"
@@ -50,14 +52,14 @@ export function TopbarAccount() {
         >
           Upgrade to Pro
         </Button>
-      </Show>
-      <Show when="signed-in">
+      ) : null}
+      {user ? (
         <UserButton
           appearance={clerkAppearance}
           userProfileProps={{ appearance: clerkProfileAppearance }}
           afterSignOutUrl={window.location.origin}
         />
-      </Show>
+      ) : null}
     </>
   )
 }
