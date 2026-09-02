@@ -139,7 +139,7 @@ export default function FlorenceCaseStudyPage() {
               went up because the agent restated what the system never said
               once. The brand paid for it in screens that looked almost right.
             </p>
-            <ul className="fcs-pains">
+            <ul className="fcs-pains fcs-pains--outcomes">
               <li>
                 <span className="fcs-pain-index" aria-hidden="true">
                   01
@@ -147,10 +147,6 @@ export default function FlorenceCaseStudyPage() {
                 <div className="fcs-pain-copy">
                   <h3>Off-brand UI that leads to an inconsistent experience</h3>
                   <p>Agents could see components. They still had no rules for a complete product.</p>
-                  <p className="fcs-impact">
-                    Users hit a different product in every flow. The brand
-                    stops holding.
-                  </p>
                 </div>
               </li>
               <li>
@@ -160,10 +156,6 @@ export default function FlorenceCaseStudyPage() {
                 <div className="fcs-pain-copy">
                   <h3>Scattered context that agents cannot retrieve</h3>
                   <p>Some of it lived in GitHub. Some in Figma. A lot of it was never written down.</p>
-                  <p className="fcs-impact">
-                    Every session starts from zero. The agent burns tokens
-                    relearning the product.
-                  </p>
                 </div>
               </li>
               <li>
@@ -173,9 +165,6 @@ export default function FlorenceCaseStudyPage() {
                 <div className="fcs-pain-copy">
                   <h3>Token cost that climbs with every guessed screen</h3>
                   <p>The hole was product context. The agent restated what the system never said once.</p>
-                  <p className="fcs-impact">
-                    The bill goes up. The screens still need a rewrite.
-                  </p>
                 </div>
               </li>
               <li>
@@ -185,10 +174,6 @@ export default function FlorenceCaseStudyPage() {
                 <div className="fcs-pain-copy">
                   <h3>Shipping that slows while humans clean up every pass</h3>
                   <p>One screen can look fine. Across flows, review becomes the bottleneck.</p>
-                  <p className="fcs-impact">
-                    Velocity looks high until the cleanup starts. The product
-                    ships later, and less on-brand.
-                  </p>
                 </div>
               </li>
             </ul>
@@ -239,18 +224,14 @@ export default function FlorenceCaseStudyPage() {
           </figure>
 
           <div className="fcs-body">
-            <ul className="fcs-pains">
+            <ul className="fcs-pains fcs-pains--outcomes">
               <li>
                 <span className="fcs-pain-index" aria-hidden="true">
                   01
                 </span>
                 <div className="fcs-pain-copy">
                   <h3>29 components. 9 foundations. 736 tokens.</h3>
-                  <p>Agents hit a real catalog instead of inventing UI.</p>
-                  <p className="fcs-impact">
-                    <span>Shipped</span>
-                    A live AI-ready design system. Still running.
-                  </p>
+                  <p>A live catalog agents retrieve instead of inventing UI.</p>
                 </div>
               </li>
               <li>
@@ -258,12 +239,8 @@ export default function FlorenceCaseStudyPage() {
                   02
                 </span>
                 <div className="fcs-pain-copy">
-                  <h3>73% retrieval at launch</h3>
+                  <h3>73% retrieval accuracy at launch</h3>
                   <p>After a few tweaks, screens were on-brand and cheaper in tokens.</p>
-                  <p className="fcs-impact">
-                    <span>Measured</span>
-                    Retrievable enough to ship. Cheap enough to keep using.
-                  </p>
                 </div>
               </li>
               <li>
@@ -273,10 +250,6 @@ export default function FlorenceCaseStudyPage() {
                 <div className="fcs-pain-copy">
                   <h3>The agent-ready design system framework</h3>
                   <p>Same problem, on their system, without the studio internals.</p>
-                  <p className="fcs-impact">
-                    <span>Method</span>
-                    A way to do the work on someone else&apos;s system.
-                  </p>
                 </div>
               </li>
               <li>
@@ -286,10 +259,6 @@ export default function FlorenceCaseStudyPage() {
                 <div className="fcs-pain-copy">
                   <h3>Workshops with working designers</h3>
                   <p>Salesforce was in the room. So were other product orgs.</p>
-                  <p className="fcs-impact">
-                    <span>In the room</span>
-                    The work left the catalog and went into other teams.
-                  </p>
                 </div>
               </li>
             </ul>
