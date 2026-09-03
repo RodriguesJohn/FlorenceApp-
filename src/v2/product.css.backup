@@ -173,6 +173,203 @@
 @media(prefers-reduced-motion:reduce){.product-orbit{animation:none}}
 
 /* Product page — light theme */
+.product-page {
+  --ink: #15171b;
+  --muted: #626874;
+  --line: rgba(20, 29, 45, 0.12);
+  color-scheme: light;
+  background: #f7f8fb;
+  color: var(--ink);
+}
+
+.product-nav {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+}
+
+.product-nav-links > a:not(.product-nav-cta) { color: #5f6570; }
+.product-nav-links > a:hover { color: #111318; }
+.product-nav-cta { border-color: rgba(20, 29, 45, 0.2); background: rgba(255, 255, 255, 0.72); }
+
+.product-hero-context {
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 72%, #f3f6fb 100%);
+}
+
+.product-grid {
+  opacity: 0.48;
+  background-image:
+    linear-gradient(rgba(28, 39, 58, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28, 39, 58, 0.07) 1px, transparent 1px);
+}
+
+.product-glow { background: rgba(17, 24, 39, 0.07); filter: blur(120px); }
+.product-page .product-hero h1 { color: var(--ink); white-space: normal; }
+.product-hero h1 span { color: #858b96; }
+.product-hero-intro { color: #5d6470; }
+.product-button-secondary { color: #20242b !important; background: #ffffff; border-color: rgba(20, 29, 45, 0.16); box-shadow: 0 0.5rem 1.5rem rgba(28, 39, 58, 0.06); }
+
+.product-problem { background: #ffffff; }
+.product-page .product-stat { background: #f9fafb; border-color: rgba(20, 29, 45, 0.11); }
+.product-page .product-stat span { color: #626874; }
+.product-system { background: #f1f4f8; color: #15171b; }
+.product-system .product-section-label { color: #69717d; }
+.product-layer-list,
+.product-layer { border-color: rgba(20, 29, 45, 0.16); }
+.product-layer-number { color: #8a929e; }
+.product-layer-copy { color: #626a75; }
+
+.product-blueprint { background: #f7f8fb; }
+.product-blueprint-card {
+  border-color: rgba(20, 29, 45, 0.13);
+  background: #ffffff;
+  box-shadow: 0 2rem 5rem rgba(31, 45, 70, 0.08);
+}
+.product-blueprint-art {
+  border-color: rgba(20, 29, 45, 0.12);
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.12), transparent 58%), #f5f8fc;
+}
+.product-blueprint-art svg { stroke: rgba(28, 39, 58, 0.16); }
+.blueprint-node { border-color: rgba(20, 29, 45, 0.18); background: #ffffff; color: #535b67; box-shadow: 0 0.45rem 1.1rem rgba(31, 45, 70, 0.08); }
+.blueprint-node.center { color: #ffffff; background: var(--acid); border-color: var(--acid); }
+.product-blueprint-copy li { color: #343a44; }
+
+.product-market { background: #ffffff; }
+.product-page .product-market-item { background: #f9fafb; border-color: rgba(20, 29, 45, 0.11); }
+.product-page .product-market-insight { background: rgba(59, 130, 246, 0.06); border-color: rgba(59, 130, 246, 0.18); color: #4a515d; }
+
+.product-cta { background: #ffffff; }
+.product-cta-ring { border-color: rgba(59, 130, 246, 0.2); box-shadow: inset 0 0 120px rgba(59, 130, 246, 0.06); }
+.product-cta-ring::before,
+.product-cta-ring::after { border-color: rgba(28, 39, 58, 0.09); }
+.product-footer { background: #f7f8fb; color: #6d7480; }
+.product-footer .product-brand { color: var(--ink); }
+
+/* Light treatment for the embedded context-product mockup. */
+.product-page .saas-device {
+  border-color: rgba(20, 29, 45, 0.16);
+  background: #ffffff;
+  box-shadow: 0 4rem 8rem rgba(24, 32, 47, 0.22), 0 1.2rem 2.8rem rgba(24, 32, 47, 0.1), 0 0 0 1px rgba(20, 29, 45, 0.025);
+}
+.product-page .saas-device::after { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92); }
+.product-page .saas-window-bar { border-color: rgba(20, 29, 45, 0.12); background: linear-gradient(180deg, #f8f9fb, #eef1f5); }
+.product-page .saas-window-dots span { background: rgba(28, 39, 58, 0.18); }
+.product-page .saas-window-address { border-color: rgba(20, 29, 45, 0.1); background: rgba(255, 255, 255, 0.78); color: #8a919c; }
+.product-page .saas-window-actions span { border-color: rgba(20, 29, 45, 0.16); }
+.product-page .saas-app { color: #20242b; }
+.product-page .saas-sidebar { border-color: rgba(20, 29, 45, 0.1); background: #f7f9fc; }
+.product-page .saas-app-brand { color: #20242b; }
+.product-page .saas-app-mark i { border-color: #20242b; }
+.product-page .saas-app-mark i:last-child { background: #20242b; }
+.product-page .saas-workspace-switcher { border-color: rgba(20, 29, 45, 0.1); background: #ffffff; box-shadow: 0 0.4rem 1rem rgba(31, 45, 70, 0.05); }
+.product-page .saas-workspace-logo { background: #20242b; }
+.product-page .saas-workspace-switcher strong { color: #343a44; }
+.product-page .saas-workspace-switcher small,
+.product-page .saas-chevron { color: #939aa5; }
+.product-page .saas-sidebar nav > span,
+.product-page .saas-settings { color: #707783; }
+.product-page .saas-sidebar nav > span.active { color: #1f242c; background: #e9eef7; box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.08); }
+.product-page .saas-context-meter { border-color: rgba(20, 29, 45, 0.1); background: #ffffff; }
+.product-page .saas-context-meter > div { color: #717986; }
+.product-page .saas-context-meter strong { color: #343a44; }
+.product-page .saas-context-meter > i,
+.product-page .saas-system-card > i { background: rgba(28, 39, 58, 0.1); }
+.product-page .saas-context-meter b { background: #20242b; }
+.product-page .saas-context-meter small { color: #9299a4; }
+.product-page .saas-user { border-color: rgba(20, 29, 45, 0.1); }
+.product-page .saas-user > span,
+.product-page .saas-avatar { border-color: rgba(20, 29, 45, 0.12); background: #e9edf3; color: #545c68; }
+.product-page .saas-user strong { color: #444b56; }
+.product-page .saas-user small { color: #8a919c; }
+.product-page .saas-user i { background: #9aa1ab; box-shadow: 0 0.3rem #9aa1ab, 0 -0.3rem #9aa1ab; }
+
+.product-page .saas-main { background: #f4f6f9; }
+.product-page .saas-topbar { border-color: rgba(20, 29, 45, 0.1); background: rgba(255, 255, 255, 0.9); }
+.product-page .saas-breadcrumb { color: #8b929d; }
+.product-page .saas-breadcrumb i { color: #b6bbc3; }
+.product-page .saas-breadcrumb strong { color: #434a55; }
+.product-page .saas-icon-button { border-color: rgba(20, 29, 45, 0.1); background: #ffffff; color: #68717d !important; }
+.product-page .saas-share { background: #20242b; color: #ffffff !important; }
+.product-page .saas-content::before { background: rgba(59, 130, 246, 0.08); }
+.product-page .saas-content-title p { color: #8a929e; }
+.product-page .saas-content-title h3 { color: #1d2229; }
+.product-page .saas-content-title button { border-color: rgba(20, 29, 45, 0.1); background: #ffffff; color: #59616d; }
+
+.product-page .saas-health-card,
+.product-page .saas-activity-card,
+.product-page .saas-system-card { border-color: rgba(20, 29, 45, 0.1); background: #ffffff; box-shadow: 0 0.8rem 2rem rgba(31, 45, 70, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9); }
+.product-page .saas-card-head p { color: #404752; }
+.product-page .saas-card-head span { color: #939aa5; }
+.product-page .saas-card-head button { color: #9299a4; }
+.product-page .saas-score circle { stroke: rgba(28, 39, 58, 0.09); }
+.product-page .saas-context-map { background: radial-gradient(circle at center,rgba(59,130,246,.11),transparent 38%),#f8fafc; box-shadow: inset 0 0 0 1px rgba(20,29,45,.06); }
+.product-page .saas-context-map > svg { stroke: rgba(59,130,246,.26); }
+.product-page .saas-map-hub { border-color: rgba(59,130,246,.25); background: #fff; box-shadow: 0 .5rem 1.5rem rgba(31,45,70,.1),0 0 1.2rem rgba(59,130,246,.08); }
+.product-page .saas-map-hub strong { color: #303640; }.product-page .saas-map-hub small { color: #9299a4; }
+.product-page .saas-map-source { border-color: rgba(20,29,45,.09); background: rgba(255,255,255,.94); color: #626a76; box-shadow: 0 .25rem .8rem rgba(31,45,70,.06); }
+.product-page .saas-health-meta p { color: #747c88; }
+.product-page .saas-health-meta a { color: #48515d; }
+.product-page .saas-agent-event { border-color: rgba(20, 29, 45, 0.08); }
+.product-page .saas-agent-event strong { color: #4a515d; }
+.product-page .saas-agent-event p,
+.product-page .saas-agent-event time { color: #969da8; }
+.product-page .saas-library-head p { color: #404752; }
+.product-page .saas-library-head div span { color: #9299a4; }
+.product-page .saas-library-head button { color: #68717d; }
+.product-page .saas-system-visual { background: #f2f5f8; }
+.product-page .saas-system-visual::before { background-image: linear-gradient(rgba(28, 39, 58, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(28, 39, 58, 0.08) 1px, transparent 1px); }
+.product-page .saas-system-card.blue .saas-system-visual { background: linear-gradient(145deg, rgba(59, 130, 246, 0.13), #f6f9fc); }
+.product-page .saas-system-card.violet .saas-system-visual { background: linear-gradient(145deg, rgba(139, 92, 246, 0.13), #f6f9fc); }
+.product-page .saas-system-card.green .saas-system-visual { background: linear-gradient(145deg, rgba(16, 185, 129, 0.13), #f6f9fc); }
+.product-page .saas-system-card.amber .saas-system-visual { background: linear-gradient(145deg, rgba(245, 158, 11, 0.13), #f6f9fc); }
+.product-page .saas-source-glyph { background: rgba(255,255,255,.82); }
+.product-page .saas-system-visual small { border-color: rgba(20,29,45,.08); background: rgba(255,255,255,.84); color: #747d89; }
+.product-page .saas-system-meta p { color: #4a515d; }
+.product-page .saas-system-meta span { color: #9299a4; }
+.product-page .saas-system-meta strong { color: #656d78; }
+.product-page .saas-promptbar { border-color: rgba(20, 29, 45, 0.13); background: rgba(255, 255, 255, 0.94); box-shadow: 0 1rem 2.5rem rgba(31, 45, 70, 0.12), inset 0 1px 0 #ffffff; }
+.product-page .saas-promptbar p { color: #7c8490; }
+.product-page .saas-promptbar kbd { border-color: rgba(20, 29, 45, 0.1); background: #f0f3f6; color: #7d8590; }
+.product-page .saas-promptbar button { background: #20242b; color: #ffffff; }
+
+/* Creative business operating-system mockup. */
+.product-page .saas-ops-title > div > span { color: #7f8792; }
+.product-page .saas-metric-card,
+.product-page .saas-revenue-card,
+.product-page .saas-projects-card,
+.product-page .saas-agent-team-card,
+.product-page .saas-agent-chat { border-color: rgba(20,29,45,.1); background: #fff; box-shadow: 0 .45rem 1.25rem rgba(31,45,70,.035),inset 0 1px 0 #fff; }
+.product-page .saas-metric-card > div { color: #7c8490; }
+.product-page .saas-metric-card > strong { color: #20252d; }
+.product-page .saas-revenue-total strong { color: #20252d; }
+.product-page .saas-revenue-total span { color: #159a6d; }
+.product-page .saas-chart { border-color: rgba(20,29,45,.09); background: repeating-linear-gradient(to bottom,transparent 0,transparent 1.5rem,rgba(20,29,45,.045) 1.55rem); }
+.product-page .saas-chart-labels { color: #99a0aa; }
+.product-page .saas-projects-card .saas-card-head button { color: #717986; }
+.product-page .saas-project-row { border-color: rgba(20,29,45,.075); }
+.product-page .saas-project-row strong { color: #4a515c; }
+.product-page .saas-project-row small { color: #969da8; }
+.product-page .saas-project-row em { background: rgba(139,92,246,.09); color: #7754c7; }
+.product-page .saas-project-row > i { background: rgba(20,29,45,.09); }
+.product-page .saas-project-row > i b { background: #20242b; }
+.product-page .saas-project-row > span:last-child { color: #8d95a0; }
+.product-page .saas-agent-team-card .saas-card-head button { color: #717986; }
+.product-page .saas-agent-member { border-color: rgba(20,29,45,.075); }
+.product-page .saas-agent-member strong { color: #4a515c; }
+.product-page .saas-agent-member small { color: #969da8; }
+.product-page .saas-agent-chat > header { border-color: rgba(20,29,45,.08); }
+.product-page .saas-agent-chat header strong { color: #343a44; }
+.product-page .saas-agent-chat header small { color: #89919c; }
+.product-page .saas-agent-chat header button { color: #9299a4; }
+.product-page .saas-chat-day { color: #9aa1ab; }
+.product-page .saas-chat-message.agent { background: #f1f4f8; color: #626a75; }
+.product-page .saas-chat-message.user { background: #e6efff; color: #3567ad; }
+.product-page .saas-agent-actions span { border-color: rgba(16,185,129,.16); background: rgba(16,185,129,.07); color: #16845f; }
+.product-page .saas-chat-input { border-color: rgba(20,29,45,.1); background: #f7f9fb; }
+.product-page .saas-chat-input p { color: #9299a4; }
+.product-page .saas-chat-input button { background: #20242b; color: #fff; }
+
 @media (max-width: 980px) {
   .product-system .product-section-heading { display: grid; justify-items: center; margin-bottom: 56px; text-align: center; }
   .product-system .product-section-heading .product-section-label { margin-bottom: 22px; }
