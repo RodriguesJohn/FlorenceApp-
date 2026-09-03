@@ -16,28 +16,28 @@ function Icon({ name }) {
 
 const navigation = [
   ["overview", "Overview"],
-  ["agents", "Clients"],
-  ["library", "Projects"],
-  ["activity", "Agent team"],
-  ["code", "Automations"]
+  ["library", "Components"],
+  ["code", "Tokens"],
+  ["agents", "Brand"],
+  ["activity", "Quality"]
 ];
 
-const studioMetrics = [
-  { label: "Revenue", value: "$1.84M", change: "+18.4%", tone: "blue" },
-  { label: "Active projects", value: "24", change: "+4 this month", tone: "violet" },
-  { label: "Pipeline", value: "$2.6M", change: "8 opportunities", tone: "green" }
+const contextMetrics = [
+  { label: "Components", value: "127", change: "18 updated today", tone: "blue" },
+  { label: "Tokens", value: "340", change: "Synced 2m ago", tone: "violet" },
+  { label: "Agent queries", value: "1.2K", change: "Today", tone: "green" }
 ];
 
-const activeProjects = [
-  { client: "Sonder", project: "Brand system", status: "In review", progress: "82%" },
-  { client: "Nova", project: "Launch campaign", status: "In progress", progress: "64%" },
-  { client: "Harbor", project: "Content engine", status: "Agent running", progress: "48%" }
+const recentComponents = [
+  { name: "Button", category: "Core", status: "Agent-ready", usage: "840" },
+  { name: "Input", category: "Forms", status: "Synced", usage: "620" },
+  { name: "Modal", category: "Overlay", status: "Updated", usage: "380" }
 ];
 
-const agentTeam = [
-  { initials: "OP", name: "Operations Agent", task: "Coordinating 8 projects", tone: "violet" },
-  { initials: "CS", name: "Client Success", task: "Preparing 3 updates", tone: "blue" },
-  { initials: "CP", name: "Content Producer", task: "Creating Nova assets", tone: "green" }
+const brandLayers = [
+  { initials: "BR", name: "Brand Voice", task: "Tone & personality defined", tone: "violet" },
+  { initials: "DS", name: "Design System", task: "127 components cataloged", tone: "blue" },
+  { initials: "EG", name: "Engineering", task: "Stack constraints set", tone: "green" }
 ];
 
 function Chrome({ locked, className, children, ...rest }) {
@@ -69,10 +69,10 @@ function SaaSProductMockup({ embedded = false, locked = false }) {
       {!embedded && <div className="saas-preview-heading reveal">
         <div>
           <p className="eyebrow">Product Preview</p>
-          <h2 id="saas-preview-title">Your AI team, built to scale your creative business.</h2>
+          <h2 id="saas-preview-title">The context layer for agent-generated interfaces.</h2>
         </div>
         <div className="saas-preview-intro">
-          <p>Keep clients, projects, revenue, and new business moving without losing context or letting opportunities fall through the cracks.</p>
+          <p>Your agents inherit brand voice, design system, engineering constraints, and quality standards—so they ship on-brand, production-ready interfaces without retraining models.</p>
           <a href="/product">Explore the product <span aria-hidden="true">↗</span></a>
         </div>
       </div>}
@@ -95,7 +95,7 @@ function SaaSProductMockup({ embedded = false, locked = false }) {
             <div className="saas-app-brand"><span className="saas-app-mark"><i /><i /></span><strong>Human AI</strong></div>
             <div className="saas-workspace-switcher">
               <span className="saas-workspace-logo">A</span>
-              <div><strong>Northstar Creative</strong><small>Agency workspace</small></div>
+              <div><strong>Acme Design System</strong><small>Production workspace</small></div>
               <span className="saas-chevron">⌄</span>
             </div>
             <nav aria-label="Product mockup">
@@ -105,54 +105,54 @@ function SaaSProductMockup({ embedded = false, locked = false }) {
             </nav>
             <div className="saas-sidebar-spacer" />
             <div className="saas-context-meter">
-              <div><span>Monthly capacity</span><strong>74%</strong></div>
+              <div><span>Context coverage</span><strong>100%</strong></div>
               <i><b /></i>
-              <small>18 projects scheduled</small>
+              <small>All layers synced</small>
             </div>
             <span className="saas-settings"><Icon name="settings" />Settings</span>
-            <div className="saas-user"><span>JR</span><div><strong>John Rodrigues</strong><small>Workspace admin</small></div><i /></div>
+            <div className="saas-user"><span>JR</span><div><strong>John Rodrigues</strong><small>System admin</small></div><i /></div>
           </aside>
 
           <div className="saas-main">
             <header className="saas-topbar">
-              <div className="saas-breadcrumb"><span>Northstar Creative</span><i>/</i><strong>Overview</strong></div>
+              <div className="saas-breadcrumb"><span>Acme Design System</span><i>/</i><strong>Overview</strong></div>
               <div className="saas-top-actions">
                 <Chrome locked={locked} className="saas-icon-button" aria-label="Search">⌕</Chrome>
-                <Chrome locked={locked} className="saas-share">Share</Chrome>
+                <Chrome locked={locked} className="saas-share">Sync context</Chrome>
                 <span className="saas-avatar">JR</span>
               </div>
             </header>
 
             <div className="saas-content">
               <div className="saas-content-title saas-ops-title">
-                <div><p>Creative business OS</p><h3>Good morning, Alex.</h3><span>Here’s how your studio is performing today.</span></div>
-                <Chrome locked={locked}><span>+</span>New project</Chrome>
+                <div><p>Context Layer</p><h3>Design system ready.</h3><span>Your agents have access to brand, components, tokens, and quality standards.</span></div>
+                <Chrome locked={locked}><span>+</span>Add layer</Chrome>
               </div>
 
               <div className="saas-command-grid">
                 <div className="saas-command-main">
                   <div className="saas-metrics-grid">
-                    {studioMetrics.map((metric) => <article className={`saas-metric-card ${metric.tone}`} key={metric.label}><div><span>{metric.label}</span><i>↗</i></div><strong>{metric.value}</strong><small>{metric.change}</small></article>)}
+                    {contextMetrics.map((metric) => <article className={`saas-metric-card ${metric.tone}`} key={metric.label}><div><span>{metric.label}</span><i>↗</i></div><strong>{metric.value}</strong><small>{metric.change}</small></article>)}
                   </div>
 
                   <div className="saas-operations-grid">
                     <div className="saas-operations-main">
                       <article className="saas-revenue-card">
-                        <div className="saas-card-head"><div><p>Revenue overview</p><span>January – June</span></div><Chrome locked={locked}>•••</Chrome></div>
-                        <div className="saas-revenue-total"><strong>$1.84M</strong><span>+18.4% vs last period</span></div>
-                        <div className="saas-chart" aria-hidden="true"><span style={{height:"34%"}} /><span style={{height:"48%"}} /><span style={{height:"42%"}} /><span style={{height:"61%"}} /><span style={{height:"72%"}} /><span style={{height:"88%"}} /><i /></div>
-                        <div className="saas-chart-labels"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
+                        <div className="saas-card-head"><div><p>Agent activity</p><span>Last 7 days</span></div><Chrome locked={locked}>•••</Chrome></div>
+                        <div className="saas-revenue-total"><strong>1.2K</strong><span>queries served with context</span></div>
+                        <div className="saas-chart" aria-hidden="true"><span style={{height:"28%"}} /><span style={{height:"42%"}} /><span style={{height:"38%"}} /><span style={{height:"65%"}} /><span style={{height:"58%"}} /><span style={{height:"82%"}} /><i /></div>
+                        <div className="saas-chart-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
                       </article>
 
                       <div className="saas-workforce-row">
                         <article className="saas-projects-card">
-                          <div className="saas-card-head"><div><p>Active work</p><span>Priority projects</span></div><Chrome locked={locked}>View all →</Chrome></div>
-                          {activeProjects.map((project) => <div className="saas-project-row" key={project.client}><span className="saas-project-logo">{project.client.slice(0,1)}</span><div><strong>{project.client}</strong><small>{project.project}</small></div><em>{project.status}</em><i><b style={{width:project.progress}} /></i><span>{project.progress}</span></div>)}
+                          <div className="saas-card-head"><div><p>Component library</p><span>Most accessed</span></div><Chrome locked={locked}>View all →</Chrome></div>
+                          {recentComponents.map((component) => <div className="saas-project-row" key={component.name}><span className="saas-project-logo">{component.name.slice(0,1)}</span><div><strong>{component.name}</strong><small>{component.category}</small></div><em>{component.status}</em><i><b style={{width:`${Math.min(parseInt(component.usage)/10, 100)}%`}} /></i><span>{component.usage} uses</span></div>)}
                         </article>
 
                         <article className="saas-agent-team-card">
-                          <div className="saas-card-head"><div><p>Agent team</p><span>3 agents working</span></div><Chrome locked={locked}>Manage →</Chrome></div>
-                          {agentTeam.map((agent) => <div className="saas-agent-member" key={agent.name}><span className={`agent-orb ${agent.tone}`}>{agent.initials}</span><div><strong>{agent.name}</strong><small>{agent.task}</small></div><i aria-label="Online" /></div>)}
+                          <div className="saas-card-head"><div><p>Context layers</p><span>All layers active</span></div><Chrome locked={locked}>Configure →</Chrome></div>
+                          {brandLayers.map((layer) => <div className="saas-agent-member" key={layer.name}><span className={`agent-orb ${layer.tone}`}>{layer.initials}</span><div><strong>{layer.name}</strong><small>{layer.task}</small></div><i aria-label="Active" /></div>)}
                         </article>
                       </div>
                     </div>
@@ -160,13 +160,13 @@ function SaaSProductMockup({ embedded = false, locked = false }) {
                 </div>
 
                 <aside className="saas-agent-chat">
-                  <header><span className="agent-orb violet">AI</span><div><strong>Studio Agent</strong><small><i />Online · has full context</small></div><Chrome locked={locked}>•••</Chrome></header>
+                  <header><span className="agent-orb blue">AI</span><div><strong>Context Agent</strong><small><i />Online · full system context</small></div><Chrome locked={locked}>•••</Chrome></header>
                   <div className="saas-chat-day">Today</div>
-                  <div className="saas-chat-message agent">Morning Alex. Three deliverables are due this week and the Nova campaign is waiting on client approval.</div>
-                  <div className="saas-chat-message user">Move the campaign forward and prepare the next client update.</div>
-                  <div className="saas-chat-message agent">Done. I advanced the production tasks, drafted the update, and scheduled it for your review at 2 PM.</div>
-                  <div className="saas-agent-actions"><span>✓ 4 tasks updated</span><span>✦ Draft ready</span></div>
-                  <div className="saas-chat-input"><p>Ask your studio agent…</p><Chrome locked={locked}>↑</Chrome></div>
+                  <div className="saas-chat-message agent">Your design system is synced. 127 components and 340 tokens are available to all agents.</div>
+                  <div className="saas-chat-message user">Generate a dashboard using our brand colors and button component.</div>
+                  <div className="saas-chat-message agent">Generated with Acme brand colors (primary #3b82f6, neutral gray scale) and your approved Button component. Applied accessibility standards and spacing tokens.</div>
+                  <div className="saas-agent-actions"><span>✓ On-brand</span><span>✦ Standards met</span></div>
+                  <div className="saas-chat-input"><p>Ask about components, colors, or tokens…</p><Chrome locked={locked}>↑</Chrome></div>
                 </aside>
               </div>
             </div>
