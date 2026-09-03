@@ -59,8 +59,8 @@ function ProductPage() {
         <div className="product-grid" aria-hidden="true" />
         <div className="product-glow" aria-hidden="true" />
         <motion.div className="product-hero-copy" {...rise}>
-          <h1>The context layer<span className="product-mobile-break"><br /></span> for<span>agent-generated interfaces.</span></h1>
-          <p className="product-hero-intro">Agents ship fast. Enterprises ship inconsistent, off-brand products. We encode the judgment layer—brand, design system, engineering constraints, and quality criteria—so your agents inherit standards without retraining models.</p>
+          <h1>AI-native design system platform<span className="product-mobile-break"><br /></span> <span>so your team doesn't ship AI slop.</span></h1>
+          <p className="product-hero-intro">Agents generate code fast, but without context they produce inconsistent, off-brand interfaces. We encode brand, design system, engineering constraints, and quality standards—so every agent inherits your judgment without retraining models.</p>
           <div className="product-hero-actions">
             <ProductButton href="mailto:john@humanaistudio.ai?subject=Early%20access">Request early access</ProductButton>
           </div>

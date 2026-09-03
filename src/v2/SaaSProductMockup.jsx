@@ -69,7 +69,7 @@ function SaaSProductMockup({ embedded = false, locked = false }) {
       {!embedded && <div className="saas-preview-heading reveal">
         <div>
           <p className="eyebrow">Product Preview</p>
-          <h2 id="saas-preview-title">The context layer for agent-generated interfaces.</h2>
+          <h2 id="saas-preview-title">AI-native design system platform so your team doesn't ship AI slop.</h2>
         </div>
         <div className="saas-preview-intro">
           <p>Your agents inherit brand voice, design system, engineering constraints, and quality standards—so they ship on-brand, production-ready interfaces without retraining models.</p>
