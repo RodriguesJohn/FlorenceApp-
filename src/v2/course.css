@@ -1,5 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500;600&display=swap");
+
+.course-landing {
+  --font-display: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-body: Inter, ui-sans-serif, system-ui, sans-serif;
+  --text-display: 3.25rem;
+  --leading-display: 1.12;
+  --tracking-display: -0.021em;
+  --text-heading-sm: 2rem;
+  --leading-heading-sm: 1.25;
+  --tracking-heading-sm: -0.025em;
+  --text-subheading: 1.25rem;
+  font-family: var(--font-body);
+}
+
+.course-landing h1,
+.course-landing h2,
+.course-landing h3,
+.course-landing p,
+.course-landing li,
+.course-landing dt,
+.course-landing dd {
+  animation: none;
+  -webkit-text-fill-color: currentColor;
+  white-space: normal;
+}
+
+.course-landing h1,
+.course-landing h2,
+.course-landing h3,
+.course-landing .academy-reviews-copy h2,
+.course-landing .academy-section-heading h2,
+.course-landing .academy-hero h1,
+.course-landing .academy-hero-wrap--product .academy-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+.course-landing .academy-hero-wrap--product .academy-hero h1,
+.course-landing .academy-hero h1 {
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  font-size: clamp(1.125rem, 5.4vw, var(--text-display));
+  font-weight: 400;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  white-space: nowrap;
+}
+
+.course-landing .academy-hero-wrap--product .academy-hero h1 span,
+.course-landing .academy-hero h1 span {
+  display: inline;
+  white-space: nowrap;
+}
+
+.course-landing .academy-hero-sub {
+  max-width: 36rem;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.69;
+  letter-spacing: 0.003em;
+}
+
+.course-landing .academy-eyebrow,
+.course-landing .academy-reviews-badge,
+.course-landing .academy-package-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.004em;
+  text-transform: none;
+}
+
+.course-landing .academy-section-heading h2,
+.course-landing .academy-reviews-copy h2 {
+  max-width: none;
+  font-size: clamp(1.75rem, 3vw, var(--text-heading-sm));
+  font-weight: 400;
+  line-height: var(--leading-heading-sm);
+  letter-spacing: var(--tracking-heading-sm);
+  white-space: normal;
+}
+
+.course-landing .course-module h3,
+.course-landing .course-audience-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-subheading);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+
+.course-landing .course-module p,
+.course-landing .course-audience-card p,
+.course-landing .course-faq-item dd,
+.course-landing .course-pricing-lede,
+.course-landing .academy-check-list,
+.course-landing .academy-package-quote,
+.course-landing .academy-footer {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.64;
+}
+
+.course-landing .course-faq-item dt {
+  font-family: var(--font-display);
+  font-size: var(--text-subheading);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+.course-landing .course-module-num {
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.004em;
+}
+
+.course-landing .academy-btn,
+.course-landing .site-header,
+.course-landing .nav-direct-link,
+.course-landing .site-header-brand {
+  font-family: var(--font-body);
+}
+
+.course-landing .academy-btn {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
 .course-landing .academy-hero-wrap--product {
-  padding-top: clamp(2.25rem, 4vw, 3.5rem);
+  padding-top: clamp(5.75rem, 9vw, 8rem);
 }
 
 .course-landing .academy-hero-shot {
@@ -11,17 +143,6 @@
   width: 100%;
   max-width: none;
   margin-inline: 0;
-}
-
-.course-landing .academy-hero-wrap--product .academy-hero h1 {
-  white-space: normal;
-}
-
-.course-landing .academy-hero-wrap--product .academy-hero h1 span {
-  display: block;
-  width: auto;
-  max-width: 100%;
-  white-space: normal;
 }
 
 .course-landing .academy-hero-wrap--product .academy-hero-sub {
@@ -189,6 +310,11 @@
 .course-landing .academy-reviews-quote p {
   text-align: center;
   margin-inline: auto;
+  font-family: var(--font-body);
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
 }
 
 .course-landing .academy-reviews-person {
@@ -197,7 +323,7 @@
 
 @media (max-width: 47.99rem) {
   .course-landing .academy-hero-wrap--product .academy-hero h1 {
-    font-size: clamp(2.1rem, 9vw, 2.85rem);
+    font-size: clamp(1.05rem, 6.2vw, 1.85rem);
   }
 
   .course-landing .academy-reviews-copy h2 {

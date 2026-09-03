@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500;600&display=swap");
+
+.studio-home {
+  --font-display: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-body: Inter, ui-sans-serif, system-ui, sans-serif;
+  --text-display: 3.25rem;
+  --leading-display: 1.12;
+  --tracking-display: -0.021em;
+  --text-heading-sm: 2rem;
+  --leading-heading-sm: 1.25;
+  --tracking-heading-sm: -0.025em;
+  --text-subheading: 1.25rem;
+  font-family: var(--font-body);
+}
+
+.studio-home h1,
+.studio-home h2,
+.studio-home h3,
+.studio-home p,
+.studio-home li,
+.studio-home a,
+.studio-home button,
+.studio-home span,
+.studio-home small,
+.studio-home dt,
+.studio-home dd {
+  font-family: inherit;
+  -webkit-text-fill-color: currentColor;
+}
+
+.studio-home h1,
+.studio-home h2,
+.studio-home h3,
+.studio-home .hero-cinematic-title,
+.studio-home .hero-cinematic-line,
+.studio-home .pathways-title,
+.studio-home .home-florence-title,
+.studio-home .section-heading h2,
+.studio-home .approach h2,
+.studio-home .v2-bio h2,
+.studio-home .bio h2,
+.studio-home .v2-cta h2,
+.studio-home .testimonials .section-heading h2,
+.studio-home .work-showcase .section-heading h2,
+.studio-home .offering-thumb-title,
+.studio-home .pathway-card h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+.studio-home .nav,
+.studio-home .brand,
+.studio-home .nav-link,
+.studio-home .nav-direct-link,
+.studio-home .hero-cinematic-subtitle,
+.studio-home .hero-cinematic-cta,
+.studio-home .hero-cinematic-spots,
+.studio-home .home-workshop-bar,
+.studio-home .approach-subhead,
+.studio-home .site-footer,
+.studio-home .testimonial-card p,
+.studio-home .testimonial-name,
+.studio-home .testimonial-role {
+  font-family: var(--font-body);
+}
+
+.studio-home .hero-cinematic-panel {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: max-content;
+  max-width: 100%;
+}
+
+.studio-home .hero-cinematic-title {
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
+  margin-bottom: 1rem;
+  font-size: clamp(2.25rem, 5vw, var(--text-display));
+  font-weight: 400;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  white-space: normal;
+}
+
+.studio-home .hero-cinematic-line {
+  display: block;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.studio-home .hero-cinematic-subtitle,
+.studio-home .hero-cinematic-cta-row {
+  width: 0;
+  min-width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.studio-home .hero-cinematic-subtitle {
+  font-size: 0.77rem;
+  font-weight: 400;
+  line-height: 1.64;
+  letter-spacing: 0.004em;
+  text-align: center;
+}
+
+.studio-home .hero-cinematic-subtitle-line {
+  display: block;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.studio-home .hero-cinematic-subtitle .motto-emphasis {
+  font-weight: 500;
+}
+
+.studio-home .hero-cinematic-cta,
+.studio-home .hero-cinematic-spots,
+.studio-home .home-florence-cta,
+.studio-home .work-case-studies-cta,
+.studio-home .nav-direct-link,
+.studio-home .brand {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.studio-home .nav-direct-link,
+.studio-home .nav .nav-link {
+  font-weight: 400;
+}
+
+.studio-home .hero-eyebrow,
+.studio-home .eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.004em;
+  text-transform: none;
+}
+
+.studio-home .pathways-title,
+.studio-home .home-florence-title,
+.studio-home .section-heading h2,
+.studio-home .approach h2,
+.studio-home .v2-bio h2,
+.studio-home .bio h2,
+.studio-home .v2-cta h2,
+.studio-home .testimonials .section-heading h2,
+.studio-home .work-showcase .section-heading h2 {
+  max-width: none;
+  font-size: clamp(1.75rem, 3vw, var(--text-heading-sm));
+  font-weight: 400;
+  line-height: var(--leading-heading-sm);
+  letter-spacing: var(--tracking-heading-sm);
+  white-space: normal;
+}
+
+.studio-home .offering-thumb-title,
+.studio-home .pathway-card h3,
+.studio-home .work-heading h2 {
+  font-size: var(--text-subheading);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+
+.studio-home .approach-subhead,
+.studio-home .testimonial-card p,
+.studio-home .site-footer p,
+.studio-home .site-footer a,
+.studio-home .footer-address,
+.studio-home .principle-list p,
+.studio-home .pathways-inner p,
+.studio-home .bio-inner p {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.64;
+  letter-spacing: 0.004em;
+}
+
+@media (max-width: 47.99rem) {
+  .studio-home .hero-cinematic-title {
+    font-size: clamp(1.65rem, 8vw, 2.35rem);
+  }
+
+  .studio-home .hero-cinematic-line {
+    white-space: normal;
+  }
+}

@@ -16,6 +16,7 @@ import profilePicture from "../assets/Profile Picture.jpg";
 import "./styles.css";
 import "./design-systems.css";
 import "./academy.css";
+import "./workshop-type.css";
 
 const SHOW_PLAYBOOK_SECTION = false;
 const SHOW_TRAINING_SECTION = false;

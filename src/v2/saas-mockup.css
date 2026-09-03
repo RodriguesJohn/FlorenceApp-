@@ -82,8 +82,12 @@
 .saas-chevron { color: rgba(255,255,255,.35); }
 
 .saas-sidebar nav { display: grid; gap: .18rem; }
-.saas-sidebar nav > span,.saas-settings { min-height: 2.25rem; padding: 0 .65rem; display: flex; align-items: center; gap: .65rem; border-radius: .4rem; color: rgba(255,255,255,.42); font-size: .62rem; font-weight: 520; }
-.saas-sidebar nav > span.active { color: #fff; background: rgba(255,255,255,.07); box-shadow: inset 0 0 0 1px rgba(255,255,255,.025); }
+.saas-sidebar nav span,.saas-settings { min-height: 2.25rem; padding: 0 .65rem; display: flex; align-items: center; gap: .65rem; border-radius: .4rem; color: rgba(255,255,255,.42); font-size: .62rem; font-weight: 520; }
+.saas-sidebar nav span.active { color: #fff; background: rgba(255,255,255,.07); box-shadow: inset 0 0 0 1px rgba(255,255,255,.025); }
+.saas-nav-group { display: grid; gap: .1rem; }
+.saas-nav-group + .saas-nav-group { margin-top: .5rem; }
+.saas-nav-group p { margin: 0 0 .18rem; padding: 0 .65rem; color: rgba(255,255,255,.24); font-size: .44rem; font-weight: 600; text-transform: uppercase; letter-spacing: .13em; }
+.saas-sidebar--system nav span { min-height: 1.85rem; font-size: .58rem; }
 .saas-sidebar svg { width: .9rem; height: .9rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .saas-sidebar-spacer { flex: 1; }
 .saas-context-meter { margin: 0 .35rem 1rem; padding: .75rem; border: 1px solid rgba(255,255,255,.07); border-radius: .5rem; background: rgba(255,255,255,.022); }
@@ -156,6 +160,123 @@
 .saas-agent-actions { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .15rem; }.saas-agent-actions span { padding: .28rem .38rem; border: 1px solid rgba(16,185,129,.15); border-radius: 999px; background: rgba(16,185,129,.06); color: var(--mock-green-soft); font-size: .32rem; }
 .saas-chat-input { min-height: 2.15rem; margin-top: auto; padding: .35rem .38rem .35rem .55rem; display: grid; grid-template-columns: 1fr auto; align-items: center; border: 1px solid rgba(255,255,255,.09); border-radius: .5rem; background: rgba(0,0,0,.16); }.saas-chat-input p { margin:0;color:rgba(255,255,255,.24);font-size:.4rem}.saas-chat-input button,.saas-chat-input > span:last-child{width:1.45rem;height:1.45rem;display:grid;place-items:center;border:0;border-radius:.38rem;background:#f3f4f4;color:#111;font-size:.58rem}
 
+/* ---------------------------------------------------------------------------
+   Design system product: flat black surfaces, hairline rules, no gloss.
+   Colour appears only where it is the content (the colour tokens).
+   --------------------------------------------------------------------------- */
+.saas-device--system {
+  --ds-line: rgba(255,255,255,.09);
+  --ds-line-strong: rgba(255,255,255,.2);
+  --ds-ink: rgba(255,255,255,.92);
+  --ds-ink-2: rgba(255,255,255,.5);
+  --ds-ink-3: rgba(255,255,255,.3);
+  border-color: var(--ds-line);
+  background: #000;
+  box-shadow: 0 2.5rem 6rem rgba(0,0,0,.55);
+}
+.saas-device--system::after { display: none; }
+.saas-device--system .saas-window-bar { background: #000; border-bottom-color: var(--ds-line); }
+.saas-device--system .saas-window-address { border-color: var(--ds-line); background: #000; }
+.saas-device--system .saas-window-dots span { background: transparent; box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); }
+.saas-device--system .saas-window-actions span { border-color: var(--ds-line); }
+
+.saas-device--system .saas-app { min-height: 42rem; }
+.saas-device--system .saas-sidebar,
+.saas-device--system .saas-main,
+.saas-device--system .saas-topbar { background: #000; }
+.saas-device--system .saas-sidebar { border-right-color: var(--ds-line); }
+.saas-device--system .saas-topbar { border-bottom-color: var(--ds-line); }
+.saas-device--system .saas-content::before { display: none; }
+.saas-device--system .saas-workspace-switcher { border-color: var(--ds-line); background: transparent; }
+.saas-device--system .saas-workspace-logo { background: #fff; color: #000; box-shadow: none; }
+.saas-device--system .saas-sidebar nav span.active { background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px var(--ds-line); }
+.saas-device--system .saas-context-meter { border-color: var(--ds-line); background: transparent; }
+.saas-device--system .saas-context-meter > i { background: rgba(255,255,255,.1); }
+.saas-device--system .saas-context-meter b { background: #fff; }
+.saas-device--system .saas-user { border-top-color: var(--ds-line); }
+.saas-device--system .saas-user > span,
+.saas-device--system .saas-avatar { border-color: var(--ds-line-strong); background: #000; }
+.saas-device--system .saas-icon-button { border-color: var(--ds-line); background: transparent; }
+.saas-device--system .saas-share { background: #fff; color: #000!important; }
+.saas-device--system .saas-content-title button { border-color: var(--ds-line-strong); background: transparent; color: var(--ds-ink); }
+
+.saas-device--system .saas-content { padding: clamp(1.5rem,2.8vw,2.2rem) clamp(1.5rem,2.8vw,2.2rem) 0; }
+.saas-device--system .saas-content-title { margin-bottom: 1.35rem; }
+.saas-device--system .saas-content-title p { color: var(--ds-ink-3); letter-spacing: .16em; }
+.saas-device--system .saas-content-title h3 { color: var(--ds-ink); font-weight: 500; letter-spacing: -.045em; }
+.saas-device--system .saas-ops-title > div > span { color: var(--ds-ink-3); font-size: .52rem; }
+
+.saas-ds-toolbar { margin-bottom: .95rem; padding-bottom: .55rem; display: flex; align-items: center; justify-content: space-between; gap: .75rem; border-bottom: 1px solid var(--ds-line); }
+.saas-ds-filters { display: flex; flex-wrap: wrap; gap: .85rem; }
+.saas-ds-filters span { position: relative; display: inline-flex; align-items: center; gap: .28rem; padding-bottom: .55rem; margin-bottom: -.56rem; color: var(--ds-ink-3); font-size: .48rem; }
+.saas-ds-filters span.active { box-shadow: inset 0 -1px 0 #fff; color: var(--ds-ink); }
+.saas-ds-filters b { color: rgba(255,255,255,.22); font-weight: 500; font-variant-numeric: tabular-nums; }
+.saas-ds-filters span.active b { color: var(--ds-ink-2); }
+.saas-ds-search { flex: 0 0 auto; display: inline-flex; align-items: center; gap: .42rem; padding: .32rem .6rem; border: 1px solid var(--ds-line); border-radius: .3rem; color: rgba(255,255,255,.24); font-size: .46rem; }
+.saas-ds-search i { width: .38rem; height: .38rem; border: 1px solid currentColor; border-radius: 50%; }
+
+.saas-ds-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .55rem; }
+.saas-ds-card { position: relative; min-width: 0; padding: .6rem .6rem .55rem; overflow: hidden; border: 1px solid var(--ds-line); border-radius: .4rem; background: #000; transition: border-color 320ms ease; }
+.saas-ds-card.is-active { border-color: var(--ds-line-strong); }
+.saas-ds-card-scan { position: absolute; top: 0; left: 0; height: 1px; width: 100%; display: block; background: #fff; transform-origin: left; }
+.saas-ds-preview { height: 4.4rem; margin-bottom: .6rem; padding: .5rem; display: grid; place-items: center; overflow: hidden; border-radius: .28rem; background: rgba(255,255,255,.022); transition: background 320ms ease; }
+.saas-ds-card.is-active .saas-ds-preview { background: rgba(255,255,255,.05); }
+.saas-ds-card-meta > div { min-width: 0; display: grid; gap: .16rem; }
+.saas-ds-card-meta p { margin: 0; overflow: hidden; color: var(--ds-ink); font-size: .5rem; font-weight: 500; letter-spacing: -.01em; text-overflow: ellipsis; white-space: nowrap; }
+.saas-ds-card-meta span { overflow: hidden; color: rgba(255,255,255,.28); font-size: .4rem; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Miniature component previews — monochrome, mirroring real Florence components */
+.dsp-buttons { display: grid; gap: .32rem; justify-items: center; }
+.dsp-btn-primary { padding: .32rem .6rem; border-radius: .24rem; background: #fff; color: #000; font-size: .42rem; font-weight: 560; }
+.dsp-btn-ghost { padding: .32rem .6rem; border: 1px solid var(--ds-line-strong); border-radius: .24rem; color: var(--ds-ink-2); font-size: .42rem; }
+.dsp-field { width: 100%; display: grid; gap: .26rem; }
+.dsp-field small { color: var(--ds-ink-3); font-size: .38rem; }
+.dsp-input { min-height: 1.4rem; padding: 0 .45rem; display: flex; align-items: center; gap: .25rem; border: 1px solid var(--ds-line-strong); border-radius: .24rem; color: var(--ds-ink-2); font-size: .42rem; }
+.dsp-input i { width: 1px; height: .52rem; margin-left: auto; background: #fff; }
+.dsp-select b { margin-left: auto; color: rgba(255,255,255,.28); font-size: .5rem; }
+.dsp-switches { display: grid; gap: .4rem; }
+.dsp-switch-row { display: flex; align-items: center; gap: .4rem; color: var(--ds-ink-2); font-size: .4rem; }
+.dsp-switch { width: 1.1rem; height: .6rem; padding: .09rem; display: flex; align-items: center; border-radius: 999px; background: rgba(255,255,255,.12); }
+.dsp-switch i { width: .42rem; height: .42rem; border-radius: 50%; background: rgba(255,255,255,.45); }
+.dsp-switch.on { justify-content: end; background: #fff; }
+.dsp-switch.on i { background: #000; }
+.dsp-tabs { display: flex; gap: .5rem; border-bottom: 1px solid var(--ds-line); }
+.dsp-tabs span { padding-bottom: .3rem; color: rgba(255,255,255,.3); font-size: .42rem; }
+.dsp-tabs span.active { box-shadow: inset 0 -1px 0 #fff; color: var(--ds-ink); }
+.dsp-tags { display: flex; flex-wrap: wrap; gap: .26rem; justify-content: center; }
+.dsp-tags span { padding: .2rem .42rem; border: 1px solid var(--ds-line); border-radius: 999px; color: var(--ds-ink-2); font-size: .38rem; }
+.dsp-kpi { width: 100%; display: grid; gap: .16rem; }
+.dsp-kpi small { color: var(--ds-ink-3); font-size: .38rem; }
+.dsp-kpi strong { color: var(--ds-ink); font-size: .98rem; font-weight: 500; letter-spacing: -.05em; }
+.dsp-kpi em { color: rgba(255,255,255,.34); font-size: .36rem; font-style: normal; }
+.dsp-chart { width: 100%; height: 100%; display: flex; align-items: end; justify-content: space-between; gap: .24rem; }
+.dsp-chart i { flex: 1; border-radius: .08rem .08rem 0 0; background: rgba(255,255,255,.32); }
+.dsp-chart i:last-child { background: #fff; }
+
+.saas-ds-bottom { margin-top: .9rem; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: .55rem; }
+.saas-ds-panel { min-width: 0; padding: .8rem .85rem .6rem; border: 1px solid var(--ds-line); border-radius: .4rem; background: #000; }
+.saas-ds-panel .saas-card-head { margin-bottom: .35rem; }
+.saas-ds-panel .saas-card-head p { color: var(--ds-ink); font-size: .54rem; font-weight: 500; }
+.saas-ds-panel .saas-card-head span { color: rgba(255,255,255,.26); font-size: .42rem; }
+.saas-ds-panel .saas-card-head button { color: rgba(255,255,255,.32); font-size: .4rem; letter-spacing: 0; }
+.saas-ds-log { display: grid; }
+.saas-ds-token-row,.saas-ds-log-row { min-height: 1.9rem; display: grid; grid-template-columns: 2.4rem minmax(0,1fr) auto; align-items: center; gap: .55rem; border-top: 1px solid var(--ds-line); }
+.saas-ds-token-row > div,.saas-ds-log-row > div { min-width: 0; display: grid; gap: .1rem; }
+.saas-ds-token-row strong,.saas-ds-log-row strong { overflow: hidden; color: rgba(255,255,255,.82); font-size: .44rem; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+.saas-ds-token-row small,.saas-ds-log-row small { overflow: hidden; color: rgba(255,255,255,.28); font-size: .36rem; text-overflow: ellipsis; white-space: nowrap; }
+.saas-ds-token-row em { color: rgba(255,255,255,.3); font-size: .4rem; font-style: normal; font-variant-numeric: tabular-nums; }
+.saas-ds-log-row { grid-template-columns: auto minmax(0,1fr) auto; }
+.saas-ds-log-row time { color: rgba(255,255,255,.22); font-size: .36rem; font-variant-numeric: tabular-nums; }
+.saas-ds-log-row > i { width: .3rem; height: .3rem; margin: 0 .25rem 0 .15rem; border-radius: 50%; background: rgba(255,255,255,.3); }
+.saas-ds-log-row:first-child > i { background: #fff; }
+.dsp-token-swatches,.dsp-token-type,.dsp-token-space,.dsp-token-radius { display: flex; align-items: center; gap: .14rem; }
+.dsp-token-swatches b { width: .22rem; height: .5rem; border-radius: .06rem; }
+.dsp-token-type { gap: .18rem; color: rgba(255,255,255,.6); }
+.dsp-token-type b { font-weight: 400; line-height: 1; }
+.dsp-token-space { flex-direction: column; align-items: start; gap: .12rem; }
+.dsp-token-space b { height: .12rem; border-radius: 99px; background: rgba(255,255,255,.32); }
+.dsp-token-radius b { width: .44rem; height: .44rem; border: 1px solid rgba(255,255,255,.32); }
+
 .saas-summary-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: .9rem; }
 .saas-health-card,.saas-activity-card,.saas-system-card { border: 1px solid rgba(255,255,255,.075); border-radius: .7rem; background: linear-gradient(150deg,rgba(255,255,255,.045),rgba(255,255,255,.018)); box-shadow: inset 0 1px 0 rgba(255,255,255,.025),0 .8rem 2rem rgba(0,0,0,.13); }
 .saas-health-card,.saas-activity-card { min-height: 11.8rem; padding: 1rem; }
@@ -194,9 +315,11 @@
   .saas-preview-intro { max-width: 38rem; }
   .saas-app { min-height: 39rem; grid-template-columns: 4.4rem minmax(0,1fr); }
   .saas-sidebar { padding-right: .65rem; padding-left: .65rem; }
-  .saas-app-brand { justify-content: center; }.saas-app-brand strong,.saas-workspace-switcher div,.saas-chevron,.saas-sidebar nav span:not(.active)::after,.saas-context-meter,.saas-settings,.saas-user div,.saas-user i { display: none; }
+  .saas-app-brand { justify-content: center; }.saas-app-brand strong,.saas-workspace-switcher div,.saas-chevron,.saas-sidebar nav span:not(.active)::after,.saas-context-meter,.saas-settings,.saas-user div,.saas-user i,.saas-nav-group p { display: none; }
   .saas-workspace-switcher { display: flex; justify-content: center; padding: .5rem; }
-  .saas-sidebar nav > span { justify-content: center; padding: 0; font-size: 0; }.saas-sidebar nav svg { width: 1rem; height: 1rem; }
+  .saas-sidebar nav span { justify-content: center; padding: 0; font-size: 0; }.saas-sidebar nav svg { width: 1rem; height: 1rem; }
+  .saas-nav-group + .saas-nav-group { margin-top: .32rem; }
+  .saas-ds-search { display: none; }
   .saas-user { display: flex; justify-content: center; padding-right: 0; padding-left: 0; }
   .saas-operations-grid { grid-template-columns: minmax(0,1.45fr) minmax(12rem,.7fr); }
   .saas-command-grid { grid-template-columns: minmax(0,1.9fr) minmax(13rem,.9fr); }
@@ -217,6 +340,12 @@
   .saas-library-head { margin-top: 1rem; }.saas-system-grid { gap: .45rem; }.saas-system-card { padding: .5rem; }.saas-system-visual { height: 2.6rem; }.saas-system-meta strong,.saas-system-meta span { display: none; }
   .saas-context-map { height: 7rem; }.saas-map-source { min-width: 0; font-size: 0; }.saas-map-source i { font-size: .34rem; }.saas-map-hub { min-width: 6.4rem; }
   .saas-promptbar kbd { display: none; }
+  .saas-ds-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: .45rem; }
+  .saas-ds-preview { height: 3.5rem; }
+  .saas-ds-card:nth-child(n+7) { display: none; }
+  .saas-ds-bottom { grid-template-columns: 1fr; }
+  .saas-ds-panel:last-child { display: none; }
+  .saas-ds-filters span:nth-child(n+4) { display: none; }
   .saas-command-grid { grid-template-columns:1fr; }.saas-command-main .saas-metrics-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }.saas-operations-grid { grid-template-columns: 1fr; }.saas-revenue-card,.saas-agent-chat,.saas-workforce-row{grid-column:1;grid-row:auto}.saas-agent-chat { height:auto;min-height:17rem; }.saas-project-row { grid-template-columns:auto 1fr auto}.saas-project-row>i,.saas-project-row>span:last-child{display:none}
   .saas-workforce-row { grid-template-columns:1fr; }
 }

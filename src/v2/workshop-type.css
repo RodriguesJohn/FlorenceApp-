@@ -1,0 +1,274 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500;600&display=swap");
+
+.ds-audit-page {
+  --font-display: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-body: Inter, ui-sans-serif, system-ui, sans-serif;
+  --text-display: 3.25rem;
+  --leading-display: 1.12;
+  --tracking-display: -0.021em;
+  --text-heading-sm: 2rem;
+  --leading-heading-sm: 1.25;
+  --tracking-heading-sm: -0.025em;
+  --text-subheading: 1.25rem;
+  font-family: var(--font-body);
+}
+
+.ds-audit-page .academy-page {
+  font-family: var(--font-body);
+}
+
+.ds-audit-page h1,
+.ds-audit-page h2,
+.ds-audit-page h3,
+.ds-audit-page p,
+.ds-audit-page li,
+.ds-audit-page dt,
+.ds-audit-page dd,
+.ds-audit-page summary,
+.ds-audit-page a,
+.ds-audit-page button,
+.ds-audit-page span,
+.ds-audit-page small,
+.ds-audit-page strong {
+  font-family: inherit;
+  -webkit-text-fill-color: currentColor;
+}
+
+.ds-audit-page h1,
+.ds-audit-page h2,
+.ds-audit-page h3,
+.ds-audit-page .ds-training-hero .academy-hero-copy h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+.ds-audit-page .nav,
+.ds-audit-page .brand,
+.ds-audit-page .nav-direct-link,
+.ds-audit-page .nav-menu-item,
+.ds-audit-page .ds-urgency-bar,
+.ds-audit-page .ds-conversion-cta,
+.ds-audit-page .site-footer,
+.ds-audit-page .academy-reviews-badge,
+.ds-audit-page .academy-reviews-person {
+  font-family: var(--font-body);
+}
+
+.ds-audit-page .ds-audit-hero h1 {
+  max-width: 15ch;
+  margin: 0;
+  font-size: clamp(2.25rem, 5vw, var(--text-display));
+  font-weight: 400;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  white-space: normal;
+}
+
+.ds-audit-page .ds-audit-hero h1 span {
+  font-weight: 400;
+}
+
+.ds-audit-page .ds-audit-intro,
+.ds-audit-page .ds-section-intro,
+.ds-audit-page .ds-training-hero .academy-hero-sub {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.69;
+  letter-spacing: 0.003em;
+}
+
+.ds-audit-page .academy-reviews-badge,
+.ds-audit-page .ds-hero-badge,
+.ds-audit-page .ds-hero-offer-label,
+.ds-audit-page .ds-section-kicker,
+.ds-audit-page .ds-price-label,
+.ds-audit-page .ds-instructor-role {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.004em;
+  text-transform: none;
+}
+
+.ds-audit-page .ds-audit-problem h2,
+.ds-audit-page .ds-why-section h2,
+.ds-audit-page .ds-masterclass h2,
+.ds-audit-page .ds-playbook h2,
+.ds-audit-page .ds-agenda h2,
+.ds-audit-page .ds-fit h2,
+.ds-audit-page .ds-instructor h2,
+.ds-audit-page .ds-offer h2,
+.ds-audit-page .ds-faq h2,
+.ds-audit-page .ds-final-choice h2,
+.ds-audit-page .ds-training-intro h2,
+.ds-audit-page .ds-training-hero .academy-hero-copy h2 {
+  max-width: none;
+  font-size: clamp(1.75rem, 3vw, var(--text-heading-sm));
+  font-weight: 400;
+  line-height: var(--leading-heading-sm);
+  letter-spacing: var(--tracking-heading-sm);
+  white-space: normal;
+}
+
+.ds-audit-page .ds-outcome-card h3,
+.ds-audit-page .ds-agenda-list h3,
+.ds-audit-page .ds-training-lesson h3,
+.ds-audit-page .ds-faq summary {
+  font-family: var(--font-display);
+  font-size: var(--text-subheading);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+
+.ds-audit-page .ds-outcome-card p,
+.ds-audit-page .ds-why-copy p,
+.ds-audit-page .ds-agenda-list p,
+.ds-audit-page .ds-fit li,
+.ds-audit-page .ds-instructor-inner > div > p:not(.ds-section-kicker, .ds-instructor-role),
+.ds-audit-page .ds-offer-copy > p:not(.ds-section-kicker),
+.ds-audit-page .ds-faq details p,
+.ds-audit-page .ds-price-card li,
+.ds-audit-page .ds-playbook-copy > p,
+.ds-audit-page .ds-training-intro p,
+.ds-audit-page .ds-training-lesson > p:not(.ds-training-back),
+.ds-audit-page .ds-masterclass-copy > p:not(.ds-section-kicker, .ds-masterclass-proof),
+.ds-audit-page .site-footer p,
+.ds-audit-page .site-footer a,
+.ds-audit-page .footer-address {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.64;
+  letter-spacing: 0.004em;
+}
+
+.ds-audit-page .ds-why-copy .ds-why-emphasis {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.ds-audit-page .brand,
+.ds-audit-page .nav-direct-link,
+.ds-audit-page .nav-menu-item,
+.ds-audit-page .ds-conversion-cta,
+.ds-audit-page .ds-banner-cta {
+  font-size: 0.875rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.ds-audit-page .brand {
+  font-weight: 500;
+}
+
+.ds-audit-page .nav-direct-link,
+.ds-audit-page .nav-menu-item {
+  font-weight: 400;
+}
+
+.ds-audit-page .ds-conversion-cta,
+.ds-audit-page .ds-banner-cta,
+.ds-audit-page .ds-conversion-cta.is-primary,
+.ds-audit-page .ds-conversion-cta.is-light {
+  font-weight: 500;
+}
+
+.ds-audit-page .ds-conversion-cta.is-secondary {
+  font-weight: 400;
+}
+
+.ds-audit-page .ds-hero-meta dt,
+.ds-audit-page .ds-hero-proof,
+.ds-audit-page .ds-agenda-number,
+.ds-audit-page .ds-agenda-list strong,
+.ds-audit-page .ds-outcome-card > span,
+.ds-audit-page .ds-discount-note,
+.ds-audit-page .ds-seat-note,
+.ds-audit-page .ds-price-badge,
+.ds-audit-page .ds-trust-strip p,
+.ds-audit-page .workshop-countdown.is-banner .workshop-countdown-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.004em;
+  text-transform: none;
+}
+
+.ds-audit-page .ds-hero-meta dd {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.ds-audit-page .ds-price {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, var(--text-display));
+  font-weight: 400;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+}
+
+.ds-audit-page .ds-price-term {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.004em;
+}
+
+.ds-audit-page .ds-reviews .academy-reviews-quote p {
+  font-family: var(--font-body);
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+}
+
+.ds-audit-page .academy-reviews-person strong {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.ds-audit-page .academy-reviews-person small {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.004em;
+}
+
+.ds-audit-page .workshop-countdown.is-banner .workshop-countdown-unit strong {
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+.ds-audit-page .ds-skip-link {
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+@media (max-width: 47.99rem) {
+  .ds-audit-page .ds-audit-hero h1 {
+    font-size: clamp(1.65rem, 8vw, 2.35rem);
+  }
+
+  .ds-audit-page .ds-audit-problem h2,
+  .ds-audit-page .ds-why-section h2,
+  .ds-audit-page .ds-masterclass h2,
+  .ds-audit-page .ds-playbook h2,
+  .ds-audit-page .ds-agenda h2,
+  .ds-audit-page .ds-fit h2,
+  .ds-audit-page .ds-instructor h2,
+  .ds-audit-page .ds-offer h2,
+  .ds-audit-page .ds-faq h2,
+  .ds-audit-page .ds-final-choice h2,
+  .ds-audit-page .ds-training-hero .academy-hero-copy h2 {
+    font-size: clamp(1.75rem, 6vw, var(--text-heading-sm));
+  }
+
+  .ds-audit-page .ds-reviews .academy-reviews-quote p {
+    font-size: clamp(1.05rem, 4.8vw, 1.35rem);
+  }
+}

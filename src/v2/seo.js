@@ -85,9 +85,9 @@ const pages = {
     type: "Course"
   },
   "/product": {
-    title: "AI Agent Teams for Creative Businesses | Human AI Studio",
+    title: "AI native design systems for agents | Human AI Studio",
     description:
-      "AI agent teams and operating systems that help creative businesses connect clients, projects, revenue, and workflows without losing context.",
+      "A layer over brand, design system, engineering constraints, and quality criteria so coding agents ship on-brand UI without a platform migration.",
     type: "Product"
   },
   "/blog": {

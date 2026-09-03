@@ -1,126 +1,240 @@
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import SaaSProductMockup from "./SaaSProductMockup.jsx";
+import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
 import "./product.css";
 
-const bookingUrl = "https://cal.com/john-rodrigues-rqt2lg/15min";
+const BOOKING_URL = "https://cal.com/john-rodrigues-rqt2lg/15min";
+const NEWSLETTER_URL = "https://substack.com/@johnrodrigues";
+const WAITLIST_URL = "mailto:john@humanaistudio.ai?subject=Context%20layer%20waitlist";
+const WORKSHOP_URL = "/workshop";
 
 const systemLayers = [
-  ["01", "Business command center", "See the whole studio in one view", "Track revenue, pipeline, capacity, client health, and delivery performance without stitching together reports."],
-  ["02", "Project operations", "Move work forward automatically", "Keep briefs, schedules, deliverables, approvals, and client communication connected from kickoff to final delivery."],
-  ["03", "AI agent workforce", "Give every workflow an operator", "Deploy agents that understand your clients and processes, then let them research, coordinate, draft, and follow up."],
-  ["04", "Creative intelligence", "Turn your business context into action", "Ask questions across projects, finances, and clients—and get useful answers grounded in how your studio actually works."]
+  {
+    number: "01",
+    label: "Brand",
+    title: "Voice, not just tokens",
+    copy: "Brand voice and taste sit outside the library. Without them, agents can be consistent and still off-brand."
+  },
+  {
+    number: "02",
+    label: "Design system",
+    title: "What agents can retrieve",
+    copy: "Components, tokens, and contracts written so Cursor, Claude Code, and Codex read one source of truth."
+  },
+  {
+    number: "03",
+    label: "Engineering constraints",
+    title: "What the stack will allow",
+    copy: "The rules of the repo: platforms, performance, accessibility, and what a generated screen is allowed to touch."
+  },
+  {
+    number: "04",
+    label: "Quality criteria",
+    title: "How you score the output",
+    copy: "Evals and heuristics so a pass is measurable. Not a vibe. Not another round of visual QA."
+  }
 ];
 
 const outcomes = [
-  "A live view of revenue, pipeline, capacity, and margins",
-  "Connected client, project, and delivery workflows",
-  "AI agents that work from your real business context",
-  "Automated updates, follow-ups, briefs, and reporting",
-  "One operating system for your entire creative business"
+  "A layer over the system you already run. No migration into a new platform.",
+  "Agents inherit brand, system, constraints, and quality in one place.",
+  "MCP is how they connect. Where we sit is the product.",
+  "Workshops teach the problem. The platform is what we hand the same buyer."
 ];
 
-function ProductButton({ children, secondary = false, href }) {
-  const reduceMotion = useReducedMotion();
+const layerInputs = [
+  "Slugita",
+  "Figma",
+  "Storybook",
+  "Design tokens",
+  "Component library",
+  "Brand guidelines"
+];
+
+const layerOutputs = [
+  "Cloud Code",
+  "Cursor",
+  "Claude Code",
+  "Codex",
+  "Figma MCP",
+  "QA agents"
+];
+
+function ProductFooter() {
   return (
-    <motion.a
-      className={`product-button${secondary ? " product-button-secondary" : ""}`}
-      href={href || (secondary ? "#context" : bookingUrl)}
-      whileHover={reduceMotion ? undefined : { y: -2 }}
-      whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-    >
-      <span>{children}</span>
-      <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9h10M10 5l4 4-4 4" /></svg>
-    </motion.a>
+    <footer className="product-footer" aria-label="Human AI Studio footer">
+      <div className="product-footer-inner">
+        <a className="product-footer-brand" href="/">
+          Human AI Studio
+        </a>
+        <a href={NEWSLETTER_URL} target="_blank" rel="noreferrer">
+          Publication
+        </a>
+        <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
+        <a href={BOOKING_URL} target="_blank" rel="noreferrer">
+          Book a call
+        </a>
+      </div>
+    </footer>
   );
 }
 
-function ProductPage() {
-  const reduceMotion = useReducedMotion();
-  const rise = reduceMotion ? {} : {
-    initial: { opacity: 0, y: 24 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] }
-  };
-
+export default function ProductPage() {
   return (
-    <main className="product-page">
+    <div className="product-page">
       <SiteHeader />
 
-      <section className="product-hero product-hero-context" id="top">
-        <div className="product-grid" aria-hidden="true" />
-        <div className="product-glow" aria-hidden="true" />
-        <motion.div className="product-hero-copy" {...rise}>
-          <h1>AI agent teams<span className="product-mobile-break"><br /></span> that help<span>scale your creative business.</span></h1>
-          <p className="product-hero-intro">Your AI team keeps clients, projects, revenue, and new business moving without losing context or letting deals fall through the cracks.</p>
-          <div className="product-hero-actions">
-            <ProductButton href="mailto:john@humanaistudio.ai?subject=Join%20the%20waitlist">Join the waitlist</ProductButton>
-          </div>
-        </motion.div>
-        <SaaSProductMockup embedded />
-      </section>
+      <main>
+        <section className="product-hero" aria-labelledby="product-hero-title">
+          <Entrance className="product-hero-inner" animate="visible">
+            <EntranceItem className="product-hero-copy">
+              <p className="product-eyebrow">Design and engineering context layer</p>
+              <h1 id="product-hero-title">
+                <span>AI native design systems</span>
+                <span>for agents.</span>
+              </h1>
+              <p className="product-lede">
+                An MCP you plug into your agent. You build the system here.
+                Generated UI is not production-ready, not useful, and not
+                accessible. We encode design and front-end engineering
+                constraints so you can ship fast with confidence.
+              </p>
+              <div className="product-hero-actions">
+                <a className="product-btn product-btn--primary" href={WAITLIST_URL}>
+                  Join the waitlist
+                </a>
+                <a className="product-btn product-btn--ghost" href="#layers">
+                  The four layers
+                </a>
+              </div>
+            </EntranceItem>
+            <EntranceItem className="product-preview">
+              <SaaSProductMockup embedded story="context" />
+            </EntranceItem>
+          </Entrance>
+        </section>
 
-      <section className="product-problem">
-        <p className="product-section-label">The context gap</p>
-        <div>
-          <h2>Creative businesses need more than <em>another tool.</em></h2>
-          <p>Your clients live in a CRM. Projects live in task boards. Revenue lives in spreadsheets. Team knowledge lives in conversations. When operations stay fragmented, people spend more time coordinating the work than creating it.</p>
-        </div>
-      </section>
+        <section className="product-section" aria-labelledby="product-gap-title">
+          <Entrance className="product-section-inner product-gap">
+            <EntranceItem as="p" className="product-eyebrow">
+              The problem
+            </EntranceItem>
+            <EntranceItem as="h2" id="product-gap-title">
+              Agents ship slop. Enterprises ship off-brand products.
+            </EntranceItem>
+            <EntranceItem as="p" className="product-body">
+              They are not blocked. They ship. The damage is what goes out
+              the door: almost-right UI, heavier QA, and a product that does
+              not look like the company. Volume of agent-generated code is
+              compounding. Trust in that output is not.
+            </EntranceItem>
+          </Entrance>
+        </section>
 
-      <section className="product-system" id="context">
-        <div className="product-section-heading">
-          <p className="product-section-label">The operating system</p>
-          <h2>One intelligent layer across your entire business.</h2>
-        </div>
-        <div className="product-layer-list">
-          {systemLayers.map(([number, label, title, copy]) => (
-            <article className="product-layer" key={number}>
-              <span className="product-layer-number">{number}</span>
-              <p className="product-layer-label">{label}</p>
-              <h3>{title}</h3>
-              <p className="product-layer-copy">{copy}</p>
-              <span className="product-layer-icon" aria-hidden="true">↗</span>
-            </article>
-          ))}
-        </div>
-      </section>
+        <section className="product-section" id="layers" aria-labelledby="product-system-title">
+          <Entrance className="product-section-inner">
+            <EntranceItem className="product-section-heading">
+              <p className="product-eyebrow">The product argument</p>
+              <h2 id="product-system-title">
+                Four things. Not one library.
+              </h2>
+            </EntranceItem>
+            <div className="product-layer-list">
+              {systemLayers.map((layer) => (
+                <EntranceItem as="article" className="product-layer" key={layer.number}>
+                  <p className="product-layer-meta">
+                    <span>{layer.number}</span>
+                    {layer.label}
+                  </p>
+                  <h3>{layer.title}</h3>
+                  <p>{layer.copy}</p>
+                </EntranceItem>
+              ))}
+            </div>
+            <EntranceItem className="product-ecosystem" aria-label="Context layer connections">
+              <p className="product-ecosystem-title">What plugs into this layer</p>
+              <div className="product-ecosystem-grid">
+                <div className="product-ecosystem-column">
+                  <p className="product-ecosystem-label">System inputs</p>
+                  <ul>
+                    {layerInputs.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="product-ecosystem-core" aria-hidden="true">
+                  <span>Context layer</span>
+                </div>
+                <div className="product-ecosystem-column">
+                  <p className="product-ecosystem-label">Agent outputs</p>
+                  <ul>
+                    {layerOutputs.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </EntranceItem>
+          </Entrance>
+        </section>
 
-      <section className="product-blueprint" id="outcomes">
-        <div className="product-blueprint-card">
-          <div className="product-blueprint-art" aria-hidden="true">
-            <div className="blueprint-node center">AI operating system</div>
-            <div className="blueprint-node one">Clients</div>
-            <div className="blueprint-node two">Projects</div>
-            <div className="blueprint-node three">Revenue</div>
-            <div className="blueprint-node four">Agents</div>
-            <svg viewBox="0 0 600 600"><circle cx="300" cy="300" r="174" /><circle cx="300" cy="300" r="245" /><path d="M300 55v490M55 300h490M127 127l346 346M473 127 127 473" /></svg>
-          </div>
-          <div className="product-blueprint-copy">
-            <p className="product-section-label">What you get</p>
-            <h2>An operating system,<br />not another dashboard.</h2>
-            <p>Connected to the tools and workflows you already use. Your team gets a live command center while AI agents handle the coordination, analysis, and repeatable work around it.</p>
-            <ul>{outcomes.map((outcome) => <li key={outcome}><span>✓</span>{outcome}</li>)}</ul>
-          </div>
-        </div>
-      </section>
+        <section className="product-section" id="outcomes" aria-labelledby="product-outcomes-title">
+          <Entrance className="product-section-inner product-outcomes">
+            <EntranceItem className="product-outcomes-copy">
+              <p className="product-eyebrow">Where we sit</p>
+              <h2 id="product-outcomes-title">
+                Over the system you already run.
+              </h2>
+              <p className="product-body">
+                Others ask you to move into their platform. This layer sits
+                on brand, design system, and engineering standards you
+                already have, so agents inherit them. Connecting to agents
+                is commodity. The claim is the layer.
+              </p>
+              <ul className="product-outcome-list">
+                {outcomes.map((outcome) => (
+                  <li key={outcome}>{outcome}</li>
+                ))}
+              </ul>
+            </EntranceItem>
+            <EntranceItem className="product-outcomes-map" aria-hidden="true">
+              <div className="product-map-hub">Context layer</div>
+              <div className="product-map-node product-map-node--a">Brand</div>
+              <div className="product-map-node product-map-node--b">System</div>
+              <div className="product-map-node product-map-node--c">Constraints</div>
+              <div className="product-map-node product-map-node--d">Quality</div>
+            </EntranceItem>
+          </Entrance>
+        </section>
 
-      <section className="product-cta">
-        <div className="product-cta-ring" aria-hidden="true" />
-        <p className="product-section-label">Start here</p>
-        <h2>Build the operating system<br />behind your creative business.</h2>
-        <p>For creative agencies, studios, and teams ready to put AI agents to work.</p>
-        <ProductButton>Book a discovery call</ProductButton>
-      </section>
+        <section className="product-section product-close" aria-labelledby="product-close-title">
+          <Entrance className="product-section-inner product-close-inner">
+            <EntranceItem as="p" className="product-eyebrow">
+              Who it is for
+            </EntranceItem>
+            <EntranceItem as="h2" id="product-close-title">
+              Teams that maintain a design system and run coding agents.
+            </EntranceItem>
+            <EntranceItem as="p" className="product-body">
+              Growth-stage B2B SaaS through enterprise. The champion is
+              whoever owns the design system. Workshops are how we teach
+              the problem. The platform is the solution we hand the same
+              buyer.
+            </EntranceItem>
+            <EntranceItem className="product-hero-actions">
+              <a className="product-btn product-btn--primary" href={WAITLIST_URL}>
+                Join the waitlist
+              </a>
+              <a className="product-btn product-btn--ghost" href={WORKSHOP_URL}>
+                Join the workshop
+              </a>
+            </EntranceItem>
+          </Entrance>
+        </section>
+      </main>
 
-      <footer className="product-footer">
-        <a className="product-brand" href="/"><span />Human AI Studio</a>
-        <p>AI operating systems for creative businesses.</p>
-        <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
-      </footer>
-    </main>
+      <ProductFooter />
+    </div>
   );
 }
-
-export default ProductPage;

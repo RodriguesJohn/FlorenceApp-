@@ -221,8 +221,7 @@ export default function CoursePage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1" id="course-hero-title">
-                <span>AI-Ready Design</span>
-                <span>Systems Course</span>
+                AI-Ready Design Systems Course
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
                 <span>Agents cannot retrieve what you never wrote down. This course is how you structure a system</span>

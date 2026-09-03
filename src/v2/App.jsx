@@ -65,6 +65,7 @@ import appleCompanyLogo from "../assets/companies/Apple-Logo.png";
 import googleCompanyLogo from "../assets/companies/GoogleLogog.png";
 import metaCompanyLogo from "../assets/companies/Meta-Emblem.png";
 import "./styles.css";
+import "./home-type.css";
 
 const FlorenceOfferPage = React.lazy(() => import("./FlorenceOfferPage.jsx"));
 
@@ -441,7 +442,7 @@ function CinematicHero() {
           >
             <span className="hero-cinematic-subtitle-line">
               Based in the heart of Silicon Valley, we help teams build{" "}
-              <span className="motto-emphasis">AI-ready design systems</span>.
+              <span className="motto-emphasis">AI-native design systems</span>.
             </span>
             <span className="hero-cinematic-subtitle-line">
               So you can ship fast without the{" "}
@@ -2055,7 +2056,7 @@ function StudioHome({ isHistory = false }) {
   const principlesList = isHistory ? v2Principles : homePrinciples;
 
   return (
-    <main className={`page-shell ${isHistory ? "history-home" : "current-home"}`}>
+    <main className={`page-shell ${isHistory ? "history-home" : "current-home studio-home"}`}>
       <motion.nav
         className="nav nav-dark"
         aria-label="Primary"
