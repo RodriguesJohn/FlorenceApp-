@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import SaaSProductMockup from "./SaaSProductMockup.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
+import { FlorenceWaitlistModal, WaitlistButton } from "./FlorenceWaitlistModal.jsx";
 import figmaLogo from "../assets/logos/Figma.png";
 import storybookLogo from "../assets/logos/storybook.png";
 import reactLogo from "../assets/logos/react-mark.svg";
@@ -13,7 +14,6 @@ import "./product.css";
 
 const BOOKING_URL = "https://cal.com/john-rodrigues-rqt2lg/15min";
 const NEWSLETTER_URL = "https://substack.com/@johnrodrigues";
-const WAITLIST_URL = "mailto:john@humanaistudio.ai?subject=Context%20layer%20waitlist";
 const WORKSHOP_URL = "/workshop";
 
 const systemLayers = [
@@ -43,6 +43,21 @@ const systemLayers = [
   }
 ];
 
+const gapOutcomes = [
+  {
+    title: "Reduced Q&A",
+    copy: "Agents retrieve the right component, token, and constraint instead of guessing and iterating."
+  },
+  {
+    title: "Token cost reduce",
+    copy: "Smaller prompts, fewer retries, and less wasted generation on almost-right UI."
+  },
+  {
+    title: "Ship with quality",
+    copy: "Output passes brand, system, and eval criteria before it reaches review."
+  }
+];
+
 const outcomes = [
   "A layer over the system you already run. No migration into a new platform.",
   "Agents inherit brand, system, constraints, and quality in one place.",
@@ -66,6 +81,57 @@ const layerOutputs = [
   { name: "Codex", logo: codexLogo, contain: true },
   { name: "Figma", logo: figmaLogo, contain: true, badge: "MCP" },
   { name: "QA agents", logo: hermesLogo, contain: true }
+];
+
+const pricingPlans = [
+  {
+    id: "entry",
+    name: "Entry",
+    price: "$49",
+    term: "per month",
+    description: "For individuals and small teams getting agents on-brand for the first time.",
+    features: [
+      "1 workspace and design system",
+      "MCP for Cursor and Claude Code",
+      "Brand, tokens, and component context",
+      "1 seat"
+    ],
+    ctaLabel: "Join the waitlist",
+    waitlist: true,
+    featured: false
+  },
+  {
+    id: "platform",
+    name: "Platform",
+    price: "$99",
+    term: "per month",
+    description: "Self-serve Florence MCP for teams running coding agents on an existing design system.",
+    features: [
+      "Brand, system, constraints, and quality in one layer",
+      "MCP for Cursor, Claude Code, Codex, and Figma",
+      "Component contracts and evals for generated UI",
+      "Unlimited repos in your workspace"
+    ],
+    ctaLabel: "Join the waitlist",
+    waitlist: true,
+    featured: true
+  },
+  {
+    id: "custom",
+    name: "Custom",
+    price: "Project",
+    term: null,
+    description: "Embedded rollout for enterprise teams that need governance, integrations, and hands-on setup.",
+    features: [
+      "Discovery, audit, and implementation with your team",
+      "Custom MCP integrations and quality criteria",
+      "Multi-repo governance and onboarding",
+      "Workshops for design system owners"
+    ],
+    ctaLabel: "Book a discovery call",
+    ctaHref: BOOKING_URL,
+    featured: false
+  }
 ];
 
 function EcosystemGlyph({ id }) {
@@ -145,6 +211,55 @@ function ProductEcosystemChip({ name, logo, glyph, contain, badge }) {
   );
 }
 
+function ProductPricingCard({ plan, onWaitlistOpen }) {
+  return (
+    <article
+      className={`product-pricing-card${
+        plan.featured ? " product-pricing-card--featured" : ""
+      }`}
+    >
+      <div className="product-pricing-card-head">
+        <div className="product-pricing-card-tier">
+          <h3>{plan.name}</h3>
+          {plan.badge ? (
+            <span className="product-pricing-card-badge">{plan.badge}</span>
+          ) : null}
+        </div>
+        <p className="product-pricing-card-price">
+          <span>{plan.price}</span>
+          {plan.term ? <small>{plan.term}</small> : null}
+        </p>
+        <p className="product-pricing-card-description">{plan.description}</p>
+      </div>
+      <ul className="product-pricing-card-features">
+        {plan.features.map((feature) => (
+          <li key={feature}>{feature}</li>
+        ))}
+      </ul>
+      {plan.waitlist ? (
+        <WaitlistButton
+          className={`product-btn product-btn--full${
+            plan.featured ? " product-btn--primary" : " product-btn--ghost"
+          }`}
+          onOpen={onWaitlistOpen}
+        >
+          {plan.ctaLabel}
+        </WaitlistButton>
+      ) : (
+        <a
+          className={`product-btn product-btn--full${
+            plan.featured ? " product-btn--primary" : " product-btn--ghost"
+          }`}
+          href={plan.ctaHref}
+          {...(plan.ctaHref.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+        >
+          {plan.ctaLabel}
+        </a>
+      )}
+    </article>
+  );
+}
+
 function ProductFooter() {
   return (
     <footer className="product-footer" aria-label="Human AI Studio footer">
@@ -165,6 +280,9 @@ function ProductFooter() {
 }
 
 export default function ProductPage() {
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const openWaitlist = () => setWaitlistOpen(true);
+
   return (
     <div className="product-page">
       <SiteHeader />
@@ -173,10 +291,9 @@ export default function ProductPage() {
         <section className="product-hero" aria-labelledby="product-hero-title">
           <Entrance className="product-hero-inner" animate="visible">
             <EntranceItem className="product-hero-copy">
-              <p className="product-eyebrow">Design and engineering context layer</p>
               <h1 id="product-hero-title">
-                <span>AI native design systems</span>
-                <span>for agents.</span>
+                <span>AI Native Design Systems</span>
+                <span>For Agents.</span>
               </h1>
               <p className="product-lede">
                 An MCP for your coding agent. Build brand, system, and
@@ -184,9 +301,7 @@ export default function ProductPage() {
                 confidence.
               </p>
               <div className="product-hero-actions">
-                <a className="product-btn product-btn--primary" href={WAITLIST_URL}>
-                  Join the waitlist
-                </a>
+                <WaitlistButton onOpen={openWaitlist} />
                 <a className="product-btn product-btn--ghost" href="#layers">
                   Learn More
                 </a>
@@ -200,11 +315,9 @@ export default function ProductPage() {
 
         <section className="product-section" aria-labelledby="product-gap-title">
           <Entrance className="product-section-inner product-gap">
-            <EntranceItem as="p" className="product-eyebrow">
-              The problem
-            </EntranceItem>
             <EntranceItem as="h2" id="product-gap-title">
-              Agents ship slop. Enterprises ship off-brand products.
+              <span>All this design and engineering context so that your agents</span>
+              <span>don&apos;t ship AI slop.</span>
             </EntranceItem>
             <EntranceItem as="p" className="product-body">
               They are not blocked. They ship. The damage is what goes out
@@ -212,13 +325,50 @@ export default function ProductPage() {
               not look like the company. Volume of agent-generated code is
               compounding. Trust in that output is not.
             </EntranceItem>
+            <div className="product-gap-outcomes">
+              {gapOutcomes.map((outcome) => (
+                <EntranceItem as="article" className="product-gap-outcome" key={outcome.title}>
+                  <h3>{outcome.title}</h3>
+                  <p>{outcome.copy}</p>
+                </EntranceItem>
+              ))}
+            </div>
           </Entrance>
         </section>
 
-        <section className="product-section" id="layers" aria-labelledby="product-system-title">
+        <section className="product-section" id="layers" aria-labelledby="product-ecosystem-title product-system-title">
           <Entrance className="product-section-inner">
-            <EntranceItem className="product-section-heading">
-              <p className="product-eyebrow">The product argument</p>
+            <EntranceItem className="product-section-heading product-ecosystem-heading">
+              <h2 id="product-ecosystem-title">What plugs into this layer</h2>
+              <p className="product-body">
+                Your stack on one side. Your agents on the other. One context layer in the middle.
+              </p>
+            </EntranceItem>
+            <EntranceItem className="product-ecosystem" aria-label="Context layer connections">
+              <div className="product-ecosystem-map">
+                <div className="product-ecosystem-column product-ecosystem-column--inputs">
+                  <p className="product-ecosystem-label">System inputs</p>
+                  <ul>
+                    {layerInputs.map((item) => (
+                      <ProductEcosystemChip key={item.name} {...item} />
+                    ))}
+                  </ul>
+                </div>
+                <div className="product-ecosystem-hub">
+                  <span className="product-ecosystem-hub-ring" aria-hidden="true" />
+                  <strong>Florence MCP Context layer</strong>
+                </div>
+                <div className="product-ecosystem-column product-ecosystem-column--outputs">
+                  <p className="product-ecosystem-label">Agent outputs</p>
+                  <ul>
+                    {layerOutputs.map((item) => (
+                      <ProductEcosystemChip key={item.name} {...item} />
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </EntranceItem>
+            <EntranceItem className="product-section-heading product-layer-heading">
               <h2 id="product-system-title">
                 Four things. Not one library.
               </h2>
@@ -235,48 +385,12 @@ export default function ProductPage() {
                 </EntranceItem>
               ))}
             </div>
-            <EntranceItem className="product-ecosystem" aria-label="Context layer connections">
-              <div className="product-ecosystem-header">
-                <p className="product-ecosystem-title">What plugs into this layer</p>
-                <p className="product-ecosystem-lede">
-                  Your stack on one side. Your agents on the other. One context layer in the middle.
-                </p>
-              </div>
-              <div className="product-ecosystem-map">
-                <div className="product-ecosystem-column product-ecosystem-column--inputs">
-                  <p className="product-ecosystem-label">System inputs</p>
-                  <ul>
-                    {layerInputs.map((item) => (
-                      <ProductEcosystemChip key={item.name} {...item} />
-                    ))}
-                  </ul>
-                </div>
-                <div className="product-ecosystem-hub">
-                  <span className="product-ecosystem-hub-ring" aria-hidden="true" />
-                  <span className="product-ecosystem-hub-mark" aria-hidden="true">
-                    <i />
-                    <i />
-                  </span>
-                  <strong>Context layer</strong>
-                  <small>Human AI Studio</small>
-                </div>
-                <div className="product-ecosystem-column product-ecosystem-column--outputs">
-                  <p className="product-ecosystem-label">Agent outputs</p>
-                  <ul>
-                    {layerOutputs.map((item) => (
-                      <ProductEcosystemChip key={item.name} {...item} />
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </EntranceItem>
           </Entrance>
         </section>
 
         <section className="product-section" id="outcomes" aria-labelledby="product-outcomes-title">
           <Entrance className="product-section-inner product-outcomes">
             <EntranceItem className="product-outcomes-copy">
-              <p className="product-eyebrow">Where we sit</p>
               <h2 id="product-outcomes-title">
                 Over the system you already run.
               </h2>
@@ -302,11 +416,23 @@ export default function ProductPage() {
           </Entrance>
         </section>
 
+        <section className="product-section" id="pricing" aria-labelledby="product-pricing-title">
+          <Entrance className="product-section-inner product-pricing">
+            <EntranceItem className="product-section-heading">
+              <h2 id="product-pricing-title">Pricing.</h2>
+            </EntranceItem>
+            <div className="product-pricing-grid">
+              {pricingPlans.map((plan) => (
+                <EntranceItem key={plan.id}>
+                  <ProductPricingCard plan={plan} onWaitlistOpen={openWaitlist} />
+                </EntranceItem>
+              ))}
+            </div>
+          </Entrance>
+        </section>
+
         <section className="product-section product-close" aria-labelledby="product-close-title">
           <Entrance className="product-section-inner product-close-inner">
-            <EntranceItem as="p" className="product-eyebrow">
-              Who it is for
-            </EntranceItem>
             <EntranceItem as="h2" id="product-close-title">
               Teams that maintain a design system and run coding agents.
             </EntranceItem>
@@ -317,9 +443,7 @@ export default function ProductPage() {
               buyer.
             </EntranceItem>
             <EntranceItem className="product-hero-actions">
-              <a className="product-btn product-btn--primary" href={WAITLIST_URL}>
-                Join the waitlist
-              </a>
+              <WaitlistButton onOpen={openWaitlist} />
               <a className="product-btn product-btn--ghost" href={WORKSHOP_URL}>
                 Join the workshop
               </a>
@@ -329,6 +453,8 @@ export default function ProductPage() {
       </main>
 
       <ProductFooter />
+
+      <FlorenceWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </div>
   );
 }

@@ -70,9 +70,6 @@
 .saas-sidebar { min-width: 0; padding: 1.2rem 1rem 1rem; display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,.08); background: #0e0f11; }
 .saas-app-brand { height: 2rem; display: flex; align-items: center; gap: .65rem; padding: 0 .45rem; color: rgba(255,255,255,.92); }
 .saas-app-brand strong { font-size: .76rem; font-weight: 650; letter-spacing: -.02em; }
-.saas-app-mark { position: relative; width: 1.15rem; height: 1.15rem; display: block; }
-.saas-app-mark i { position: absolute; width: .7rem; height: .7rem; border: 1px solid #fff; border-radius: 50%; }
-.saas-app-mark i:last-child { right: 0; bottom: 0; background: #fff; mix-blend-mode: screen; }
 
 .saas-workspace-switcher { margin: 1.35rem 0 1.1rem; padding: .7rem; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .6rem; border: 1px solid rgba(255,255,255,.09); border-radius: .55rem; background: rgba(255,255,255,.035); }
 .saas-workspace-logo { width: 1.7rem; height: 1.7rem; display: grid; place-items: center; border-radius: .42rem; background: linear-gradient(145deg,#3b82f6,#8b5cf6); color: #fff; font-size: .68rem; font-weight: 700; box-shadow: inset 0 1px 0 rgba(255,255,255,.25); }
@@ -238,77 +235,103 @@
 .saas-device--system .saas-ops-title > div > span { color: var(--ds-ink-3); font-size: .52rem; }
 
 .saas-ds-toolbar { margin-bottom: .95rem; padding-bottom: .55rem; display: flex; align-items: center; justify-content: space-between; gap: .75rem; border-bottom: 1px solid var(--ds-line); }
-.saas-ds-filters { display: flex; flex-wrap: wrap; gap: .85rem; }
-.saas-ds-filters span { position: relative; display: inline-flex; align-items: center; gap: .28rem; padding-bottom: .55rem; margin-bottom: -.56rem; color: var(--ds-ink-3); font-size: .48rem; }
+.saas-ds-filters { display: flex; flex-wrap: nowrap; gap: .85rem; min-width: 0; overflow: hidden; }
+.saas-ds-filters span { position: relative; flex-shrink: 0; display: inline-flex; align-items: center; gap: .28rem; padding-bottom: .55rem; margin-bottom: -.56rem; color: var(--ds-ink-3); font-size: .48rem; white-space: nowrap; }
 .saas-ds-filters span.active { box-shadow: inset 0 -1px 0 #fff; color: var(--ds-ink); }
 .saas-ds-filters b { color: rgba(255,255,255,.22); font-weight: 500; font-variant-numeric: tabular-nums; }
 .saas-ds-filters span.active b { color: var(--ds-ink-2); }
-.saas-ds-search { flex: 0 0 auto; display: inline-flex; align-items: center; gap: .42rem; padding: .32rem .6rem; border: 1px solid var(--ds-line); border-radius: .3rem; color: rgba(255,255,255,.24); font-size: .46rem; }
-.saas-ds-search i { width: .38rem; height: .38rem; border: 1px solid currentColor; border-radius: 50%; }
+.saas-ds-search { flex: 0 0 auto; display: inline-flex; align-items: center; gap: .42rem; min-width: 7.5rem; padding: .36rem .62rem; border: 1px solid var(--ds-line); border-radius: .34rem; background: rgba(255,255,255,.025); color: rgba(255,255,255,.32); font-size: .46rem; white-space: nowrap; }
+.saas-ds-search i { position: relative; width: .42rem; height: .42rem; flex-shrink: 0; border: 1.5px solid currentColor; border-radius: 50%; }
+.saas-ds-search i::after { position: absolute; right: -.14rem; bottom: -.1rem; width: .22rem; height: 1.5px; background: currentColor; transform: rotate(45deg); transform-origin: right center; content: ""; }
 
-.saas-ds-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .55rem; }
+.saas-ds-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .62rem; }
 .saas-ds-card {
   position: relative;
   min-width: 0;
-  padding: .6rem .6rem .55rem;
+  padding: .62rem .62rem .58rem;
   overflow: hidden;
   border: 1px solid var(--ds-line);
-  border-radius: .5rem;
-  background: linear-gradient(150deg, rgba(255,255,255,.045), rgba(255,255,255,.016));
-  transition: border-color 320ms ease, background 320ms ease;
+  border-radius: .58rem;
+  background: linear-gradient(165deg, rgba(255,255,255,.05), rgba(255,255,255,.018));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+  transition: border-color 320ms ease, background 320ms ease, transform 320ms ease;
 }
 .saas-ds-card.is-active {
   border-color: rgba(255,255,255,.22);
-  background: linear-gradient(150deg, rgba(255,255,255,.06), rgba(255,255,255,.022));
+  background: linear-gradient(165deg, rgba(255,255,255,.065), rgba(255,255,255,.024));
 }
 .saas-ds-card-scan { position: absolute; top: 0; left: 0; height: 1px; width: 100%; display: block; background: rgba(255,255,255,.65); transform-origin: left; }
 .saas-ds-preview {
-  height: 4.4rem;
-  margin-bottom: .6rem;
-  padding: .5rem;
+  height: 4.65rem;
+  margin-bottom: .62rem;
+  padding: .58rem .62rem;
   display: grid;
   place-items: center;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.05);
-  border-radius: .32rem;
-  background: var(--ds-surface);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: .38rem;
+  background:
+    radial-gradient(circle at 50% 115%, rgba(59,130,246,.12), transparent 58%),
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)),
+    var(--ds-surface);
   transition: background 320ms ease, border-color 320ms ease;
 }
 .saas-ds-card.is-active .saas-ds-preview {
-  background: #121418;
-  border-color: rgba(255,255,255,.08);
+  background:
+    radial-gradient(circle at 50% 115%, rgba(59,130,246,.16), transparent 58%),
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.012)),
+    #121418;
+  border-color: rgba(255,255,255,.1);
 }
-.saas-ds-card-meta > div { min-width: 0; display: grid; gap: .16rem; }
-.saas-ds-card-meta p { margin: 0; overflow: hidden; color: var(--ds-ink); font-size: .5rem; font-weight: 500; letter-spacing: -.01em; text-overflow: ellipsis; white-space: nowrap; }
-.saas-ds-card-meta span { overflow: hidden; color: rgba(255,255,255,.28); font-size: .4rem; text-overflow: ellipsis; white-space: nowrap; }
+.saas-ds-card-meta > div { min-width: 0; display: grid; gap: .14rem; }
+.saas-ds-card-title { display: flex; align-items: center; justify-content: space-between; gap: .4rem; min-width: 0; }
+.saas-ds-card-meta p { margin: 0; overflow: hidden; color: var(--ds-ink); font-size: .52rem; font-weight: 520; letter-spacing: -.015em; text-overflow: ellipsis; white-space: nowrap; }
+.saas-ds-card-category {
+  flex-shrink: 0;
+  padding: .12rem .34rem;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.42);
+  font-size: .34rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.saas-ds-card-meta > div > span:last-child { overflow: hidden; color: rgba(255,255,255,.32); font-size: .4rem; text-overflow: ellipsis; white-space: nowrap; }
 
 /* Miniature component previews — monochrome, mirroring real Florence components */
-.dsp-buttons { display: grid; gap: .32rem; justify-items: center; }
-.dsp-btn-primary { padding: .32rem .6rem; border-radius: .24rem; background: #fff; color: #000; font-size: .42rem; font-weight: 560; }
-.dsp-btn-ghost { padding: .32rem .6rem; border: 1px solid var(--ds-line-strong); border-radius: .24rem; color: var(--ds-ink-2); font-size: .42rem; }
-.dsp-field { width: 100%; display: grid; gap: .26rem; }
+.dsp-buttons { display: flex; flex-wrap: wrap; gap: .32rem; justify-content: center; align-items: center; }
+.dsp-btn-primary { padding: .34rem .64rem; border-radius: .26rem; background: #fff; color: #000; font-size: .42rem; font-weight: 560; white-space: nowrap; }
+.dsp-btn-ghost { padding: .34rem .64rem; border: 1px solid var(--ds-line-strong); border-radius: .26rem; color: var(--ds-ink-2); font-size: .42rem; white-space: nowrap; }
+.dsp-field { width: 100%; max-width: 8.8rem; display: grid; gap: .26rem; }
 .dsp-field small { color: var(--ds-ink-3); font-size: .38rem; }
-.dsp-input { min-height: 1.4rem; padding: 0 .45rem; display: flex; align-items: center; gap: .25rem; border: 1px solid var(--ds-line-strong); border-radius: .24rem; color: var(--ds-ink-2); font-size: .42rem; }
-.dsp-input i { width: 1px; height: .52rem; margin-left: auto; background: #fff; }
+.dsp-input { min-height: 1.45rem; padding: 0 .48rem; display: flex; align-items: center; gap: .25rem; border: 1px solid var(--ds-line-strong); border-radius: .26rem; background: rgba(0,0,0,.22); color: var(--ds-ink-2); font-size: .42rem; }
+.dsp-input i { width: 1px; height: .52rem; margin-left: auto; background: #fff; animation: dsp-caret 1.1s step-end infinite; }
 .dsp-select b { margin-left: auto; color: rgba(255,255,255,.28); font-size: .5rem; }
 .dsp-switches { display: grid; gap: .4rem; }
-.dsp-switch-row { display: flex; align-items: center; gap: .4rem; color: var(--ds-ink-2); font-size: .4rem; }
+.dsp-switch-row { display: flex; align-items: center; gap: .42rem; color: var(--ds-ink-2); font-size: .4rem; white-space: nowrap; }
 .dsp-switch {
   position: relative;
   display: block;
-  width: 1.18rem;
-  height: .64rem;
+  width: 1.22rem;
+  height: .68rem;
   border-radius: 999px;
 }
 .dsp-switch-knob {
+  position: absolute;
+  top: .12rem;
+  right: .12rem;
   display: block;
   width: .44rem;
   height: .44rem;
   border-radius: 50%;
   background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.18);
 }
 .dsp-animated-preview {
   width: 100%;
+  height: 100%;
   display: grid;
   place-items: center;
   align-content: center;
@@ -336,17 +359,25 @@
   flex-shrink: 0;
   border-radius: .06rem;
 }
-.dsp-tabs { display: flex; gap: .5rem; border-bottom: 1px solid var(--ds-line); }
-.dsp-tabs span { padding-bottom: .3rem; color: rgba(255,255,255,.3); font-size: .42rem; }
+.dsp-tabs { display: flex; gap: .55rem; border-bottom: 1px solid var(--ds-line); }
+.dsp-tabs span { padding-bottom: .32rem; color: rgba(255,255,255,.32); font-size: .42rem; white-space: nowrap; }
 .dsp-tabs span.active { box-shadow: inset 0 -1px 0 #fff; color: var(--ds-ink); }
-.dsp-tags { display: flex; flex-wrap: wrap; gap: .26rem; justify-content: center; }
-.dsp-tags span { padding: .2rem .42rem; border: 1px solid var(--ds-line); border-radius: 999px; color: var(--ds-ink-2); font-size: .38rem; }
-.dsp-kpi { width: 100%; display: grid; gap: .16rem; }
+.dsp-tags { display: flex; flex-wrap: wrap; gap: .28rem; justify-content: center; }
+.dsp-tags span { padding: .22rem .44rem; border: 1px solid var(--ds-line); border-radius: 999px; color: var(--ds-ink-2); font-size: .38rem; white-space: nowrap; }
+.dsp-kpi { width: 100%; max-width: 9rem; display: grid; gap: .14rem; }
+.dsp-kpi-head { display: flex; align-items: center; justify-content: space-between; gap: .4rem; }
 .dsp-kpi small { color: var(--ds-ink-3); font-size: .38rem; }
-.dsp-kpi strong { color: var(--ds-ink); font-size: .98rem; font-weight: 500; letter-spacing: -.05em; }
+.dsp-kpi-spark { display: flex; align-items: end; gap: .12rem; height: .9rem; }
+.dsp-kpi-spark i { width: .18rem; min-height: .18rem; display: block; border-radius: .06rem .06rem 0 0; }
+.dsp-kpi strong { color: var(--ds-ink); font-size: 1.02rem; font-weight: 520; letter-spacing: -.05em; line-height: 1; }
 .dsp-kpi em { color: rgba(255,255,255,.34); font-size: .36rem; font-style: normal; }
-.dsp-chart { width: 100%; height: 100%; display: flex; align-items: end; justify-content: space-between; gap: .24rem; }
-.dsp-chart i { flex: 1; display: block; border-radius: .08rem .08rem 0 0; background: rgba(255,255,255,.32); transform-origin: bottom; }
+.dsp-chart { width: 100%; max-width: 8.5rem; height: 2.65rem; display: flex; align-items: end; justify-content: space-between; gap: .28rem; }
+.dsp-chart i { flex: 1; min-width: 0; min-height: .5rem; display: block; border-radius: .1rem .1rem 0 0; transform-origin: bottom; opacity: .92; }
+
+@keyframes dsp-caret {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
 
 .saas-ds-bottom { margin-top: .9rem; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: .55rem; }
 .saas-ds-panel {
@@ -528,6 +559,16 @@
 
 .dsp-components-page .saas-ds-grid {
   height: 100%;
+  align-content: start;
+  padding-bottom: .35rem;
+}
+
+.dsp-components-page .saas-ds-toolbar {
+  margin-bottom: 0;
+}
+
+.dsp-components-page .dsp-system-toolbar-inner {
+  flex-wrap: nowrap;
 }
 
 .dsp-florence-tabs {
@@ -537,10 +578,6 @@
   border: 1px solid var(--ds-line);
   border-radius: .42rem;
   background: rgba(255, 255, 255, 0.03);
-}
-
-.dsp-components-page .saas-ds-toolbar {
-  margin-bottom: 0;
 }
 
 .dsp-florence-tabs span {
@@ -631,10 +668,6 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: .3rem;
   font-variant-numeric: tabular-nums;
-}
-
-.dsp-components-page .saas-ds-grid {
-  align-content: start;
 }
 
 .saas-ds-log { display: grid; }

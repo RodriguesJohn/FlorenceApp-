@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import OfferingShader from "./OfferingShader.jsx";
 import AcademyWorkspacePreview from "./AcademyWorkspacePreview.jsx";
 import { AcademyAnimatedTestimonials } from "./AcademyAnimatedTestimonials.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
+import { CourseWaitlistModal, WaitlistButton } from "./FlorenceWaitlistModal.jsx";
 import { modules } from "./playbookTopics.js";
 import "./academy.css";
 import "./course.css";
+import "./product.css";
 
 const NEWSLETTER_URL = "https://johnrodrigues.substack.com/";
 
@@ -240,11 +242,14 @@ const faqs = [
   }
 ];
 
-function ComingSoon({ className = "" }) {
+function ComingSoon({ className = "", onOpen }) {
   return (
-    <span className={`academy-btn academy-btn--primary academy-btn--soon ${className}`.trim()} aria-disabled="true">
-      Coming soon
-    </span>
+    <WaitlistButton
+      className={`academy-btn academy-btn--primary ${className}`.trim()}
+      onOpen={onOpen}
+    >
+      Join the waitlist
+    </WaitlistButton>
   );
 }
 
@@ -276,6 +281,9 @@ function CourseProductShot() {
 }
 
 export default function CoursePage() {
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const openWaitlist = () => setWaitlistOpen(true);
+
   React.useEffect(() => {
     const html = document.documentElement;
     const body = document.body;
@@ -311,7 +319,7 @@ export default function CoursePage() {
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
                 <div className="academy-hero-cta-ring">
-                  <ComingSoon />
+                  <ComingSoon onOpen={openWaitlist} />
                 </div>
                 <a
                   className="academy-btn academy-btn--ghost academy-hero-cta-ghost"
@@ -421,7 +429,7 @@ export default function CoursePage() {
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-                <ComingSoon className="academy-btn--full" />
+                <ComingSoon className="academy-btn--full" onOpen={openWaitlist} />
               </div>
             </EntranceItem>
             <EntranceItem
@@ -479,6 +487,8 @@ export default function CoursePage() {
           Human AI Studio
         </div>
       </footer>
+
+      <CourseWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </div>
   );
 }

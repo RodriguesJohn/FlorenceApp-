@@ -27,8 +27,8 @@ const navigation = [
 ];
 
 const systemNavigation = [
-  { group: "Brand", items: [["voice", "Voice & tone"], ["assets", "Logo & assets"]] },
-  { group: "Design system", items: [["library", "Foundations"], ["components", "Components"], ["tokens", "Tokens"]] },
+  { group: "Brand and Marketing", items: [["voice", "Brand System"], ["assets", "Creatives"]] },
+  { group: "Product", items: [["library", "Foundation Token"], ["components", "Components"]] },
   { group: "Engineering", items: [["code", "Constraints"]] },
   { group: "Quality", items: [["activity", "Evals"]] }
 ];
@@ -173,14 +173,14 @@ const SEMANTIC_GROUPS = [
 ];
 
 const componentCards = [
-  { name: "Button", meta: "5 variants · 3 sizes", type: "button" },
-  { name: "Input", meta: "Label · hint · error", type: "input" },
-  { name: "Select", meta: "Single · grouped", type: "select" },
-  { name: "Switch", meta: "2 sizes · disabled", type: "switch" },
-  { name: "Tabs", meta: "Underline · pill", type: "tabs" },
-  { name: "Tag", meta: "6 tones · removable", type: "tag" },
-  { name: "KPI card", meta: "Delta · sparkline", type: "kpi" },
-  { name: "Bar chart", meta: "Stacked · grouped", type: "chart" }
+  { name: "Button", meta: "5 variants · 3 sizes", type: "button", category: "Base" },
+  { name: "Input", meta: "Label · hint · error", type: "input", category: "Base" },
+  { name: "Select", meta: "Single · grouped", type: "select", category: "Base" },
+  { name: "Switch", meta: "2 sizes · disabled", type: "switch", category: "Base" },
+  { name: "Tabs", meta: "Underline · pill", type: "tabs", category: "Base" },
+  { name: "Tag", meta: "6 tones · removable", type: "tag", category: "Base" },
+  { name: "KPI card", meta: "Delta · sparkline", type: "kpi", category: "Data display" },
+  { name: "Bar chart", meta: "Stacked · grouped", type: "chart", category: "Data display" }
 ];
 
 const studioMetrics = [
@@ -205,8 +205,8 @@ const PAGE_META = {
   color: {
     title: "Color",
     lede: "Palette ramps, then semantic roles your agents retrieve.",
-    breadcrumbParent: "Foundations",
-    navActive: "Foundations"
+    breadcrumbParent: "Foundation Token",
+    navActive: "Foundation Token"
   },
   components: {
     title: "Components",
@@ -231,7 +231,7 @@ function ComponentPreview({ type }) {
         <div className="dsp-switches">
           <span className="dsp-switch-row">
             <span className="dsp-switch" style={{ backgroundColor: FLORENCE["--color-interactive-primary"] }}>
-              <i className="dsp-switch-knob" style={{ transform: "translateX(0.44rem)" }} />
+              <i className="dsp-switch-knob" />
             </span>
             Enabled
           </span>
@@ -300,10 +300,18 @@ function ComponentPreview({ type }) {
   }
 
   if (type === "kpi") {
+    const sparkHeights = ["28%", "42%", "36%", "58%", "48%", "72%", "64%"];
     return (
       <div className="dsp-animated-preview">
         <div className="dsp-kpi">
-          <small>Retrieval rate</small>
+          <div className="dsp-kpi-head">
+            <small>Retrieval rate</small>
+            <div className="dsp-kpi-spark" aria-hidden="true">
+              {sparkHeights.map((height, index) => (
+                <i key={index} style={{ height, backgroundColor: FLORENCE["--color-data-1"], opacity: 0.35 + index * 0.08 }} />
+              ))}
+            </div>
+          </div>
           <strong style={{ color: FLORENCE["--color-text-primary"] }}>94%</strong>
           <em style={{ color: FLORENCE["--color-text-success"] }}>+6.2% vs last week</em>
         </div>
@@ -464,7 +472,13 @@ function MockComponentsPage() {
               <ComponentPreview type={card.type} />
             </div>
             <div className="saas-ds-card-meta">
-              <div><p>{card.name}</p><span>{card.meta}</span></div>
+              <div>
+                <div className="saas-ds-card-title">
+                  <p>{card.name}</p>
+                  <span className="saas-ds-card-category">{card.category}</span>
+                </div>
+                <span>{card.meta}</span>
+              </div>
             </div>
           </article>
         ))}
@@ -573,7 +587,7 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
 
         <div className="saas-app">
           <aside className={`saas-sidebar${isContext ? " saas-sidebar--system" : ""}`}>
-            <div className="saas-app-brand"><span className="saas-app-mark"><i /><i /></span><strong>Human AI</strong></div>
+            <div className="saas-app-brand"><strong>Florence AI</strong></div>
             <div className="saas-workspace-switcher">
               <span className="saas-workspace-logo">A</span>
               <div>
@@ -610,7 +624,7 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
                 <strong>{isContext ? "94%" : "74%"}</strong>
               </div>
               <i><b style={isContext ? { width: "94%" } : undefined} /></i>
-              <small>{isContext ? "Brand · foundations · components · tokens" : "18 projects scheduled"}</small>
+              <small>{isContext ? "Brand · foundation · components" : "18 projects scheduled"}</small>
             </div>
             <span className="saas-settings"><Icon name="settings" />Settings</span>
             <div className="saas-user"><span>JR</span><div><strong>John Rodrigues</strong><small>Workspace admin</small></div><i /></div>
@@ -621,7 +635,7 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
               <div className="saas-breadcrumb">
                 <span>{isContext ? "Acme Product" : "Northstar Creative"}</span>
                 <i>/</i>
-                {isContext && <><span>Design system</span><i>/</i></>}
+                {isContext && <><span>Product</span><i>/</i></>}
                 {isContext && pageMeta.breadcrumbParent && <><span>{pageMeta.breadcrumbParent}</span><i>/</i></>}
                 <strong>{isContext ? pageMeta.title : "Overview"}</strong>
               </div>
@@ -638,7 +652,7 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
                 <div className="dsp-system-shell">
                   <div className="saas-content-title saas-ops-title dsp-system-head">
                     <div>
-                      <p>Design system</p>
+                      <p>Product</p>
                       <h3>{pageMeta.title}</h3>
                       <span>{pageMeta.lede}</span>
                     </div>
