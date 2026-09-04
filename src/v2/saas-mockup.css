@@ -254,11 +254,35 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
   transition: border-color 320ms ease, background 320ms ease, transform 320ms ease;
 }
+.saas-ds-card.is-expanded {
+  grid-column: 1 / -1;
+}
+.saas-ds-card--locked {
+  cursor: default;
+}
+.saas-ds-card-trigger {
+  width: 100%;
+  padding: 0;
+  display: block;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.saas-ds-card--locked .saas-ds-card-trigger {
+  cursor: default;
+}
+.saas-ds-card-trigger:focus-visible {
+  outline: 2px solid rgba(96, 165, 250, .72);
+  outline-offset: 3px;
+  border-radius: .34rem;
+}
 .saas-ds-card.is-active {
   border-color: rgba(255,255,255,.22);
   background: linear-gradient(165deg, rgba(255,255,255,.065), rgba(255,255,255,.024));
 }
-.saas-ds-card-scan { position: absolute; top: 0; left: 0; height: 1px; width: 100%; display: block; background: rgba(255,255,255,.65); transform-origin: left; }
+.saas-ds-card-scan { position: absolute; top: 0; left: 0; height: 1px; width: 100%; display: block; background: rgba(255,255,255,.65); transform-origin: left; z-index: 1; pointer-events: none; }
 .saas-ds-preview {
   height: 4.65rem;
   margin-bottom: .62rem;
@@ -281,22 +305,64 @@
     #121418;
   border-color: rgba(255,255,255,.1);
 }
-.saas-ds-card-meta > div { min-width: 0; display: grid; gap: .14rem; }
-.saas-ds-card-title { display: flex; align-items: center; justify-content: space-between; gap: .4rem; min-width: 0; }
+.saas-ds-card-meta { min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: .42rem; }
 .saas-ds-card-meta p { margin: 0; overflow: hidden; color: var(--ds-ink); font-size: .52rem; font-weight: 520; letter-spacing: -.015em; text-overflow: ellipsis; white-space: nowrap; }
-.saas-ds-card-category {
+.saas-ds-card-hint {
   flex-shrink: 0;
-  padding: .12rem .34rem;
+  color: rgba(255,255,255,.28);
+  font-size: .36rem;
+  letter-spacing: .01em;
+  transition: color 220ms ease;
+}
+.saas-ds-card.is-active .saas-ds-card-hint {
+  color: rgba(147, 197, 253, .82);
+}
+.saas-ds-card-code {
+  margin-top: .58rem;
+  overflow: hidden;
   border: 1px solid rgba(255,255,255,.08);
-  border-radius: 999px;
-  background: rgba(255,255,255,.04);
-  color: rgba(255,255,255,.42);
+  border-radius: .38rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)),
+    rgba(0,0,0,.34);
+}
+.saas-ds-card-code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .42rem;
+  padding: .34rem .52rem;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  color: rgba(255,255,255,.34);
   font-size: .34rem;
-  font-weight: 500;
-  letter-spacing: .02em;
+  letter-spacing: .04em;
   text-transform: uppercase;
 }
-.saas-ds-card-meta > div > span:last-child { overflow: hidden; color: rgba(255,255,255,.32); font-size: .4rem; text-overflow: ellipsis; white-space: nowrap; }
+.saas-ds-card-code-head code {
+  color: rgba(255,255,255,.52);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .34rem;
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.saas-ds-card-code pre {
+  margin: 0;
+  max-height: 7.4rem;
+  padding: .52rem .58rem .58rem;
+  overflow: auto;
+}
+.saas-ds-card-code pre code {
+  display: block;
+  color: rgba(226, 232, 240, .82);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .36rem;
+  line-height: 1.55;
+  white-space: pre;
+}
+.saas-ds-card.is-expanded .saas-ds-preview {
+  height: 3.85rem;
+}
 
 /* Miniature component previews — monochrome, mirroring real Florence components */
 .dsp-buttons { display: flex; flex-wrap: wrap; gap: .32rem; justify-content: center; align-items: center; }

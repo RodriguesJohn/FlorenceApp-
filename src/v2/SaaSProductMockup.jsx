@@ -115,15 +115,113 @@ const FLORENCE = {
 };
 
 const componentCards = [
-  { name: "Button", meta: "5 variants · 3 sizes", type: "button", category: "Base" },
-  { name: "Input", meta: "Label · hint · error", type: "input", category: "Base" },
-  { name: "Select", meta: "Single · grouped", type: "select", category: "Base" },
-  { name: "Switch", meta: "2 sizes · disabled", type: "switch", category: "Base" },
-  { name: "Tabs", meta: "Underline · pill", type: "tabs", category: "Base" },
-  { name: "Tag", meta: "6 tones · removable", type: "tag", category: "Base" },
-  { name: "KPI card", meta: "Delta · sparkline", type: "kpi", category: "Data display" },
-  { name: "Bar chart", meta: "Stacked · grouped", type: "chart", category: "Data display" }
+  { name: "Button", type: "button", file: "Button.jsx" },
+  { name: "Input", type: "input", file: "Input.jsx" },
+  { name: "Select", type: "select", file: "Select.jsx" },
+  { name: "Switch", type: "switch", file: "Switch.jsx" },
+  { name: "Tabs", type: "tabs", file: "Tabs.jsx" },
+  { name: "Tag", type: "tag", file: "Tag.jsx" },
+  { name: "KPI card", type: "kpi", file: "KpiCard.jsx" },
+  { name: "Bar chart", type: "chart", file: "BarChart.jsx" }
 ];
+
+const COMPONENT_CODE = {
+  button: `import { Button } from "@florence/button"
+
+export function SaveActions() {
+  return (
+    <>
+      <Button variant="primary">Save changes</Button>
+      <Button variant="tertiary">Cancel</Button>
+    </>
+  )
+}`,
+  input: `import { Input } from "@florence/input"
+
+export function EmailField() {
+  return (
+    <Input
+      label="Work email"
+      type="email"
+      placeholder="jane@acme.com"
+      hint="Used for workspace invites"
+    />
+  )
+}`,
+  select: `import { Select } from "@florence/select"
+
+export function EnvironmentField({ value, onValueChange }) {
+  return (
+    <Select
+      label="Environment"
+      value={value}
+      onValueChange={onValueChange}
+      options={[
+        { value: "prod", label: "Production" },
+        { value: "staging", label: "Staging" },
+      ]}
+    />
+  )
+}`,
+  switch: `import { Switch } from "@florence/switch"
+
+export function FeatureToggle({ enabled, onCheckedChange }) {
+  return (
+    <Switch
+      label="Enabled"
+      checked={enabled}
+      onCheckedChange={onCheckedChange}
+    />
+  )
+}`,
+  tabs: `import { Tabs, TabsList, TabsTrigger } from "@florence/tabs"
+
+export function SettingsTabs() {
+  return (
+    <Tabs defaultValue="overview" variant="line">
+      <TabsList>
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="usage">Usage</TabsTrigger>
+        <TabsTrigger value="code">Code</TabsTrigger>
+      </TabsList>
+    </Tabs>
+  )
+}`,
+  tag: `import { Tag } from "@florence/tag"
+
+export function StatusTags() {
+  return (
+    <>
+      <Tag tone="brand">Design</Tag>
+      <Tag tone="neutral">Beta</Tag>
+      <Tag tone="success">Passed</Tag>
+    </>
+  )
+}`,
+  kpi: `import { KpiCard } from "@florence/kpi-card"
+
+export function RetrievalMetric() {
+  return (
+    <KpiCard
+      label="Retrieval rate"
+      value="94%"
+      delta="+6.2% vs last week"
+      trend="up"
+    />
+  )
+}`,
+  chart: `import { BarChart } from "@florence/bar-chart"
+
+export function WeeklyVolume() {
+  return (
+    <BarChart
+      categories={["Mon", "Tue", "Wed", "Thu", "Fri"]}
+      data={[38, 56, 44, 72, 88]}
+      aria-label="Weekly retrieval volume"
+    />
+  )
+}`
+};
 
 const studioMetrics = [
   { label: "Revenue", value: "$1.84M", change: "+18.4%", tone: "blue" },
@@ -359,28 +457,91 @@ function MockColorPage() {
   );
 }
 
-function MockComponentsPage() {
+function MockComponentsPage({ locked = false }) {
+  const reduceMotion = useReducedMotion();
+  const [activeType, setActiveType] = useState(null);
+
+  function toggleCard(type) {
+    if (locked) return;
+    setActiveType((current) => (current === type ? null : type));
+  }
+
   return (
     <div className="dsp-components-page">
       <div className="saas-ds-grid">
         {componentCards.map((card) => (
-          <article className="saas-ds-card" key={card.name}>
-            <div className="saas-ds-preview">
-              <ComponentPreview type={card.type} />
-            </div>
-            <div className="saas-ds-card-meta">
-              <div>
-                <div className="saas-ds-card-title">
-                  <p>{card.name}</p>
-                  <span className="saas-ds-card-category">{card.category}</span>
-                </div>
-                <span>{card.meta}</span>
-              </div>
-            </div>
-          </article>
+          <ComponentCard
+            key={card.type}
+            card={card}
+            code={COMPONENT_CODE[card.type]}
+            isActive={activeType === card.type}
+            locked={locked}
+            reduceMotion={reduceMotion}
+            onToggle={() => toggleCard(card.type)}
+          />
         ))}
       </div>
     </div>
+  );
+}
+
+function ComponentCard({ card, code, isActive, locked, reduceMotion, onToggle }) {
+  const motionEase = [0.22, 1, 0.36, 1];
+
+  return (
+    <motion.article
+      layout={!reduceMotion}
+      className={`saas-ds-card${isActive ? " is-active is-expanded" : ""}${locked ? " saas-ds-card--locked" : ""}`}
+      transition={{ layout: { duration: 0.42, ease: motionEase } }}
+    >
+      {isActive && !reduceMotion ? (
+        <motion.span
+          className="saas-ds-card-scan"
+          aria-hidden="true"
+          initial={{ scaleX: 0, opacity: 0.85 }}
+          animate={{ scaleX: 1, opacity: 0 }}
+          transition={{ duration: 0.72, ease: motionEase }}
+        />
+      ) : null}
+
+      <button
+        type="button"
+        className="saas-ds-card-trigger"
+        aria-expanded={isActive}
+        aria-label={`${card.name} component${isActive ? ", showing React code" : ""}`}
+        disabled={locked}
+        onClick={onToggle}
+      >
+        <div className="saas-ds-preview">
+          <ComponentPreview type={card.type} />
+        </div>
+        <div className="saas-ds-card-meta">
+          <p>{card.name}</p>
+          <span className="saas-ds-card-hint">{isActive ? "React code" : "View code"}</span>
+        </div>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {isActive ? (
+          <motion.div
+            key={`${card.type}-code`}
+            className="saas-ds-card-code"
+            initial={reduceMotion ? false : { opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={reduceMotion ? undefined : { opacity: 0, height: 0 }}
+            transition={{ duration: 0.34, ease: motionEase }}
+          >
+            <div className="saas-ds-card-code-head">
+              <span>React</span>
+              <code>{card.file}</code>
+            </div>
+            <pre>
+              <code>{code}</code>
+            </pre>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </motion.article>
   );
 }
 
@@ -551,7 +712,7 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
                         {currentPage === "color" ? (
                           <MockColorPage />
                         ) : (
-                          <MockComponentsPage />
+                          <MockComponentsPage locked={locked} />
                         )}
                       </motion.div>
                     </AnimatePresence>

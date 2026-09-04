@@ -44,16 +44,16 @@ const systemLayers = [
 
 const gapOutcomes = [
   {
-    title: "Reduced Q&A",
-    copy: "Agents retrieve the right component, token, and constraint instead of guessing and iterating."
+    title: "Less rework",
+    copy: "Agents retrieve context instead of guessing."
   },
   {
-    title: "Token cost reduce",
-    copy: "Smaller prompts, fewer retries, and less wasted generation on almost-right UI."
+    title: "Lower token spend",
+    copy: "Fewer retries on almost-right UI."
   },
   {
-    title: "Ship with quality not AI slop",
-    copy: "Output passes brand, system, and eval criteria before it reaches review."
+    title: "Not AI slop",
+    copy: "Output passes brand and system criteria."
   }
 ];
 
@@ -252,7 +252,7 @@ function ProductEcosystemChip({ name, logo, glyph, contain, badge }) {
   );
 }
 
-function ProductPricingCard({ plan, onWaitlistOpen }) {
+function ProductPricingCard({ plan }) {
   return (
     <article
       className={`product-pricing-card${
@@ -277,27 +277,34 @@ function ProductPricingCard({ plan, onWaitlistOpen }) {
           <li key={feature}>{feature}</li>
         ))}
       </ul>
-      {plan.waitlist ? (
-        <WaitlistButton
-          className={`product-btn product-btn--full${
-            plan.featured ? " product-btn--primary" : " product-btn--ghost"
-          }`}
-          onOpen={onWaitlistOpen}
-        >
-          {plan.ctaLabel}
-        </WaitlistButton>
-      ) : (
-        <a
-          className={`product-btn product-btn--full${
-            plan.featured ? " product-btn--primary" : " product-btn--ghost"
-          }`}
-          href={plan.ctaHref}
-          {...(plan.ctaHref.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
-        >
-          {plan.ctaLabel}
-        </a>
-      )}
     </article>
+  );
+}
+
+function ProductPricingCta({ plan, onWaitlistOpen }) {
+  if (plan.waitlist) {
+    return (
+      <WaitlistButton
+        className={`product-btn product-btn--full${
+          plan.featured ? " product-btn--primary" : " product-btn--ghost"
+        }`}
+        onOpen={onWaitlistOpen}
+      >
+        {plan.ctaLabel}
+      </WaitlistButton>
+    );
+  }
+
+  return (
+    <a
+      className={`product-btn product-btn--full${
+        plan.featured ? " product-btn--primary" : " product-btn--ghost"
+      }`}
+      href={plan.ctaHref}
+      {...(plan.ctaHref.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+    >
+      {plan.ctaLabel}
+    </a>
   );
 }
 
@@ -332,10 +339,7 @@ export default function ProductPage() {
         <section className="product-hero" aria-labelledby="product-hero-title">
           <Entrance className="product-hero-inner" animate="visible">
             <EntranceItem className="product-hero-copy">
-              <h1 id="product-hero-title">
-                <span>AI Native Design System</span>
-                <span>For Agents.</span>
-              </h1>
+              <h1 id="product-hero-title">Design System For Agents.</h1>
               <p className="product-lede">
                 An MCP for your coding agent. Build brand, system, and
                 engineering constraints here so generated UI ships with
@@ -357,13 +361,11 @@ export default function ProductPage() {
         <section className="product-section" aria-labelledby="product-gap-title">
           <Entrance className="product-section-inner product-gap">
             <EntranceItem as="h2" id="product-gap-title">
-              <span>All this design and engineering context so that your agents</span>
+              <span>Context so your agents</span>
               <span>don&apos;t ship AI slop.</span>
             </EntranceItem>
             <EntranceItem as="p" className="product-body">
-              They ship. The damage is almost-right UI, heavier QA, and
-              output that doesn&apos;t look like your company. Volume
-              compounds. Trust doesn&apos;t.
+              They ship almost-right UI. QA load grows. Trust doesn&apos;t.
             </EntranceItem>
             <div className="product-gap-outcomes">
               {gapOutcomes.map((outcome) => (
@@ -449,7 +451,14 @@ export default function ProductPage() {
             <div className="product-pricing-grid">
               {pricingPlans.map((plan) => (
                 <EntranceItem key={plan.id}>
-                  <ProductPricingCard plan={plan} onWaitlistOpen={openWaitlist} />
+                  <ProductPricingCard plan={plan} />
+                </EntranceItem>
+              ))}
+            </div>
+            <div className="product-pricing-actions">
+              {pricingPlans.map((plan) => (
+                <EntranceItem key={`${plan.id}-cta`}>
+                  <ProductPricingCta plan={plan} onWaitlistOpen={openWaitlist} />
                 </EntranceItem>
               ))}
             </div>

@@ -85,7 +85,7 @@ const pages = {
     type: "Course"
   },
   "/product": {
-    title: "AI native design systems for agents | Human AI Studio",
+    title: "Design systems for agents | Human AI Studio",
     description:
       "A layer over brand, design system, engineering constraints, and quality criteria so coding agents ship on-brand UI without a platform migration.",
     type: "Product"
