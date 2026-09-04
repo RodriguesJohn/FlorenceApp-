@@ -292,7 +292,7 @@ export default function ProductPage() {
           <Entrance className="product-hero-inner" animate="visible">
             <EntranceItem className="product-hero-copy">
               <h1 id="product-hero-title">
-                <span>AI Native Design Systems</span>
+                <span>AI Native Design System</span>
                 <span>For Agents.</span>
               </h1>
               <p className="product-lede">
