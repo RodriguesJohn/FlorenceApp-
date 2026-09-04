@@ -18,7 +18,7 @@ function trackWorkshopNavClick() {
 const barLinks = [
   { label: "Studio", href: studioUrl },
   { label: "Workshop", href: designSystemsUrl, onClick: trackWorkshopNavClick },
-  { label: "Course", href: courseUrl }
+  { label: "DX Course", href: courseUrl }
 ];
 
 const menuLinks = [

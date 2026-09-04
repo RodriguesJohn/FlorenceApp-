@@ -47,7 +47,7 @@ const nextSteps = [
   },
   {
     title: "Continue on the course",
-    body: "The AI-Ready Design Systems Course is the longer track. Modules unlock after you join.",
+    body: "The Design Engineering course is the longer track. Modules unlock after you join.",
     href: "/academy",
     label: "Start today"
   },

@@ -18,7 +18,7 @@ export function AcademyAnimatedTestimonials({
   badgeText = "Popular courses on Maven",
   testimonials = [],
   logos = [],
-  trustedCompaniesTitle = "Trusted by designers from",
+  trustedCompaniesTitle = "Resources trusted by designers from",
   autoRotateInterval = 7000
 }) {
   const [activeIndex, setActiveIndex] = React.useState(0);

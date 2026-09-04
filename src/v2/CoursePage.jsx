@@ -10,6 +10,62 @@ import "./course.css";
 
 const NEWSLETTER_URL = "https://johnrodrigues.substack.com/";
 
+const designEngineeringSidebar = [
+  { id: "foundations", label: "Roadmap" },
+  { id: "existing", label: "UI craft" },
+  { id: "making-ready", label: "Code" },
+  {
+    id: "animations",
+    label: "Animations",
+    lede: "Motion, transitions, and micro-interactions that make interfaces feel finished, not static."
+  },
+  { id: "tooling", label: "AI tools and workflows" },
+  { id: "workflows", label: "Design systems" },
+  {
+    id: "prototyping",
+    label: "Advanced prototyping",
+    lede: "Interactive prototypes, motion, and coded demos that prove the design before it ships."
+  },
+  {
+    id: "portfolio",
+    label: "DX portfolio",
+    lede: "Ship a portfolio that shows design-engineering craft, not just screens in a grid."
+  }
+];
+
+const designEngineeringModules = designEngineeringSidebar.map((item, index) => {
+  const module = modules.find((entry) => entry.id === item.id);
+  return {
+    id: item.id,
+    number: String(index + 1).padStart(2, "0"),
+    label: item.label,
+    lede: item.lede ?? module?.lede ?? ""
+  };
+});
+
+const lessonCardColor = { color1: "#38bdf8", color2: "#0284c7" };
+
+const designEngineeringLessons = [
+  "What is design engineering",
+  "Layout, type, and visual hierarchy",
+  "From Figma frame to production code",
+  "Motion that guides attention",
+  "Cursor, Claude Code, and agent workflows",
+  "Tokens, components, and contracts",
+  "Coded prototypes that ship the idea",
+  "Build a DX portfolio that gets hired",
+  "The design-engineering career path"
+].map((title, index) => ({
+  id: `de-${index}`,
+  title,
+  ...lessonCardColor
+}));
+
+const designEngineeringFeaturedLesson = {
+  title: "What is Design Engineering?",
+  body: ["The intersection of design and code powered with AI."]
+};
+
 const logos = [
   { src: "/academy/Apple.png", alt: "Apple" },
   { src: "/academy/Google.svg.png", alt: "Google" },
@@ -22,30 +78,49 @@ const logos = [
 const surveyQuotes = [
   {
     id: 1,
-    name: "Jake Barrow",
-    role: "Product Designer",
-    company: "",
+    name: "IniOluwa",
+    role: "Senior Product Designer",
+    company: "Intercom",
     content:
-      "John is very knowledgeable and enthusiastic about building quality design systems that allow us to get the most from AI. The course was informative, and there were many opportunities to ask questions.",
-    rating: 4
+      "I've gone from not knowing how to code to building my own AI agent. Every session has been engaging, interactive, and deeply impactful.",
+    rating: 5
   },
   {
     id: 2,
-    name: "Kelly Redznak",
-    role: "Sr. Product Designer",
-    company: "Optimum",
+    name: "Dana",
+    role: "Lead Product Designer",
+    company: "ex Rite Aid",
     content:
-      "He packed in a lot of valuable insight on building industry-standard AI-ready design systems, how to structure them, maintain them, and test them so agents produce reliable, on-brand output.",
+      "I'm leaving feeling truly confident in my AI fluency. I'm now ready to build a new portfolio quickly and effectively.",
     rating: 5
+  },
+  {
+    id: 3,
+    name: "Dan",
+    role: "UX Designer",
+    company: "RTI International",
+    content:
+      "I gained valuable experience building an AI product with AI tools, from strategy and wireframes to a functional prototype.",
+    rating: 4
+  },
+  {
+    id: 4,
+    name: "Brett",
+    role: "Product Designer",
+    company: "Simpson Strong-Tie",
+    content:
+      "John helped me turn initial ideas into working POCs for my portfolio, employer, or even something of my own.",
+    rating: 4
   }
 ];
 
 const included = [
-  "All six modules, self-paced",
+  "All eight modules, self-paced",
   "Lesson video plus the written lesson",
-  "Tokens, contracts, and retrieval",
-  "Figma, Cursor, and Claude Code workflows",
-  "Evals so you can score the system",
+  "UI craft, layout, type, and motion",
+  "From Figma frame to production code",
+  "AI tools and workflows with Cursor and Claude Code",
+  "A DX portfolio you can ship",
   "New lessons while you are subscribed"
 ];
 
@@ -66,6 +141,13 @@ const packageTestimonials = [
   },
   {
     quote:
+      "I gained valuable experience building an AI product, from strategy and wireframes to a functional prototype.",
+    name: "Dan",
+    role: "UX Designer, RTI International",
+    img: "/academy/Dan.jpeg"
+  },
+  {
+    quote:
       "John equipped me with understanding the AI possibility space to take my initial ideas and turn them into working POCs.",
     name: "Brett",
     role: "Product Designer",
@@ -73,17 +155,10 @@ const packageTestimonials = [
   },
   {
     quote:
-      "John emphasizes practical application over lectures, which made the material immediately useful.",
-    name: "Sonali",
-    role: "Sr. Product Designer, JPMorgan Chase",
-    img: "/academy/Sonali.jpeg"
-  },
-  {
-    quote:
-      "His strategic frameworks and live sessions helped me think like both a strategist and a solutionist.",
-    name: "Sneh",
-    role: "UX Designer",
-    img: "/academy/Sneh.webp"
+      "John's course is practical, with demos and real encouragement to explore AI tools specifically for designers.",
+    name: "Linda",
+    role: "Principal PD, JPMorgan Chase",
+    img: "/academy/Linda.jpeg"
   }
 ];
 
@@ -125,7 +200,7 @@ function PackageTestimonial() {
             />
           ))}
         </div>
-        <p>From designers who have trained with John</p>
+        <p>From designers learning design engineering with John</p>
       </div>
     </div>
   );
@@ -133,23 +208,23 @@ function PackageTestimonial() {
 
 const audience = [
   {
-    title: "Product designers",
-    body: "You ship in Figma and now the team is prompting Cursor. You want the agent on your system, not around it."
+    title: "Designers learning to code",
+    body: "You are strong in Figma and want to ship real UI. Learn to write components, use AI to move faster, and close the gap to production."
   },
   {
-    title: "Design system leads",
-    body: "You already have a library. You need retrieval, contracts, and a way to keep agents from inventing a second UI."
+    title: "Engineers who want design craft",
+    body: "You can build features but want stronger layout, type, and motion. Learn the visual layer that makes interfaces feel intentional, not assembled."
   },
   {
-    title: "Design engineers",
-    body: "You sit between Figma and code. This is how that gap becomes the source of truth for humans and agents."
+    title: "Aspiring design engineers",
+    body: "You want a career at the intersection of design and code. Build the skills, workflows, and portfolio that prove you can do both."
   }
 ];
 
 const faqs = [
   {
     q: "What is this?",
-    a: "A self-paced course on making a design system agents can retrieve. Lessons, video, and the same curriculum I teach in the live workshop — on your schedule."
+    a: "A self-paced course on making a design system agents can retrieve. Lessons, video, and the same curriculum I teach in the live workshop, on your schedule."
   },
   {
     q: "Why $249 a month?",
@@ -183,10 +258,17 @@ function CourseProductShot() {
             <i />
             <i />
           </span>
-          <span className="academy-hero-chrome-title">Training</span>
+          <span className="academy-hero-chrome-title">Design Engineering</span>
         </div>
         <div className="academy-hero-app-frame">
-          <AcademyWorkspacePreview />
+          <AcademyWorkspacePreview
+            product="Design Engineering"
+            subtitle="Self-paced course"
+            sidebarItems={designEngineeringSidebar}
+            previewLessons={designEngineeringLessons}
+            featuredLesson={designEngineeringFeaturedLesson}
+            demoVideo="/course/work.mp4?v=1"
+          />
         </div>
       </div>
     </figure>
@@ -221,11 +303,11 @@ export default function CoursePage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1" id="course-hero-title">
-                AI-Ready Design Systems Course
+                Design Engineering course
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
-                <span>Agents cannot retrieve what you never wrote down. This course is how you structure a system</span>
-                <span>so Cursor, Claude Code, and Codex ship from it instead of around it.</span>
+                <span>Learn the intersection of design and code and accelerate your workflows</span>
+                <span>with AI and become a most desirable talent.</span>
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
                 <div className="academy-hero-cta-ring">
@@ -254,7 +336,7 @@ export default function CoursePage() {
 
           <AcademyAnimatedTestimonials
             title="What practitioners say."
-            subtitle="From designers already shipping. Their reviews. Their ratings."
+            subtitle="From designers shipping at the intersection of design, code, and AI."
             badgeText=""
             testimonials={surveyQuotes}
             logos={logos}
@@ -267,11 +349,11 @@ export default function CoursePage() {
               Curriculum
             </EntranceItem>
             <EntranceItem as="h2" id="curriculum-title">
-              Six modules. One system.
+              Eight modules. One system.
             </EntranceItem>
           </Entrance>
           <Entrance className="course-module-grid" as="ol">
-            {modules.map((module) => (
+            {designEngineeringModules.map((module) => (
               <EntranceItem as="li" className="course-module" key={module.id}>
                 <span className="course-module-num">{module.number}</span>
                 <div>

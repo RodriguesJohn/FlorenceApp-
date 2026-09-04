@@ -41,153 +41,146 @@ const componentFilters = [
   ["Motion", "4"]
 ];
 
+const SYSTEM_PAGES = ["color", "components"];
+const PAGE_MS = 6200;
+const COLOR_TAB_MS = 3400;
+
+const COLOR_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+
+/* Primitive ramps from florence-ds/02-foundations/colors/primitives.css */
+const PRIMITIVE_PALETTES = [
+  {
+    name: "gray",
+    label: "Gray",
+    values: ["#f9fafb", "#f3f4f6", "#e5e7eb", "#d1d5db", "#9ca3af", "#6b7280", "#4b5563", "#374151", "#1f2937", "#111827"]
+  },
+  {
+    name: "slate",
+    label: "Slate",
+    values: ["#f8fafc", "#f1f5f9", "#e2e8f0", "#cbd5e1", "#94a3b8", "#64748b", "#475569", "#334155", "#1e293b", "#0f172a"]
+  },
+  {
+    name: "blue",
+    label: "Blue",
+    values: ["#eff6ff", "#dbeafe", "#bfdbfe", "#93c5fd", "#60a5fa", "#3b82f6", "#2563eb", "#1d4ed8", "#1e40af", "#1e3a8a"]
+  },
+  {
+    name: "green",
+    label: "Green",
+    values: ["#f0fdf4", "#dcfce7", "#bbf7d0", "#86efac", "#4ade80", "#22c55e", "#16a34a", "#15803d", "#166534", "#14532d"]
+  },
+  {
+    name: "violet",
+    label: "Violet",
+    values: ["#f5f3ff", "#ede9fe", "#ddd6fe", "#c4b5fd", "#a78bfa", "#8b5cf6", "#7c3aed", "#6d28d9", "#5b21b6", "#4c1d95"]
+  },
+  {
+    name: "rose",
+    label: "Rose",
+    values: ["#fff1f2", "#ffe4e6", "#fecdd3", "#fda4af", "#fb7185", "#f43f5e", "#e11d48", "#be123c", "#9f1239", "#881337"]
+  }
+];
+
+const COLOR_SINGLES = [
+  { name: "white", label: "White", hex: "#ffffff" },
+  { name: "black", label: "Black", hex: "#000000" }
+];
+
+/* Semantic roles — dark theme resolved from florence-ds/02-foundations/colors/semantics.css */
+const FLORENCE = {
+  "--color-text-primary": "#f9fafb",
+  "--color-text-secondary": "#d1d5db",
+  "--color-text-muted": "#6b7280",
+  "--color-text-brand": "#93c5fd",
+  "--color-text-success": "#86efac",
+  "--color-bg-page": "#000000",
+  "--color-bg-subtle": "#141414",
+  "--color-bg-muted": "#1a1a1a",
+  "--color-bg-brand": "#3b82f6",
+  "--color-bg-brand-subtle": "#1e3a8a",
+  "--color-border-default": "#262626",
+  "--color-border-strong": "#404040",
+  "--color-border-focus": "#60a5fa",
+  "--color-border-brand": "#60a5fa",
+  "--color-interactive-primary": "#60a5fa",
+  "--color-interactive-primary-hover": "#93c5fd",
+  "--color-interactive-selected": "#1e3a8a",
+  "--color-brand-primary": "#60a5fa",
+  "--color-brand-on-brand": "#ffffff",
+  "--color-disabled-text": "#6b7280",
+  "--color-data-1": "#60a5fa",
+  "--color-data-2": "#a3e635",
+  "--color-data-3": "#a78bfa",
+  "--color-data-4": "#fb7185",
+  "--color-data-5": "#22d3ee"
+};
+
+const SEMANTIC_GROUPS = [
+  {
+    label: "Text",
+    code: "color-text-*",
+    tokens: [
+      ["--color-text-primary", FLORENCE["--color-text-primary"]],
+      ["--color-text-secondary", FLORENCE["--color-text-secondary"]],
+      ["--color-text-muted", FLORENCE["--color-text-muted"]],
+      ["--color-text-brand", FLORENCE["--color-text-brand"]],
+      ["--color-text-success", FLORENCE["--color-text-success"]]
+    ]
+  },
+  {
+    label: "Background",
+    code: "color-bg-*",
+    tokens: [
+      ["--color-bg-page", FLORENCE["--color-bg-page"]],
+      ["--color-bg-subtle", FLORENCE["--color-bg-subtle"]],
+      ["--color-bg-muted", FLORENCE["--color-bg-muted"]],
+      ["--color-bg-brand", FLORENCE["--color-bg-brand"]],
+      ["--color-bg-brand-subtle", FLORENCE["--color-bg-brand-subtle"]]
+    ]
+  },
+  {
+    label: "Border",
+    code: "color-border-*",
+    tokens: [
+      ["--color-border-default", FLORENCE["--color-border-default"]],
+      ["--color-border-strong", FLORENCE["--color-border-strong"]],
+      ["--color-border-focus", FLORENCE["--color-border-focus"]],
+      ["--color-border-brand", FLORENCE["--color-border-brand"]]
+    ]
+  },
+  {
+    label: "Interactive",
+    code: "color-interactive-*",
+    tokens: [
+      ["--color-interactive-primary", FLORENCE["--color-interactive-primary"]],
+      ["--color-interactive-primary-hover", FLORENCE["--color-interactive-primary-hover"]],
+      ["--color-interactive-selected", FLORENCE["--color-interactive-selected"]],
+      ["--color-brand-primary", FLORENCE["--color-brand-primary"]]
+    ]
+  },
+  {
+    label: "Data",
+    code: "color-data-*",
+    layout: "data-row",
+    tokens: [
+      ["--color-data-1", FLORENCE["--color-data-1"]],
+      ["--color-data-2", FLORENCE["--color-data-2"]],
+      ["--color-data-3", FLORENCE["--color-data-3"]],
+      ["--color-data-4", FLORENCE["--color-data-4"]],
+      ["--color-data-5", FLORENCE["--color-data-5"]]
+    ]
+  }
+];
+
 const componentCards = [
-  {
-    name: "Button",
-    meta: "5 variants · 3 sizes",
-    detail: "Contract retrieved by Cursor",
-    preview: (
-      <div className="dsp-buttons">
-        <span className="dsp-btn-primary">Save changes</span>
-        <span className="dsp-btn-ghost">Cancel</span>
-      </div>
-    )
-  },
-  {
-    name: "Input",
-    meta: "Label · hint · error",
-    detail: "Form contract resolved",
-    preview: (
-      <div className="dsp-field">
-        <small>Work email</small>
-        <span className="dsp-input">jane@acme.com<i /></span>
-      </div>
-    )
-  },
-  {
-    name: "Select",
-    meta: "Single · grouped",
-    detail: "Options schema matched",
-    preview: (
-      <div className="dsp-field">
-        <small>Environment</small>
-        <span className="dsp-input dsp-select">Production<b>⌄</b></span>
-      </div>
-    )
-  },
-  {
-    name: "Switch",
-    meta: "2 sizes · disabled",
-    detail: "States mapped to tokens",
-    preview: (
-      <div className="dsp-switches">
-        <span className="dsp-switch-row"><em className="dsp-switch on"><i /></em>Enabled</span>
-        <span className="dsp-switch-row"><em className="dsp-switch"><i /></em>Off</span>
-      </div>
-    )
-  },
-  {
-    name: "Tabs",
-    meta: "Underline · pill",
-    detail: "Keyboard contract checked",
-    preview: (
-      <div className="dsp-tabs">
-        <span className="active">Overview</span>
-        <span>Usage</span>
-        <span>Code</span>
-      </div>
-    )
-  },
-  {
-    name: "Tag",
-    meta: "6 tones · removable",
-    detail: "Tone scale resolved",
-    preview: (
-      <div className="dsp-tags">
-        <span>Design</span>
-        <span>Beta</span>
-        <span>Passed</span>
-      </div>
-    )
-  },
-  {
-    name: "KPI card",
-    meta: "Delta · sparkline",
-    detail: "Data roles bound",
-    preview: (
-      <div className="dsp-kpi">
-        <small>Retrieval rate</small>
-        <strong>94%</strong>
-        <em>+6.2% vs last week</em>
-      </div>
-    )
-  },
-  {
-    name: "Bar chart",
-    meta: "Stacked · grouped",
-    detail: "Chart palette applied",
-    preview: (
-      <div className="dsp-chart" aria-hidden="true">
-        <i style={{ height: "38%" }} />
-        <i style={{ height: "56%" }} />
-        <i style={{ height: "44%" }} />
-        <i style={{ height: "72%" }} />
-        <i style={{ height: "88%" }} />
-      </div>
-    )
-  }
-];
-
-const colorTokens = [
-  ["--color-bg-brand", "#2563eb"],
-  ["--color-data-2", "#8b5cf6"],
-  ["--color-data-3", "#10b981"],
-  ["--color-data-4", "#f59e0b"],
-  ["--color-data-5", "#ef4444"],
-  ["--color-data-6", "#06b6d4"],
-  ["--color-data-7", "#ec4899"],
-  ["--color-text-primary", "#e5e7eb"]
-];
-
-const STEP_MS = 1900;
-
-const staticTokenRows = [
-  {
-    name: "Typography",
-    token: "--text-heading-md",
-    count: "18",
-    visual: (
-      <span className="dsp-token-type">
-        <b style={{ fontSize: ".8rem" }}>Aa</b>
-        <b style={{ fontSize: ".58rem" }}>Aa</b>
-        <b style={{ fontSize: ".44rem" }}>Aa</b>
-      </span>
-    )
-  },
-  {
-    name: "Spacing",
-    token: "--space-400",
-    count: "12",
-    visual: (
-      <span className="dsp-token-space">
-        <b style={{ width: ".3rem" }} />
-        <b style={{ width: ".65rem" }} />
-        <b style={{ width: "1.15rem" }} />
-      </span>
-    )
-  },
-  {
-    name: "Radius",
-    token: "--radius-control-md",
-    count: "6",
-    visual: (
-      <span className="dsp-token-radius">
-        <b style={{ borderRadius: ".1rem" }} />
-        <b style={{ borderRadius: ".3rem" }} />
-        <b style={{ borderRadius: "999px" }} />
-      </span>
-    )
-  }
+  { name: "Button", meta: "5 variants · 3 sizes", type: "button" },
+  { name: "Input", meta: "Label · hint · error", type: "input" },
+  { name: "Select", meta: "Single · grouped", type: "select" },
+  { name: "Switch", meta: "2 sizes · disabled", type: "switch" },
+  { name: "Tabs", meta: "Underline · pill", type: "tabs" },
+  { name: "Tag", meta: "6 tones · removable", type: "tag" },
+  { name: "KPI card", meta: "Delta · sparkline", type: "kpi" },
+  { name: "Bar chart", meta: "Stacked · grouped", type: "chart" }
 ];
 
 const studioMetrics = [
@@ -208,6 +201,300 @@ const agentTeam = [
   { initials: "CP", name: "Content Producer", task: "Creating Nova assets", tone: "green" }
 ];
 
+const PAGE_META = {
+  color: {
+    title: "Color",
+    lede: "Palette ramps, then semantic roles your agents retrieve.",
+    breadcrumbParent: "Foundations",
+    navActive: "Foundations"
+  },
+  components: {
+    title: "Components",
+    lede: "28 contracts your agents retrieve instead of inventing UI.",
+    breadcrumbParent: null,
+    navActive: "Components"
+  }
+};
+
+function isLightHex(hex) {
+  const value = hex.replace("#", "");
+  const r = parseInt(value.slice(0, 2), 16);
+  const g = parseInt(value.slice(2, 4), 16);
+  const b = parseInt(value.slice(4, 6), 16);
+  return (r * 299 + g * 587 + b * 114) / 1000 > 160;
+}
+
+function ComponentPreview({ type }) {
+  if (type === "switch") {
+    return (
+      <div className="dsp-animated-preview">
+        <div className="dsp-switches">
+          <span className="dsp-switch-row">
+            <span className="dsp-switch" style={{ backgroundColor: FLORENCE["--color-interactive-primary"] }}>
+              <i className="dsp-switch-knob" style={{ transform: "translateX(0.44rem)" }} />
+            </span>
+            Enabled
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "button") {
+    return (
+      <div className="dsp-animated-preview">
+        <div className="dsp-buttons">
+          <span
+            className="dsp-btn-primary"
+            style={{
+              backgroundColor: FLORENCE["--color-interactive-primary"],
+              color: FLORENCE["--color-brand-on-brand"]
+            }}
+          >
+            Save changes
+          </span>
+          <span className="dsp-btn-ghost">Cancel</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "input" || type === "select") {
+    return (
+      <div className="dsp-animated-preview">
+        <div className="dsp-field">
+          <small>{type === "select" ? "Environment" : "Work email"}</small>
+          <span
+            className={`dsp-input${type === "select" ? " dsp-select" : ""}`}
+            style={{ borderColor: FLORENCE["--color-border-default"] }}
+          >
+            {type === "select" ? <>Production<b>⌄</b></> : <>jane@acme.com<i /></>}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "tabs") {
+    return (
+      <div className="dsp-animated-preview">
+        <div className="dsp-tabs">
+          <span className="active" style={{ color: FLORENCE["--color-text-primary"] }}>Overview</span>
+          <span>Usage</span>
+          <span>Code</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "tag") {
+    return (
+      <div className="dsp-animated-preview">
+        <div className="dsp-tags">
+          <span style={{ backgroundColor: FLORENCE["--color-bg-brand-subtle"], color: FLORENCE["--color-text-brand"] }}>Design</span>
+          <span>Beta</span>
+          <span style={{ backgroundColor: FLORENCE["--color-interactive-selected"], color: FLORENCE["--color-text-success"] }}>Passed</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "kpi") {
+    return (
+      <div className="dsp-animated-preview">
+        <div className="dsp-kpi">
+          <small>Retrieval rate</small>
+          <strong style={{ color: FLORENCE["--color-text-primary"] }}>94%</strong>
+          <em style={{ color: FLORENCE["--color-text-success"] }}>+6.2% vs last week</em>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "chart") {
+    const dataColors = [
+      FLORENCE["--color-data-1"],
+      FLORENCE["--color-data-2"],
+      FLORENCE["--color-data-3"],
+      FLORENCE["--color-data-4"],
+      FLORENCE["--color-data-5"]
+    ];
+    const heights = ["38%", "56%", "44%", "72%", "88%"];
+    return (
+      <div className="dsp-animated-preview">
+        <div className="dsp-chart" aria-hidden="true">
+          {dataColors.map((hex, index) => (
+            <i key={hex} style={{ height: heights[index], backgroundColor: hex }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+
+function PrimitiveSwatch({ paletteName, step, hex }) {
+  const isLight = step <= 400 || paletteName === "white" || isLightHex(hex);
+  const token = `--color-${paletteName}-${step}`;
+
+  return (
+    <div
+      className={`dsp-florence-swatch${isLight ? " dsp-florence-swatch--light" : ""}`}
+      style={{ backgroundColor: hex }}
+    >
+      <span className="dsp-florence-swatch__step">{step}</span>
+      <span className="dsp-florence-swatch__meta">
+        <span className="dsp-florence-swatch__token">{token}</span>
+        <span className="dsp-florence-swatch__hex">{hex}</span>
+      </span>
+    </div>
+  );
+}
+
+function SingleSwatch({ name, label, hex }) {
+  const isLight = name === "white";
+  const token = `--color-${name}`;
+
+  return (
+    <div
+      className={`dsp-florence-swatch dsp-florence-swatch--single${isLight ? " dsp-florence-swatch--light" : ""}`}
+      style={{ backgroundColor: hex }}
+    >
+      <span className="dsp-florence-swatch__step">{label}</span>
+      <span className="dsp-florence-swatch__meta">
+        <span className="dsp-florence-swatch__token">{token}</span>
+        <span className="dsp-florence-swatch__hex">{hex}</span>
+      </span>
+    </div>
+  );
+}
+
+function SemanticChip({ token, hex }) {
+  const label = token.replace("--color-", "").replace(/-/g, " ");
+
+  return (
+    <div className="dsp-florence-chip">
+      <i style={{ backgroundColor: hex }} aria-hidden="true" />
+      <span className="dsp-florence-chip__body">
+        <span className="dsp-florence-chip__name">{label}</span>
+        <span className="dsp-florence-chip__token">{token}</span>
+      </span>
+      <span className="dsp-florence-chip__hex">{hex}</span>
+    </div>
+  );
+}
+
+function MockColorPage({ view }) {
+  return (
+    <div className="dsp-florence-page">
+      {view === "primitives" ? (
+        <div className="dsp-florence-scales">
+          {PRIMITIVE_PALETTES.map((palette) => (
+            <section className="dsp-florence-scale" key={palette.name}>
+              <header className="dsp-florence-scale__header">
+                <strong>{palette.label}</strong>
+                <code>color-{palette.name}-*</code>
+              </header>
+              <div className="dsp-florence-scale__row">
+                {palette.values.map((hex, index) => (
+                  <PrimitiveSwatch
+                    key={`${palette.name}-${COLOR_STEPS[index]}`}
+                    paletteName={palette.name}
+                    step={COLOR_STEPS[index]}
+                    hex={hex}
+                  />
+                ))}
+              </div>
+            </section>
+          ))}
+
+          <section className="dsp-florence-scale">
+            <header className="dsp-florence-scale__header">
+              <strong>Singles</strong>
+              <code>color-white · color-black</code>
+            </header>
+            <div className="dsp-florence-scale__row dsp-florence-scale__row--singles">
+              {COLOR_SINGLES.map((single) => (
+                <SingleSwatch key={single.name} {...single} />
+              ))}
+            </div>
+          </section>
+        </div>
+      ) : (
+        <div className="dsp-florence-scales">
+          {SEMANTIC_GROUPS.map((group) => (
+            <section className="dsp-florence-scale" key={group.label}>
+              <header className="dsp-florence-scale__header">
+                <strong>{group.label}</strong>
+                <code>{group.code}</code>
+              </header>
+              {group.layout === "data-row" ? (
+                <div className="dsp-florence-data-grid">
+                  {group.tokens.map(([token, hex]) => (
+                    <div className="dsp-florence-data-item" key={token}>
+                      <span className="dsp-florence-data-swatch" style={{ backgroundColor: hex }} />
+                      <code>{token.replace("--color-", "")}</code>
+                      <span>{hex}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="dsp-florence-chip-grid">
+                  {group.tokens.map(([token, hex]) => (
+                    <SemanticChip key={token} token={token} hex={hex} />
+                  ))}
+                </div>
+              )}
+            </section>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MockComponentsPage() {
+  return (
+    <div className="dsp-components-page">
+      <div className="saas-ds-grid">
+        {componentCards.map((card) => (
+          <article className="saas-ds-card" key={card.name}>
+            <div className="saas-ds-preview">
+              <ComponentPreview type={card.type} />
+            </div>
+            <div className="saas-ds-card-meta">
+              <div><p>{card.name}</p><span>{card.meta}</span></div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SystemToolbar({ page, colorTab }) {
+  if (page === "color") {
+    return (
+      <div className="dsp-florence-tabs" role="tablist" aria-label="Color token views">
+        <span className={colorTab === "primitives" ? "active" : ""} role="tab" aria-selected={colorTab === "primitives"}>Primitives</span>
+        <span className={colorTab === "semantics" ? "active" : ""} role="tab" aria-selected={colorTab === "semantics"}>Semantics</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="saas-ds-toolbar dsp-system-toolbar-inner">
+      <div className="saas-ds-filters">
+        {componentFilters.map(([label, count], index) => (
+          <span className={index === 0 ? "active" : ""} key={label}>{label}<b>{count}</b></span>
+        ))}
+      </div>
+      <span className="saas-ds-search"><i />Search components</span>
+    </div>
+  );
+}
+
 function Chrome({ locked, className, children, ...rest }) {
   if (locked) {
     return (
@@ -227,27 +514,31 @@ function Chrome({ locked, className, children, ...rest }) {
 function SaaSProductMockup({ embedded = false, locked = false, story = "studio" }) {
   const reduceMotion = useReducedMotion();
   const isContext = story === "context";
-  const [step, setStep] = useState(0);
-  const animateSystem = isContext && !reduceMotion;
+  const [pageIndex, setPageIndex] = useState(0);
+  const [colorTab, setColorTab] = useState("primitives");
+  const cyclePages = isContext;
+  const animatePageTransition = cyclePages && !reduceMotion;
+  const currentPage = SYSTEM_PAGES[pageIndex];
+  const pageMeta = PAGE_META[currentPage];
 
   useEffect(() => {
-    if (!animateSystem) return undefined;
-    const id = setInterval(() => setStep((current) => current + 1), STEP_MS);
+    if (!cyclePages) return undefined;
+    const id = setInterval(() => setPageIndex((current) => (current + 1) % SYSTEM_PAGES.length), PAGE_MS);
     return () => clearInterval(id);
-  }, [animateSystem]);
+  }, [cyclePages]);
 
-  const activeIndex = step % componentCards.length;
-  const activeColor = colorTokens[step % colorTokens.length];
-  const logEntries = Array.from({ length: 4 }, (_, offset) => {
-    const cursor = step - offset;
-    const card = componentCards[((cursor % componentCards.length) + componentCards.length) % componentCards.length];
-    return {
-      id: cursor,
-      title: card.name,
-      detail: card.detail,
-      time: offset === 0 ? "now" : `${offset * 2}s`
-    };
-  });
+  useEffect(() => {
+    if (!cyclePages || currentPage !== "color") {
+      setColorTab("primitives");
+      return undefined;
+    }
+
+    const id = setInterval(() => {
+      setColorTab((current) => (current === "primitives" ? "semantics" : "primitives"));
+    }, COLOR_TAB_MS);
+
+    return () => clearInterval(id);
+  }, [cyclePages, currentPage]);
 
   return (
     <section
@@ -297,7 +588,7 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
                   <div className="saas-nav-group" key={section.group}>
                     <p>{section.group}</p>
                     {section.items.map(([icon, label]) => (
-                      <span className={label === "Components" ? "active" : ""} key={label}>
+                      <span className={label === pageMeta.navActive ? "active" : ""} key={label}>
                         <Icon name={icon} />
                         {label}
                       </span>
@@ -331,7 +622,8 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
                 <span>{isContext ? "Acme Product" : "Northstar Creative"}</span>
                 <i>/</i>
                 {isContext && <><span>Design system</span><i>/</i></>}
-                <strong>{isContext ? "Components" : "Overview"}</strong>
+                {isContext && pageMeta.breadcrumbParent && <><span>{pageMeta.breadcrumbParent}</span><i>/</i></>}
+                <strong>{isContext ? pageMeta.title : "Overview"}</strong>
               </div>
               <div className="saas-top-actions">
                 <Chrome locked={locked} className="saas-icon-button" aria-label="Search">⌕</Chrome>
@@ -342,173 +634,111 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
 
             <div className="saas-content">
               {isContext ? (
-              <>
-              <div className="saas-content-title saas-ops-title">
-                <div>
-                  <p>Design system</p>
-                  <h3>Components</h3>
-                  <span>28 contracts your agents retrieve instead of inventing UI.</span>
-                </div>
-                <Chrome locked={locked}><span>+</span>New component</Chrome>
-              </div>
-
-              <div className="saas-ds-toolbar">
-                <div className="saas-ds-filters">
-                  {componentFilters.map(([label, count], index) => (
-                    <span className={index === 0 ? "active" : ""} key={label}>{label}<b>{count}</b></span>
-                  ))}
-                </div>
-                <span className="saas-ds-search"><i />Search components</span>
-              </div>
-
-              <div className="saas-ds-grid">
-                {componentCards.map((card, index) => {
-                  const isActive = animateSystem && index === activeIndex;
-                  return (
-                    <article className={`saas-ds-card${isActive ? " is-active" : ""}`} key={card.name}>
-                      <div className="saas-ds-preview">{card.preview}</div>
-                      <div className="saas-ds-card-meta">
-                        <div><p>{card.name}</p><span>{card.meta}</span></div>
-                      </div>
-                      {isActive && (
-                        <motion.i
-                          className="saas-ds-card-scan"
-                          aria-hidden="true"
-                          initial={{ scaleX: 0 }}
-                          animate={{ scaleX: 1 }}
-                          transition={{ duration: STEP_MS / 1000, ease: "linear" }}
-                        />
-                      )}
-                    </article>
-                  );
-                })}
-              </div>
-
-              <div className="saas-ds-bottom">
-                <article className="saas-ds-panel">
-                  <div className="saas-card-head"><div><p>Tokens</p><span>68 across 9 foundations</span></div><Chrome locked={locked}>View all →</Chrome></div>
-
-                  <div className="saas-ds-token-row">
-                    <span className="dsp-token-swatches">
-                      {colorTokens.map(([token, hex], index) => (
-                        <motion.b
-                          key={token}
-                          style={{ background: hex }}
-                          animate={animateSystem
-                            ? { opacity: index === step % colorTokens.length ? 1 : 0.32, scale: index === step % colorTokens.length ? 1.28 : 1 }
-                            : { opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                        />
-                      ))}
-                    </span>
+                <>
+                <div className="dsp-system-shell">
+                  <div className="saas-content-title saas-ops-title dsp-system-head">
                     <div>
-                      <strong>Color</strong>
-                      <small>{animateSystem ? activeColor[0] : "--color-bg-brand"}</small>
+                      <p>Design system</p>
+                      <h3>{pageMeta.title}</h3>
+                      <span>{pageMeta.lede}</span>
                     </div>
-                    <em>32</em>
+                    <Chrome locked={locked} className={currentPage === "components" ? "" : "dsp-system-action--placeholder"}>
+                      <span>+</span>New component
+                    </Chrome>
                   </div>
 
-                  {staticTokenRows.map((token) => (
-                    <div className="saas-ds-token-row" key={token.name}>
-                      {token.visual}
-                      <div><strong>{token.name}</strong><small>{token.token}</small></div>
-                      <em>{token.count}</em>
-                    </div>
-                  ))}
-                </article>
+                  <div className="dsp-system-toolbar">
+                    <SystemToolbar page={currentPage} colorTab={colorTab} />
+                  </div>
 
-                <article className="saas-ds-panel">
-                  <div className="saas-card-head"><div><p>Agent retrieval</p><span>Live · Cursor session</span></div><Chrome locked={locked}>•••</Chrome></div>
-                  <div className="saas-ds-log">
-                    <AnimatePresence initial={false} mode="popLayout">
-                      {logEntries.map((entry) => (
-                        <motion.div
-                          className="saas-ds-log-row"
-                          key={entry.id}
-                          layout={animateSystem}
-                          initial={animateSystem ? { opacity: 0, y: -10 } : false}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-                        >
-                          <i aria-hidden="true" />
-                          <div><strong>{entry.title}</strong><small>{entry.detail}</small></div>
-                          <time>{entry.time}</time>
-                        </motion.div>
-                      ))}
+                  <div className="dsp-system-stage">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={currentPage}
+                        className="dsp-system-page"
+                        initial={animatePageTransition ? { opacity: 0 } : false}
+                        animate={{ opacity: 1 }}
+                        exit={animatePageTransition ? { opacity: 0 } : undefined}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        {currentPage === "color" ? (
+                          <MockColorPage view={colorTab} />
+                        ) : (
+                          <MockComponentsPage />
+                        )}
+                      </motion.div>
                     </AnimatePresence>
                   </div>
-                </article>
-              </div>
-              </>
-              ) : (
-              <>
-              <div className="saas-content-title saas-ops-title">
-                <div>
-                  <p>Creative business OS</p>
-                  <h3>Good morning, Alex.</h3>
-                  <span>Here’s how your studio is performing today.</span>
                 </div>
-                <Chrome locked={locked}><span>+</span>New project</Chrome>
-              </div>
-
-              <div className="saas-command-grid">
-                <div className="saas-command-main">
-                  <div className="saas-metrics-grid">
-                    {studioMetrics.map((metric) => <article className={`saas-metric-card ${metric.tone}`} key={metric.label}><div><span>{metric.label}</span><i>↗</i></div><strong>{metric.value}</strong><small>{metric.change}</small></article>)}
+                </>
+              ) : (
+                <>
+                  <div className="saas-content-title saas-ops-title">
+                    <div>
+                      <p>Creative business OS</p>
+                      <h3>Good morning, Alex.</h3>
+                      <span>Here’s how your studio is performing today.</span>
+                    </div>
+                    <Chrome locked={locked}><span>+</span>New project</Chrome>
                   </div>
 
-                  <div className="saas-operations-grid">
-                    <div className="saas-operations-main">
-                      <article className="saas-revenue-card">
-                        <div className="saas-card-head"><div><p>Revenue overview</p><span>January – June</span></div><Chrome locked={locked}>•••</Chrome></div>
-                        <div className="saas-revenue-total"><strong>$1.84M</strong><span>+18.4% vs last period</span></div>
-                        <div className="saas-chart" aria-hidden="true"><span style={{height:"34%"}} /><span style={{height:"48%"}} /><span style={{height:"42%"}} /><span style={{height:"61%"}} /><span style={{height:"72%"}} /><span style={{height:"88%"}} /><i /></div>
-                        <div className="saas-chart-labels"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
-                      </article>
+                  <div className="saas-command-grid">
+                    <div className="saas-command-main">
+                      <div className="saas-metrics-grid">
+                        {studioMetrics.map((metric) => <article className={`saas-metric-card ${metric.tone}`} key={metric.label}><div><span>{metric.label}</span><i>↗</i></div><strong>{metric.value}</strong><small>{metric.change}</small></article>)}
+                      </div>
 
-                      <div className="saas-workforce-row">
-                        <article className="saas-projects-card">
-                          <div className="saas-card-head"><div><p>Active work</p><span>Priority projects</span></div><Chrome locked={locked}>View all →</Chrome></div>
-                          {activeProjects.map((project) => <div className="saas-project-row" key={project.client}><span className="saas-project-logo">{project.client.slice(0,1)}</span><div><strong>{project.client}</strong><small>{project.project}</small></div><em>{project.status}</em><i><b style={{width:project.progress}} /></i><span>{project.progress}</span></div>)}
-                        </article>
+                      <div className="saas-operations-grid">
+                        <div className="saas-operations-main">
+                          <article className="saas-revenue-card">
+                            <div className="saas-card-head"><div><p>Revenue overview</p><span>January – June</span></div><Chrome locked={locked}>•••</Chrome></div>
+                            <div className="saas-revenue-total"><strong>$1.84M</strong><span>+18.4% vs last period</span></div>
+                            <div className="saas-chart" aria-hidden="true"><span style={{ height: "34%" }} /><span style={{ height: "48%" }} /><span style={{ height: "42%" }} /><span style={{ height: "61%" }} /><span style={{ height: "72%" }} /><span style={{ height: "88%" }} /><i /></div>
+                            <div className="saas-chart-labels"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
+                          </article>
 
-                        <article className="saas-agent-team-card">
-                          <div className="saas-card-head"><div><p>Agent team</p><span>3 agents working</span></div><Chrome locked={locked}>Manage →</Chrome></div>
-                          {agentTeam.map((agent) => <div className="saas-agent-member" key={agent.name}><span className={`agent-orb ${agent.tone}`}>{agent.initials}</span><div><strong>{agent.name}</strong><small>{agent.task}</small></div><i aria-label="Online" /></div>)}
-                        </article>
+                          <div className="saas-workforce-row">
+                            <article className="saas-projects-card">
+                              <div className="saas-card-head"><div><p>Active work</p><span>Priority projects</span></div><Chrome locked={locked}>View all →</Chrome></div>
+                              {activeProjects.map((project) => <div className="saas-project-row" key={project.client}><span className="saas-project-logo">{project.client.slice(0, 1)}</span><div><strong>{project.client}</strong><small>{project.project}</small></div><em>{project.status}</em><i><b style={{ width: project.progress }} /></i><span>{project.progress}</span></div>)}
+                            </article>
+
+                            <article className="saas-agent-team-card">
+                              <div className="saas-card-head"><div><p>Agent team</p><span>3 agents working</span></div><Chrome locked={locked}>Manage →</Chrome></div>
+                              {agentTeam.map((agent) => <div className="saas-agent-member" key={agent.name}><span className={`agent-orb ${agent.tone}`}>{agent.initials}</span><div><strong>{agent.name}</strong><small>{agent.task}</small></div><i aria-label="Online" /></div>)}
+                            </article>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                <aside className="saas-agent-chat">
-                  <header>
-                    <span className="agent-orb violet">AI</span>
-                    <div>
-                      <strong>Studio Agent</strong>
-                      <small><i />Online · has full context</small>
-                    </div>
-                    <Chrome locked={locked}>•••</Chrome>
-                  </header>
-                  <div className="saas-chat-day">Today</div>
-                  <div className="saas-chat-message agent">
-                    Morning Alex. Three deliverables are due this week and the Nova campaign is waiting on client approval.
+                    <aside className="saas-agent-chat">
+                      <header>
+                        <span className="agent-orb violet">AI</span>
+                        <div>
+                          <strong>Studio Agent</strong>
+                          <small><i />Online · has full context</small>
+                        </div>
+                        <Chrome locked={locked}>•••</Chrome>
+                      </header>
+                      <div className="saas-chat-day">Today</div>
+                      <div className="saas-chat-message agent">
+                        Morning Alex. Three deliverables are due this week and the Nova campaign is waiting on client approval.
+                      </div>
+                      <div className="saas-chat-message user">
+                        Move the campaign forward and prepare the next client update.
+                      </div>
+                      <div className="saas-chat-message agent">
+                        Done. I advanced the production tasks, drafted the update, and scheduled it for your review at 2 PM.
+                      </div>
+                      <div className="saas-agent-actions"><span>✓ 4 tasks updated</span><span>✦ Draft ready</span></div>
+                      <div className="saas-chat-input">
+                        <p>Ask your studio agent…</p>
+                        <Chrome locked={locked}>↑</Chrome>
+                      </div>
+                    </aside>
                   </div>
-                  <div className="saas-chat-message user">
-                    Move the campaign forward and prepare the next client update.
-                  </div>
-                  <div className="saas-chat-message agent">
-                    Done. I advanced the production tasks, drafted the update, and scheduled it for your review at 2 PM.
-                  </div>
-                  <div className="saas-agent-actions"><span>✓ 4 tasks updated</span><span>✦ Draft ready</span></div>
-                  <div className="saas-chat-input">
-                    <p>Ask your studio agent…</p>
-                    <Chrome locked={locked}>↑</Chrome>
-                  </div>
-                </aside>
-              </div>
-              </>
+                </>
               )}
             </div>
           </div>

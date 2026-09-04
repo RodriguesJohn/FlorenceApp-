@@ -104,8 +104,9 @@ const pages = {
     noindex: true
   },
   "/course": {
-    title: "AI Ready Design System course | Human AI Studio",
-    description: "AI Ready Design System course from Human AI Studio.",
+    title: "Design Engineering course | Human AI Studio",
+    description:
+      "A self-paced Design Engineering course on making your design system agent-ready — tokens, contracts, retrieval, and evals for Cursor, Claude Code, and Codex.",
     type: "Course"
   },
   "/florence": {

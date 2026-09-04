@@ -2,6 +2,13 @@ import React from "react";
 import SaaSProductMockup from "./SaaSProductMockup.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
+import figmaLogo from "../assets/logos/Figma.png";
+import storybookLogo from "../assets/logos/storybook.png";
+import reactLogo from "../assets/logos/react-mark.svg";
+import cursorLogo from "../assets/logos/cursor.webp";
+import claudeCodeLogo from "../assets/logos/claude-code.png";
+import codexLogo from "../assets/logos/codex.png";
+import hermesLogo from "../assets/logos/Hermes.jpeg";
 import "./product.css";
 
 const BOOKING_URL = "https://cal.com/john-rodrigues-rqt2lg/15min";
@@ -44,22 +51,99 @@ const outcomes = [
 ];
 
 const layerInputs = [
-  "Slugita",
-  "Figma",
-  "Storybook",
-  "Design tokens",
-  "Component library",
-  "Brand guidelines"
+  { name: "Slugita", glyph: "slugita" },
+  { name: "Figma", logo: figmaLogo, contain: true },
+  { name: "Storybook", logo: storybookLogo, contain: true },
+  { name: "Design tokens", glyph: "tokens" },
+  { name: "Component library", logo: reactLogo },
+  { name: "Brand guidelines", glyph: "brand" }
 ];
 
 const layerOutputs = [
-  "Cloud Code",
-  "Cursor",
-  "Claude Code",
-  "Codex",
-  "Figma MCP",
-  "QA agents"
+  { name: "Cloud Code", glyph: "cloud" },
+  { name: "Cursor", logo: cursorLogo },
+  { name: "Claude Code", logo: claudeCodeLogo, contain: true },
+  { name: "Codex", logo: codexLogo, contain: true },
+  { name: "Figma", logo: figmaLogo, contain: true, badge: "MCP" },
+  { name: "QA agents", logo: hermesLogo, contain: true }
 ];
+
+function EcosystemGlyph({ id }) {
+  const props = {
+    width: 16,
+    height: 16,
+    viewBox: "0 0 16 16",
+    fill: "none",
+    "aria-hidden": true
+  };
+
+  switch (id) {
+    case "slugita":
+      return (
+        <svg {...props}>
+          <rect x="2.5" y="3" width="11" height="10" rx="2.5" stroke="currentColor" strokeWidth="1.2" />
+          <path
+            d="M5.5 8h5M8 5.5v5"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "tokens":
+      return (
+        <svg {...props}>
+          <circle cx="5" cy="8" r="2.4" stroke="currentColor" strokeWidth="1.2" />
+          <circle cx="11" cy="5" r="2.4" stroke="currentColor" strokeWidth="1.2" />
+          <circle cx="11" cy="11" r="2.4" stroke="currentColor" strokeWidth="1.2" />
+        </svg>
+      );
+    case "brand":
+      return (
+        <svg {...props}>
+          <path
+            d="M4 3.5h8v9H4z"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeLinejoin="round"
+          />
+          <path d="M6 6.5h4M6 8.5h2.8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+        </svg>
+      );
+    case "cloud":
+      return (
+        <svg {...props}>
+          <path
+            d="M4.5 10.5h7a2.2 2.2 0 0 0 .4-4.4A3 3 0 0 0 6.2 4.5 2.6 2.6 0 0 0 4.5 10.5Z"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeLinejoin="round"
+          />
+          <path d="M7 8.2 8.2 9.4 10.8 6.8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
+function ProductEcosystemChip({ name, logo, glyph, contain, badge }) {
+  return (
+    <li className="product-ecosystem-chip">
+      <span
+        className={`product-ecosystem-chip-logo${
+          contain ? " product-ecosystem-chip-logo--contain" : ""
+        }`}
+      >
+        {logo ? <img src={logo} alt="" loading="lazy" /> : <EcosystemGlyph id={glyph} />}
+      </span>
+      <span className="product-ecosystem-chip-label">
+        {name}
+        {badge ? <small className="product-ecosystem-chip-badge">{badge}</small> : null}
+      </span>
+    </li>
+  );
+}
 
 function ProductFooter() {
   return (
@@ -95,17 +179,16 @@ export default function ProductPage() {
                 <span>for agents.</span>
               </h1>
               <p className="product-lede">
-                An MCP you plug into your agent. You build the system here.
-                Generated UI is not production-ready, not useful, and not
-                accessible. We encode design and front-end engineering
-                constraints so you can ship fast with confidence.
+                An MCP for your coding agent. Build brand, system, and
+                engineering constraints here so generated UI ships with
+                confidence.
               </p>
               <div className="product-hero-actions">
                 <a className="product-btn product-btn--primary" href={WAITLIST_URL}>
                   Join the waitlist
                 </a>
                 <a className="product-btn product-btn--ghost" href="#layers">
-                  The four layers
+                  Learn More
                 </a>
               </div>
             </EntranceItem>
@@ -153,24 +236,35 @@ export default function ProductPage() {
               ))}
             </div>
             <EntranceItem className="product-ecosystem" aria-label="Context layer connections">
-              <p className="product-ecosystem-title">What plugs into this layer</p>
-              <div className="product-ecosystem-grid">
-                <div className="product-ecosystem-column">
+              <div className="product-ecosystem-header">
+                <p className="product-ecosystem-title">What plugs into this layer</p>
+                <p className="product-ecosystem-lede">
+                  Your stack on one side. Your agents on the other. One context layer in the middle.
+                </p>
+              </div>
+              <div className="product-ecosystem-map">
+                <div className="product-ecosystem-column product-ecosystem-column--inputs">
                   <p className="product-ecosystem-label">System inputs</p>
                   <ul>
                     {layerInputs.map((item) => (
-                      <li key={item}>{item}</li>
+                      <ProductEcosystemChip key={item.name} {...item} />
                     ))}
                   </ul>
                 </div>
-                <div className="product-ecosystem-core" aria-hidden="true">
-                  <span>Context layer</span>
+                <div className="product-ecosystem-hub">
+                  <span className="product-ecosystem-hub-ring" aria-hidden="true" />
+                  <span className="product-ecosystem-hub-mark" aria-hidden="true">
+                    <i />
+                    <i />
+                  </span>
+                  <strong>Context layer</strong>
+                  <small>Human AI Studio</small>
                 </div>
-                <div className="product-ecosystem-column">
+                <div className="product-ecosystem-column product-ecosystem-column--outputs">
                   <p className="product-ecosystem-label">Agent outputs</p>
                   <ul>
                     {layerOutputs.map((item) => (
-                      <li key={item}>{item}</li>
+                      <ProductEcosystemChip key={item.name} {...item} />
                     ))}
                   </ul>
                 </div>

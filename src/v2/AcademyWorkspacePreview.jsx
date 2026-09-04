@@ -6,6 +6,9 @@ import "./playbook.css";
 
 const FIRST_LESSON = modules[0]?.chapters[0];
 const FIRST_VIDEO = FIRST_LESSON?.videos?.[0];
+const DEFAULT_MUX_SRC = FIRST_VIDEO?.muxPlaybackId
+  ? `https://player.mux.com/${FIRST_VIDEO.muxPlaybackId}?autoplay=true&muted=true&loop=true`
+  : "";
 
 const sidebarIcons = {
   foundations: "foundations",
@@ -13,7 +16,10 @@ const sidebarIcons = {
   "making-ready": "ready",
   tooling: "tooling",
   evals: "evals",
-  workflows: "workflows"
+  workflows: "workflows",
+  prototyping: "prototyping",
+  animations: "animations",
+  portfolio: "portfolio"
 };
 
 function SidebarIcon({ name }) {
@@ -60,6 +66,25 @@ function SidebarIcon({ name }) {
         <path d="M17 8h2v4" />
         <path d="M5 16h14" />
       </>
+    ),
+    prototyping: (
+      <>
+        <rect x="5" y="6" width="14" height="10" rx="1.5" />
+        <path d="M8.5 15.5 11 12l2 2.5 2.5-3 3 4" />
+        <circle cx="9" cy="9.5" r="1" />
+      </>
+    ),
+    animations: (
+      <>
+        <path d="M5 12c2-4 4-4 7 0s5 4 7 0" />
+        <path d="M5 16c2-4 4-4 7 0s5 4 7 0" />
+      </>
+    ),
+    portfolio: (
+      <>
+        <rect x="5" y="5" width="14" height="14" rx="1.5" />
+        <path d="M8.5 9h7M8.5 12h5M8.5 15h6" />
+      </>
     )
   };
 
@@ -88,20 +113,37 @@ function wait(ms) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
-function AcademyWorkspacePreview({ product = "Training" } = {}) {
+function AcademyWorkspacePreview({
+  product = "Training",
+  subtitle,
+  sidebarItems,
+  demoVideo,
+  previewLessons,
+  featuredLesson
+} = {}) {
   const reduceMotion = useReducedMotion();
   const [phase, setPhase] = React.useState(reduceMotion ? "open" : "idle");
+  const navItems = sidebarItems ?? modules.map((item) => ({ id: item.id, label: item.label }));
+  const navSubtitle = subtitle ?? "AI-ready design systems";
+  const previewVideo = demoVideo ?? "";
+  const previewVideoLabel = demoVideo ? "Course preview" : FIRST_VIDEO?.title ?? "Lesson preview";
+  const activeLesson = featuredLesson ?? {
+    title: FIRST_LESSON?.title ?? "Lesson",
+    body: FIRST_LESSON?.body ?? []
+  };
 
-  const previewCards = modules
-    .flatMap((mod) =>
-      mod.chapters.map((chapter) => ({
-        id: `${mod.id}-${chapter.id}`,
-        title: chapter.title.replace(/\?$/, ""),
-        color1: "#38bdf8",
-        color2: "#0284c7"
-      }))
-    )
-    .slice(0, 9);
+  const previewCards =
+    previewLessons ??
+    modules
+      .flatMap((mod) =>
+        mod.chapters.map((chapter) => ({
+          id: `${mod.id}-${chapter.id}`,
+          title: chapter.title.replace(/\?$/, ""),
+          color1: "#38bdf8",
+          color2: "#0284c7"
+        }))
+      )
+      .slice(0, 9);
 
   React.useEffect(() => {
     if (reduceMotion) {
@@ -133,9 +175,6 @@ function AcademyWorkspacePreview({ product = "Training" } = {}) {
     };
   }, [reduceMotion]);
 
-  const muxSrc = FIRST_VIDEO?.muxPlaybackId
-    ? `https://player.mux.com/${FIRST_VIDEO.muxPlaybackId}?autoplay=true&muted=true&loop=true`
-    : "";
   const cursorVariants = {
     idle: { x: 92, y: -78, opacity: 0, scale: 1 },
     aim: { x: 0, y: 0, opacity: 1, scale: 1 },
@@ -158,15 +197,15 @@ function AcademyWorkspacePreview({ product = "Training" } = {}) {
               </span>
               <span>
                 <strong>{product}</strong>
-                <small>AI-ready design systems</small>
+                <small>{navSubtitle}</small>
               </span>
             </span>
           </div>
           <nav className="playbook-sidebar-nav">
-            {modules.map((item) => (
+            {navItems.map((item) => (
               <span
                 key={item.id}
-                className={`playbook-sidebar-item${item.id === "foundations" ? " is-active" : ""}`}
+                className={`playbook-sidebar-item${item.id === navItems[0]?.id ? " is-active" : ""}`}
               >
                 <span className="playbook-sidebar-icon">
                   <SidebarIcon name={sidebarIcons[item.id]} />
@@ -190,25 +229,41 @@ function AcademyWorkspacePreview({ product = "Training" } = {}) {
               >
                 <article className="playbook-article">
                   <span className="playbook-back">Back</span>
-                  <h1>
-                    {FIRST_LESSON.title.replaceAll("AI-ready", "AI\u2011ready")}
-                  </h1>
-                  {(FIRST_LESSON.body || []).slice(0, 2).map((paragraph, index) => (
+                  <h1>{activeLesson.title}</h1>
+                  {(activeLesson.body || []).slice(0, 2).map((paragraph, index) => (
                     <React.Fragment key={paragraph}>
                       <p>{paragraph}</p>
-                      {index === 0 && muxSrc ? (
+                      {index === 0 && (previewVideo || DEFAULT_MUX_SRC) ? (
                         <div className="playbook-watch is-single">
                           <div className="playbook-watch-stage">
                             <div className="playbook-video-frame">
-                              <iframe
-                                src={muxSrc}
-                                title={FIRST_VIDEO.title}
-                                allow="autoplay; encrypted-media; picture-in-picture"
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                tabIndex={-1}
-                              />
+                              {previewVideo ? (
+                                <video
+                                  key={previewVideo}
+                                  src={previewVideo}
+                                  autoPlay
+                                  muted
+                                  loop
+                                  playsInline
+                                  preload="auto"
+                                  tabIndex={-1}
+                                  aria-label={previewVideoLabel}
+                                  onCanPlay={(event) => {
+                                    event.currentTarget.muted = true;
+                                    event.currentTarget.play().catch(() => {});
+                                  }}
+                                />
+                              ) : (
+                                <iframe
+                                  src={DEFAULT_MUX_SRC}
+                                  title={FIRST_VIDEO.title}
+                                  allow="autoplay; encrypted-media; picture-in-picture"
+                                  referrerPolicy="strict-origin-when-cross-origin"
+                                  tabIndex={-1}
+                                />
+                              )}
                             </div>
-                            <p className="playbook-watch-now">{FIRST_VIDEO.title}</p>
+                            <p className="playbook-watch-now">{previewVideoLabel}</p>
                           </div>
                         </div>
                       ) : null}
