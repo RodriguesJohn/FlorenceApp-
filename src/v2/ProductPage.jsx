@@ -14,7 +14,6 @@ import "./product.css";
 
 const BOOKING_URL = "https://cal.com/john-rodrigues-rqt2lg/15min";
 const NEWSLETTER_URL = "https://substack.com/@johnrodrigues";
-const WORKSHOP_URL = "/workshop";
 
 const systemLayers = [
   {
@@ -59,10 +58,9 @@ const gapOutcomes = [
 ];
 
 const outcomes = [
-  "A layer over the system you already run. No migration into a new platform.",
-  "Agents inherit brand, system, constraints, and quality in one place.",
-  "MCP is how they connect. Where we sit is the product.",
-  "Workshops teach the problem. The platform is what we hand the same buyer."
+  "No migration into a new platform.",
+  "Brand, system, constraints, and quality in one layer.",
+  "MCP connects. The layer is the product."
 ];
 
 const layerInputs = [
@@ -87,14 +85,14 @@ const pricingPlans = [
   {
     id: "entry",
     name: "Entry",
-    price: "$49",
-    term: "per month",
-    description: "For individuals and small teams getting agents on-brand for the first time.",
+    price: "Free",
+    term: null,
+    description: "Free context so agents stop shipping AI slop.",
     features: [
-      "1 workspace and design system",
-      "MCP for Cursor and Claude Code",
-      "Brand, tokens, and component context",
-      "1 seat"
+      "Reduce AI slop",
+      "Lower token spend on retries and rework",
+      "Ship with quality, not AI slop",
+      "MCP for Cursor and Claude Code"
     ],
     ctaLabel: "Join the waitlist",
     waitlist: true,
@@ -105,7 +103,7 @@ const pricingPlans = [
     name: "Platform",
     price: "$99",
     term: "per month",
-    description: "Self-serve Florence MCP for teams running coding agents on an existing design system.",
+    description: "Self-serve Florence MCP on your design system.",
     features: [
       "Brand, system, constraints, and quality in one layer",
       "MCP for Cursor, Claude Code, Codex, and Figma",
@@ -121,7 +119,7 @@ const pricingPlans = [
     name: "Custom",
     price: "Project",
     term: null,
-    description: "Embedded rollout for enterprise teams that need governance, integrations, and hands-on setup.",
+    description: "Custom solution to build your AI-ready design system.",
     features: [
       "Discovery, audit, and implementation with your team",
       "Custom MCP integrations and quality criteria",
@@ -191,6 +189,49 @@ function EcosystemGlyph({ id }) {
     default:
       return null;
   }
+}
+
+function chunkPairs(items) {
+  const rows = [];
+  for (let index = 0; index < items.length; index += 2) {
+    rows.push(items.slice(index, index + 2));
+  }
+  return rows;
+}
+
+function ProductEcosystemSide({ label, items, direction }) {
+  const rows = chunkPairs(items);
+
+  return (
+    <div className={`product-ecosystem-side product-ecosystem-side--${direction}`}>
+      <p className="product-ecosystem-label">{label}</p>
+      <div className="product-ecosystem-rows">
+        {rows.map((row, index) => (
+          <div className="product-ecosystem-row" key={row.map((item) => item.name).join("-")}>
+            {direction === "outputs" ? (
+              <span
+                className="product-ecosystem-link"
+                style={{ animationDelay: `${index * 0.35}s` }}
+                aria-hidden="true"
+              />
+            ) : null}
+            <ul className="product-ecosystem-row-chips">
+              {row.map((item) => (
+                <ProductEcosystemChip key={item.name} {...item} />
+              ))}
+            </ul>
+            {direction === "inputs" ? (
+              <span
+                className="product-ecosystem-link"
+                style={{ animationDelay: `${index * 0.35}s` }}
+                aria-hidden="true"
+              />
+            ) : null}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function ProductEcosystemChip({ name, logo, glyph, contain, badge }) {
@@ -285,7 +326,7 @@ export default function ProductPage() {
 
   return (
     <div className="product-page">
-      <SiteHeader />
+      <SiteHeader brand="Florence AI" />
 
       <main>
         <section className="product-hero" aria-labelledby="product-hero-title">
@@ -320,10 +361,9 @@ export default function ProductPage() {
               <span>don&apos;t ship AI slop.</span>
             </EntranceItem>
             <EntranceItem as="p" className="product-body">
-              They are not blocked. They ship. The damage is what goes out
-              the door: almost-right UI, heavier QA, and a product that does
-              not look like the company. Volume of agent-generated code is
-              compounding. Trust in that output is not.
+              They ship. The damage is almost-right UI, heavier QA, and
+              output that doesn&apos;t look like your company. Volume
+              compounds. Trust doesn&apos;t.
             </EntranceItem>
             <div className="product-gap-outcomes">
               {gapOutcomes.map((outcome) => (
@@ -346,26 +386,13 @@ export default function ProductPage() {
             </EntranceItem>
             <EntranceItem className="product-ecosystem" aria-label="Context layer connections">
               <div className="product-ecosystem-map">
-                <div className="product-ecosystem-column product-ecosystem-column--inputs">
-                  <p className="product-ecosystem-label">System inputs</p>
-                  <ul>
-                    {layerInputs.map((item) => (
-                      <ProductEcosystemChip key={item.name} {...item} />
-                    ))}
-                  </ul>
-                </div>
+                <ProductEcosystemSide label="System inputs" items={layerInputs} direction="inputs" />
                 <div className="product-ecosystem-hub">
                   <span className="product-ecosystem-hub-ring" aria-hidden="true" />
-                  <strong>Florence MCP Context layer</strong>
+                  <strong>Florence MCP</strong>
+                  <span>Context layer</span>
                 </div>
-                <div className="product-ecosystem-column product-ecosystem-column--outputs">
-                  <p className="product-ecosystem-label">Agent outputs</p>
-                  <ul>
-                    {layerOutputs.map((item) => (
-                      <ProductEcosystemChip key={item.name} {...item} />
-                    ))}
-                  </ul>
-                </div>
+                <ProductEcosystemSide label="Agent outputs" items={layerOutputs} direction="outputs" />
               </div>
             </EntranceItem>
             <EntranceItem className="product-section-heading product-layer-heading">
@@ -395,10 +422,8 @@ export default function ProductPage() {
                 Over the system you already run.
               </h2>
               <p className="product-body">
-                Others ask you to move into their platform. This layer sits
-                on brand, design system, and engineering standards you
-                already have, so agents inherit them. Connecting to agents
-                is commodity. The claim is the layer.
+                No migration. Sit on what you already run so agents inherit
+                brand, system, and engineering standards.
               </p>
               <ul className="product-outcome-list">
                 {outcomes.map((outcome) => (
@@ -444,9 +469,6 @@ export default function ProductPage() {
             </EntranceItem>
             <EntranceItem className="product-hero-actions">
               <WaitlistButton onOpen={openWaitlist} />
-              <a className="product-btn product-btn--ghost" href={WORKSHOP_URL}>
-                Join the workshop
-              </a>
             </EntranceItem>
           </Entrance>
         </section>

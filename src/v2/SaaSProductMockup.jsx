@@ -43,7 +43,6 @@ const componentFilters = [
 
 const SYSTEM_PAGES = ["color", "components"];
 const PAGE_MS = 6200;
-const COLOR_TAB_MS = 3400;
 
 const COLOR_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
@@ -115,63 +114,6 @@ const FLORENCE = {
   "--color-data-5": "#22d3ee"
 };
 
-const SEMANTIC_GROUPS = [
-  {
-    label: "Text",
-    code: "color-text-*",
-    tokens: [
-      ["--color-text-primary", FLORENCE["--color-text-primary"]],
-      ["--color-text-secondary", FLORENCE["--color-text-secondary"]],
-      ["--color-text-muted", FLORENCE["--color-text-muted"]],
-      ["--color-text-brand", FLORENCE["--color-text-brand"]],
-      ["--color-text-success", FLORENCE["--color-text-success"]]
-    ]
-  },
-  {
-    label: "Background",
-    code: "color-bg-*",
-    tokens: [
-      ["--color-bg-page", FLORENCE["--color-bg-page"]],
-      ["--color-bg-subtle", FLORENCE["--color-bg-subtle"]],
-      ["--color-bg-muted", FLORENCE["--color-bg-muted"]],
-      ["--color-bg-brand", FLORENCE["--color-bg-brand"]],
-      ["--color-bg-brand-subtle", FLORENCE["--color-bg-brand-subtle"]]
-    ]
-  },
-  {
-    label: "Border",
-    code: "color-border-*",
-    tokens: [
-      ["--color-border-default", FLORENCE["--color-border-default"]],
-      ["--color-border-strong", FLORENCE["--color-border-strong"]],
-      ["--color-border-focus", FLORENCE["--color-border-focus"]],
-      ["--color-border-brand", FLORENCE["--color-border-brand"]]
-    ]
-  },
-  {
-    label: "Interactive",
-    code: "color-interactive-*",
-    tokens: [
-      ["--color-interactive-primary", FLORENCE["--color-interactive-primary"]],
-      ["--color-interactive-primary-hover", FLORENCE["--color-interactive-primary-hover"]],
-      ["--color-interactive-selected", FLORENCE["--color-interactive-selected"]],
-      ["--color-brand-primary", FLORENCE["--color-brand-primary"]]
-    ]
-  },
-  {
-    label: "Data",
-    code: "color-data-*",
-    layout: "data-row",
-    tokens: [
-      ["--color-data-1", FLORENCE["--color-data-1"]],
-      ["--color-data-2", FLORENCE["--color-data-2"]],
-      ["--color-data-3", FLORENCE["--color-data-3"]],
-      ["--color-data-4", FLORENCE["--color-data-4"]],
-      ["--color-data-5", FLORENCE["--color-data-5"]]
-    ]
-  }
-];
-
 const componentCards = [
   { name: "Button", meta: "5 variants · 3 sizes", type: "button", category: "Base" },
   { name: "Input", meta: "Label · hint · error", type: "input", category: "Base" },
@@ -204,7 +146,7 @@ const agentTeam = [
 const PAGE_META = {
   color: {
     title: "Color",
-    lede: "Palette ramps, then semantic roles your agents retrieve.",
+    lede: "Primitive palette ramps your agents retrieve.",
     breadcrumbParent: "Foundation Token",
     navActive: "Foundation Token"
   },
@@ -378,86 +320,41 @@ function SingleSwatch({ name, label, hex }) {
   );
 }
 
-function SemanticChip({ token, hex }) {
-  const label = token.replace("--color-", "").replace(/-/g, " ");
-
-  return (
-    <div className="dsp-florence-chip">
-      <i style={{ backgroundColor: hex }} aria-hidden="true" />
-      <span className="dsp-florence-chip__body">
-        <span className="dsp-florence-chip__name">{label}</span>
-        <span className="dsp-florence-chip__token">{token}</span>
-      </span>
-      <span className="dsp-florence-chip__hex">{hex}</span>
-    </div>
-  );
-}
-
-function MockColorPage({ view }) {
+function MockColorPage() {
   return (
     <div className="dsp-florence-page">
-      {view === "primitives" ? (
-        <div className="dsp-florence-scales">
-          {PRIMITIVE_PALETTES.map((palette) => (
-            <section className="dsp-florence-scale" key={palette.name}>
-              <header className="dsp-florence-scale__header">
-                <strong>{palette.label}</strong>
-                <code>color-{palette.name}-*</code>
-              </header>
-              <div className="dsp-florence-scale__row">
-                {palette.values.map((hex, index) => (
-                  <PrimitiveSwatch
-                    key={`${palette.name}-${COLOR_STEPS[index]}`}
-                    paletteName={palette.name}
-                    step={COLOR_STEPS[index]}
-                    hex={hex}
-                  />
-                ))}
-              </div>
-            </section>
-          ))}
-
-          <section className="dsp-florence-scale">
+      <div className="dsp-florence-scales">
+        {PRIMITIVE_PALETTES.map((palette) => (
+          <section className="dsp-florence-scale" key={palette.name}>
             <header className="dsp-florence-scale__header">
-              <strong>Singles</strong>
-              <code>color-white · color-black</code>
+              <strong>{palette.label}</strong>
+              <code>color-{palette.name}-*</code>
             </header>
-            <div className="dsp-florence-scale__row dsp-florence-scale__row--singles">
-              {COLOR_SINGLES.map((single) => (
-                <SingleSwatch key={single.name} {...single} />
+            <div className="dsp-florence-scale__row">
+              {palette.values.map((hex, index) => (
+                <PrimitiveSwatch
+                  key={`${palette.name}-${COLOR_STEPS[index]}`}
+                  paletteName={palette.name}
+                  step={COLOR_STEPS[index]}
+                  hex={hex}
+                />
               ))}
             </div>
           </section>
-        </div>
-      ) : (
-        <div className="dsp-florence-scales">
-          {SEMANTIC_GROUPS.map((group) => (
-            <section className="dsp-florence-scale" key={group.label}>
-              <header className="dsp-florence-scale__header">
-                <strong>{group.label}</strong>
-                <code>{group.code}</code>
-              </header>
-              {group.layout === "data-row" ? (
-                <div className="dsp-florence-data-grid">
-                  {group.tokens.map(([token, hex]) => (
-                    <div className="dsp-florence-data-item" key={token}>
-                      <span className="dsp-florence-data-swatch" style={{ backgroundColor: hex }} />
-                      <code>{token.replace("--color-", "")}</code>
-                      <span>{hex}</span>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="dsp-florence-chip-grid">
-                  {group.tokens.map(([token, hex]) => (
-                    <SemanticChip key={token} token={token} hex={hex} />
-                  ))}
-                </div>
-              )}
-            </section>
-          ))}
-        </div>
-      )}
+        ))}
+
+        <section className="dsp-florence-scale">
+          <header className="dsp-florence-scale__header">
+            <strong>Singles</strong>
+            <code>color-white · color-black</code>
+          </header>
+          <div className="dsp-florence-scale__row dsp-florence-scale__row--singles">
+            {COLOR_SINGLES.map((single) => (
+              <SingleSwatch key={single.name} {...single} />
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
@@ -487,14 +384,9 @@ function MockComponentsPage() {
   );
 }
 
-function SystemToolbar({ page, colorTab }) {
-  if (page === "color") {
-    return (
-      <div className="dsp-florence-tabs" role="tablist" aria-label="Color token views">
-        <span className={colorTab === "primitives" ? "active" : ""} role="tab" aria-selected={colorTab === "primitives"}>Primitives</span>
-        <span className={colorTab === "semantics" ? "active" : ""} role="tab" aria-selected={colorTab === "semantics"}>Semantics</span>
-      </div>
-    );
+function SystemToolbar({ page, locked }) {
+  if (page !== "components") {
+    return null;
   }
 
   return (
@@ -504,7 +396,12 @@ function SystemToolbar({ page, colorTab }) {
           <span className={index === 0 ? "active" : ""} key={label}>{label}<b>{count}</b></span>
         ))}
       </div>
-      <span className="saas-ds-search"><i />Search components</span>
+      <div className="saas-ds-toolbar-actions">
+        <span className="saas-ds-search"><i />Search components</span>
+        <Chrome locked={locked} className="saas-ds-new">
+          <span>+</span>New component
+        </Chrome>
+      </div>
     </div>
   );
 }
@@ -529,7 +426,6 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
   const reduceMotion = useReducedMotion();
   const isContext = story === "context";
   const [pageIndex, setPageIndex] = useState(0);
-  const [colorTab, setColorTab] = useState("primitives");
   const cyclePages = isContext;
   const animatePageTransition = cyclePages && !reduceMotion;
   const currentPage = SYSTEM_PAGES[pageIndex];
@@ -540,19 +436,6 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
     const id = setInterval(() => setPageIndex((current) => (current + 1) % SYSTEM_PAGES.length), PAGE_MS);
     return () => clearInterval(id);
   }, [cyclePages]);
-
-  useEffect(() => {
-    if (!cyclePages || currentPage !== "color") {
-      setColorTab("primitives");
-      return undefined;
-    }
-
-    const id = setInterval(() => {
-      setColorTab((current) => (current === "primitives" ? "semantics" : "primitives"));
-    }, COLOR_TAB_MS);
-
-    return () => clearInterval(id);
-  }, [cyclePages, currentPage]);
 
   return (
     <section
@@ -589,7 +472,6 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
           <aside className={`saas-sidebar${isContext ? " saas-sidebar--system" : ""}`}>
             <div className="saas-app-brand"><strong>Florence AI</strong></div>
             <div className="saas-workspace-switcher">
-              <span className="saas-workspace-logo">A</span>
               <div>
                 <strong>{isContext ? "Acme Product" : "Northstar Creative"}</strong>
                 <small>{isContext ? "Design system workspace" : "Agency workspace"}</small>
@@ -618,14 +500,6 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
               </nav>
             )}
             <div className="saas-sidebar-spacer" />
-            <div className="saas-context-meter">
-              <div>
-                <span>{isContext ? "Context coverage" : "Monthly capacity"}</span>
-                <strong>{isContext ? "94%" : "74%"}</strong>
-              </div>
-              <i><b style={isContext ? { width: "94%" } : undefined} /></i>
-              <small>{isContext ? "Brand · foundation · components" : "18 projects scheduled"}</small>
-            </div>
             <span className="saas-settings"><Icon name="settings" />Settings</span>
             <div className="saas-user"><span>JR</span><div><strong>John Rodrigues</strong><small>Workspace admin</small></div><i /></div>
           </aside>
@@ -649,21 +523,20 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
             <div className="saas-content">
               {isContext ? (
                 <>
-                <div className="dsp-system-shell">
+                <div className={`dsp-system-shell${currentPage === "color" ? " dsp-system-shell--color" : ""}`}>
                   <div className="saas-content-title saas-ops-title dsp-system-head">
                     <div>
                       <p>Product</p>
                       <h3>{pageMeta.title}</h3>
                       <span>{pageMeta.lede}</span>
                     </div>
-                    <Chrome locked={locked} className={currentPage === "components" ? "" : "dsp-system-action--placeholder"}>
-                      <span>+</span>New component
-                    </Chrome>
                   </div>
 
-                  <div className="dsp-system-toolbar">
-                    <SystemToolbar page={currentPage} colorTab={colorTab} />
-                  </div>
+                  {currentPage === "components" ? (
+                    <div className="dsp-system-toolbar">
+                      <SystemToolbar page={currentPage} locked={locked} />
+                    </div>
+                  ) : null}
 
                   <div className="dsp-system-stage">
                     <AnimatePresence mode="wait">
@@ -676,7 +549,7 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                       >
                         {currentPage === "color" ? (
-                          <MockColorPage view={colorTab} />
+                          <MockColorPage />
                         ) : (
                           <MockComponentsPage />
                         )}
