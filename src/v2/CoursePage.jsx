@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import OfferingShader from "./OfferingShader.jsx";
 import AcademyWorkspacePreview from "./AcademyWorkspacePreview.jsx";
 import { AcademyAnimatedTestimonials } from "./AcademyAnimatedTestimonials.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
-import { CourseWaitlistModal, WaitlistButton } from "./FlorenceWaitlistModal.jsx";
+import { CourseWaitlistEmbed } from "./FlorenceWaitlistModal.jsx";
 import { modules } from "./playbookTopics.js";
 import "./academy.css";
 import "./course.css";
@@ -242,14 +242,14 @@ const faqs = [
   }
 ];
 
-function ComingSoon({ className = "", onOpen }) {
+function JoinWaitlistLink({ className = "" }) {
   return (
-    <WaitlistButton
+    <a
       className={`academy-btn academy-btn--primary ${className}`.trim()}
-      onOpen={onOpen}
+      href="#waitlist"
     >
       Join the waitlist
-    </WaitlistButton>
+    </a>
   );
 }
 
@@ -281,9 +281,6 @@ function CourseProductShot() {
 }
 
 export default function CoursePage() {
-  const [waitlistOpen, setWaitlistOpen] = useState(false);
-  const openWaitlist = () => setWaitlistOpen(true);
-
   React.useEffect(() => {
     const html = document.documentElement;
     const body = document.body;
@@ -319,7 +316,7 @@ export default function CoursePage() {
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
                 <div className="academy-hero-cta-ring">
-                  <ComingSoon onOpen={openWaitlist} />
+                  <JoinWaitlistLink />
                 </div>
                 <a
                   className="academy-btn academy-btn--ghost academy-hero-cta-ghost"
@@ -429,7 +426,7 @@ export default function CoursePage() {
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-                <ComingSoon className="academy-btn--full" onOpen={openWaitlist} />
+                <CourseWaitlistEmbed />
               </div>
             </EntranceItem>
             <EntranceItem
@@ -487,8 +484,6 @@ export default function CoursePage() {
           Human AI Studio
         </div>
       </footer>
-
-      <CourseWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </div>
   );
 }

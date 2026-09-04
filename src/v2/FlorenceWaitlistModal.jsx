@@ -35,14 +35,77 @@ export const KIT_WAITLIST_FORMS = {
 };
 
 function loadConvertKitScript() {
-  if (document.querySelector(`script[src="${CK_SCRIPT}"]`)) {
+  return new Promise((resolve) => {
+    const existing = document.querySelector(`script[src="${CK_SCRIPT}"]`);
+
+    if (existing) {
+      if (existing.dataset.loaded === "true") {
+        resolve();
+        return;
+      }
+
+      existing.addEventListener("load", () => resolve(), { once: true });
+      existing.addEventListener("error", () => resolve(), { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = CK_SCRIPT;
+    script.async = true;
+    script.addEventListener(
+      "load",
+      () => {
+        script.dataset.loaded = "true";
+        resolve();
+      },
+      { once: true }
+    );
+    script.addEventListener("error", () => resolve(), { once: true });
+    document.body.appendChild(script);
+  });
+}
+
+function initConvertKitForms(root = document) {
+  if (typeof window === "undefined") {
     return;
   }
 
-  const script = document.createElement("script");
-  script.src = CK_SCRIPT;
-  script.async = true;
-  document.body.appendChild(script);
+  if (typeof window.Formkit?.initialize === "function") {
+    root.querySelectorAll(".formkit-form").forEach((form) => {
+      window.Formkit.initialize(form);
+    });
+    return;
+  }
+
+  if (typeof window._FormsInit === "function") {
+    window._FormsInit();
+  }
+}
+
+function useConvertKitForm(rootRef, active = true) {
+  useEffect(() => {
+    if (!active) {
+      return undefined;
+    }
+
+    let cancelled = false;
+
+    loadConvertKitScript().then(() => {
+      if (cancelled) {
+        return;
+      }
+
+      requestAnimationFrame(() => {
+        if (!cancelled) {
+          initConvertKitForms(rootRef.current ?? document);
+        }
+      });
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [active, rootRef]);
 }
 
 function WaitlistFormCopy({ config }) {
@@ -64,9 +127,7 @@ export function KitWaitlistForm({ variant = "florence" }) {
   const formRef = useRef(null);
   const config = KIT_WAITLIST_FORMS[variant];
 
-  useEffect(() => {
-    loadConvertKitScript();
-  }, []);
+  useConvertKitForm(formRef, true);
 
   return (
     <form
@@ -114,14 +175,15 @@ export function KitWaitlistForm({ variant = "florence" }) {
 
 export function KitWaitlistModal({ open, onClose, variant = "florence" }) {
   const closeRef = useRef(null);
+  const dialogRef = useRef(null);
   const config = KIT_WAITLIST_FORMS[variant];
+
+  useConvertKitForm(dialogRef, open);
 
   useEffect(() => {
     if (!open) {
       return undefined;
     }
-
-    loadConvertKitScript();
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -159,6 +221,7 @@ export function KitWaitlistModal({ open, onClose, variant = "florence" }) {
       }}
     >
       <section
+        ref={dialogRef}
         className="product-waitlist-dialog"
         role="dialog"
         aria-modal="true"
@@ -190,6 +253,20 @@ export function FlorenceWaitlistModal({ open, onClose }) {
 
 export function CourseWaitlistModal({ open, onClose }) {
   return <KitWaitlistModal open={open} onClose={onClose} variant="course" />;
+}
+
+export function CourseWaitlistEmbed() {
+  const embedRef = useRef(null);
+  const config = KIT_WAITLIST_FORMS.course;
+
+  useConvertKitForm(embedRef, true);
+
+  return (
+    <section ref={embedRef} className="course-waitlist-embed" id="waitlist" aria-labelledby={config.titleId}>
+      <WaitlistFormCopy config={config} />
+      <KitWaitlistForm variant="course" />
+    </section>
+  );
 }
 
 export function WaitlistButton({
