@@ -28,7 +28,7 @@ export const KIT_WAITLIST_FORMS = {
     id: "9882802",
     uid: "ab8a37e2e6",
     titleId: "course-waitlist-title",
-    title: "Join the Design Engineering waitlist",
+    titleLines: ["Join the Design Engineering", "waitlist"],
     description:
       "Get notified when the self-paced course opens. Learn the intersection of design, code, and AI on your schedule."
   }
@@ -43,6 +43,21 @@ function loadConvertKitScript() {
   script.src = CK_SCRIPT;
   script.async = true;
   document.body.appendChild(script);
+}
+
+function WaitlistFormCopy({ config }) {
+  return (
+    <div className="product-waitlist-form-copy">
+      <h2 id={config.titleId}>
+        {config.titleLines ? (
+          config.titleLines.map((line) => <span key={line}>{line}</span>)
+        ) : (
+          config.title
+        )}
+      </h2>
+      <p>{config.description}</p>
+    </div>
+  );
 }
 
 export function KitWaitlistForm({ variant = "florence" }) {
@@ -65,10 +80,6 @@ export function KitWaitlistForm({ variant = "florence" }) {
       data-version="5"
       data-options={JSON.stringify(FORM_OPTIONS)}
     >
-      <div className="product-waitlist-form-copy">
-        <h2 id={config.titleId}>{config.title}</h2>
-        <p>{config.description}</p>
-      </div>
       <ul className="formkit-alert formkit-alert-error" data-element="errors" data-group="alert" />
       <div className="product-waitlist-fields formkit-fields" data-element="fields" data-stacked="false">
         <div className="formkit-field">
@@ -162,6 +173,7 @@ export function KitWaitlistModal({ open, onClose, variant = "florence" }) {
         >
           <span aria-hidden="true">×</span>
         </button>
+        <WaitlistFormCopy config={config} />
         <KitWaitlistForm variant={variant} />
       </section>
     </div>

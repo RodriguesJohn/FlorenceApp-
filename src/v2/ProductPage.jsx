@@ -53,7 +53,7 @@ const gapOutcomes = [
     copy: "Smaller prompts, fewer retries, and less wasted generation on almost-right UI."
   },
   {
-    title: "Ship with quality",
+    title: "Ship with quality not AI slop",
     copy: "Output passes brand, system, and eval criteria before it reaches review."
   }
 ];
