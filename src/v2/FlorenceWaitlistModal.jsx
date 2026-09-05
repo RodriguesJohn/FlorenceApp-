@@ -40,7 +40,7 @@ export const KIT_WAITLIST_FORMS = {
   }
 };
 
-const FLORENCE_NPX_COMMAND = "npx -y florence-mcp";
+const FLORENCE_NPX_COMMAND = "npx -y github:RodriguesJohn/florence-mcp";
 
 function loadConvertKitScript() {
   return new Promise((resolve) => {

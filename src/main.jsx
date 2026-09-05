@@ -1,8 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Analytics } from "@vercel/analytics/react";
+import { ClerkProvider } from "@clerk/react";
 import { applyPageSeo, setupSeoTracking } from "./v2/seo.js";
 import { ThemeProvider } from "./v2/theme.jsx";
+import { APP_START, clerkConfigured, clerkPublishableKey } from "./v2/clerkConfig.js";
 import "./v2/styles.css";
 
 const FLORENCE_HOME = new Set([
@@ -51,10 +53,23 @@ setupSeoTracking();
 applyPageSeo(route);
 
 function renderWithAnalytics(root, page) {
+  const tree = clerkConfigured ? (
+    <ClerkProvider
+      publishableKey={clerkPublishableKey}
+      afterSignOutUrl="/"
+      signInFallbackRedirectUrl={APP_START}
+      signUpFallbackRedirectUrl={APP_START}
+    >
+      {page}
+    </ClerkProvider>
+  ) : (
+    page
+  );
+
   root.render(
     <React.StrictMode>
       <ThemeProvider>
-        {page}
+        {tree}
         <Analytics />
       </ThemeProvider>
     </React.StrictMode>

@@ -3,7 +3,13 @@ import SaaSProductMockup from "./SaaSProductMockup.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
 import { FlorenceWaitlistModal, WaitlistButton } from "./FlorenceWaitlistModal.jsx";
-import { EnterAppPinModal } from "./EnterAppPinModal.jsx";
+import { useAuth, useClerk } from "@clerk/react";
+import {
+  APP_HOME,
+  APP_START,
+  clerkConfigured,
+  clerkOverlayOptions,
+} from "./clerkConfig.js";
 import figmaLogo from "../assets/logos/Figma.png";
 import storybookLogo from "../assets/logos/storybook.png";
 import reactLogo from "../assets/logos/react-mark.svg";
@@ -16,9 +22,6 @@ import "./product.css";
 
 const BOOKING_URL = "https://cal.com/john-rodrigues-rqt2lg/15min";
 const NEWSLETTER_URL = "https://substack.com/@johnrodrigues";
-const APP_HOME =
-  import.meta.env.VITE_APP_URL ||
-  (import.meta.env.DEV ? "http://localhost:5175/" : "https://florence-app-seven.vercel.app/");
 
 const systemLayers = [
   {
@@ -92,7 +95,8 @@ const pricingPlans = [
       "MCP for Cursor and Claude Code"
     ],
     ctaLabel: "Fix AI Slop",
-    waitlist: true,
+    waitlist: false,
+    signup: true,
     ctaPrimary: true,
     featured: false
   },
@@ -354,7 +358,7 @@ function ProductEcosystemChip({ name, logo, glyph, contain, invert, chipRef }) {
   );
 }
 
-function ProductPricingCard({ plan, onWaitlistOpen }) {
+function ProductPricingCard({ plan, onWaitlistOpen, onFixAiSlop }) {
   return (
     <article
       className={`product-pricing-card${
@@ -372,7 +376,7 @@ function ProductPricingCard({ plan, onWaitlistOpen }) {
           <span>{plan.price}</span>
           {plan.term ? <small>{plan.term}</small> : null}
         </p>
-        <ProductPricingCta plan={plan} onWaitlistOpen={onWaitlistOpen} />
+        <ProductPricingCta plan={plan} onWaitlistOpen={onWaitlistOpen} onFixAiSlop={onFixAiSlop} />
       </div>
       <div className="product-pricing-card-body">
         <p className="product-pricing-card-description">{plan.description}</p>
@@ -386,17 +390,24 @@ function ProductPricingCard({ plan, onWaitlistOpen }) {
   );
 }
 
-function ProductPricingCta({ plan, onWaitlistOpen }) {
-  if (plan.waitlist) {
-    const isPrimary = Boolean(plan.featured || plan.ctaPrimary);
+function ProductPricingCta({ plan, onWaitlistOpen, onFixAiSlop }) {
+  const isPrimary = Boolean(plan.featured || plan.ctaPrimary);
+  const href = plan.ctaHref;
+  const className = `product-btn product-btn--full${
+    isPrimary ? " product-btn--primary" : " product-btn--ghost"
+  }`;
 
+  if (plan.waitlist) {
     return (
-      <WaitlistButton
-        className={`product-btn product-btn--full${
-          isPrimary ? " product-btn--primary" : " product-btn--ghost"
-        }`}
-        onOpen={onWaitlistOpen}
-      >
+      <WaitlistButton className={className} onOpen={onWaitlistOpen}>
+        {plan.ctaLabel}
+      </WaitlistButton>
+    );
+  }
+
+  if (plan.signup) {
+    return (
+      <WaitlistButton className={className} onOpen={onFixAiSlop}>
         {plan.ctaLabel}
       </WaitlistButton>
     );
@@ -404,11 +415,9 @@ function ProductPricingCta({ plan, onWaitlistOpen }) {
 
   return (
     <a
-      className={`product-btn product-btn--full${
-        plan.featured ? " product-btn--primary" : " product-btn--ghost"
-      }`}
-      href={plan.ctaHref}
-      {...(plan.ctaHref.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+      className={className}
+      href={href}
+      {...(href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
     >
       {plan.ctaLabel}
     </a>
@@ -434,9 +443,8 @@ function ProductFooter() {
   );
 }
 
-export default function ProductPage() {
+function ProductPageView({ onFixAiSlop, onLogIn }) {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
-  const [pinOpen, setPinOpen] = useState(false);
   const openWaitlist = () => setWaitlistOpen(true);
 
   return (
@@ -455,16 +463,16 @@ export default function ProductPage() {
               <div className="product-hero-actions">
                 <WaitlistButton
                   className="product-btn product-btn--primary liquid-metal-btn--wide"
-                  onOpen={openWaitlist}
+                  onOpen={onFixAiSlop}
                 >
                   Fix AI Slop
                 </WaitlistButton>
                 <button
                   type="button"
                   className="product-btn product-btn--ghost"
-                  onClick={() => setPinOpen(true)}
+                  onClick={onLogIn}
                 >
-                  Enter App
+                  Log in
                 </button>
               </div>
             </EntranceItem>
@@ -561,7 +569,11 @@ export default function ProductPage() {
             <div className="product-pricing-grid">
               {pricingPlans.map((plan) => (
                 <EntranceItem key={plan.id}>
-                  <ProductPricingCard plan={plan} onWaitlistOpen={openWaitlist} />
+                  <ProductPricingCard
+                    plan={plan}
+                    onWaitlistOpen={openWaitlist}
+                    onFixAiSlop={onFixAiSlop}
+                  />
                 </EntranceItem>
               ))}
             </div>
@@ -588,11 +600,55 @@ export default function ProductPage() {
       <ProductFooter />
 
       <FlorenceWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
-      <EnterAppPinModal
-        open={pinOpen}
-        onClose={() => setPinOpen(false)}
-        appUrl={APP_HOME}
-      />
     </div>
   );
 }
+
+function ProductPageWithClerk() {
+  const { isLoaded, isSignedIn } = useAuth();
+  const clerk = useClerk();
+
+  function goToApp() {
+    window.location.assign(APP_START);
+  }
+
+  function openSignUp() {
+    if (isLoaded && isSignedIn) {
+      goToApp();
+      return;
+    }
+    clerk.openSignUp({
+      ...clerkOverlayOptions,
+      forceRedirectUrl: APP_START,
+      fallbackRedirectUrl: APP_START,
+    });
+  }
+
+  function openSignIn() {
+    if (isLoaded && isSignedIn) {
+      goToApp();
+      return;
+    }
+    clerk.openSignIn({
+      ...clerkOverlayOptions,
+      forceRedirectUrl: APP_START,
+      fallbackRedirectUrl: APP_START,
+    });
+  }
+
+  return <ProductPageView onFixAiSlop={openSignUp} onLogIn={openSignIn} />;
+}
+
+export default function ProductPage() {
+  if (!clerkConfigured) {
+    return (
+      <ProductPageView
+        onFixAiSlop={() => window.location.assign(APP_START)}
+        onLogIn={() => window.location.assign(APP_HOME)}
+      />
+    );
+  }
+
+  return <ProductPageWithClerk />;
+}
+
