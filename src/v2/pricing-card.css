@@ -145,13 +145,6 @@
   color: rgba(255, 255, 255, 0.52);
 }
 
-.pathway-features .pricing-card-list-item svg {
-  width: 1.15rem;
-  height: 1.15rem;
-  margin-top: 0.1rem;
-  color: #4ade80;
-}
-
 .pathway-card:hover .pricing-card-header::before {
   opacity: 0.92;
 }

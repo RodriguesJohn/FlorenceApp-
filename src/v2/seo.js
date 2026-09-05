@@ -2,14 +2,14 @@ import { track } from "@vercel/analytics";
 import { blogPosts } from "./blogData.js";
 
 const SITE_URL = "https://www.humanaistudio.io";
-const SITE_NAME = "Human AI Studio";
-const DEFAULT_IMAGE = `${SITE_URL}/academy/og.jpg`;
+const SITE_NAME = "Florence AI";
+const DEFAULT_IMAGE = `${SITE_URL}/og.jpg`;
 
 const pages = {
   "/": {
-    title: "Human AI Studio | AI Product Studio",
+    title: "Florence AI | Design system for agents",
     description:
-      "Human AI Studio helps founders and teams design, prototype, and ship AI-native products, agentic systems, design systems, and practical AI workflows.",
+      "An MCP for your coding agent. Build brand, system, and engineering constraints so generated UI ships with confidence.",
     type: "WebSite"
   },
   "/academy": {
