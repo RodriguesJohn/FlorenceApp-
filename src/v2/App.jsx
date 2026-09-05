@@ -9,6 +9,7 @@ import * as PricingCard from "./PricingCard.jsx";
 import { Entrance, EntranceItem, entranceChild, entranceViewport } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import { WorkshopCountdown } from "./WorkshopCountdown.jsx";
+import { AcademyAnimatedTestimonials } from "./AcademyAnimatedTestimonials.jsx";
 import {
   MASTERCLASS_ARIA,
   MASTERCLASS_DATE_LABEL,
@@ -57,6 +58,7 @@ import githubLogo from "../assets/logos/github.svg";
 import storybookLogo from "../assets/logos/storybook.png";
 import typescriptLogo from "../assets/logos/typescript.webp";
 import ProductPage from "./ProductPage.jsx";
+import AcademyPage from "./AcademyPage.jsx";
 import tocaCompanyLogo from "../assets/companies/Toca.png";
 import citiCompanyLogo from "../assets/companies/Citi.svg.png";
 import chaseCompanyLogo from "../assets/companies/ChaseLightMOde.png";
@@ -65,6 +67,9 @@ import googleCompanyLogo from "../assets/companies/GoogleLogog.png";
 import metaCompanyLogo from "../assets/companies/Meta-Emblem.png";
 import "./styles.css";
 import "./home-type.css";
+import "./academy.css";
+
+const FlorenceOfferPage = React.lazy(() => import("./FlorenceOfferPage.jsx"));
 
 const bookingLink = "john-rodrigues-rqt2lg/15min";
 const bookingNamespace = "15min";
@@ -423,13 +428,7 @@ function CinematicHero() {
               className="hero-cinematic-line"
               variants={entranceChild}
             >
-              Design Systems for
-            </motion.span>
-            <motion.span
-              className="hero-cinematic-line"
-              variants={entranceChild}
-            >
-              Humans and AI Agents
+              AI Design System as a Service
             </motion.span>
           </h1>
 
@@ -438,12 +437,10 @@ function CinematicHero() {
             variants={entranceChild}
           >
             <span className="hero-cinematic-subtitle-line">
-              Based in the heart of Silicon Valley, we help teams build{" "}
-              <span className="motto-emphasis">AI-native design systems</span>.
+              For SaaS companies, we build and operate AI-ready design systems
             </span>
             <span className="hero-cinematic-subtitle-line">
-              So you can ship fast without the{" "}
-              <span className="motto-emphasis">AI slop</span>.
+              across Figma and code, so your team can ship faster with AI.
             </span>
           </motion.p>
 
@@ -500,114 +497,76 @@ function CinematicHero() {
   );
 }
 
-const workPathways = [
-  {
-    name: "Self-paced training",
-    color1: "#3b82f6",
-    color2: "#bae6fd",
-    ctaLabel: "See the course",
-    ctaHref: "/course",
-    features: [
-      "Tokens, contracts, and retrieval",
-      "Figma, Cursor, and Claude Code workflows",
-      "Evals so you can score the system"
-    ]
-  },
-  {
-    name: "Design system workshop",
-    color1: "#10b981",
-    color2: "#a7f3d0",
-    ctaLabel: "Join Workshop",
-    ctaHref: "/workshop",
-    features: [
-      "Hands-on audit and build of an AI-ready system",
-      "Practical tooling and workflows",
-      "Tokens, evals, and implementation"
-    ]
-  },
-  {
-    name: "Embedded team work",
-    featured: true,
-    color1: "#8b5cf6",
-    color2: "#ddd6fe",
-    ctaLabel: "Book 15 Min Discovery Call",
-    features: [
-      "Sit with your team on live product work",
-      "Audits, reports, and implementation",
-      "Figma, code, and foundations"
-    ]
-  }
-];
+const workOffering = {
+  price: "$20k",
+  term: "/ month",
+  tagline: "Your embedded team for design systems in Figma and code, ready for humans and AI.",
+  includesLabel: "Everything included",
+  features: [
+    "Design system built in Figma",
+    "Design system built in code, React & TypeScript",
+    "Production-ready UI components",
+    "AI-ready architecture",
+    "Governance",
+    "Ongoing maintenance",
+    "Async collaboration"
+  ],
+  footnote: "Cancel anytime. No long-term contract.",
+  ctaLabel: "Get started",
+  featured: true,
+  color1: "#8b5cf6",
+  color2: "#ddd6fe"
+};
 
 function WorkPathways() {
   return (
     <section className="pathways" aria-labelledby="pathways-title" data-nav-theme="dark">
-      <Entrance className="pathways-inner">
-        <EntranceItem as="h2" id="pathways-title" className="pathways-title">
-          Ways to work together
+      <Entrance className="pathways-inner pathways-inner--stacked">
+        <EntranceItem className="pathways-copy">
+          <h2 id="pathways-title" className="pathways-title">
+            No more guessing, transparent pricing.
+          </h2>
+          <p className="pathways-lede">{workOffering.tagline}</p>
         </EntranceItem>
 
-        <EntranceItem className="pathways-grid">
-          {workPathways.map((plan) => (
-            <article
-              className={`pathway-card${plan.featured ? " is-featured" : ""}`}
-              key={plan.name}
-              style={{ "--card-1": plan.color1, "--card-2": plan.color2 }}
-            >
-              <PricingCard.Header>
-                <div className="pricing-card-header-intro">
-                  <PricingCard.PlanName as="h3" className="pathway-name">
-                    {plan.name}
-                  </PricingCard.PlanName>
-                  {plan.tagline ? (
-                    <PricingCard.Description>{plan.tagline}</PricingCard.Description>
-                  ) : null}
+        <EntranceItem>
+          <article
+            className="pathway-card pathway-card--pricing"
+            style={{ "--card-1": workOffering.color1, "--card-2": workOffering.color2 }}
+          >
+            <div className="pathway-card-header">
+              <div className="pathway-card-heading">
+                <div className="pathway-price">
+                  <strong>{workOffering.price}</strong>
+                  <span className="pathway-price-term">{workOffering.term}</span>
                 </div>
-                {plan.ctaHref ? (
-                  <a
-                    className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
-                    href={plan.ctaHref}
-                    onClick={
-                      plan.ctaHref === "/academy"
-                        ? () => trackAcademyCtaClick("work_pathways", plan.ctaLabel)
-                        : plan.ctaHref === "/workshop"
-                          ? () => trackWorkshopPageClick("work_pathways", plan.ctaLabel)
-                          : plan.ctaHref === "/course"
-                            ? () =>
-                                track("Course CTA Click", {
-                                  location: "work_pathways",
-                                  label: plan.ctaLabel,
-                                  href: "/course"
-                                })
-                            : undefined
-                    }
-                  >
-                    {plan.ctaLabel}
-                  </a>
-                ) : (
-                  <a
-                    className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
-                    href={bookingUrl}
-                    onClick={openBookingModal}
-                    {...bookingAttributes}
-                  >
-                    {plan.ctaLabel || "Book 15 min call"}
-                  </a>
-                )}
-              </PricingCard.Header>
+                <p className="pathway-footnote">{workOffering.footnote}</p>
+              </div>
+              <a
+                className="pathway-cta is-featured pathway-card-header-cta"
+                href={bookingUrl}
+                onClick={openBookingModal}
+                {...bookingAttributes}
+              >
+                {workOffering.ctaLabel}
+                <span aria-hidden="true"> →</span>
+              </a>
+            </div>
 
-              <PricingCard.Body>
-                <PricingCard.List className="pathway-features">
-                  {plan.features.map((feature) => (
-                    <PricingCard.ListItem key={feature}>
-                      <CheckCircle2 aria-hidden="true" />
-                      <span>{feature}</span>
-                    </PricingCard.ListItem>
-                  ))}
-                </PricingCard.List>
-              </PricingCard.Body>
-            </article>
-          ))}
+            <div className="pathway-card-divider" aria-hidden="true" />
+
+            <div className="pathway-card-content">
+              <p className="pathway-includes">{workOffering.includesLabel}</p>
+              <ul className="pathway-features">
+                {workOffering.features.map((feature) => (
+                  <li key={feature}>
+                    <CheckCircle2 aria-hidden="true" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
         </EntranceItem>
       </Entrance>
     </section>
@@ -737,20 +696,20 @@ const homeOffers = [
 
 const homeProblems = [
   {
-    title: "AI slop to on-brand UI.",
-    titleLines: ["AI slop →", "on-brand UI."],
+    title: "Get started and submit your request.",
+    titleLines: ["Get started →", "submit your request and needs."],
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Design drift to shared context.",
-    titleLines: ["Design drift →", "shared context."],
+    title: "Build from foundation to production-ready systems in Figma and code.",
+    titleLines: ["Foundation to production-ready", "components in Figma and code."],
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Models guessing to models with context.",
-    titleLines: ["Models guessing →", "models with context."],
+    title: "We integrate AI workflows and help you transition your systems to AI-ready infrastructure.",
+    titleLines: ["We integrate AI workflows", "and transition your systems to AI-ready infrastructure."],
     color1: "#10b981",
     color2: "#a7f3d0"
   }
@@ -1276,6 +1235,18 @@ function CohortAcademyProof() {
     </div>
   );
 }
+
+const homeProofQuotes = [
+  {
+    id: 1,
+    name: "Jake Barrow",
+    role: "Product Designer",
+    company: "",
+    content:
+      "John is very knowledgeable and enthusiastic about building quality design systems that allow us to get the most from AI. The course was informative, and there were many opportunities to ask questions.",
+    rating: 4
+  }
+];
 
 const testimonials = [
   {
@@ -2119,7 +2090,7 @@ function StudioHome({ isHistory = false }) {
         id="offerings"
         className={`offerings ${isHistory ? "" : "dark-offerings"}`}
         aria-labelledby={isHistory ? "v2-how-title" : undefined}
-        aria-label={isHistory ? undefined : "How we build zero to one"}
+        aria-label={isHistory ? undefined : "How it works"}
         data-nav-theme={isHistory ? "light" : "dark"}
       >
         {isHistory ? (
@@ -2215,6 +2186,16 @@ function StudioHome({ isHistory = false }) {
           </Entrance>
         )}
       </section>
+
+      {!isHistory && (
+        <div className="home-proof" data-nav-theme="dark">
+          <AcademyAnimatedTestimonials
+            title=""
+            badgeText=""
+            testimonials={homeProofQuotes}
+          />
+        </div>
+      )}
 
       {!isHistory && (
         <section className="home-florence-showcase" aria-labelledby="home-florence-title" data-nav-theme="dark">
@@ -2490,53 +2471,6 @@ function StudioHome({ isHistory = false }) {
         </section>
       )}
 
-      {!isHistory && (
-        <section className="final-cta v2-final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
-          <DotMatrixBackground />
-          <Entrance className="final-cta-inner final-cta-inner--newsletter">
-            <div className="newsletter-cta">
-              <EntranceItem className="newsletter-copy">
-                <h2 id="v2-cta-title">Newsletter</h2>
-                <p className="final-cta-lede">
-                  Behind-the-scenes notes on AI industry shifts, design systems, and how product teams are evolving with AI.
-                </p>
-                <div className="newsletter-actions">
-                  <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
-                    <span className="button-label">Read the Newsletter</span>
-                  </a>
-                </div>
-              </EntranceItem>
-              <EntranceItem className="newsletter-visual" aria-hidden="true">
-                <div className="issue-card-deck">
-                  <div className="issue-card issue-card--back" />
-                  <div className="issue-card issue-card--front">
-                    <div className="issue-card-head">
-                      <span className="issue-mark" />
-                      <div className="issue-card-meta">
-                        <span className="issue-card-name">Human AI Studio</span>
-                        <span className="issue-card-sub">Research Newsletter</span>
-                      </div>
-                      <span className="issue-card-pill">Subscribed</span>
-                    </div>
-                    <p className="issue-card-body">
-                      Field notes on AI industry changes, agent-ready design systems, and the workflows shaping modern product teams.
-                    </p>
-                    <div className="issue-card-foot">
-                      <span className="issue-card-foot-label">Read by professionals at</span>
-                      <div className="issue-card-logos">
-                        {newsletterCompanies.map((company) => (
-                          <img key={company.name} src={company.icon} alt={company.name} />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </EntranceItem>
-            </div>
-          </Entrance>
-        </section>
-      )}
-
       {isHistory && (
       <section className="final-cta v2-final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
         <DotMatrixBackground />
@@ -2614,7 +2548,7 @@ function StudioHome({ isHistory = false }) {
                 Human AI Studio
               </EntranceItem>
               <EntranceItem as="p">
-                AI product studio for design systems, agents, and AI-native workflows.
+                AI Systems Studio for design systems, agents, and AI-native workflows.
               </EntranceItem>
             </Entrance>
           )}
@@ -2652,9 +2586,6 @@ function StudioHome({ isHistory = false }) {
           ) : (
             <Entrance className="footer-column">
               <EntranceItem as="p">Contact</EntranceItem>
-              <EntranceItem as="a" href={newsletterUrl} target="_blank" rel="noreferrer">
-                Publication
-              </EntranceItem>
               <EntranceItem as="a" href="mailto:john@humanaistudio.ai">
                 john@humanaistudio.ai
               </EntranceItem>
@@ -2663,9 +2594,6 @@ function StudioHome({ isHistory = false }) {
                 455 Market St Ste 1940<br />
                 PMB 769150<br />
                 San Francisco, California 94105-2448 US
-              </EntranceItem>
-              <EntranceItem as="span">
-                <BookingTextLink>Book a call</BookingTextLink>
               </EntranceItem>
             </Entrance>
           )}
@@ -2841,9 +2769,28 @@ function OfferingPage({ slug }) {
 }
 
 function App() {
+  const route = window.location.pathname.replace(/\/+$/, "") || "/";
+  const isHistory = route === "/history";
+  const isProduct = route === "/product";
+  const isAcademy = route === "/academy";
+  const offeringMatch = route.match(/^\/offerings\/([^/]+)$/);
+  const offeringSlug = offeringMatch ? offeringMatch[1] : null;
+
   return (
     <>
-      <ProductPage />
+      {isProduct ? (
+        <ProductPage />
+      ) : isAcademy ? (
+        <AcademyPage />
+      ) : route === "/florence" || offeringSlug === "agent-ready-design-system" ? (
+        <React.Suspense fallback={null}>
+          <FlorenceOfferPage />
+        </React.Suspense>
+      ) : offeringSlug ? (
+        <OfferingPage slug={offeringSlug} />
+      ) : (
+        <StudioHome isHistory={isHistory} />
+      )}
       <BottomBlur />
       <Analytics />
     </>

@@ -1,5 +1,6 @@
 import React from "react";
 import { NavMenu } from "./NavMenu.jsx";
+import { NewsletterCta } from "./NewsletterCta.jsx";
 import { blogPosts, getBlogPost } from "./blogData.js";
 import "./blog.css";
 
@@ -99,6 +100,8 @@ function BlogIndex() {
             </a>
           </section>
         )}
+
+        <NewsletterCta className="blog-newsletter" />
       </main>
     </BlogShell>
   );
