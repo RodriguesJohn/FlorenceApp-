@@ -1,0 +1,110 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "input",
+  "name": "Input",
+  "category": "forms",
+  "path": "03-components/input",
+  "exports": [
+    "Input"
+  ],
+  "intent": "Capture a single line of text with optional label, hint, and validation error.",
+  "whenToUse": [
+    "Names, emails, search fields, short numeric values",
+    "Forms that need inline validation messaging"
+  ],
+  "whenNotToUse": [
+    "Multi-line copy - use Textarea",
+    "Choosing from known options - use Select or Radio",
+    "On/off settings - use Switch"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "type": "string",
+        "description": "Helper text when valid"
+      },
+      {
+        "name": "error",
+        "type": "string|boolean",
+        "description": "Error message or invalid flag"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "name": "...native input attrs",
+        "type": "HTMLAttributes",
+        "description": "value, onChange, placeholder, type, etc."
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-*",
+      "--color-border-*",
+      "--color-focus-ring",
+      "--color-status-danger"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-body-*",
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*"
+    ],
+    "radius": [
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-control",
+      "--border-focus"
+    ],
+    "motion": [
+      "--motion-interaction-*"
+    ]
+  },
+  "a11y": [
+    "Associate label with control",
+    "Surface errors in accessible message text"
+  ],
+  "examples": [
+    {
+      "title": "Basic",
+      "code": "<Input label=\"Email\" placeholder=\"name@company.com\" />"
+    },
+    {
+      "title": "Error",
+      "code": "<Input label=\"Email\" error=\"Enter a valid email\" />"
+    }
+  ],
+  "related": [
+    "textarea",
+    "select",
+    "button"
+  ]
+}

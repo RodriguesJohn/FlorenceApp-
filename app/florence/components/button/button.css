@@ -1,0 +1,352 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-inline-sm);
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  border: var(--border-control) solid transparent;
+  border-radius: var(--radius-control-md);
+  background: transparent;
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+  cursor: pointer;
+  transform: scale(1);
+  transition:
+    background var(--motion-interaction-duration) var(--motion-interaction-easing),
+    border-color var(--motion-interaction-duration) var(--motion-interaction-easing),
+    color var(--motion-interaction-duration) var(--motion-interaction-easing),
+    opacity var(--motion-interaction-duration) var(--motion-interaction-easing),
+    transform var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn:hover:not(:disabled):not([aria-disabled='true']) {
+  transform: scale(1.02);
+}
+
+.btn:active:not(:disabled):not([aria-disabled='true']) {
+  transform: scale(0.97);
+}
+
+/* Sizes */
+/* Button labels inherit medium weight from --text-label; sm keeps it readable. */
+.btn--sm {
+  gap: var(--space-inline-xs);
+  padding: var(--space-inset-xs) var(--space-inset-sm);
+  border-radius: var(--radius-control-sm);
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+}
+
+.btn--md {
+  gap: var(--space-inline-sm);
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  border-radius: var(--radius-control-md);
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+}
+
+.btn--lg {
+  gap: var(--space-inline-sm);
+  padding: var(--space-inset-md) var(--space-inset-lg);
+  border-radius: var(--radius-control-lg);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+}
+
+/* Variants */
+.btn--primary {
+  background: var(--color-interactive-primary);
+  color: var(--color-brand-on-brand);
+}
+
+.btn--primary:hover {
+  background: var(--color-interactive-primary-hover);
+}
+
+.btn--primary:active {
+  background: var(--color-interactive-primary-active);
+}
+
+.btn--secondary {
+  background: var(--color-interactive-secondary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-default);
+}
+
+.btn--secondary:hover {
+  background: var(--color-interactive-secondary-hover);
+}
+
+.btn--secondary:active {
+  background: var(--color-interactive-secondary-active);
+}
+
+.btn--tertiary {
+  background: transparent;
+  color: var(--color-text-brand);
+}
+
+.btn--tertiary:hover {
+  background: var(--color-bg-brand-subtle);
+}
+
+.btn--tertiary:active {
+  background: var(--color-interactive-selected);
+}
+
+.btn--danger {
+  background: var(--color-interactive-danger);
+  color: var(--color-brand-on-brand);
+}
+
+.btn--danger:hover {
+  background: var(--color-interactive-danger-hover);
+}
+
+.btn--danger:active {
+  background: var(--color-interactive-danger-active);
+}
+
+.btn:focus-visible {
+  outline: var(--border-focus) solid var(--color-focus-ring);
+  outline-offset: var(--space-inset-2xs);
+}
+
+.btn__label {
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+}
+
+.btn--loading .btn__label {
+  opacity: var(--opacity-muted);
+}
+
+.btn__spinner {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  border: var(--border-control) solid currentcolor;
+  border-top-color: transparent;
+  border-radius: var(--radius-pill);
+  animation: btn-spin var(--motion-interaction-duration) linear infinite;
+}
+
+@keyframes btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+    transform: none;
+  }
+
+  .btn:hover:not(:disabled):not([aria-disabled='true']),
+  .btn:active:not(:disabled):not([aria-disabled='true']) {
+    transform: none;
+  }
+
+  .btn__spinner {
+    animation: none;
+    border-top-color: currentcolor;
+    opacity: var(--opacity-muted);
+  }
+}
+
+/* Primary — liquid metal */
+.btn-liquid {
+  display: inline-flex;
+  vertical-align: middle;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-raised-md);
+  transform: scale(1);
+  transition:
+    box-shadow var(--motion-interaction-duration) var(--motion-interaction-easing),
+    transform var(--motion-interaction-duration) var(--motion-interaction-easing),
+    opacity var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.btn-liquid:hover:has(.btn-liquid__control:not(:disabled):not([aria-disabled='true'])) {
+  box-shadow: var(--shadow-raised-lg);
+}
+
+.btn-liquid:has(.btn-liquid__control:active:not(:disabled):not([aria-disabled='true'])) {
+  box-shadow: var(--shadow-raised-xs);
+  transform: scale(0.98);
+}
+
+.btn-liquid:has(.btn-liquid__control:disabled),
+.btn-liquid:has(.btn-liquid__control[aria-disabled='true']) {
+  opacity: var(--opacity-disabled);
+}
+
+.btn-liquid__control {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-inline-sm);
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  border: var(--border-control) solid transparent;
+  border-radius: inherit;
+  background: transparent;
+  color: color-mix(
+    in srgb,
+    var(--color-brand-on-brand) 72%,
+    var(--color-overlay-scrim-soft)
+  );
+  font-family: var(--text-label-font-family);
+  font-size: var(--text-label-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-letter-spacing);
+  cursor: pointer;
+}
+
+.btn-liquid__control:disabled,
+.btn-liquid__control[aria-disabled='true'] {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-liquid__control:focus-visible {
+  outline: var(--border-focus) solid var(--color-focus-ring);
+  outline-offset: var(--space-inset-2xs);
+}
+
+.btn-liquid--sm .btn-liquid__control {
+  gap: var(--space-inline-xs);
+  padding: var(--space-inset-xs) var(--space-inset-sm);
+}
+
+.btn-liquid--md .btn-liquid__control {
+  padding: var(--space-inset-sm) var(--space-inset-md);
+}
+
+.btn-liquid--lg .btn-liquid__control {
+  gap: var(--space-inline-sm);
+  padding: var(--space-inset-md) var(--space-inset-lg);
+  font-family: var(--text-body-sm-font-family);
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--text-label-font-weight);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+}
+
+.btn-liquid__shader,
+.btn-liquid__face {
+  position: absolute;
+  pointer-events: none;
+}
+
+.btn-liquid__shader {
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: color-mix(
+    in srgb,
+    var(--color-brand-on-brand) 28%,
+    var(--color-overlay-scrim-soft)
+  );
+}
+
+.btn-liquid__shader :is(canvas) {
+  display: block;
+  border-radius: inherit;
+}
+
+.btn-liquid__face {
+  inset: var(--space-inset-2xs);
+  z-index: 1;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    var(--color-overlay-scrim-soft) 0%,
+    var(--color-overlay-scrim) 100%
+  );
+}
+
+.btn-liquid__label {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+  white-space: nowrap;
+}
+
+.btn-liquid--loading .btn-liquid__label {
+  opacity: var(--opacity-muted);
+}
+
+.btn-liquid__control > .btn__spinner {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-liquid__ripple {
+  position: absolute;
+  z-index: 3;
+  width: var(--space-inset-xl);
+  height: var(--space-inset-xl);
+  border-radius: var(--radius-pill);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-brand-on-brand) 40%, transparent) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.95);
+  opacity: var(--opacity-muted);
+  animation: btn-liquid-ripple var(--motion-expand-duration)
+    var(--motion-expand-easing) forwards;
+}
+
+@keyframes btn-liquid-ripple {
+  to {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-liquid {
+    transition: none;
+    transform: none;
+  }
+
+  .btn-liquid:has(.btn-liquid__control:active:not(:disabled):not([aria-disabled='true'])) {
+    transform: none;
+  }
+
+  .btn-liquid__ripple {
+    animation: none;
+    display: none;
+  }
+}

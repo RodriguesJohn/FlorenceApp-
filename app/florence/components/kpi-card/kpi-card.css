@@ -1,0 +1,162 @@
+.kpi-card {
+  display: grid;
+  gap: var(--space-stack-sm);
+  width: min(100%, 16rem);
+  margin: 0;
+  padding: var(--space-inset-md);
+  border: var(--border-highlight) solid var(--color-border-highlight);
+  border-radius: var(--radius-surface-md);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-raised-depth);
+  color: var(--color-text-primary);
+  text-align: start;
+  outline: none;
+}
+
+.kpi-card--sm {
+  width: min(100%, 12.5rem);
+  gap: var(--space-stack-xs);
+  padding: var(--space-inset-sm);
+}
+
+.kpi-card--lg {
+  width: min(100%, 20rem);
+  gap: var(--space-stack-md);
+  padding: var(--space-inset-lg);
+}
+
+.kpi-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-inline-sm);
+  min-width: 0;
+}
+
+.kpi-card__label {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+  text-transform: none;
+}
+
+.kpi-card__value {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--text-heading-lg-font-family);
+  font-size: var(--text-heading-lg-font-size);
+  font-weight: var(--text-heading-lg-font-weight);
+  line-height: var(--text-heading-lg-line-height);
+  letter-spacing: var(--text-heading-lg-letter-spacing);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+.kpi-card--sm .kpi-card__value {
+  font-family: var(--text-heading-md-font-family);
+  font-size: var(--text-heading-md-font-size);
+  font-weight: var(--text-heading-md-font-weight);
+  line-height: var(--text-heading-md-line-height);
+  letter-spacing: var(--text-heading-md-letter-spacing);
+}
+
+.kpi-card--lg .kpi-card__value {
+  font-family: var(--text-metric-font-family);
+  font-size: var(--text-metric-font-size);
+  font-weight: var(--text-metric-font-weight);
+  line-height: var(--text-metric-line-height);
+  letter-spacing: var(--text-metric-letter-spacing);
+}
+
+.kpi-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-inline-xs) var(--space-inline-sm);
+  min-width: 0;
+}
+
+.kpi-card__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-inline-2xs);
+  min-width: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+.kpi-card__delta-icon {
+  display: grid;
+  place-items: center;
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.kpi-card__delta-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.kpi-card__delta-text {
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-card__hint {
+  color: var(--color-text-muted);
+  font-family: var(--text-caption-font-family);
+  font-size: var(--text-caption-font-size);
+  font-weight: var(--text-caption-font-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+}
+
+.kpi-card--trend-up .kpi-card__delta {
+  color: var(--color-text-success);
+}
+
+.kpi-card--trend-down .kpi-card__delta {
+  color: var(--color-text-danger);
+}
+
+.kpi-card--trend-flat .kpi-card__delta,
+.kpi-card--trend-neutral .kpi-card__delta {
+  color: var(--color-text-secondary);
+}
+
+.kpi-card--interactive {
+  cursor: pointer;
+  transition:
+    transform var(--motion-interaction-duration) var(--motion-interaction-easing),
+    box-shadow var(--motion-interaction-duration) var(--motion-interaction-easing),
+    border-color var(--motion-interaction-duration) var(--motion-interaction-easing);
+}
+
+.kpi-card--interactive:hover {
+  border-color: var(--color-border-highlight);
+  box-shadow: var(--shadow-raised-depth);
+}
+
+.kpi-card--interactive:active {
+  transform: scale(0.98);
+}
+
+.kpi-card--interactive:focus-visible {
+  outline: var(--border-focus) solid var(--color-focus-ring);
+  outline-offset: var(--space-inset-2xs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kpi-card--interactive,
+  .kpi-card--interactive:active {
+    transition: none;
+    transform: none;
+  }
+}

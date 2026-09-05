@@ -1,0 +1,101 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "bar-chart",
+  "name": "BarChart",
+  "category": "data-display",
+  "path": "03-components/charts/bar-chart",
+  "exports": [
+    "BarChart"
+  ],
+  "intent": "Compare magnitudes across categories with vertical or horizontal bars.",
+  "whenToUse": [
+    "Region / plan / owner comparisons",
+    "Ranking discrete categories"
+  ],
+  "whenNotToUse": [
+    "Part-to-whole only - PieChart may suffice",
+    "Continuous time series - prefer LineChart"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "data",
+        "type": "{ label: string, value: number }[]",
+        "description": "Single-series shorthand"
+      },
+      {
+        "name": "series",
+        "type": "{ label: string, data: number[] }[]"
+      },
+      {
+        "name": "categories",
+        "type": "string[]"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "name": "orientation",
+        "type": "enum",
+        "values": [
+          "vertical",
+          "horizontal"
+        ],
+        "default": "vertical"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-data-*",
+      "--color-text-*",
+      "--color-border-*"
+    ],
+    "typography": [
+      "--text-caption-*",
+      "--text-heading-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-gap-*"
+    ],
+    "radius": [
+      "--radius-surface-*",
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-highlight"
+    ],
+    "shadow": [
+      "--shadow-raised-depth"
+    ]
+  },
+  "a11y": [
+    "Hit targets keyboard focusable",
+    "Table twin through ChartFrame"
+  ],
+  "examples": [
+    {
+      "title": "Vertical",
+      "code": "<BarChart title=\"Revenue by region\" data={[{ label: \"North\", value: 2610 }]} />"
+    }
+  ],
+  "deps": [
+    "chart-core"
+  ],
+  "related": [
+    "chart-core",
+    "line-chart",
+    "pie-chart"
+  ]
+}

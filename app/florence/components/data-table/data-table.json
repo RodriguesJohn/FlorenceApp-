@@ -1,0 +1,156 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "data-table",
+  "name": "DataTable",
+  "category": "data-display",
+  "path": "03-components/data-table",
+  "exports": [
+    "DataTable"
+  ],
+  "intent": "Present structured rows with optional search, filters, selection, and column visibility.",
+  "whenToUse": [
+    "Operational datasets",
+    "Admin lists",
+    "Task backlogs"
+  ],
+  "whenNotToUse": [
+    "Simple key/value details - use definition list or cards",
+    "Heavy analytics pivots - use charts + specialized grids"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "columns",
+        "type": "{ key, header, type?, render?, align? }[]",
+        "required": true
+      },
+      {
+        "name": "rows",
+        "type": "object[]",
+        "required": true
+      },
+      {
+        "name": "caption",
+        "type": "string"
+      },
+      {
+        "name": "emptyMessage",
+        "type": "string",
+        "default": "No data available."
+      },
+      {
+        "name": "filteredEmptyMessage",
+        "type": "string"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "selectable",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "toolbar",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "searchPlaceholder",
+        "type": "string"
+      },
+      {
+        "name": "searchKeys",
+        "type": "string[]"
+      },
+      {
+        "name": "filters",
+        "type": "{ key, label, options? }[]"
+      },
+      {
+        "name": "columnSettings",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "onRowClick",
+        "type": "(row, index) => void"
+      },
+      {
+        "name": "onSelectionChange",
+        "type": "(keys, rows) => void"
+      },
+      {
+        "name": "onFilteredRowsChange",
+        "type": "(rows) => void"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-*",
+      "--color-border-*",
+      "--color-interactive-*"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-body-*",
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-gap-*",
+      "--space-stack-*"
+    ],
+    "radius": [
+      "--radius-surface-*",
+      "--radius-control-*",
+      "--radius-pill"
+    ],
+    "border": [
+      "--border-surface",
+      "--border-divider",
+      "--border-control"
+    ],
+    "shadow": [
+      "--shadow-raised-sm",
+      "--shadow-overlay-md"
+    ]
+  },
+  "a11y": [
+    "Caption optional",
+    "Selection checkboxes labeled",
+    "Empty state in table body"
+  ],
+  "examples": [
+    {
+      "title": "Toolbar table",
+      "code": "<DataTable caption=\"Team\" selectable toolbar columnSettings columns={columns} rows={rows} filters={[{ key: \"status\", label: \"Status\" }]} />"
+    }
+  ],
+  "deps": [
+    "button",
+    "checkbox",
+    "input",
+    "select"
+  ],
+  "related": [
+    "tag",
+    "checkbox",
+    "select",
+    "input"
+  ]
+}

@@ -1,0 +1,22 @@
+/* Florence - import this once in your app entry */
+
+@import "./foundations/colors/primitives.css";
+@import "./foundations/colors/semantics.css";
+@import "./foundations/typography/primitives.css";
+@import "./foundations/typography/semantics.css";
+@import "./foundations/spacing/primitives.css";
+@import "./foundations/spacing/semantics.css";
+@import "./foundations/grid/primitives.css";
+@import "./foundations/grid/semantics.css";
+@import "./foundations/radius/primitives.css";
+@import "./foundations/radius/semantics.css";
+@import "./foundations/border/primitives.css";
+@import "./foundations/border/semantics.css";
+@import "./foundations/shadow/primitives.css";
+@import "./foundations/shadow/semantics.css";
+@import "./foundations/motion/primitives.css";
+@import "./foundations/motion/semantics.css";
+@import "./foundations/opacity/primitives.css";
+@import "./foundations/opacity/semantics.css";
+@import "./foundations/colors/component-tokens.css";
+

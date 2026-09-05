@@ -1,0 +1,120 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "toast",
+  "name": "Toast",
+  "category": "feedback",
+  "path": "03-components/toast",
+  "exports": [
+    "Toast"
+  ],
+  "intent": "Confirm an outcome or surface a short transient system message.",
+  "whenToUse": [
+    "Save succeeded",
+    "Background job status",
+    "Non-blocking errors"
+  ],
+  "whenNotToUse": [
+    "Blocking decisions - use Modal",
+    "Permanent page status - use inline alert / insight"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "name": "status",
+        "type": "enum",
+        "values": [
+          "default",
+          "success",
+          "warning",
+          "danger",
+          "info"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "onClose",
+        "type": "() => void"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-bg-*",
+      "--color-text-*",
+      "--color-border-*",
+      "--color-status-*"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-body-*",
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*",
+      "--space-inline-*"
+    ],
+    "radius": [
+      "--radius-surface-*"
+    ],
+    "border": [
+      "--border-surface"
+    ],
+    "shadow": [
+      "--shadow-overlay-*"
+    ],
+    "motion": [
+      "--motion-overlay-*"
+    ],
+    "opacity": [
+      "--opacity-scrim-soft"
+    ]
+  },
+  "a11y": [
+    "Closable with explicit control",
+    "Status conveyed by copy + tone, not color alone"
+  ],
+  "examples": [
+    {
+      "title": "Success",
+      "code": "<Toast title=\"Update published\" description=\"Your changes are live.\" status=\"success\" />"
+    }
+  ],
+  "related": [
+    "modal",
+    "insight-card"
+  ]
+}

@@ -1,0 +1,18 @@
+:root {
+  /* Control - buttons, inputs, selects */
+  --border-control: var(--border-100);
+  --border-control-strong: var(--border-200);
+
+  /* Surface - cards, panels, dialogs */
+  --border-surface: var(--border-100);
+
+  /* Highlight - thin glass / light-catching stroke on elevated surfaces */
+  --border-highlight: var(--border-100);
+
+  /* Divider - separators and rules */
+  --border-divider: var(--border-100);
+  --border-divider-strong: var(--border-200);
+
+  /* Focus - focus rings and emphasis */
+  --border-focus: var(--border-200);
+}

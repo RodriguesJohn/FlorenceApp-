@@ -1,0 +1,104 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "tooltip",
+  "name": "Tooltip",
+  "category": "overlays",
+  "path": "03-components/tooltip",
+  "exports": [
+    "Tooltip"
+  ],
+  "intent": "Reveal short clarifying text on hover or focus without leaving the control.",
+  "whenToUse": [
+    "Icon-only buttons",
+    "Truncated labels",
+    "Light affordance hints"
+  ],
+  "whenNotToUse": [
+    "Critical information required to act - put it in the UI",
+    "Long help content - use inline hint or modal"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "content",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "side",
+        "type": "enum",
+        "values": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ],
+        "default": "top"
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "description": "Controlled open state"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "description": "Trigger element"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-bg-inverse",
+      "--color-text-inverse",
+      "--color-border-*"
+    ],
+    "typography": [
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*"
+    ],
+    "radius": [
+      "--radius-control-*"
+    ],
+    "border": [
+      "--border-surface"
+    ],
+    "shadow": [
+      "--shadow-overlay-*"
+    ],
+    "motion": [
+      "--motion-overlay-*"
+    ],
+    "opacity": [
+      "--opacity-*"
+    ]
+  },
+  "a11y": [
+    "Shows on focus as well as pointer",
+    "Keep content concise"
+  ],
+  "examples": [
+    {
+      "title": "Icon help",
+      "code": "<Tooltip content=\"Export CSV\"><Button variant=\"tertiary\">Export</Button></Tooltip>"
+    }
+  ],
+  "related": [
+    "button",
+    "toast"
+  ]
+}

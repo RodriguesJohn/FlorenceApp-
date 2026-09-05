@@ -1,0 +1,128 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "select",
+  "name": "Select",
+  "category": "forms",
+  "path": "03-components/select",
+  "exports": [
+    "Select"
+  ],
+  "intent": "Pick one value from a list of predefined options when radios would overwhelm the layout.",
+  "whenToUse": [
+    "Medium-to-long option lists",
+    "Filters and form fields with known values"
+  ],
+  "whenNotToUse": [
+    "Free text - use Input",
+    "Very short lists (2-4) that deserve permanence - consider Radio"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "label",
+        "type": "string"
+      },
+      {
+        "name": "hint",
+        "type": "string"
+      },
+      {
+        "name": "error",
+        "type": "string|boolean"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false
+      },
+      {
+        "name": "options",
+        "type": "{ value: string, label: string }[]",
+        "required": true
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "Select an option"
+      },
+      {
+        "name": "value",
+        "type": "string"
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: string) => void"
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-text-*",
+      "--color-bg-*",
+      "--color-border-*",
+      "--color-interactive-*",
+      "--color-focus-ring"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-body-*",
+      "--text-caption-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-stack-*",
+      "--space-gap-*"
+    ],
+    "radius": [
+      "--radius-control-*",
+      "--radius-surface-*"
+    ],
+    "border": [
+      "--border-control",
+      "--border-surface",
+      "--border-focus"
+    ],
+    "shadow": [
+      "--shadow-overlay-*"
+    ],
+    "motion": [
+      "--motion-interaction-*",
+      "--motion-overlay-*"
+    ]
+  },
+  "a11y": [
+    "Keyboard open/navigate/select",
+    "Announced label and invalid state"
+  ],
+  "examples": [
+    {
+      "title": "Status filter",
+      "code": "<Select label=\"Status\" options={[{ value: \"open\", label: \"Open\" }]} />"
+    }
+  ],
+  "related": [
+    "radio",
+    "input",
+    "data-table"
+  ]
+}

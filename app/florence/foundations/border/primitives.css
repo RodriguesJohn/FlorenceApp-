@@ -1,0 +1,7 @@
+:root {
+  /* Border width scale */
+  --border-0: 0;
+  --border-100: 1px;
+  --border-200: 2px;
+  --border-300: 4px;
+}

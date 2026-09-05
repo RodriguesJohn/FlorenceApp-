@@ -1,0 +1,377 @@
+:root {
+  /* Container - content max-widths */
+  --layout-container-sm: var(--grid-width-sm); /* 640px */
+  --layout-container-md: var(--grid-width-md); /* 1024px */
+  --layout-container-lg: var(--grid-width-lg); /* 1280px */
+  --layout-container-xl: var(--grid-width-xl); /* 1440px */
+
+  /* Gutter - column and section gaps */
+  --layout-gutter-sm: var(--grid-gutter-sm);
+  --layout-gutter-md: var(--grid-gutter-md);
+  --layout-gutter-lg: var(--grid-gutter-lg);
+  --layout-gutter-xl: var(--grid-gutter-xl);
+
+  /* Margin - page edge inset */
+  --layout-margin-sm: var(--grid-margin-sm);
+  --layout-margin-md: var(--grid-margin-md);
+  --layout-margin-lg: var(--grid-margin-lg);
+
+  /* SaaS shell - app chrome widths */
+  --layout-sidebar: 14rem;
+  --layout-sidebar-compact: var(--space-section-lg);
+  --layout-rail: 22rem;
+  --layout-metrics-min: 12rem;
+  --layout-auto-min: 16rem;
+
+  /* Split - 12-column spans */
+  --layout-split-primary: 8;
+  --layout-split-secondary: 4;
+  --layout-split-half: 6;
+  --layout-split-third: 4;
+}
+
+/* ------------------------------------------------------------------ */
+/* SaaS patterns - compose these in product shells and dashboards     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * App shell - fixed nav + fluid canvas.
+ * Children: nav, canvas (order matters).
+ */
+.layout-app {
+  display: grid;
+  grid-template-columns: var(--layout-sidebar) minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+}
+
+.layout-app > * {
+  min-width: 0;
+  min-height: 0;
+}
+
+/**
+ * Canvas - page header + scrollable body inside the app shell.
+ * Children: header, body (workspace or content).
+ */
+.layout-canvas {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/**
+ * Workspace - primary content + optional context rail (chat, inspector).
+ * Children: main, rail.
+ */
+.layout-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--layout-rail);
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.layout-workspace > * {
+  min-width: 0;
+  min-height: 0;
+}
+
+.layout-workspace--flush {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/**
+ * Content - stacked dashboard sections with page inset.
+ * Put metrics, splits, and full-bleed tables inside this.
+ */
+.layout-content {
+  display: grid;
+  gap: var(--space-stack-lg);
+  align-content: start;
+  min-width: 0;
+  min-height: 0;
+  padding: var(--layout-margin-md);
+  overflow: auto;
+}
+
+.layout-content--dense {
+  gap: var(--space-stack-md);
+  padding: var(--layout-margin-sm);
+}
+
+.layout-content--spacious {
+  gap: var(--space-stack-xl);
+  padding: var(--layout-margin-lg);
+}
+
+/**
+ * Metrics - KPI / summary card strip for SaaS dashboards.
+ */
+.layout-metrics {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--layout-metrics-min)), 1fr)
+  );
+  gap: var(--layout-gutter-md);
+}
+
+.layout-metrics--fixed-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.layout-metrics--fixed-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/**
+ * Header bar - title cluster + actions row inside a canvas.
+ */
+.layout-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--layout-gutter-sm);
+  padding-block: var(--space-inset-md);
+  padding-inline: var(--layout-margin-md);
+}
+
+.layout-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-inline-sm);
+}
+
+/* ------------------------------------------------------------------ */
+/* Content ratios - panels inside layout-content                      */
+/* ------------------------------------------------------------------ */
+
+.layout-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--layout-gutter-md);
+  align-items: start;
+}
+
+.layout-split--primary {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* main 8 / aside 4 */
+  gap: var(--layout-gutter-md);
+  align-items: start;
+}
+
+.layout-split--secondary {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* rail 4 / main 8 */
+  gap: var(--layout-gutter-md);
+  align-items: start;
+}
+
+.layout-split--thirds {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--layout-gutter-md);
+  align-items: start;
+}
+
+.layout-split--quarters {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--layout-gutter-md);
+  align-items: start;
+}
+
+/* ------------------------------------------------------------------ */
+/* Marketing / docs shells                                            */
+/* ------------------------------------------------------------------ */
+
+.layout-container-sm {
+  width: min(100%, var(--layout-container-sm));
+  margin-inline: auto;
+}
+
+.layout-container-md {
+  width: min(100%, var(--layout-container-md));
+  margin-inline: auto;
+}
+
+.layout-container-lg {
+  width: min(100% - (var(--layout-margin-md) * 2), var(--layout-container-lg));
+  margin-inline: auto;
+}
+
+.layout-container-xl {
+  width: min(100% - (var(--layout-margin-lg) * 2), var(--layout-container-xl));
+  margin-inline: auto;
+}
+
+.layout-page {
+  width: min(100% - (var(--layout-margin-md) * 2), var(--layout-container-lg));
+  margin-inline: auto;
+}
+
+.layout-page--xl {
+  width: min(100% - (var(--layout-margin-lg) * 2), var(--layout-container-xl));
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* 12-column + auto utilities                                         */
+/* ------------------------------------------------------------------ */
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  gap: var(--layout-gutter-lg);
+}
+
+.layout-grid--gutter-sm {
+  gap: var(--layout-gutter-sm);
+}
+
+.layout-grid--gutter-md {
+  gap: var(--layout-gutter-md);
+}
+
+.layout-grid--gutter-lg {
+  gap: var(--layout-gutter-lg);
+}
+
+.layout-grid--gutter-xl {
+  gap: var(--layout-gutter-xl);
+}
+
+.layout-col-1 {
+  grid-column: span 1;
+}
+
+.layout-col-2 {
+  grid-column: span 2;
+}
+
+.layout-col-3 {
+  grid-column: span 3;
+}
+
+.layout-col-4 {
+  grid-column: span 4;
+}
+
+.layout-col-5 {
+  grid-column: span 5;
+}
+
+.layout-col-6 {
+  grid-column: span 6;
+}
+
+.layout-col-7 {
+  grid-column: span 7;
+}
+
+.layout-col-8 {
+  grid-column: span 8;
+}
+
+.layout-col-9 {
+  grid-column: span 9;
+}
+
+.layout-col-10 {
+  grid-column: span 10;
+}
+
+.layout-col-11 {
+  grid-column: span 11;
+}
+
+.layout-col-12 {
+  grid-column: span 12;
+}
+
+.layout-auto {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--layout-auto-min)), 1fr)
+  );
+  gap: var(--layout-gutter-lg);
+}
+
+.layout-auto--dense {
+  gap: var(--layout-gutter-md);
+}
+
+/* ------------------------------------------------------------------ */
+/* Breakpoints                                                        */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 64rem) {
+  .layout-app {
+    grid-template-columns: var(--layout-sidebar-compact) minmax(0, 1fr);
+  }
+
+  .layout-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .layout-metrics--fixed-3,
+  .layout-metrics--fixed-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .layout-split,
+  .layout-split--primary,
+  .layout-split--secondary,
+  .layout-split--thirds,
+  .layout-split--quarters {
+    grid-template-columns: 1fr;
+  }
+
+  .layout-col-1,
+  .layout-col-2,
+  .layout-col-3,
+  .layout-col-4,
+  .layout-col-5,
+  .layout-col-6,
+  .layout-col-7,
+  .layout-col-8,
+  .layout-col-9,
+  .layout-col-10,
+  .layout-col-11,
+  .layout-col-12 {
+    grid-column: span 12;
+  }
+}
+
+@media (min-width: 40rem) and (max-width: 64rem) {
+  .layout-metrics--fixed-3,
+  .layout-metrics--fixed-4,
+  .layout-split--thirds,
+  .layout-split--quarters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .layout-col-1,
+  .layout-col-2,
+  .layout-col-3,
+  .layout-col-4,
+  .layout-col-5,
+  .layout-col-6 {
+    grid-column: span 6;
+  }
+
+  .layout-col-7,
+  .layout-col-8,
+  .layout-col-9,
+  .layout-col-10,
+  .layout-col-11,
+  .layout-col-12 {
+    grid-column: span 12;
+  }
+}

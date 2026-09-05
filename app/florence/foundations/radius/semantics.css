@@ -1,0 +1,19 @@
+:root {
+  /* Control - buttons, inputs, selects */
+  --radius-control-sm: var(--radius-100);
+  --radius-control-md: var(--radius-200);
+  --radius-control-lg: var(--radius-300);
+
+  /* Surface - cards, panels, dialogs */
+  --radius-surface-sm: var(--radius-200);
+  --radius-surface-md: var(--radius-300);
+  --radius-surface-lg: var(--radius-400);
+
+  /* Media - images, video, avatars */
+  --radius-media-sm: var(--radius-200);
+  --radius-media-md: var(--radius-300);
+  --radius-media-lg: var(--radius-400);
+
+  /* Pill - chips, badges, tags */
+  --radius-pill: var(--radius-full);
+}

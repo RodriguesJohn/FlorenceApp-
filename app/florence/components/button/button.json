@@ -1,0 +1,160 @@
+{
+  "$schema": "florence.component.v1",
+  "id": "button",
+  "name": "Button",
+  "category": "actions",
+  "path": "03-components/button",
+  "exports": [
+    "Button"
+  ],
+  "intent": "Trigger a single action with clear visual hierarchy. One primary path per view; quieter variants for secondary work.",
+  "whenToUse": [
+    "Primary CTA on a screen or dialog",
+    "Form submit and destructive confirms (danger)",
+    "Toolbar or empty-state actions (secondary / tertiary)"
+  ],
+  "whenNotToUse": [
+    "In-page navigation - use a link",
+    "Binary on/off settings - use Switch",
+    "Choosing one of many options - use Radio or Select"
+  ],
+  "api": {
+    "props": [
+      {
+        "name": "variant",
+        "type": "enum",
+        "values": [
+          "primary",
+          "secondary",
+          "tertiary",
+          "danger"
+        ],
+        "default": "primary",
+        "description": "Visual hierarchy and emphasis"
+      },
+      {
+        "name": "size",
+        "type": "enum",
+        "values": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "default": "md",
+        "description": "Control density"
+      },
+      {
+        "name": "type",
+        "type": "enum",
+        "values": [
+          "button",
+          "submit",
+          "reset"
+        ],
+        "default": "button"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": false,
+        "description": "Removes the control from interaction"
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "default": false,
+        "description": "Shows a spinner, sets aria-busy, and blocks activation"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": true,
+        "description": "Visible label. Icon-only buttons still need aria-label on the element."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "name": "aria-label",
+        "type": "string",
+        "description": "Required when children are icon-only"
+      }
+    ]
+  },
+  "tokens": {
+    "color": [
+      "--color-interactive-primary*",
+      "--color-interactive-secondary*",
+      "--color-interactive-danger*",
+      "--color-text-primary",
+      "--color-text-brand",
+      "--color-brand-on-brand",
+      "--color-border-default",
+      "--color-bg-brand-subtle",
+      "--color-focus-ring",
+      "--color-overlay-scrim",
+      "--color-overlay-scrim-soft"
+    ],
+    "typography": [
+      "--text-label-*",
+      "--text-body-sm-*"
+    ],
+    "spacing": [
+      "--space-inset-*",
+      "--space-inline-*"
+    ],
+    "radius": [
+      "--radius-control-*",
+      "--radius-pill"
+    ],
+    "border": [
+      "--border-control",
+      "--border-focus"
+    ],
+    "shadow": [
+      "--shadow-raised-*"
+    ],
+    "motion": [
+      "--motion-interaction-*",
+      "--motion-expand-*"
+    ],
+    "opacity": [
+      "--opacity-disabled",
+      "--opacity-muted"
+    ]
+  },
+  "a11y": [
+    "Native <button> — keyboard (Enter/Space), implicit button role, form submit support",
+    "Visible label in children, or aria-label when icon-only — never an unnamed icon control",
+    ":focus-visible ring via --color-focus-ring and --border-focus (keyboard only, not mouse click)",
+    "disabled and loading set aria-disabled, remove pointer events, and use --opacity-disabled",
+    "loading sets aria-busy and shows a decorative spinner marked aria-hidden",
+    "Decorative icons inside the label should use aria-hidden=\"true\"",
+    "prefers-reduced-motion: reduce removes scale feedback, spinner rotation, and the liquid-metal shader animation"
+  ],
+  "examples": [
+    {
+      "title": "Primary action",
+      "code": "<Button variant=\"primary\">Save changes</Button>"
+    },
+    {
+      "title": "Icon-only",
+      "code": "<Button variant=\"secondary\" size=\"sm\" aria-label=\"Search\">\n  <Search aria-hidden=\"true\" />\n</Button>"
+    },
+    {
+      "title": "Loading submit",
+      "code": "<Button type=\"submit\" loading>Saving…</Button>"
+    },
+    {
+      "title": "Destructive",
+      "code": "<Button variant=\"danger\">Delete</Button>"
+    }
+  ],
+  "related": [
+    "input",
+    "modal",
+    "toast"
+  ]
+}

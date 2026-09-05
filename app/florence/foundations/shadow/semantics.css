@@ -1,0 +1,36 @@
+:root {
+  /* Raised - cards, tiles, resting surfaces */
+  --shadow-raised-xs: var(--shadow-150);
+  --shadow-raised-sm: var(--shadow-200);
+  --shadow-raised-md: var(--shadow-300);
+  --shadow-raised-lg: var(--shadow-400);
+  --shadow-raised-soft: var(--shadow-250);
+
+  /*
+   * Depth - soft ambient lift + partial glass rim
+   * (bright top/start edge, quiet bottom)
+   */
+  --shadow-raised-depth:
+    var(--shadow-raised-soft),
+    var(--shadow-inset-top-light),
+    var(--shadow-inset-start-light),
+    var(--shadow-inset-end-light),
+    var(--shadow-inset-bottom-light);
+
+  /* Overlay - menus, popovers, floating panels */
+  --shadow-overlay-sm: var(--shadow-300);
+  --shadow-overlay-md: var(--shadow-400);
+  --shadow-overlay-lg: var(--shadow-500);
+
+  /* Modal - dialogs and takeovers */
+  --shadow-modal: var(--shadow-600);
+}
+
+[data-theme='dark'] {
+  --shadow-raised-depth:
+    var(--shadow-raised-soft),
+    var(--shadow-inset-top-dark),
+    var(--shadow-inset-start-dark),
+    var(--shadow-inset-end-dark),
+    var(--shadow-inset-bottom-dark);
+}

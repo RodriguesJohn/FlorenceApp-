@@ -15,9 +15,9 @@ import "./product.css";
 
 const BOOKING_URL = "https://cal.com/john-rodrigues-rqt2lg/15min";
 const NEWSLETTER_URL = "https://substack.com/@johnrodrigues";
-const APP_HOME = import.meta.env.DEV
-  ? "http://localhost:5175/"
-  : "https://system.humanaistudio.ai/";
+const APP_HOME =
+  import.meta.env.VITE_APP_URL ||
+  (import.meta.env.DEV ? "http://localhost:5175/" : "https://florence-app-seven.vercel.app/");
 
 const systemLayers = [
   {

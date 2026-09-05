@@ -1,0 +1,17 @@
+:root {
+  /* Disabled - muted controls and content */
+  --opacity-disabled: var(--opacity-400);
+
+  /* Muted - secondary icons, quiet labels */
+  --opacity-muted: var(--opacity-500);
+
+  /* Hover - soft wash / tint strength */
+  --opacity-hover: var(--opacity-100);
+
+  /* Scrim - modal / drawer backdrop dimming */
+  --opacity-scrim-soft: var(--opacity-300);
+  --opacity-scrim: var(--opacity-500);
+
+  /* Full - fully opaque */
+  --opacity-full: var(--opacity-700);
+}
