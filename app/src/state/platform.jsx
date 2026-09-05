@@ -92,8 +92,9 @@ export function PlatformProvider({ children }) {
     const plan = PLANS[planId] ?? PLANS.free
     const workspace =
       workspaces.find((item) => item.id === workspaceId) ?? workspaces[0]
-    const canGenerate = planId === 'studio' || planId === 'custom'
-    const mcpEndpoint = `https://mcp.florence.ai/${workspace.id}`
+    const isPaid = planId === 'studio' || planId === 'custom'
+    const canGenerate = isPaid
+    const mcpEndpoint = 'node mcp/src/index.js'
     const mcpSnippet = buildMcpSnippet(mcpEndpoint)
 
     function patchWorkspace(id, updater) {
@@ -109,6 +110,7 @@ export function PlatformProvider({ children }) {
     return {
       plan,
       planId,
+      isPaid,
       workspace,
       workspaceId,
       workspaces,
@@ -133,8 +135,8 @@ export function PlatformProvider({ children }) {
         })
         setWorkspaceId(brand.id)
         notify({
-          title: `${brand.name} is ready`,
-          description: 'Switch brands anytime from the workspace menu.',
+          title: `${brand.name} is open`,
+          description: 'Generate guidelines or upload a kit to finish this brand.',
           status: 'success',
         })
         return brand

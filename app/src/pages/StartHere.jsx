@@ -82,7 +82,7 @@ export function StartHere() {
       <PageHeader
         eyebrow="Start here"
         title="Agent Connect"
-        description="Point Cursor or your coding agent at this workspace. Agents retrieve brand, tokens, and constraints instead of inventing UI."
+        description="Copy this into Cursor. The MCP names AI slop in the product you are already building and returns one recommendation."
         actions={
           <Tag tone={mcpConnected ? 'success' : 'neutral'} size="sm">
             {mcpConnected ? 'MCP live' : 'Not connected'}
@@ -94,8 +94,8 @@ export function StartHere() {
           <div className="surface-card">
             <h2 className="surface-card__title">Agent config</h2>
             <p className="surface-card__body">
-              Paste this into Cursor Settings, MCP. Any host that accepts an MCP
-              server URL can use the same snippet.
+              Paste this into Cursor Settings → MCP. Claude Code and Cursor
+              take the same JSON.
             </p>
             <pre className="code-block">
               <code>{mcpSnippet}</code>
@@ -110,10 +110,10 @@ export function StartHere() {
           <div className="surface-card">
             <h2 className="surface-card__title">Florence MCP</h2>
             <p className="surface-card__body">
-              Free includes this endpoint. Connect it so agents retrieve this
-              workspace instead of guessing.
+              Free is this MCP. It does not give them a design system. It
+              removes slop from the product they already have.
             </p>
-            <Input label="Endpoint" value={mcpEndpoint} readOnly />
+            <Input label="Command" value={mcpEndpoint} readOnly />
             <div className="layout-header__actions">
               {mcpConnected ? (
                 <Button variant="secondary" onClick={disconnectMcp}>

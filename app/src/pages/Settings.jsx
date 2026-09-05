@@ -184,11 +184,10 @@ export function Settings() {
               <div className="surface-card">
                 <h2 className="surface-card__title">Florence MCP</h2>
                 <p className="surface-card__body">
-                  Free includes this. Point Cursor, Claude, or your agent host at the
-                  endpoint. Agents retrieve brand, tokens, contracts, and constraints
-                  instead of inventing UI.
+                  Free is this MCP. Copy the config into Cursor. It names slop
+                  in the product they already have and returns one recommendation.
                 </p>
-                <Input label="Endpoint" value={mcpEndpoint} readOnly />
+                <Input label="Command" value={mcpEndpoint} readOnly />
                 <Switch
                   label="Allow write tools"
                   checked={writeTools}

@@ -11,6 +11,7 @@ import { Skills } from './pages/Skills.jsx'
 import { Libraries } from './pages/Libraries.jsx'
 import { Constraints } from './pages/Constraints.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
+import { Internal } from './pages/Internal.jsx'
 import { Evals } from './pages/Evals.jsx'
 import { Settings } from './pages/Settings.jsx'
 import { Generator } from './pages/Generator.jsx'
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/guardrails" element={<Constraints />} />
         <Route path="/constraints" element={<Navigate to="/guardrails" replace />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/internal" element={<Internal />} />
         <Route path="/evals" element={<Evals />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/generator" element={<Generator />} />

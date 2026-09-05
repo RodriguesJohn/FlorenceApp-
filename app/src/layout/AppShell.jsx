@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Activity,
   ChevronDown,
+  CircleDollarSign,
   CirclePlus,
   Code2,
   Film,
@@ -27,11 +28,13 @@ import {
   SidebarSection,
 } from '../../florence/components/sidebar/Sidebar.jsx'
 import { Button } from '../../florence/components/button/Button.jsx'
+import { Input } from '../../florence/components/input/Input.jsx'
 import { Modal } from '../../florence/components/modal/Modal.jsx'
 import { Switch } from '../../florence/components/switch/Switch.jsx'
 import { Tag } from '../../florence/components/tag/Tag.jsx'
 import { Toast } from '../../florence/components/toast/Toast.jsx'
 import { CreateBrandDialog } from './CreateBrandDialog.jsx'
+import { TEST_UNLOCK_PIN } from '../data/platform.js'
 import { usePlatform } from '../state/platform.jsx'
 import { useTheme } from '../state/theme.jsx'
 
@@ -81,7 +84,13 @@ const NAV = [
       { to: '/evals', label: 'Evals', icon: Activity },
     ],
   },
+  {
+    label: 'Internal',
+    items: [{ to: '/internal', label: 'Internal', icon: CircleDollarSign }],
+  },
 ]
+
+const FREE_PATHS = new Set(['/start', '/internal'])
 
 export function AppShell({ children }) {
   const {
@@ -90,6 +99,8 @@ export function AppShell({ children }) {
     setWorkspaceId,
     createBrand,
     plan,
+    isPaid,
+    choosePlan,
     toast,
     dismissToast,
   } = usePlatform()
@@ -99,6 +110,51 @@ export function AppShell({ children }) {
   const [workspaceOpen, setWorkspaceOpen] = useState(false)
   const [createOpen, setCreateOpen] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
+  const [pinOpen, setPinOpen] = useState(false)
+  const [pin, setPin] = useState('')
+  const [pinError, setPinError] = useState('')
+  const [pendingPath, setPendingPath] = useState('/start')
+
+  useEffect(() => {
+    if (isPaid || FREE_PATHS.has(location.pathname)) return
+    navigate('/start', { replace: true })
+  }, [isPaid, location.pathname, navigate])
+
+  function openUnlock(path = '/start') {
+    setPendingPath(path)
+    setPin('')
+    setPinError('')
+    setPinOpen(true)
+  }
+
+  function closeUnlock(open) {
+    setPinOpen(open)
+    if (!open) {
+      setPin('')
+      setPinError('')
+    }
+  }
+
+  function unlockPaid(event) {
+    event.preventDefault()
+    if (pin.trim() !== TEST_UNLOCK_PIN) {
+      setPinError('That PIN is not right.')
+      return
+    }
+    choosePlan('studio')
+    setPinOpen(false)
+    setPin('')
+    setPinError('')
+    navigate(pendingPath)
+  }
+
+  function go(path) {
+    if (isPaid || FREE_PATHS.has(path)) {
+      navigate(path)
+      return
+    }
+    openUnlock(path)
+  }
 
   return (
     <div className="app-shell layout-app">
@@ -116,11 +172,16 @@ export function AppShell({ children }) {
             className="workspace-switcher"
             aria-haspopup="dialog"
             aria-expanded={workspaceOpen}
-            onClick={() => setWorkspaceOpen(true)}
+            onClick={() => {
+              if (isPaid) {
+                setWorkspaceOpen(true)
+                return
+              }
+              openUnlock('/start')
+            }}
           >
             <span>
               <strong>{workspace.name}</strong>
-              <span>{workspace.kind || 'Design system workspace'}</span>
             </span>
             <ChevronDown aria-hidden="true" />
           </button>
@@ -131,12 +192,15 @@ export function AppShell({ children }) {
             <SidebarSection key={section.label} label={section.label}>
               {section.items.map((item) => {
                 const Icon = item.icon
+                const locked = !isPaid && !FREE_PATHS.has(item.to)
                 return (
                   <SidebarItem
                     key={item.to}
                     active={location.pathname === item.to}
                     icon={<Icon />}
-                    onClick={() => navigate(item.to)}
+                    className={locked ? 'app-nav-item--locked' : undefined}
+                    aria-haspopup={locked ? 'dialog' : undefined}
+                    onClick={() => go(item.to)}
                   >
                     {item.label}
                   </SidebarItem>
@@ -157,14 +221,22 @@ export function AppShell({ children }) {
           <SidebarItem
             active={location.pathname === '/settings'}
             icon={<Settings />}
-            onClick={() => navigate('/settings')}
+            className={!isPaid ? 'app-nav-item--locked' : undefined}
+            aria-haspopup={!isPaid ? 'dialog' : undefined}
+            onClick={() => go('/settings')}
           >
             Settings
           </SidebarItem>
           <button
             type="button"
             className="account-card"
-            onClick={() => setAccountOpen(true)}
+            onClick={() => {
+              if (isPaid) {
+                setAccountOpen(true)
+                return
+              }
+              openUnlock('/settings')
+            }}
           >
             <span className="account-card__avatar" aria-hidden="true">
               JR
@@ -245,21 +317,59 @@ export function AppShell({ children }) {
       />
 
       <Modal
+        open={pinOpen}
+        onOpenChange={closeUnlock}
+        title="Unlock paid features"
+        description="Free includes Agent Connect. Enter the test PIN to see the rest of the product."
+        size="sm"
+        footer={
+          <Button variant="primary" type="submit" form="unlock-pin-form">
+            Unlock
+          </Button>
+        }
+      >
+        <form id="unlock-pin-form" onSubmit={unlockPaid}>
+          <Input
+            label="PIN"
+            inputMode="numeric"
+            autoComplete="off"
+            value={pin}
+            error={pinError}
+            onChange={(event) => {
+              setPin(event.target.value)
+              if (pinError) setPinError('')
+            }}
+          />
+        </form>
+      </Modal>
+
+      <Modal
         open={accountOpen}
         onOpenChange={setAccountOpen}
         title="John Rodrigues"
         description="Workspace admin"
         size="sm"
         footer={
-          <Button
-            variant="secondary"
-            onClick={() => {
-              setAccountOpen(false)
-              navigate('/settings')
-            }}
-          >
-            Open settings
-          </Button>
+          <>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setAccountOpen(false)
+                navigate('/internal')
+              }}
+            >
+              Open internal
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setAccountOpen(false)
+                navigate('/settings')
+              }}
+            >
+              Open settings
+            </Button>
+          </>
         }
       >
         <div className="account-dialog">

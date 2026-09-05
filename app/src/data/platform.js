@@ -1,3 +1,5 @@
+export const TEST_UNLOCK_PIN = '2024'
+
 export const PLANS = {
   free: {
     id: 'free',
@@ -246,12 +248,15 @@ export function slugifyBrand(name) {
   return base || 'brand'
 }
 
-export function buildMcpSnippet(endpoint) {
+export function buildMcpSnippet(_endpoint) {
   return JSON.stringify(
     {
       mcpServers: {
         florence: {
-          url: endpoint,
+          command: 'node',
+          args: [
+            '/Users/johnrodrigues/Projects/Active Projects/Folrence AI App /mcp/src/index.js',
+          ],
         },
       },
     },
@@ -397,12 +402,10 @@ export function createBrandRecord({ name, product, voice }) {
     name: name.trim(),
     kind: 'Design system workspace',
     product: product.trim() || name.trim(),
-    voice:
-      voice.trim() ||
-      'Calm, precise, and specific. No hype. Sentence case. One idea per sentence.',
-    origin: 'created',
-    principles: DEFAULT_PRINCIPLES,
-    lockups: lockupsForProduct(product.trim() || name.trim()),
+    voice: voice.trim(),
+    origin: null,
+    principles: [],
+    lockups: [],
     creatives: [],
     designSystem: null,
   })
