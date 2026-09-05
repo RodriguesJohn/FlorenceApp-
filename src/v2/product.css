@@ -1402,3 +1402,101 @@ html[data-theme="dark"] .product-ecosystem-chip-logo--invert img {
   background: color-mix(in srgb, var(--product-danger) 12%, transparent);
   color: var(--product-danger);
 }
+
+/* ========================================================================
+   Enhanced Mobile Responsive Styles (Linear-style approach)
+   ======================================================================== */
+
+/* Improved mobile viewport and touch targets */
+@media (max-width: 768px) {
+  .product-page {
+    --page-padding: clamp(16px, 4vw, 24px);
+    --section-gap: clamp(48px, 12vw, 80px);
+    --card-padding: clamp(20px, 5vw, 28px);
+  }
+  
+  /* Better typography scaling for mobile */
+  .product-hero h1 {
+    font-size: clamp(2rem, 7.5vw, 3.25rem);
+    line-height: 1.15;
+  }
+  
+  .product-hero-copy {
+    font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+    line-height: 1.65;
+  }
+  
+  /* Improved button touch targets */
+  .product-btn {
+    min-height: 44px;
+    padding: 0.75rem 1.5rem;
+    font-size: clamp(0.875rem, 3vw, 1rem);
+  }
+  
+  /* Stack pricing cards but keep them full-featured */
+  .product-pricing-grid {
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 4vw, 1.5rem);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  
+  .product-pricing-card {
+    padding: clamp(1.25rem, 5vw, 2rem);
+  }
+  
+  /* Better spacing for sections */
+  .product-section {
+    padding: var(--section-gap) var(--page-padding);
+  }
+  
+  /* Improved grid layouts on mobile */
+  .product-layer-list {
+    gap: clamp(1rem, 4vw, 1.5rem);
+  }
+  
+  .product-layer {
+    padding: clamp(1.25rem, 5vw, 2rem);
+  }
+  
+  /* Keep ecosystem visualization functional */
+  .product-ecosystem-chips {
+    gap: 0.65rem;
+  }
+  
+  .product-ecosystem-chip {
+    padding: 0.65rem 1rem;
+    min-height: 44px;
+  }
+  
+  /* Footer improvements */
+  .product-footer {
+    padding: clamp(2rem, 6vw, 3rem) var(--page-padding);
+  }
+}
+
+/* Very small screens - further optimization */
+@media (max-width: 480px) {
+  .product-hero {
+    padding-top: clamp(2.5rem, 8vw, 4rem);
+  }
+  
+  .product-hero h1 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+  
+  /* Ensure all interactive elements are touch-friendly */
+  .product-btn,
+  .liquid-metal-btn__control,
+  .product-pricing-card button {
+    min-height: 48px;
+    font-size: 0.95rem;
+  }
+  
+  /* Optimize card padding for small screens */
+  .product-layer,
+  .product-pricing-card,
+  .product-gap-outcome {
+    padding: 1.25rem 1rem;
+  }
+}

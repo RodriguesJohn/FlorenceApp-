@@ -1,0 +1,9 @@
+{
+  "install": "npm install",
+  "ports": [
+    {
+      "name": "dev-server",
+      "port": 5173
+    }
+  ]
+}
