@@ -57,7 +57,6 @@ import githubLogo from "../assets/logos/github.svg";
 import storybookLogo from "../assets/logos/storybook.png";
 import typescriptLogo from "../assets/logos/typescript.webp";
 import ProductPage from "./ProductPage.jsx";
-import AcademyPage from "./AcademyPage.jsx";
 import tocaCompanyLogo from "../assets/companies/Toca.png";
 import citiCompanyLogo from "../assets/companies/Citi.svg.png";
 import chaseCompanyLogo from "../assets/companies/ChaseLightMOde.png";
@@ -66,8 +65,6 @@ import googleCompanyLogo from "../assets/companies/GoogleLogog.png";
 import metaCompanyLogo from "../assets/companies/Meta-Emblem.png";
 import "./styles.css";
 import "./home-type.css";
-
-const FlorenceOfferPage = React.lazy(() => import("./FlorenceOfferPage.jsx"));
 
 const bookingLink = "john-rodrigues-rqt2lg/15min";
 const bookingNamespace = "15min";
@@ -2844,28 +2841,9 @@ function OfferingPage({ slug }) {
 }
 
 function App() {
-  const route = window.location.pathname.replace(/\/+$/, "") || "/";
-  const isHistory = route === "/history";
-  const isProduct = route === "/product";
-  const isAcademy = route === "/academy";
-  const offeringMatch = route.match(/^\/offerings\/([^/]+)$/);
-  const offeringSlug = offeringMatch ? offeringMatch[1] : null;
-
   return (
     <>
-      {isProduct ? (
-        <ProductPage />
-      ) : isAcademy ? (
-        <AcademyPage />
-      ) : route === "/florence" || offeringSlug === "agent-ready-design-system" ? (
-        <React.Suspense fallback={null}>
-          <FlorenceOfferPage />
-        </React.Suspense>
-      ) : offeringSlug ? (
-        <OfferingPage slug={offeringSlug} />
-      ) : (
-        <StudioHome isHistory={isHistory} />
-      )}
+      <ProductPage />
       <BottomBlur />
       <Analytics />
     </>

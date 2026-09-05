@@ -6,161 +6,152 @@
       "permanent": true
     },
     {
-      "source": "/academy/",
-      "destination": "/academy",
+      "source": "/workshop",
+      "destination": "/",
       "permanent": true
     },
     {
-      "source": "/case-studies/",
-      "destination": "/case-studies",
+      "source": "/workshop/",
+      "destination": "/",
       "permanent": true
     },
     {
-      "source": "/case-studies/florence/",
-      "destination": "/case-studies/florence",
+      "source": "/workshop/complete",
+      "destination": "/",
       "permanent": true
     },
     {
-      "source": "/blog/",
-      "destination": "/blog",
+      "source": "/workshop/complete/",
+      "destination": "/",
       "permanent": true
     },
     {
-      "source": "/offerings/agent-ready-design-system/",
-      "destination": "/offerings/agent-ready-design-system",
+      "source": "/workshop/playbook",
+      "destination": "/",
       "permanent": true
     },
     {
-      "source": "/beta/",
-      "destination": "/beta",
+      "source": "/workshop/playbook/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/course",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/course/",
-      "destination": "/course",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/academy",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/academy/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/design-systems",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/design-systems/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/product",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/product/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/florence",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/florence/",
-      "destination": "/florence",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/florence",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/florence/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tools",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/websites",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/offerings/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/beta/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/app/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/playbook/",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/florence/system/",
       "destination": "/florence/system",
       "permanent": true
-    },
-    {
-      "source": "/workshop/complete/",
-      "destination": "/workshop/complete",
-      "permanent": true
-    },
-    {
-      "source": "/app/",
-      "destination": "/app",
-      "permanent": true
-    },
-    {
-      "source": "/workshop/playbook",
-      "destination": "/app",
-      "permanent": true
-    },
-    {
-      "source": "/workshop/playbook/",
-      "destination": "/app",
-      "permanent": true
-    },
-    {
-      "source": "/playbook/",
-      "destination": "/playbook",
-      "permanent": true
     }
   ],
   "rewrites": [
-    {
-      "source": "/academy",
-      "destination": "/academy.html"
-    },
-    {
-      "source": "/websites",
-      "destination": "/websites.html"
-    },
-    {
-      "source": "/case-studies",
-      "destination": "/case-studies.html"
-    },
-    {
-      "source": "/case-studies/florence",
-      "destination": "/case-studies.html"
-    },
-    {
-      "source": "/tools",
-      "destination": "/tools.html"
-    },
-    {
-      "source": "/workshop/complete",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/app",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/workshop/playbook",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/playbook",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/workshop",
-      "destination": "/design-systems.html"
-    },
-    {
-      "source": "/design-systems",
-      "destination": "/design-systems.html"
-    },
-    {
-      "source": "/product",
-      "destination": "/product.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/blog.html"
-    },
-    {
-      "source": "/blog/:slug",
-      "destination": "/blog/:slug.html"
-    },
-    {
-      "source": "/offerings/design-engineering",
-      "destination": "/offering-design-engineering.html"
-    },
-    {
-      "source": "/offerings/ai-native-products",
-      "destination": "/offering-ai-native-products.html"
-    },
-    {
-      "source": "/offerings/ai-consulting",
-      "destination": "/offering-ai-consulting.html"
-    },
-    {
-      "source": "/offerings/ai-training-enablement",
-      "destination": "/offering-ai-training-enablement.html"
-    },
-    {
-      "source": "/offerings/agent-ready-design-system",
-      "destination": "/offering-agent-ready-design-system.html"
-    },
-    {
-      "source": "/course",
-      "destination": "/course.html"
-    },
-    {
-      "source": "/florence",
-      "destination": "/florence.html"
-    },
     {
       "source": "/florence/system",
       "destination": "/florence-system.html"

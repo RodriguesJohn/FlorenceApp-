@@ -571,7 +571,7 @@ a {
   overflow: hidden;
   padding: 0.55rem;
   border: 1px solid color-mix(in srgb, var(--color-text-primary) 14%, transparent);
-  border-radius: 1.15rem;
+  border-radius: var(--radius-surface-lg);
   background: #070708;
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--color-text-primary) 6%, transparent),
@@ -621,7 +621,7 @@ a {
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border: 0;
-  border-radius: 0.7rem;
+  border-radius: calc(var(--radius-surface-lg) - 0.55rem);
   outline: 1px solid oklch(1 0 0 / 0.1);
   outline-offset: -1px;
   background: var(--color-overlay-scrim);

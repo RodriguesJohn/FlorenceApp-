@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@clerk/react": "^6.14.8",
+    "@paper-design/shaders": "^0.0.80",
     "@paper-design/shaders-react": "^0.0.80",
     "@supabase/supabase-js": "^2.112.4",
     "@vercel/analytics": "^2.0.1",

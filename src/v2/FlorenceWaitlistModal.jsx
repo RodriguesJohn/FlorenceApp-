@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
+import { LiquidMetalButton } from "./LiquidMetalButton.jsx";
+
 const CK_SCRIPT = "https://f.convertkit.com/ckjs/ck.5.js";
 
 const FORM_OPTIONS = {
@@ -274,6 +276,19 @@ export function WaitlistButton({
   children = "Join the waitlist",
   onOpen
 }) {
+  const isPrimary = /\bproduct-btn--primary\b/.test(className);
+
+  if (isPrimary) {
+    return (
+      <LiquidMetalButton
+        className={className.includes("product-btn--full") ? "liquid-metal-btn--full" : ""}
+        onClick={onOpen}
+      >
+        {children}
+      </LiquidMetalButton>
+    );
+  }
+
   return (
     <button type="button" className={className} onClick={onOpen}>
       {children}

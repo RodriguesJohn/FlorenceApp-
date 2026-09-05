@@ -1,12 +1,12 @@
 :root {
-  /* Radius scale */
+  /* Radius scale — Apple-like continuous corners */
   --radius-0: 0;
-  --radius-50: 0.125rem; /* 2px */
-  --radius-100: 0.25rem; /* 4px */
-  --radius-200: 0.5rem; /* 8px */
-  --radius-300: 0.75rem; /* 12px */
-  --radius-400: 1rem; /* 16px */
-  --radius-500: 1.25rem; /* 20px */
-  --radius-600: 1.5rem; /* 24px */
+  --radius-50: 0.25rem; /* 4px */
+  --radius-100: 0.5rem; /* 8px */
+  --radius-200: 0.75rem; /* 12px */
+  --radius-300: 1rem; /* 16px */
+  --radius-400: 1.25rem; /* 20px */
+  --radius-500: 1.5rem; /* 24px */
+  --radius-600: 2rem; /* 32px */
   --radius-full: 9999px;
 }

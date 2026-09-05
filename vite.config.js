@@ -65,11 +65,18 @@ function htmlAliases() {
     "/workshop/playbook": "/index.html",
     "/playbook": "/index.html",
     "/workshop/complete": "/index.html",
-    "/workshop": "/design-systems.html",
-    "/course": "/course.html",
-    "/florence": "/florence.html",
+    "/workshop": "/index.html",
+    "/design-systems": "/index.html",
+    "/course": "/index.html",
+    "/academy": "/index.html",
+    "/product": "/index.html",
+    "/florence": "/index.html",
     "/florence/system": "/florence-system.html",
-    "/case-studies/florence": "/case-studies.html"
+    "/case-studies": "/index.html",
+    "/case-studies/florence": "/index.html",
+    "/tools": "/index.html",
+    "/websites": "/index.html",
+    "/blog": "/index.html"
   };
 
   return {

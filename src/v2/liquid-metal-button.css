@@ -1,0 +1,132 @@
+.liquid-metal-btn {
+  display: inline-flex;
+  vertical-align: middle;
+  border-radius: 100px;
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.3),
+    0 36px 14px 0 rgb(0 0 0 / 0.02),
+    0 20px 12px 0 rgb(0 0 0 / 0.08),
+    0 9px 9px 0 rgb(0 0 0 / 0.12),
+    0 2px 5px 0 rgb(0 0 0 / 0.15);
+  transform: scale(1);
+  transition:
+    box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.liquid-metal-btn:hover {
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.4),
+    0 12px 6px 0 rgb(0 0 0 / 0.05),
+    0 8px 5px 0 rgb(0 0 0 / 0.1),
+    0 4px 4px 0 rgb(0 0 0 / 0.15),
+    0 1px 2px 0 rgb(0 0 0 / 0.2);
+}
+
+.liquid-metal-btn:has(.liquid-metal-btn__control:active) {
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.5),
+    0 1px 2px 0 rgb(0 0 0 / 0.3);
+  transform: translateY(1px) scale(0.98);
+}
+
+.liquid-metal-btn__control {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 48px;
+  margin: 0;
+  padding: 15.5px 24px;
+  border: none;
+  border-radius: inherit;
+  background: transparent;
+  color: var(--product-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  letter-spacing: var(--tracking-body-sm);
+  cursor: pointer;
+  appearance: none;
+}
+
+.liquid-metal-btn__control:focus-visible {
+  outline: 2px solid var(--product-ink);
+  outline-offset: 4px;
+}
+
+.liquid-metal-btn__shader,
+.liquid-metal-btn__face {
+  position: absolute;
+  pointer-events: none;
+}
+
+.liquid-metal-btn__shader {
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: linear-gradient(180deg, #cfcfd2 0%, #6d6d70 100%);
+}
+
+.liquid-metal-btn__shader :is(canvas) {
+  display: block;
+  border-radius: inherit;
+}
+
+.liquid-metal-btn__face {
+  inset: 2px;
+  z-index: 1;
+  border-radius: inherit;
+  background: var(--product-canvas);
+}
+
+.liquid-metal-btn__label {
+  position: relative;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.liquid-metal-btn__ripple {
+  position: absolute;
+  z-index: 3;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 255 255 / 0.4) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.95);
+  animation: liquid-metal-ripple 0.6s ease-out forwards;
+}
+
+@keyframes liquid-metal-ripple {
+  to {
+    transform: translate(-50%, -50%) scale(4);
+    opacity: 0;
+  }
+}
+
+.liquid-metal-btn--full,
+.product-btn--full.liquid-metal-btn {
+  width: 100%;
+}
+
+.liquid-metal-btn--full .liquid-metal-btn__control,
+.product-btn--full.liquid-metal-btn .liquid-metal-btn__control {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-metal-btn,
+  .liquid-metal-btn:has(.liquid-metal-btn__control:active) {
+    transition: none;
+    transform: none;
+  }
+
+  .liquid-metal-btn__ripple {
+    display: none;
+  }
+}

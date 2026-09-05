@@ -3,16 +3,17 @@
   --radius-control-sm: var(--radius-100);
   --radius-control-md: var(--radius-200);
   --radius-control-lg: var(--radius-300);
+  --radius-control: var(--radius-control-md);
 
   /* Surface - cards, panels, dialogs */
-  --radius-surface-sm: var(--radius-200);
-  --radius-surface-md: var(--radius-300);
-  --radius-surface-lg: var(--radius-400);
+  --radius-surface-sm: var(--radius-400);
+  --radius-surface-md: var(--radius-500);
+  --radius-surface-lg: var(--radius-600);
 
   /* Media - images, video, avatars */
-  --radius-media-sm: var(--radius-200);
-  --radius-media-md: var(--radius-300);
-  --radius-media-lg: var(--radius-400);
+  --radius-media-sm: var(--radius-400);
+  --radius-media-md: var(--radius-500);
+  --radius-media-lg: var(--radius-600);
 
   /* Pill - chips, badges, tags */
   --radius-pill: var(--radius-full);

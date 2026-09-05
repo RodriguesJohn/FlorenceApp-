@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useTheme } from "./theme.jsx";
 import "./saas-mockup.css";
 
 function Icon({ name }) {
@@ -13,6 +14,9 @@ function Icon({ name }) {
     assets: <><rect x="3" y="3" width="18" height="18" rx="2.5" /><circle cx="8.6" cy="8.6" r="1.6" /><path d="m20.5 15.5-4.8-4.8L5 21" /></>,
     components: <><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><path d="M17.5 14.5v6M14.5 17.5h6" /></>,
     tokens: <><path d="M12 3a9 9 0 1 0 0 18 2.4 2.4 0 0 0 0-4.8 2 2 0 0 1 0-4h4.4A4.6 4.6 0 0 0 21 7.6C21 4.9 17 3 12 3Z" /><circle cx="8.4" cy="9.2" r="1" /></>,
+    plug: <><path d="M12 17v5M9 8V3M15 8V3" /><path d="M8 8h8v3a4 4 0 0 1-8 0V8Z" /></>,
+    sparkles: <><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6.2 6.2l2.1 2.1M15.7 15.7l2.1 2.1M17.8 6.2l-2.1 2.1M8.3 15.7l-2.1 2.1" /></>,
+    film: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M7 4v4M7 16v4M17 4v4M17 16v4M3 12h18" /></>,
     settings: <><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z" /></>
   };
   return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>;
@@ -27,201 +31,79 @@ const navigation = [
 ];
 
 const systemNavigation = [
-  { group: "Brand and Marketing", items: [["voice", "Brand System"], ["assets", "Creatives"]] },
-  { group: "Product", items: [["library", "Foundation Token"], ["components", "Components"]] },
-  { group: "Engineering", items: [["code", "Constraints"]] },
-  { group: "Quality", items: [["activity", "Evals"]] }
+  { group: "Start here", items: [["agents", "Agent Connect"]] },
+  { group: "Brand", items: [["voice", "Brand System"], ["assets", "Assets"]] },
+  { group: "Product", items: [["tokens", "Foundation Token"], ["components", "Components"], ["film", "Animation Library"], ["sparkles", "Skills"]] },
+  { group: "Connectors", items: [["plug", "Connectors"]] },
+  { group: "References", items: [["library", "Libraries"]] },
+  { group: "Engineering", items: [["code", "Guardrails"]] },
+  { group: "Quality", items: [["overview", "Dashboard"], ["activity", "Evals"]] }
 ];
 
-const componentFilters = [
-  ["All", "28"],
-  ["Base", "14"],
-  ["Data display", "6"],
-  ["Agentic", "4"],
-  ["Motion", "4"]
-];
-
-const SYSTEM_PAGES = ["color", "components"];
+const SYSTEM_PAGES = ["tokens", "components"];
 const PAGE_MS = 6200;
 
-const COLOR_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
-
-/* Primitive ramps from florence-ds/02-foundations/colors/primitives.css */
-const PRIMITIVE_PALETTES = [
+const TOKEN_GROUPS = [
   {
-    name: "gray",
-    label: "Gray",
-    values: ["#f9fafb", "#f3f4f6", "#e5e7eb", "#d1d5db", "#9ca3af", "#6b7280", "#4b5563", "#374151", "#1f2937", "#111827"]
+    id: "color",
+    label: "Color",
+    items: [
+      { name: "--color-text-primary", role: "Primary text", swatch: "var(--color-text-primary)" },
+      { name: "--color-text-secondary", role: "Secondary text", swatch: "var(--color-text-secondary)" },
+      { name: "--color-bg-page", role: "Page", swatch: "var(--color-bg-page)" },
+      { name: "--color-bg-subtle", role: "Canvas", swatch: "var(--color-bg-subtle)" },
+      { name: "--color-bg-brand", role: "Brand fill", swatch: "var(--color-bg-brand)" },
+      { name: "--color-border-default", role: "Default stroke", swatch: "var(--color-border-default)" },
+      { name: "--color-interactive-primary", role: "Primary action", swatch: "var(--color-interactive-primary)" },
+      { name: "--color-focus-ring", role: "Focus", swatch: "var(--color-focus-ring)" }
+    ]
   },
   {
-    name: "slate",
-    label: "Slate",
-    values: ["#f8fafc", "#f1f5f9", "#e2e8f0", "#cbd5e1", "#94a3b8", "#64748b", "#475569", "#334155", "#1e293b", "#0f172a"]
+    id: "typography",
+    label: "Typography",
+    items: [
+      { name: "--text-display-*", role: "Page heroes" },
+      { name: "--text-metric-*", role: "Balances and KPIs" },
+      { name: "--text-heading-*", role: "Section titles" },
+      { name: "--text-body-*", role: "Reading copy" },
+      { name: "--text-label-*", role: "Controls" },
+      { name: "--text-caption-*", role: "Meta and hints" }
+    ]
   },
   {
-    name: "blue",
-    label: "Blue",
-    values: ["#eff6ff", "#dbeafe", "#bfdbfe", "#93c5fd", "#60a5fa", "#3b82f6", "#2563eb", "#1d4ed8", "#1e40af", "#1e3a8a"]
+    id: "spacing",
+    label: "Spacing",
+    items: [
+      { name: "--space-inset-*", role: "Padding inside surfaces" },
+      { name: "--space-stack-*", role: "Vertical rhythm" },
+      { name: "--space-inline-*", role: "Horizontal gaps" },
+      { name: "--space-section-*", role: "Section breaks" }
+    ]
   },
   {
-    name: "green",
-    label: "Green",
-    values: ["#f0fdf4", "#dcfce7", "#bbf7d0", "#86efac", "#4ade80", "#22c55e", "#16a34a", "#15803d", "#166534", "#14532d"]
-  },
-  {
-    name: "violet",
-    label: "Violet",
-    values: ["#f5f3ff", "#ede9fe", "#ddd6fe", "#c4b5fd", "#a78bfa", "#8b5cf6", "#7c3aed", "#6d28d9", "#5b21b6", "#4c1d95"]
-  },
-  {
-    name: "rose",
-    label: "Rose",
-    values: ["#fff1f2", "#ffe4e6", "#fecdd3", "#fda4af", "#fb7185", "#f43f5e", "#e11d48", "#be123c", "#9f1239", "#881337"]
+    id: "motion",
+    label: "Motion",
+    items: [
+      { name: "--motion-interaction-*", role: "Buttons and controls" },
+      { name: "--motion-expand-*", role: "Disclosure" },
+      { name: "--motion-overlay-*", role: "Menus and toasts" },
+      { name: "--motion-modal-*", role: "Dialogs" }
+    ]
   }
 ];
 
-const COLOR_SINGLES = [
-  { name: "white", label: "White", hex: "#ffffff" },
-  { name: "black", label: "Black", hex: "#000000" }
+const COMPONENT_ROWS = [
+  { name: "Button", category: "Actions", when: "Primary CTA, submit, or destructive confirm", id: "button.json" },
+  { name: "Input", category: "Forms", when: "Single-line text with label and error", id: "input.json" },
+  { name: "Select", category: "Forms", when: "One value from a known list", id: "select.json" },
+  { name: "Switch", category: "Forms", when: "Immediate on/off setting", id: "switch.json" },
+  { name: "Sidebar", category: "Navigation", when: "App shell primary nav", id: "sidebar.json" },
+  { name: "Tabs", category: "Navigation", when: "Peer views in the same page", id: "tabs.json" },
+  { name: "KPI card", category: "Data", when: "One metric with optional delta", id: "kpi-card.json" },
+  { name: "Insight card", category: "Data", when: "A recommended action or finding", id: "insight-card.json" },
+  { name: "Data table", category: "Data", when: "Structured operational rows", id: "data-table.json" },
+  { name: "Chat pattern", category: "Agentic", when: "Full assistant conversation surface", id: "chat-pattern.json" }
 ];
-
-/* Semantic roles — dark theme resolved from florence-ds/02-foundations/colors/semantics.css */
-const FLORENCE = {
-  "--color-text-primary": "#f9fafb",
-  "--color-text-secondary": "#d1d5db",
-  "--color-text-muted": "#6b7280",
-  "--color-text-brand": "#93c5fd",
-  "--color-text-success": "#86efac",
-  "--color-bg-page": "#000000",
-  "--color-bg-subtle": "#141414",
-  "--color-bg-muted": "#1a1a1a",
-  "--color-bg-brand": "#3b82f6",
-  "--color-bg-brand-subtle": "#1e3a8a",
-  "--color-border-default": "#262626",
-  "--color-border-strong": "#404040",
-  "--color-border-focus": "#60a5fa",
-  "--color-border-brand": "#60a5fa",
-  "--color-interactive-primary": "#60a5fa",
-  "--color-interactive-primary-hover": "#93c5fd",
-  "--color-interactive-selected": "#1e3a8a",
-  "--color-brand-primary": "#60a5fa",
-  "--color-brand-on-brand": "#ffffff",
-  "--color-disabled-text": "#6b7280",
-  "--color-data-1": "#60a5fa",
-  "--color-data-2": "#a3e635",
-  "--color-data-3": "#a78bfa",
-  "--color-data-4": "#fb7185",
-  "--color-data-5": "#22d3ee"
-};
-
-const componentCards = [
-  { name: "Button", type: "button", file: "Button.jsx" },
-  { name: "Input", type: "input", file: "Input.jsx" },
-  { name: "Select", type: "select", file: "Select.jsx" },
-  { name: "Switch", type: "switch", file: "Switch.jsx" },
-  { name: "Tabs", type: "tabs", file: "Tabs.jsx" },
-  { name: "Tag", type: "tag", file: "Tag.jsx" },
-  { name: "KPI card", type: "kpi", file: "KpiCard.jsx" },
-  { name: "Bar chart", type: "chart", file: "BarChart.jsx" }
-];
-
-const COMPONENT_CODE = {
-  button: `import { Button } from "@florence/button"
-
-export function SaveActions() {
-  return (
-    <>
-      <Button variant="primary">Save changes</Button>
-      <Button variant="tertiary">Cancel</Button>
-    </>
-  )
-}`,
-  input: `import { Input } from "@florence/input"
-
-export function EmailField() {
-  return (
-    <Input
-      label="Work email"
-      type="email"
-      placeholder="jane@acme.com"
-      hint="Used for workspace invites"
-    />
-  )
-}`,
-  select: `import { Select } from "@florence/select"
-
-export function EnvironmentField({ value, onValueChange }) {
-  return (
-    <Select
-      label="Environment"
-      value={value}
-      onValueChange={onValueChange}
-      options={[
-        { value: "prod", label: "Production" },
-        { value: "staging", label: "Staging" },
-      ]}
-    />
-  )
-}`,
-  switch: `import { Switch } from "@florence/switch"
-
-export function FeatureToggle({ enabled, onCheckedChange }) {
-  return (
-    <Switch
-      label="Enabled"
-      checked={enabled}
-      onCheckedChange={onCheckedChange}
-    />
-  )
-}`,
-  tabs: `import { Tabs, TabsList, TabsTrigger } from "@florence/tabs"
-
-export function SettingsTabs() {
-  return (
-    <Tabs defaultValue="overview" variant="line">
-      <TabsList>
-        <TabsTrigger value="overview">Overview</TabsTrigger>
-        <TabsTrigger value="usage">Usage</TabsTrigger>
-        <TabsTrigger value="code">Code</TabsTrigger>
-      </TabsList>
-    </Tabs>
-  )
-}`,
-  tag: `import { Tag } from "@florence/tag"
-
-export function StatusTags() {
-  return (
-    <>
-      <Tag tone="brand">Design</Tag>
-      <Tag tone="neutral">Beta</Tag>
-      <Tag tone="success">Passed</Tag>
-    </>
-  )
-}`,
-  kpi: `import { KpiCard } from "@florence/kpi-card"
-
-export function RetrievalMetric() {
-  return (
-    <KpiCard
-      label="Retrieval rate"
-      value="94%"
-      delta="+6.2% vs last week"
-      trend="up"
-    />
-  )
-}`,
-  chart: `import { BarChart } from "@florence/bar-chart"
-
-export function WeeklyVolume() {
-  return (
-    <BarChart
-      categories={["Mon", "Tue", "Wed", "Thu", "Fri"]}
-      data={[38, 56, 44, 72, 88]}
-      aria-label="Weekly retrieval volume"
-    />
-  )
-}`
-};
 
 const studioMetrics = [
   { label: "Revenue", value: "$1.84M", change: "+18.4%", tone: "blue" },
@@ -242,326 +124,99 @@ const agentTeam = [
 ];
 
 const PAGE_META = {
-  color: {
-    title: "Color",
-    lede: "Primitive palette ramps your agents retrieve.",
-    breadcrumbParent: "Foundation Token",
+  tokens: {
+    title: "Foundation Token",
+    lede: "Semantic roles agents must use. Free reads Florence. Studio publishes your own.",
     navActive: "Foundation Token"
   },
   components: {
     title: "Components",
-    lede: "28 contracts your agents retrieve instead of inventing UI.",
-    breadcrumbParent: null,
+    lede: "Retrieve the contract before composing. The MCP will not invent a sibling control.",
     navActive: "Components"
   }
 };
 
-function isLightHex(hex) {
-  const value = hex.replace("#", "");
-  const r = parseInt(value.slice(0, 2), 16);
-  const g = parseInt(value.slice(2, 4), 16);
-  const b = parseInt(value.slice(4, 6), 16);
-  return (r * 299 + g * 587 + b * 114) / 1000 > 160;
-}
+function MockTokenPage({ locked = false }) {
+  const [activeGroup, setActiveGroup] = useState(TOKEN_GROUPS[0].id);
+  const group = TOKEN_GROUPS.find((item) => item.id === activeGroup) ?? TOKEN_GROUPS[0];
 
-function ComponentPreview({ type }) {
-  if (type === "switch") {
-    return (
-      <div className="dsp-animated-preview">
-        <div className="dsp-switches">
-          <span className="dsp-switch-row">
-            <span className="dsp-switch" style={{ backgroundColor: FLORENCE["--color-interactive-primary"] }}>
-              <i className="dsp-switch-knob" />
-            </span>
-            Enabled
-          </span>
-        </div>
+  return (
+    <div className="saas-app-page">
+      <article className="saas-insight-card">
+        <p className="saas-insight-card__eyebrow">Free</p>
+        <h4>Studio generates a system you can plug in</h4>
+        <p>
+          Free already removes slop by serving Florence over MCP. For $99 you get one seat and a generator that publishes your tokens here.
+        </p>
+        <Chrome locked={locked} className="saas-btn-primary">View Studio</Chrome>
+      </article>
+      <div className="saas-tabs" role="tablist" aria-label="Token groups">
+        {TOKEN_GROUPS.map((tab) => {
+          const selected = tab.id === group.id;
+          return (
+            <Chrome
+              locked={locked}
+              className={selected ? "active" : ""}
+              key={tab.id}
+              role="tab"
+              aria-selected={selected}
+              onClick={() => setActiveGroup(tab.id)}
+            >
+              {tab.label}
+            </Chrome>
+          );
+        })}
       </div>
-    );
-  }
-
-  if (type === "button") {
-    return (
-      <div className="dsp-animated-preview">
-        <div className="dsp-buttons">
-          <span
-            className="dsp-btn-primary"
-            style={{
-              backgroundColor: FLORENCE["--color-interactive-primary"],
-              color: FLORENCE["--color-brand-on-brand"]
-            }}
-          >
-            Save changes
-          </span>
-          <span className="dsp-btn-ghost">Cancel</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "input" || type === "select") {
-    return (
-      <div className="dsp-animated-preview">
-        <div className="dsp-field">
-          <small>{type === "select" ? "Environment" : "Work email"}</small>
-          <span
-            className={`dsp-input${type === "select" ? " dsp-select" : ""}`}
-            style={{ borderColor: FLORENCE["--color-border-default"] }}
-          >
-            {type === "select" ? <>Production<b>⌄</b></> : <>jane@acme.com<i /></>}
-          </span>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "tabs") {
-    return (
-      <div className="dsp-animated-preview">
-        <div className="dsp-tabs">
-          <span className="active" style={{ color: FLORENCE["--color-text-primary"] }}>Overview</span>
-          <span>Usage</span>
-          <span>Code</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "tag") {
-    return (
-      <div className="dsp-animated-preview">
-        <div className="dsp-tags">
-          <span style={{ backgroundColor: FLORENCE["--color-bg-brand-subtle"], color: FLORENCE["--color-text-brand"] }}>Design</span>
-          <span>Beta</span>
-          <span style={{ backgroundColor: FLORENCE["--color-interactive-selected"], color: FLORENCE["--color-text-success"] }}>Passed</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "kpi") {
-    const sparkHeights = ["28%", "42%", "36%", "58%", "48%", "72%", "64%"];
-    return (
-      <div className="dsp-animated-preview">
-        <div className="dsp-kpi">
-          <div className="dsp-kpi-head">
-            <small>Retrieval rate</small>
-            <div className="dsp-kpi-spark" aria-hidden="true">
-              {sparkHeights.map((height, index) => (
-                <i key={index} style={{ height, backgroundColor: FLORENCE["--color-data-1"], opacity: 0.35 + index * 0.08 }} />
-              ))}
+      <ul className="saas-token-list">
+        {group.items.map((token) => (
+          <li className="saas-token-row" key={token.name}>
+            {token.swatch ? (
+              <span
+                className="saas-token-swatch saas-token-swatch--bordered"
+                style={{ background: token.swatch }}
+                aria-hidden="true"
+              />
+            ) : (
+              <span className="saas-token-swatch saas-token-swatch--type" aria-hidden="true" />
+            )}
+            <div>
+              <code>{token.name}</code>
+              <span>{token.role}</span>
             </div>
-          </div>
-          <strong style={{ color: FLORENCE["--color-text-primary"] }}>94%</strong>
-          <em style={{ color: FLORENCE["--color-text-success"] }}>+6.2% vs last week</em>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "chart") {
-    const dataColors = [
-      FLORENCE["--color-data-1"],
-      FLORENCE["--color-data-2"],
-      FLORENCE["--color-data-3"],
-      FLORENCE["--color-data-4"],
-      FLORENCE["--color-data-5"]
-    ];
-    const heights = ["38%", "56%", "44%", "72%", "88%"];
-    return (
-      <div className="dsp-animated-preview">
-        <div className="dsp-chart" aria-hidden="true">
-          {dataColors.map((hex, index) => (
-            <i key={hex} style={{ height: heights[index], backgroundColor: hex }} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  return null;
-}
-
-function PrimitiveSwatch({ paletteName, step, hex }) {
-  const isLight = step <= 400 || paletteName === "white" || isLightHex(hex);
-  const token = `--color-${paletteName}-${step}`;
-
-  return (
-    <div
-      className={`dsp-florence-swatch${isLight ? " dsp-florence-swatch--light" : ""}`}
-      style={{ backgroundColor: hex }}
-    >
-      <span className="dsp-florence-swatch__step">{step}</span>
-      <span className="dsp-florence-swatch__meta">
-        <span className="dsp-florence-swatch__token">{token}</span>
-        <span className="dsp-florence-swatch__hex">{hex}</span>
-      </span>
-    </div>
-  );
-}
-
-function SingleSwatch({ name, label, hex }) {
-  const isLight = name === "white";
-  const token = `--color-${name}`;
-
-  return (
-    <div
-      className={`dsp-florence-swatch dsp-florence-swatch--single${isLight ? " dsp-florence-swatch--light" : ""}`}
-      style={{ backgroundColor: hex }}
-    >
-      <span className="dsp-florence-swatch__step">{label}</span>
-      <span className="dsp-florence-swatch__meta">
-        <span className="dsp-florence-swatch__token">{token}</span>
-        <span className="dsp-florence-swatch__hex">{hex}</span>
-      </span>
-    </div>
-  );
-}
-
-function MockColorPage() {
-  return (
-    <div className="dsp-florence-page">
-      <div className="dsp-florence-scales">
-        {PRIMITIVE_PALETTES.map((palette) => (
-          <section className="dsp-florence-scale" key={palette.name}>
-            <header className="dsp-florence-scale__header">
-              <strong>{palette.label}</strong>
-              <code>color-{palette.name}-*</code>
-            </header>
-            <div className="dsp-florence-scale__row">
-              {palette.values.map((hex, index) => (
-                <PrimitiveSwatch
-                  key={`${palette.name}-${COLOR_STEPS[index]}`}
-                  paletteName={palette.name}
-                  step={COLOR_STEPS[index]}
-                  hex={hex}
-                />
-              ))}
-            </div>
-          </section>
+          </li>
         ))}
+      </ul>
+    </div>
+  );
+}
 
-        <section className="dsp-florence-scale">
-          <header className="dsp-florence-scale__header">
-            <strong>Singles</strong>
-            <code>color-white · color-black</code>
-          </header>
-          <div className="dsp-florence-scale__row dsp-florence-scale__row--singles">
-            {COLOR_SINGLES.map((single) => (
-              <SingleSwatch key={single.name} {...single} />
+function MockComponentsTable() {
+  return (
+    <div className="saas-app-page">
+      <div className="saas-table-shell">
+        <div className="saas-table-toolbar">
+          <span className="saas-table-search"><i />Search components</span>
+        </div>
+        <table className="saas-table">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Category</th>
+              <th>When to use</th>
+              <th>Contract</th>
+            </tr>
+          </thead>
+          <tbody>
+            {COMPONENT_ROWS.map((row) => (
+              <tr key={row.id}>
+                <td>{row.name}</td>
+                <td><span className="saas-table-tag">{row.category}</span></td>
+                <td>{row.when}</td>
+                <td><code>{row.id}</code></td>
+              </tr>
             ))}
-          </div>
-        </section>
-      </div>
-    </div>
-  );
-}
-
-function MockComponentsPage({ locked = false }) {
-  const reduceMotion = useReducedMotion();
-  const [activeType, setActiveType] = useState(null);
-
-  function toggleCard(type) {
-    if (locked) return;
-    setActiveType((current) => (current === type ? null : type));
-  }
-
-  return (
-    <div className="dsp-components-page">
-      <div className="saas-ds-grid">
-        {componentCards.map((card) => (
-          <ComponentCard
-            key={card.type}
-            card={card}
-            code={COMPONENT_CODE[card.type]}
-            isActive={activeType === card.type}
-            locked={locked}
-            reduceMotion={reduceMotion}
-            onToggle={() => toggleCard(card.type)}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ComponentCard({ card, code, isActive, locked, reduceMotion, onToggle }) {
-  const motionEase = [0.22, 1, 0.36, 1];
-
-  return (
-    <motion.article
-      layout={!reduceMotion}
-      className={`saas-ds-card${isActive ? " is-active is-expanded" : ""}${locked ? " saas-ds-card--locked" : ""}`}
-      transition={{ layout: { duration: 0.42, ease: motionEase } }}
-    >
-      {isActive && !reduceMotion ? (
-        <motion.span
-          className="saas-ds-card-scan"
-          aria-hidden="true"
-          initial={{ scaleX: 0, opacity: 0.85 }}
-          animate={{ scaleX: 1, opacity: 0 }}
-          transition={{ duration: 0.72, ease: motionEase }}
-        />
-      ) : null}
-
-      <button
-        type="button"
-        className="saas-ds-card-trigger"
-        aria-expanded={isActive}
-        aria-label={`${card.name} component${isActive ? ", showing React code" : ""}`}
-        disabled={locked}
-        onClick={onToggle}
-      >
-        <div className="saas-ds-preview">
-          <ComponentPreview type={card.type} />
-        </div>
-        <div className="saas-ds-card-meta">
-          <p>{card.name}</p>
-          <span className="saas-ds-card-hint">{isActive ? "React code" : "View code"}</span>
-        </div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isActive ? (
-          <motion.div
-            key={`${card.type}-code`}
-            className="saas-ds-card-code"
-            initial={reduceMotion ? false : { opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={reduceMotion ? undefined : { opacity: 0, height: 0 }}
-            transition={{ duration: 0.34, ease: motionEase }}
-          >
-            <div className="saas-ds-card-code-head">
-              <span>React</span>
-              <code>{card.file}</code>
-            </div>
-            <pre>
-              <code>{code}</code>
-            </pre>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
-    </motion.article>
-  );
-}
-
-function SystemToolbar({ page, locked }) {
-  if (page !== "components") {
-    return null;
-  }
-
-  return (
-    <div className="saas-ds-toolbar dsp-system-toolbar-inner">
-      <div className="saas-ds-filters">
-        {componentFilters.map(([label, count], index) => (
-          <span className={index === 0 ? "active" : ""} key={label}>{label}<b>{count}</b></span>
-        ))}
-      </div>
-      <div className="saas-ds-toolbar-actions">
-        <span className="saas-ds-search"><i />Search components</span>
-        <Chrome locked={locked} className="saas-ds-new">
-          <span>+</span>New component
-        </Chrome>
+          </tbody>
+        </table>
       </div>
     </div>
   );
@@ -585,7 +240,9 @@ function Chrome({ locked, className, children, ...rest }) {
 
 function SaaSProductMockup({ embedded = false, locked = false, story = "studio" }) {
   const reduceMotion = useReducedMotion();
+  const { isDark, setTheme } = useTheme();
   const isContext = story === "context";
+  const deviceTheme = isContext ? (isDark ? "dark" : "light") : undefined;
   const [pageIndex, setPageIndex] = useState(0);
   const cyclePages = isContext;
   const animatePageTransition = cyclePages && !reduceMotion;
@@ -617,11 +274,12 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
       </div>}
 
       <motion.div
-        className={`saas-device reveal${isContext ? " saas-device--system" : ""}`}
+        className={`saas-device reveal${isContext ? ` saas-device--system saas-device--${deviceTheme}` : ""}`}
         initial={reduceMotion ? undefined : { opacity: 0, y: 28, scale: 0.985 }}
         whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, amount: 0.18 }}
         transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+        data-theme={deviceTheme}
       >
         <div className="saas-window-bar">
           <div className="saas-window-dots" aria-hidden="true"><span /><span /><span /></div>
@@ -634,8 +292,8 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
             <div className="saas-app-brand"><strong>Florence AI</strong></div>
             <div className="saas-workspace-switcher">
               <div>
-                <strong>{isContext ? "Acme Product" : "Northstar Creative"}</strong>
-                <small>{isContext ? "Design system workspace" : "Agency workspace"}</small>
+                <strong>{isContext ? "Northwind Health" : "Northstar Creative"}</strong>
+                <small>{isContext ? "Independent clinic network" : "Agency workspace"}</small>
               </div>
               <span className="saas-chevron">⌄</span>
             </div>
@@ -661,64 +319,83 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
               </nav>
             )}
             <div className="saas-sidebar-spacer" />
+            {isContext ? (
+              <div className="saas-theme-switch">
+                <span>Dark mode</span>
+                {locked ? (
+                  <span
+                    className="saas-switch"
+                    data-on={isDark ? "" : undefined}
+                    aria-hidden="true"
+                  >
+                    <i />
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    className="saas-switch"
+                    role="switch"
+                    aria-checked={isDark}
+                    aria-label="Dark mode"
+                    data-on={isDark ? "" : undefined}
+                    onClick={() => setTheme(isDark ? "light" : "dark")}
+                  >
+                    <i />
+                  </button>
+                )}
+              </div>
+            ) : null}
             <span className="saas-settings"><Icon name="settings" />Settings</span>
             <div className="saas-user"><span>JR</span><div><strong>John Rodrigues</strong><small>Workspace admin</small></div><i /></div>
           </aside>
 
           <div className="saas-main">
-            <header className="saas-topbar">
-              <div className="saas-breadcrumb">
-                <span>{isContext ? "Acme Product" : "Northstar Creative"}</span>
-                <i>/</i>
-                {isContext && <><span>Product</span><i>/</i></>}
-                {isContext && pageMeta.breadcrumbParent && <><span>{pageMeta.breadcrumbParent}</span><i>/</i></>}
-                <strong>{isContext ? pageMeta.title : "Overview"}</strong>
-              </div>
-              <div className="saas-top-actions">
-                <Chrome locked={locked} className="saas-icon-button" aria-label="Search">⌕</Chrome>
-                <Chrome locked={locked} className="saas-share">{isContext ? "Publish" : "Share"}</Chrome>
-                <span className="saas-avatar">JR</span>
-              </div>
-            </header>
+            {!isContext ? (
+              <header className="saas-topbar">
+                <div className="saas-breadcrumb">
+                  <span>Northstar Creative</span>
+                  <i>/</i>
+                  <strong>Overview</strong>
+                </div>
+                <div className="saas-top-actions">
+                  <Chrome locked={locked} className="saas-icon-button" aria-label="Search">⌕</Chrome>
+                  <Chrome locked={locked} className="saas-share">Share</Chrome>
+                  <span className="saas-avatar">JR</span>
+                </div>
+              </header>
+            ) : null}
 
             <div className="saas-content">
               {isContext ? (
-                <>
-                <div className={`dsp-system-shell${currentPage === "color" ? " dsp-system-shell--color" : ""}`}>
-                  <div className="saas-content-title saas-ops-title dsp-system-head">
-                    <div>
-                      <p>Product</p>
-                      <h3>{pageMeta.title}</h3>
-                      <span>{pageMeta.lede}</span>
-                    </div>
-                  </div>
-
-                  {currentPage === "components" ? (
-                    <div className="dsp-system-toolbar">
-                      <SystemToolbar page={currentPage} locked={locked} />
-                    </div>
-                  ) : null}
-
-                  <div className="dsp-system-stage">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={currentPage}
-                        className="dsp-system-page"
-                        initial={animatePageTransition ? { opacity: 0 } : false}
-                        animate={{ opacity: 1 }}
-                        exit={animatePageTransition ? { opacity: 0 } : undefined}
-                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                      >
-                        {currentPage === "color" ? (
-                          <MockColorPage />
-                        ) : (
-                          <MockComponentsPage locked={locked} />
-                        )}
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
+                <div className="saas-canvas">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentPage}
+                      className="saas-canvas-page"
+                      initial={animatePageTransition ? { opacity: 0 } : false}
+                      animate={{ opacity: 1 }}
+                      exit={animatePageTransition ? { opacity: 0 } : undefined}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <header className="saas-page-header">
+                        <div>
+                          <p>Product</p>
+                          <h3>{pageMeta.title}</h3>
+                          <span>{pageMeta.lede}</span>
+                        </div>
+                        {currentPage === "tokens" ? (
+                          <div className="saas-page-header__actions">
+                            <span className="saas-tag">MCP off</span>
+                            <Chrome locked={locked} className="saas-btn-secondary">Upgrade to Studio</Chrome>
+                          </div>
+                        ) : null}
+                      </header>
+                      <div className="saas-canvas-body">
+                        {currentPage === "tokens" ? <MockTokenPage locked={locked} /> : <MockComponentsTable />}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
-                </>
               ) : (
                 <>
                   <div className="saas-content-title saas-ops-title">

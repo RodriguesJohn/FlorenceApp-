@@ -1,8 +1,9 @@
 import React from "react";
 import { NavMenu } from "./NavMenu.jsx";
+import { ThemeToggle } from "./ThemeToggle.jsx";
 import "./site-header.css";
 
-export function SiteHeader({ brand = "Human AI Studio" }) {
+export function SiteHeader({ brand = "Florence AI" }) {
   return (
     <header className="site-header">
       <a className="site-header-brand" href="/" aria-label={`${brand} home`}>
@@ -12,7 +13,10 @@ export function SiteHeader({ brand = "Human AI Studio" }) {
         </span>
         {brand}
       </a>
-      <NavMenu />
+      <div className="site-header-actions">
+        <NavMenu />
+        <ThemeToggle />
+      </div>
     </header>
   );
 }

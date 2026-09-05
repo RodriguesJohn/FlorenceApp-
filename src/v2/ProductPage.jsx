@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import SaaSProductMockup from "./SaaSProductMockup.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
@@ -6,6 +6,7 @@ import { FlorenceWaitlistModal, WaitlistButton } from "./FlorenceWaitlistModal.j
 import figmaLogo from "../assets/logos/Figma.png";
 import storybookLogo from "../assets/logos/storybook.png";
 import reactLogo from "../assets/logos/react-mark.svg";
+import githubLogo from "../assets/logos/github.svg";
 import cursorLogo from "../assets/logos/cursor.webp";
 import claudeCodeLogo from "../assets/logos/claude-code.png";
 import codexLogo from "../assets/logos/codex.png";
@@ -14,46 +15,43 @@ import "./product.css";
 
 const BOOKING_URL = "https://cal.com/john-rodrigues-rqt2lg/15min";
 const NEWSLETTER_URL = "https://substack.com/@johnrodrigues";
+const APP_HOME = import.meta.env.DEV
+  ? "http://localhost:5175/"
+  : "https://system.humanaistudio.ai/";
 
 const systemLayers = [
   {
     number: "01",
-    label: "Brand",
-    title: "Voice, not just tokens",
-    copy: "Brand voice and taste sit outside the library. Without them, agents can be consistent and still off-brand."
+    label: "Remove",
+    title: "Remove AI Slop",
+    copy: "Agents retrieve your brand and system instead of inventing UI. The first pass looks like your product."
   },
   {
     number: "02",
-    label: "Design system",
-    title: "What agents can retrieve",
-    copy: "Components, tokens, and contracts written so Cursor, Claude Code, and Codex read one source of truth."
+    label: "Ship",
+    title: "Ship Production UI",
+    copy: "Constraints and quality criteria travel with every retrieval. Screens can merge, not just look close."
   },
   {
     number: "03",
-    label: "Engineering constraints",
-    title: "What the stack will allow",
-    copy: "The rules of the repo: platforms, performance, accessibility, and what a generated screen is allowed to touch."
-  },
-  {
-    number: "04",
-    label: "Quality criteria",
-    title: "How you score the output",
-    copy: "Evals and heuristics so a pass is measurable. Not a vibe. Not another round of visual QA."
+    label: "Unify",
+    title: "Unify Design Library",
+    copy: "Figma, Storybook, and the repo become one catalog. Agents query one source of truth instead of stitching three."
   }
 ];
 
 const gapOutcomes = [
   {
-    title: "Less rework",
-    copy: "Agents retrieve context instead of guessing."
+    title: "Reduce QA",
+    copy: "Agents retrieve context instead of guessing. The first pass already matches brand, tokens, and constraints."
   },
   {
-    title: "Lower token spend",
-    copy: "Fewer retries on almost-right UI."
+    title: "Reduce Token Cost",
+    copy: "Fewer retries on almost-right UI. Less of the budget goes to regenerating the same screen."
   },
   {
-    title: "Not AI slop",
-    copy: "Output passes brand and system criteria."
+    title: "Reduce AI Slop",
+    copy: "Output passes brand and system criteria. It looks like it came from the system you already run."
   }
 ];
 
@@ -64,20 +62,18 @@ const outcomes = [
 ];
 
 const layerInputs = [
-  { name: "Slugita", glyph: "slugita" },
-  { name: "Figma", logo: figmaLogo, contain: true },
   { name: "Storybook", logo: storybookLogo, contain: true },
-  { name: "Design tokens", glyph: "tokens" },
+  { name: "Figma", logo: figmaLogo, contain: true },
   { name: "Component library", logo: reactLogo },
-  { name: "Brand guidelines", glyph: "brand" }
+  { name: "GitHub", logo: githubLogo, invert: true },
+  { name: "Code", glyph: "code" },
+  { name: "Design tokens", glyph: "tokens" }
 ];
 
 const layerOutputs = [
-  { name: "Cloud Code", glyph: "cloud" },
   { name: "Cursor", logo: cursorLogo },
   { name: "Claude Code", logo: claudeCodeLogo, contain: true },
   { name: "Codex", logo: codexLogo, contain: true },
-  { name: "Figma", logo: figmaLogo, contain: true, badge: "MCP" },
   { name: "QA agents", logo: hermesLogo, contain: true }
 ];
 
@@ -124,7 +120,7 @@ const pricingPlans = [
       "Discovery, audit, and implementation with your team",
       "Custom MCP integrations and quality criteria",
       "Multi-repo governance and onboarding",
-      "Workshops for design system owners"
+      "Hands-on setup with design system owners"
     ],
     ctaLabel: "Book a discovery call",
     ctaHref: BOOKING_URL,
@@ -134,26 +130,14 @@ const pricingPlans = [
 
 function EcosystemGlyph({ id }) {
   const props = {
-    width: 16,
-    height: 16,
+    width: 14,
+    height: 14,
     viewBox: "0 0 16 16",
     fill: "none",
     "aria-hidden": true
   };
 
   switch (id) {
-    case "slugita":
-      return (
-        <svg {...props}>
-          <rect x="2.5" y="3" width="11" height="10" rx="2.5" stroke="currentColor" strokeWidth="1.2" />
-          <path
-            d="M5.5 8h5M8 5.5v5"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-          />
-        </svg>
-      );
     case "tokens":
       return (
         <svg {...props}>
@@ -162,28 +146,16 @@ function EcosystemGlyph({ id }) {
           <circle cx="11" cy="11" r="2.4" stroke="currentColor" strokeWidth="1.2" />
         </svg>
       );
-    case "brand":
+    case "code":
       return (
         <svg {...props}>
           <path
-            d="M4 3.5h8v9H4z"
+            d="M6 4.5 2.5 8 6 11.5M10 4.5 13.5 8 10 11.5"
             stroke="currentColor"
             strokeWidth="1.2"
+            strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <path d="M6 6.5h4M6 8.5h2.8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-        </svg>
-      );
-    case "cloud":
-      return (
-        <svg {...props}>
-          <path
-            d="M4.5 10.5h7a2.2 2.2 0 0 0 .4-4.4A3 3 0 0 0 6.2 4.5 2.6 2.6 0 0 0 4.5 10.5Z"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinejoin="round"
-          />
-          <path d="M7 8.2 8.2 9.4 10.8 6.8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
         </svg>
       );
     default:
@@ -191,68 +163,196 @@ function EcosystemGlyph({ id }) {
   }
 }
 
-function chunkPairs(items) {
-  const rows = [];
-  for (let index = 0; index < items.length; index += 2) {
-    rows.push(items.slice(index, index + 2));
-  }
-  return rows;
+const hubPetals = [
+  { id: "brand", label: "Brand" },
+  { id: "system", label: "System" },
+  { id: "quality", label: "Quality" },
+  { id: "constraints", label: "Guardrails" }
+];
+
+function curve(from, to) {
+  const dx = to.x - from.x;
+  const pull = Math.max(Math.abs(dx) * 0.46, 28);
+  const dir = dx >= 0 ? 1 : -1;
+  return `M ${from.x.toFixed(1)} ${from.y.toFixed(1)} C ${(from.x + dir * pull).toFixed(1)} ${from.y.toFixed(1)}, ${(to.x - dir * pull).toFixed(1)} ${to.y.toFixed(1)}, ${to.x.toFixed(1)} ${to.y.toFixed(1)}`;
 }
 
-function ProductEcosystemSide({ label, items, direction }) {
-  const rows = chunkPairs(items);
+function edgePoint(cx, cy, radius, x, y) {
+  const vx = x - cx;
+  const vy = y - cy;
+  const length = Math.hypot(vx, vy) || 1;
+  return {
+    x: cx + (vx / length) * radius,
+    y: cy + (vy / length) * radius
+  };
+}
+
+function ProductEcosystem() {
+  const mapRef = useRef(null);
+  const hubRef = useRef(null);
+  const inputRefs = useRef([]);
+  const outputRefs = useRef([]);
+  const [wires, setWires] = useState({ width: 0, height: 0, paths: [] });
+
+  const measure = useCallback(() => {
+    const map = mapRef.current;
+    const hub = hubRef.current;
+    if (!map || !hub) return;
+
+    const mapBox = map.getBoundingClientRect();
+    if (mapBox.width < 48) return;
+
+    const hubBox = hub.getBoundingClientRect();
+    const cx = hubBox.left + hubBox.width / 2 - mapBox.left;
+    const cy = hubBox.top + hubBox.height / 2 - mapBox.top;
+    const radius = Math.min(hubBox.width, hubBox.height) / 2 - 2;
+    const paths = [];
+
+    inputRefs.current.forEach((node, index) => {
+      if (!node) return;
+      const box = node.getBoundingClientRect();
+      const from = {
+        x: box.right - mapBox.left,
+        y: box.top + box.height / 2 - mapBox.top
+      };
+      paths.push({
+        id: `in-${index}`,
+        dir: "in",
+        d: curve(from, edgePoint(cx, cy, radius, from.x, from.y))
+      });
+    });
+
+    outputRefs.current.forEach((node, index) => {
+      if (!node) return;
+      const box = node.getBoundingClientRect();
+      const to = {
+        x: box.left - mapBox.left,
+        y: box.top + box.height / 2 - mapBox.top
+      };
+      paths.push({
+        id: `out-${index}`,
+        dir: "out",
+        d: curve(edgePoint(cx, cy, radius, to.x, to.y), to)
+      });
+    });
+
+    setWires({ width: mapBox.width, height: mapBox.height, paths });
+  }, []);
+
+  useLayoutEffect(() => {
+    const map = mapRef.current;
+    if (!map) return undefined;
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(map);
+    window.addEventListener("resize", measure);
+    const timeout = window.setTimeout(measure, 120);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+      window.clearTimeout(timeout);
+    };
+  }, [measure]);
 
   return (
-    <div className={`product-ecosystem-side product-ecosystem-side--${direction}`}>
-      <p className="product-ecosystem-label">{label}</p>
-      <div className="product-ecosystem-rows">
-        {rows.map((row, index) => (
-          <div className="product-ecosystem-row" key={row.map((item) => item.name).join("-")}>
-            {direction === "outputs" ? (
-              <span
-                className="product-ecosystem-link"
-                style={{ animationDelay: `${index * 0.35}s` }}
-                aria-hidden="true"
+    <div className="product-ecosystem-map" ref={mapRef}>
+      {wires.width > 0 ? (
+        <svg
+          className="product-ecosystem-wires"
+          viewBox={`0 0 ${wires.width} ${wires.height}`}
+          aria-hidden="true"
+        >
+          {wires.paths.map((wire, index) => (
+            <g key={wire.id}>
+              <path className="product-ecosystem-wire-track" d={wire.d} />
+              <path
+                className={`product-ecosystem-wire-flow product-ecosystem-wire-flow--${wire.dir}`}
+                d={wire.d}
+                style={{ animationDelay: `${index * 0.18}s` }}
               />
-            ) : null}
-            <ul className="product-ecosystem-row-chips">
-              {row.map((item) => (
-                <ProductEcosystemChip key={item.name} {...item} />
-              ))}
-            </ul>
-            {direction === "inputs" ? (
-              <span
-                className="product-ecosystem-link"
-                style={{ animationDelay: `${index * 0.35}s` }}
-                aria-hidden="true"
-              />
-            ) : null}
-          </div>
+            </g>
+          ))}
+        </svg>
+      ) : null}
+
+      <ProductEcosystemSide
+        label="Your stack"
+        items={layerInputs}
+        direction="inputs"
+        itemRefs={inputRefs}
+      />
+
+      <div className="product-ecosystem-hub">
+        <span className="product-ecosystem-hub-glow" aria-hidden="true" />
+        {hubPetals.map((petal) => (
+          <span
+            className={`product-ecosystem-petal product-ecosystem-petal--${petal.id}`}
+            key={petal.id}
+          >
+            {petal.label}
+          </span>
         ))}
+        <div className="product-ecosystem-core" ref={hubRef}>
+          <span className="product-ecosystem-core-mark" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </span>
+          <strong>Florence MCP</strong>
+          <span>Context layer</span>
+        </div>
       </div>
+
+      <ProductEcosystemSide
+        label="Your agents"
+        items={layerOutputs}
+        direction="outputs"
+        itemRefs={outputRefs}
+      />
     </div>
   );
 }
 
-function ProductEcosystemChip({ name, logo, glyph, contain, badge }) {
+function ProductEcosystemSide({ label, items, direction, itemRefs }) {
   return (
-    <li className="product-ecosystem-chip">
+    <div className={`product-ecosystem-side product-ecosystem-side--${direction}`}>
+      <p className="product-ecosystem-label">{label}</p>
+      <ul className="product-ecosystem-chips">
+        {items.map((item, index) => (
+          <ProductEcosystemChip
+            key={item.name}
+            {...item}
+            chipRef={(node) => {
+              itemRefs.current[index] = node;
+            }}
+          />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ProductEcosystemChip({ name, logo, glyph, contain, invert, chipRef }) {
+  return (
+    <li className="product-ecosystem-chip" ref={chipRef}>
       <span
         className={`product-ecosystem-chip-logo${
           contain ? " product-ecosystem-chip-logo--contain" : ""
-        }`}
+        }${invert ? " product-ecosystem-chip-logo--invert" : ""}`}
       >
         {logo ? <img src={logo} alt="" loading="lazy" /> : <EcosystemGlyph id={glyph} />}
       </span>
-      <span className="product-ecosystem-chip-label">
-        {name}
-        {badge ? <small className="product-ecosystem-chip-badge">{badge}</small> : null}
-      </span>
+      <span className="product-ecosystem-chip-label">{name}</span>
     </li>
   );
 }
 
-function ProductPricingCard({ plan }) {
+function ProductPricingCard({ plan, onWaitlistOpen }) {
   return (
     <article
       className={`product-pricing-card${
@@ -270,13 +370,16 @@ function ProductPricingCard({ plan }) {
           <span>{plan.price}</span>
           {plan.term ? <small>{plan.term}</small> : null}
         </p>
-        <p className="product-pricing-card-description">{plan.description}</p>
+        <ProductPricingCta plan={plan} onWaitlistOpen={onWaitlistOpen} />
       </div>
-      <ul className="product-pricing-card-features">
-        {plan.features.map((feature) => (
-          <li key={feature}>{feature}</li>
-        ))}
-      </ul>
+      <div className="product-pricing-card-body">
+        <p className="product-pricing-card-description">{plan.description}</p>
+        <ul className="product-pricing-card-features">
+          {plan.features.map((feature) => (
+            <li key={feature}>{feature}</li>
+          ))}
+        </ul>
+      </div>
     </article>
   );
 }
@@ -310,10 +413,10 @@ function ProductPricingCta({ plan, onWaitlistOpen }) {
 
 function ProductFooter() {
   return (
-    <footer className="product-footer" aria-label="Human AI Studio footer">
+    <footer className="product-footer" aria-label="Florence AI footer">
       <div className="product-footer-inner">
         <a className="product-footer-brand" href="/">
-          Human AI Studio
+          Florence AI
         </a>
         <a href={NEWSLETTER_URL} target="_blank" rel="noreferrer">
           Publication
@@ -347,8 +450,8 @@ export default function ProductPage() {
               </p>
               <div className="product-hero-actions">
                 <WaitlistButton onOpen={openWaitlist} />
-                <a className="product-btn product-btn--ghost" href="#layers">
-                  Learn More
+                <a className="product-btn product-btn--ghost" href={APP_HOME}>
+                  Enter App
                 </a>
               </div>
             </EntranceItem>
@@ -361,8 +464,8 @@ export default function ProductPage() {
         <section className="product-section" aria-labelledby="product-gap-title">
           <Entrance className="product-section-inner product-gap">
             <EntranceItem as="h2" id="product-gap-title">
-              <span>Context so your agents</span>
-              <span>don&apos;t ship AI slop.</span>
+              <span>How Florence AI solves</span>
+              <span>your problem.</span>
             </EntranceItem>
             <EntranceItem as="p" className="product-body">
               They ship almost-right UI. QA load grows. Trust doesn&apos;t.
@@ -381,25 +484,17 @@ export default function ProductPage() {
         <section className="product-section" id="layers" aria-labelledby="product-ecosystem-title product-system-title">
           <Entrance className="product-section-inner">
             <EntranceItem className="product-section-heading product-ecosystem-heading">
-              <h2 id="product-ecosystem-title">What plugs into this layer</h2>
+              <h2 id="product-ecosystem-title">Design infrastructure for coding agents</h2>
               <p className="product-body">
                 Your stack on one side. Your agents on the other. One context layer in the middle.
               </p>
             </EntranceItem>
             <EntranceItem className="product-ecosystem" aria-label="Context layer connections">
-              <div className="product-ecosystem-map">
-                <ProductEcosystemSide label="System inputs" items={layerInputs} direction="inputs" />
-                <div className="product-ecosystem-hub">
-                  <span className="product-ecosystem-hub-ring" aria-hidden="true" />
-                  <strong>Florence MCP</strong>
-                  <span>Context layer</span>
-                </div>
-                <ProductEcosystemSide label="Agent outputs" items={layerOutputs} direction="outputs" />
-              </div>
+              <ProductEcosystem />
             </EntranceItem>
             <EntranceItem className="product-section-heading product-layer-heading">
               <h2 id="product-system-title">
-                Four things. Not one library.
+                Three outcomes. Not one library.
               </h2>
             </EntranceItem>
             <div className="product-layer-list">
@@ -437,7 +532,7 @@ export default function ProductPage() {
               <div className="product-map-hub">Context layer</div>
               <div className="product-map-node product-map-node--a">Brand</div>
               <div className="product-map-node product-map-node--b">System</div>
-              <div className="product-map-node product-map-node--c">Constraints</div>
+              <div className="product-map-node product-map-node--c">Guardrails</div>
               <div className="product-map-node product-map-node--d">Quality</div>
             </EntranceItem>
           </Entrance>
@@ -451,14 +546,7 @@ export default function ProductPage() {
             <div className="product-pricing-grid">
               {pricingPlans.map((plan) => (
                 <EntranceItem key={plan.id}>
-                  <ProductPricingCard plan={plan} />
-                </EntranceItem>
-              ))}
-            </div>
-            <div className="product-pricing-actions">
-              {pricingPlans.map((plan) => (
-                <EntranceItem key={`${plan.id}-cta`}>
-                  <ProductPricingCta plan={plan} onWaitlistOpen={openWaitlist} />
+                  <ProductPricingCard plan={plan} onWaitlistOpen={openWaitlist} />
                 </EntranceItem>
               ))}
             </div>
@@ -472,9 +560,8 @@ export default function ProductPage() {
             </EntranceItem>
             <EntranceItem as="p" className="product-body">
               Growth-stage B2B SaaS through enterprise. The champion is
-              whoever owns the design system. Workshops are how we teach
-              the problem. The platform is the solution we hand the same
-              buyer.
+              whoever owns the design system. Florence is the layer you
+              hand that buyer.
             </EntranceItem>
             <EntranceItem className="product-hero-actions">
               <WaitlistButton onOpen={openWaitlist} />
