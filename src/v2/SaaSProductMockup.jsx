@@ -17,6 +17,7 @@ function Icon({ name }) {
     plug: <><path d="M12 17v5M9 8V3M15 8V3" /><path d="M8 8h8v3a4 4 0 0 1-8 0V8Z" /></>,
     sparkles: <><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6.2 6.2l2.1 2.1M15.7 15.7l2.1 2.1M17.8 6.2l-2.1 2.1M8.3 15.7l-2.1 2.1" /></>,
     film: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M7 4v4M7 16v4M17 4v4M17 16v4M3 12h18" /></>,
+    dollar: <><circle cx="12" cy="12" r="9" /><path d="M12 7v10M15.2 9.2C15.2 8 13.8 7.2 12 7.2S8.8 8 8.8 9.2 10.4 11 12 11s3.2.7 3.2 1.8S13.8 14.8 12 14.8 8.8 14 8.8 12.8" /></>,
     settings: <><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z" /></>
   };
   return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>;
@@ -37,7 +38,8 @@ const systemNavigation = [
   { group: "Connectors", items: [["plug", "Connectors"]] },
   { group: "References", items: [["library", "Libraries"]] },
   { group: "Engineering", items: [["code", "Guardrails"]] },
-  { group: "Quality", items: [["overview", "Dashboard"], ["activity", "Evals"]] }
+  { group: "Quality", items: [["overview", "Dashboard"], ["activity", "Evals"]] },
+  { group: "Internal", items: [["dollar", "Internal"]] }
 ];
 
 const SYSTEM_PAGES = ["tokens", "components"];
@@ -293,7 +295,7 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
             <div className="saas-workspace-switcher">
               <div>
                 <strong>{isContext ? "Northwind Health" : "Northstar Creative"}</strong>
-                <small>{isContext ? "Independent clinic network" : "Agency workspace"}</small>
+                {isContext ? null : <small>Agency workspace</small>}
               </div>
               <span className="saas-chevron">⌄</span>
             </div>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,9 +29,9 @@
     <meta name="twitter:image" content="https://www.humanaistudio.io/og.jpg" />
     <script>
       (function () {
-        var theme = "dark";
+        var theme = "light";
         try {
-          var stored = localStorage.getItem("florence-theme");
+          var stored = localStorage.getItem("florence-appearance");
           if (stored === "light" || stored === "dark") theme = stored;
         } catch (e) {}
         document.documentElement.setAttribute("data-theme", theme);

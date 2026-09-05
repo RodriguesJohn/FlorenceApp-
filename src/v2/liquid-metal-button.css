@@ -109,6 +109,12 @@
   }
 }
 
+.liquid-metal-btn--wide .liquid-metal-btn__control {
+  min-width: 11.75rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .liquid-metal-btn--full,
 .product-btn--full.liquid-metal-btn {
   width: 100%;

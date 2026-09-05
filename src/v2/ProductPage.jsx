@@ -3,6 +3,7 @@ import SaaSProductMockup from "./SaaSProductMockup.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
 import { FlorenceWaitlistModal, WaitlistButton } from "./FlorenceWaitlistModal.jsx";
+import { EnterAppPinModal } from "./EnterAppPinModal.jsx";
 import figmaLogo from "../assets/logos/Figma.png";
 import storybookLogo from "../assets/logos/storybook.png";
 import reactLogo from "../assets/logos/react-mark.svg";
@@ -90,13 +91,14 @@ const pricingPlans = [
       "Ship with quality, not AI slop",
       "MCP for Cursor and Claude Code"
     ],
-    ctaLabel: "Join the waitlist",
+    ctaLabel: "Fix AI Slop",
     waitlist: true,
+    ctaPrimary: true,
     featured: false
   },
   {
-    id: "platform",
-    name: "Platform",
+    id: "growth",
+    name: "Growth",
     price: "$99",
     term: "per month",
     description: "Self-serve Florence MCP on your design system.",
@@ -111,9 +113,9 @@ const pricingPlans = [
     featured: true
   },
   {
-    id: "custom",
-    name: "Custom",
-    price: "Project",
+    id: "scale",
+    name: "Scale",
+    price: "Custom design system",
     term: null,
     description: "Custom solution to build your AI-ready design system.",
     features: [
@@ -386,10 +388,12 @@ function ProductPricingCard({ plan, onWaitlistOpen }) {
 
 function ProductPricingCta({ plan, onWaitlistOpen }) {
   if (plan.waitlist) {
+    const isPrimary = Boolean(plan.featured || plan.ctaPrimary);
+
     return (
       <WaitlistButton
         className={`product-btn product-btn--full${
-          plan.featured ? " product-btn--primary" : " product-btn--ghost"
+          isPrimary ? " product-btn--primary" : " product-btn--ghost"
         }`}
         onOpen={onWaitlistOpen}
       >
@@ -432,6 +436,7 @@ function ProductFooter() {
 
 export default function ProductPage() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const [pinOpen, setPinOpen] = useState(false);
   const openWaitlist = () => setWaitlistOpen(true);
 
   return (
@@ -442,21 +447,31 @@ export default function ProductPage() {
         <section className="product-hero" aria-labelledby="product-hero-title">
           <Entrance className="product-hero-inner" animate="visible">
             <EntranceItem className="product-hero-copy">
-              <h1 id="product-hero-title">Design System For Agents.</h1>
+              <h1 id="product-hero-title">Design System For Agents</h1>
               <p className="product-lede">
-                An MCP for your coding agent. Build brand, system, and
-                engineering constraints here so generated UI ships with
-                confidence.
+                Your agents produce off-brand, inconsistent UI. Our design
+                system keeps it on-brand, on constraint, and off AI slop.
               </p>
               <div className="product-hero-actions">
-                <WaitlistButton onOpen={openWaitlist} />
-                <a className="product-btn product-btn--ghost" href={APP_HOME}>
+                <WaitlistButton
+                  className="product-btn product-btn--primary liquid-metal-btn--wide"
+                  onOpen={openWaitlist}
+                >
+                  Fix AI Slop
+                </WaitlistButton>
+                <button
+                  type="button"
+                  className="product-btn product-btn--ghost"
+                  onClick={() => setPinOpen(true)}
+                >
                   Enter App
-                </a>
+                </button>
               </div>
             </EntranceItem>
             <EntranceItem className="product-preview">
-              <SaaSProductMockup embedded story="context" />
+              <div className="product-preview-frame">
+                <SaaSProductMockup embedded story="context" />
+              </div>
             </EntranceItem>
           </Entrance>
         </section>
@@ -573,6 +588,11 @@ export default function ProductPage() {
       <ProductFooter />
 
       <FlorenceWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
+      <EnterAppPinModal
+        open={pinOpen}
+        onClose={() => setPinOpen(false)}
+        appUrl={APP_HOME}
+      />
     </div>
   );
 }
