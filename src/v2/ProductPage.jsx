@@ -8,6 +8,9 @@ import {
   appPath,
   clerkConfigured,
   clerkOverlayOptions,
+  goToApp,
+  markSendToApp,
+  shouldSendToApp,
 } from "./clerkConfig.js";
 import figmaLogo from "../assets/logos/Figma.png";
 import storybookLogo from "../assets/logos/storybook.png";
@@ -623,33 +626,27 @@ function ProductPageView({ onFixAiSlop, onLogIn }) {
 function ProductPageWithClerk() {
   const { isLoaded, isSignedIn } = useAuth();
   const clerk = useClerk();
-  const sendToApp = useRef(false);
 
   useEffect(() => {
-    if (!sendToApp.current || !isLoaded || !isSignedIn) return;
-    sendToApp.current = false;
-    clerk.redirectWithAuth(appPath("/start"));
+    if (!isLoaded || !isSignedIn || !shouldSendToApp()) return;
+    goToApp(clerk);
   }, [clerk, isLoaded, isSignedIn]);
 
-  function goToApp() {
-    clerk.redirectWithAuth(appPath("/start"));
-  }
-
   function openSignUp() {
+    markSendToApp();
     if (isLoaded && isSignedIn) {
-      goToApp();
+      goToApp(clerk);
       return;
     }
-    sendToApp.current = true;
     clerk.openSignUp(clerkOverlayOptions);
   }
 
   function openSignIn() {
+    markSendToApp();
     if (isLoaded && isSignedIn) {
-      goToApp();
+      goToApp(clerk);
       return;
     }
-    sendToApp.current = true;
     clerk.openSignIn(clerkOverlayOptions);
   }
 

@@ -33,6 +33,39 @@ export function appPath(path = "/start") {
   return `${origin}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
+const SEND_TO_APP_KEY = "florence.sendToApp";
+
+export function markSendToApp() {
+  try {
+    sessionStorage.setItem(SEND_TO_APP_KEY, "1");
+  } catch {
+    // Ignore private-mode storage failures; the click path still navigates.
+  }
+}
+
+export function shouldSendToApp() {
+  try {
+    return sessionStorage.getItem(SEND_TO_APP_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function clearSendToApp() {
+  try {
+    sessionStorage.removeItem(SEND_TO_APP_KEY);
+  } catch {
+    // Ignore.
+  }
+}
+
+export function goToApp(clerk) {
+  const dest = appPath("/start");
+  clearSendToApp();
+  const url = clerk?.buildUrlWithAuth?.(dest) || dest;
+  window.location.assign(url);
+}
+
 const clerkModalBackdrop = {
   display: "flex",
   alignItems: "center",
