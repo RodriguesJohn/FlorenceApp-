@@ -1140,14 +1140,22 @@ html[data-theme="dark"] .product-ecosystem-chip-logo--invert img {
 
 .product-footer-inner {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-16);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-12);
   width: var(--product-rail);
   margin-inline: auto;
   color: var(--product-muted);
   font-size: var(--text-body-sm);
+}
+
+.product-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  width: 100%;
 }
 
 .product-footer a:hover {
@@ -1157,6 +1165,14 @@ html[data-theme="dark"] .product-ecosystem-chip-logo--invert img {
 .product-footer-brand {
   color: var(--product-ink);
   font-weight: var(--font-weight-regular);
+}
+
+.product-footer-credit {
+  margin: 0;
+}
+
+.product-footer-credit a {
+  color: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {

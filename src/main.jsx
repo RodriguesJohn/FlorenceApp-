@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ClerkProvider } from "@clerk/react";
 import { applyPageSeo, setupSeoTracking } from "./v2/seo.js";
 import { ThemeProvider } from "./v2/theme.jsx";
-import { APP_START, clerkAllowedRedirectOrigins, clerkConfigured, clerkPublishableKey } from "./v2/clerkConfig.js";
+import { clerkAllowedRedirectOrigins, clerkConfigured, clerkPublishableKey } from "./v2/clerkConfig.js";
 import "./v2/styles.css";
 
 const FLORENCE_HOME = new Set([
@@ -57,8 +57,8 @@ function renderWithAnalytics(root, page) {
     <ClerkProvider
       publishableKey={clerkPublishableKey}
       afterSignOutUrl="/"
-      signInFallbackRedirectUrl={APP_START}
-      signUpFallbackRedirectUrl={APP_START}
+      signInFallbackRedirectUrl="/"
+      signUpFallbackRedirectUrl="/"
       allowedRedirectOrigins={clerkAllowedRedirectOrigins}
     >
       {page}

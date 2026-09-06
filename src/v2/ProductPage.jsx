@@ -429,16 +429,22 @@ function ProductFooter() {
   return (
     <footer className="product-footer" aria-label="Florence AI footer">
       <div className="product-footer-inner">
-        <a className="product-footer-brand" href="/">
-          Florence AI
-        </a>
-        <a href={NEWSLETTER_URL} target="_blank" rel="noreferrer">
-          Publication
-        </a>
-        <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
-        <a href={BOOKING_URL} target="_blank" rel="noreferrer">
-          Book a call
-        </a>
+        <div className="product-footer-links">
+          <a className="product-footer-brand" href="/">
+            Florence AI
+          </a>
+          <a href={NEWSLETTER_URL} target="_blank" rel="noreferrer">
+            Publication
+          </a>
+          <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
+          <a href={BOOKING_URL} target="_blank" rel="noreferrer">
+            Book a call
+          </a>
+        </div>
+        <p className="product-footer-credit">
+          Florence AI by{" "}
+          <a href="https://www.humanaistudio.io">Human AI Studio</a>
+        </p>
       </div>
     </footer>
   );
@@ -622,11 +628,11 @@ function ProductPageWithClerk() {
   useEffect(() => {
     if (!sendToApp.current || !isLoaded || !isSignedIn) return;
     sendToApp.current = false;
-    window.location.assign(appPath("/start"));
-  }, [isLoaded, isSignedIn]);
+    clerk.redirectWithAuth(appPath("/start"));
+  }, [clerk, isLoaded, isSignedIn]);
 
   function goToApp() {
-    window.location.assign(appPath("/start"));
+    clerk.redirectWithAuth(appPath("/start"));
   }
 
   function openSignUp() {

@@ -68,8 +68,23 @@ function AppRoutes() {
   )
 }
 
+function SendHome() {
+  useEffect(() => {
+    window.location.replace(websiteHome())
+  }, [])
+
+  return (
+    <div className="auth-screen">
+      <p className="page-header__meta">Loading account</p>
+    </div>
+  )
+}
+
 export default function App() {
   if (!clerkConfigured) {
+    if (import.meta.env.PROD) {
+      return <SendHome />
+    }
     return <AuthGate />
   }
 

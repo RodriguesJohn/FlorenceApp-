@@ -86,6 +86,8 @@ export const clerkAllowedRedirectOrigins = [
   'http://localhost:5174',
   'http://127.0.0.1:5174',
   'https://florenceai-drab.vercel.app',
+  'https://www.florenceai.io',
+  'https://florenceai.io',
   'https://www.humanaistudio.io',
 ]
 
@@ -108,9 +110,14 @@ export function websiteHome() {
 export function isClerkHandshakePending() {
   if (typeof window === 'undefined') return false
   const query = window.location.search
+  const hash = window.location.hash
   return (
     query.includes('__clerk_handshake') ||
-    query.includes('__clerk_handshake_nonce')
+    query.includes('__clerk_handshake_nonce') ||
+    query.includes('__clerk_db_jwt') ||
+    query.includes('__clerk_ticket') ||
+    query.includes('__clerk_created_session') ||
+    hash.includes('__clerk_db_jwt')
   )
 }
 

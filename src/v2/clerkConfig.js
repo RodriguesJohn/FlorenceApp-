@@ -15,6 +15,7 @@ export const clerkAllowedRedirectOrigins = [
   "http://localhost:5175",
   "http://127.0.0.1:5175",
   "https://florence-app-seven.vercel.app",
+  "https://florence-app-johns-projects-29581f2f.vercel.app",
 ];
 
 export function appOrigin() {
