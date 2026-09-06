@@ -99,12 +99,18 @@ export function websiteOrigin() {
   }
   return (
     import.meta.env.VITE_WEBSITE_URL?.replace(/\/?$/, '') ||
-    'https://florenceai-drab.vercel.app'
+    'https://www.florenceai.io'
   )
 }
 
 export function websiteHome() {
   return `${websiteOrigin()}/`
+}
+
+export function isAuthIntent() {
+  if (typeof window === 'undefined') return false
+  const query = new URLSearchParams(window.location.search)
+  return query.get('signup') === '1' || query.get('signin') === '1'
 }
 
 export function isClerkHandshakePending() {

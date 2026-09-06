@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import SaaSProductMockup from "./SaaSProductMockup.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
@@ -7,10 +7,7 @@ import { useAuth, useClerk } from "@clerk/react";
 import {
   appPath,
   clerkConfigured,
-  clerkOverlayOptions,
   goToApp,
-  markSendToApp,
-  shouldSendToApp,
 } from "./clerkConfig.js";
 import figmaLogo from "../assets/logos/Figma.png";
 import storybookLogo from "../assets/logos/storybook.png";
@@ -627,27 +624,20 @@ function ProductPageWithClerk() {
   const { isLoaded, isSignedIn } = useAuth();
   const clerk = useClerk();
 
-  useEffect(() => {
-    if (!isLoaded || !isSignedIn || !shouldSendToApp()) return;
-    goToApp(clerk);
-  }, [clerk, isLoaded, isSignedIn]);
-
   function openSignUp() {
-    markSendToApp();
     if (isLoaded && isSignedIn) {
       goToApp(clerk);
       return;
     }
-    clerk.openSignUp(clerkOverlayOptions);
+    window.location.assign(appPath("/start?signup=1"));
   }
 
   function openSignIn() {
-    markSendToApp();
     if (isLoaded && isSignedIn) {
       goToApp(clerk);
       return;
     }
-    clerk.openSignIn(clerkOverlayOptions);
+    window.location.assign(appPath("/start?signin=1"));
   }
 
   return <ProductPageView onFixAiSlop={openSignUp} onLogIn={openSignIn} />;
@@ -657,8 +647,8 @@ export default function ProductPage() {
   if (!clerkConfigured) {
     return (
       <ProductPageView
-        onFixAiSlop={() => window.location.assign(appPath("/?signup=1"))}
-        onLogIn={() => window.location.assign(appPath("/"))}
+        onFixAiSlop={() => window.location.assign(appPath("/start?signup=1"))}
+        onLogIn={() => window.location.assign(appPath("/start?signin=1"))}
       />
     );
   }

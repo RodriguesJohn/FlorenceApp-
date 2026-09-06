@@ -6,6 +6,7 @@ import {
   clerkConfigured,
   clerkOverlayOptions,
   isClerkHandshakePending,
+  websiteHome,
 } from '../lib/clerk.js'
 
 function AuthGateCopy() {
@@ -58,7 +59,13 @@ function ClerkAuthGate() {
   return (
     <div className="auth-screen">
       <div className="auth-screen__panel layout-container-sm">
-        <AuthGateCopy />
+        <p className="page-header__eyebrow">Florence AI</p>
+        <h1 className="page-header__title">
+          {wantsSignup ? 'Create your account' : 'Log in'}
+        </h1>
+        <p className="page-header__meta">
+          Then you land in the workspace. Log out returns you to the homepage.
+        </p>
         <div className="layout-header__actions">
           <Button variant="primary" onClick={openSignIn}>
             Log in
@@ -67,6 +74,9 @@ function ClerkAuthGate() {
             Create account
           </Button>
         </div>
+        <p className="page-header__meta">
+          <a href={websiteHome()}>Back to Florence AI</a>
+        </p>
       </div>
     </div>
   )

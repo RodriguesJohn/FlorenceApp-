@@ -41,8 +41,8 @@ function ClerkRoot({ children }) {
         navigate(to, { replace: true })
       }}
       afterSignOutUrl={websiteHome()}
-      signInUrl={websiteHome()}
-      signUpUrl={websiteHome()}
+      signInUrl="/start?signin=1"
+      signUpUrl="/start?signup=1"
       signInFallbackRedirectUrl="/start"
       signUpFallbackRedirectUrl="/start"
       signInForceRedirectUrl="/start"

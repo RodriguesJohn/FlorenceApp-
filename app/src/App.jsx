@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useSearchParams } from 'react-router-dom'
 import { useAuth } from '@clerk/react'
 import { AppShell } from './layout/AppShell.jsx'
 import { StartHere } from './pages/StartHere.jsx'
@@ -23,7 +23,10 @@ import './App.css'
 
 function AppRoutes() {
   const { isLoaded, isSignedIn } = useAuth()
-  const sendHome = isLoaded && !isClerkHandshakePending() && !isSignedIn
+  const [params] = useSearchParams()
+  const wantsAuth = params.get('signup') === '1' || params.get('signin') === '1'
+  const sendHome =
+    isLoaded && !isClerkHandshakePending() && !isSignedIn && !wantsAuth
 
   useEffect(() => {
     if (sendHome) {
@@ -31,7 +34,19 @@ function AppRoutes() {
     }
   }, [sendHome])
 
-  if (!isLoaded || isClerkHandshakePending() || sendHome) {
+  if (!isLoaded || isClerkHandshakePending()) {
+    return (
+      <div className="auth-screen">
+        <p className="page-header__meta">Loading account</p>
+      </div>
+    )
+  }
+
+  if (!isSignedIn && wantsAuth) {
+    return <AuthGate />
+  }
+
+  if (sendHome) {
     return (
       <div className="auth-screen">
         <p className="page-header__meta">Loading account</p>
