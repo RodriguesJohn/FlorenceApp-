@@ -9,7 +9,7 @@
       (function () {
         var theme = 'light'
         try {
-          var stored = localStorage.getItem('florence-theme')
+          var stored = localStorage.getItem('florence-appearance')
           if (stored === 'light' || stored === 'dark') theme = stored
         } catch (e) {}
         document.documentElement.setAttribute('data-theme', theme)

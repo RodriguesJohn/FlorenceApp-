@@ -1,139 +1,67 @@
 import { useState } from 'react'
 import { PageHeader } from '../layout/PageHeader.jsx'
 import { Button } from '../../florence/components/button/Button.jsx'
-import { Input } from '../../florence/components/input/Input.jsx'
-import { Tag } from '../../florence/components/tag/Tag.jsx'
-import { Timeline } from '../../florence/components/timeline/Timeline.jsx'
 import { usePlatform } from '../state/platform.jsx'
 
 export function StartHere() {
-  const {
-    mcpConnected,
-    mcpEndpoint,
-    mcpSnippet,
-    connectMcp,
-    disconnectMcp,
-    notify,
-  } = usePlatform()
+  const { mcpEndpoint, notify } = usePlatform()
   const [copied, setCopied] = useState(false)
 
-  async function copySnippet() {
+  async function copyCommand() {
     try {
-      await navigator.clipboard.writeText(mcpSnippet)
+      await navigator.clipboard.writeText(mcpEndpoint)
       setCopied(true)
       notify({
-        title: 'Copied MCP config',
-        description: 'Paste it into Cursor or your agent host.',
+        title: 'Copied',
+        description: 'Paste it into Cursor Settings → MCP.',
         status: 'success',
       })
     } catch {
       notify({
         title: 'Unable to copy',
-        description: 'Select the snippet and copy it manually.',
+        description: 'Select the command and copy it manually.',
         status: 'warning',
       })
     }
   }
 
-  const steps = mcpConnected
-    ? [
-        {
-          status: 'later',
-          phase: 'Done',
-          title: 'Copy the MCP config',
-          body: 'The snippet on this page points your agent at this workspace.',
-        },
-        {
-          status: 'now',
-          phase: 'Now',
-          title: 'Paste it into your coding agent',
-          body: 'Open Cursor Settings, MCP, then paste and save. Other hosts take the same JSON.',
-        },
-        {
-          status: 'next',
-          phase: 'Next',
-          title: 'Ask the agent to retrieve Florence',
-          body: 'Before it writes UI, it should read tokens, contracts, and constraints from this endpoint.',
-        },
-      ]
-    : [
-        {
-          status: 'now',
-          phase: 'Step 1',
-          title: 'Copy the MCP config',
-          body: 'Use the snippet on this page. It points your agent at this workspace.',
-        },
-        {
-          status: 'next',
-          phase: 'Step 2',
-          title: 'Paste it into your coding agent',
-          body: 'Open Cursor Settings, MCP, then paste and save. Other hosts take the same JSON.',
-        },
-        {
-          status: 'later',
-          phase: 'Step 3',
-          title: 'Ask the agent to retrieve Florence',
-          body: 'Before it writes UI, it should read tokens, contracts, and constraints from this endpoint.',
-        },
-      ]
-
   return (
     <>
       <PageHeader
-        eyebrow="Start here"
         title="Agent Connect"
-        description="Copy this into Cursor. The MCP names AI slop in the product you are already building and returns one recommendation."
-        actions={
-          <Tag tone={mcpConnected ? 'success' : 'neutral'} size="sm">
-            {mcpConnected ? 'MCP live' : 'Not connected'}
-          </Tag>
-        }
+        description="Copy the package. Paste it into Cursor. Two steps."
       />
       <div className="layout-content">
-        <section className="layout-split" aria-label="MCP setup">
-          <div className="surface-card">
-            <h2 className="surface-card__title">Agent config</h2>
-            <p className="surface-card__body">
-              Paste this into Cursor Settings → MCP. Claude Code and Cursor
-              take the same JSON.
-            </p>
-            <pre className="code-block">
-              <code>{mcpSnippet}</code>
-            </pre>
-            <div className="layout-header__actions">
-              <Button variant="primary" onClick={copySnippet}>
-                {copied ? 'Copied' : 'Copy config'}
-              </Button>
-            </div>
-          </div>
-
-          <div className="surface-card">
-            <h2 className="surface-card__title">Florence MCP</h2>
-            <p className="surface-card__body">
-              Free is this MCP. It does not give them a design system. It
-              removes slop from the product they already have.
-            </p>
-            <Input label="Command" value={mcpEndpoint} readOnly />
-            <div className="layout-header__actions">
-              {mcpConnected ? (
-                <Button variant="secondary" onClick={disconnectMcp}>
-                  Disconnect MCP
+        <ol className="constraint-list" aria-label="Connect your agent">
+          <li className="surface-card constraint-card">
+            <span className="constraint-card__index">1</span>
+            <div className="stack-form">
+              <div>
+                <h2 className="surface-card__title">Copy this command</h2>
+                <p className="surface-card__body">
+                  This is the npm package.
+                </p>
+              </div>
+              <pre className="code-block">
+                <code>{mcpEndpoint}</code>
+              </pre>
+              <div className="layout-header__actions">
+                <Button variant="primary" onClick={copyCommand}>
+                  {copied ? 'Copied' : 'Copy command'}
                 </Button>
-              ) : (
-                <Button variant="primary" onClick={connectMcp}>
-                  Connect MCP
-                </Button>
-              )}
+              </div>
             </div>
-          </div>
-        </section>
-
-        <section className="surface-card" aria-labelledby="onboard-steps-title">
-          <h2 id="onboard-steps-title" className="surface-card__title">
-            How to add it
-          </h2>
-          <Timeline label="MCP onboarding steps" items={steps} headingLevel={3} />
-        </section>
+          </li>
+          <li className="surface-card constraint-card">
+            <span className="constraint-card__index">2</span>
+            <div>
+              <h2 className="surface-card__title">Paste it in Cursor</h2>
+              <p className="surface-card__body">
+                Open Settings → MCP, paste, and save.
+              </p>
+            </div>
+          </li>
+        </ol>
       </div>
     </>
   )

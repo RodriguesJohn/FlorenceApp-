@@ -1,8 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Analytics } from "@vercel/analytics/react";
+import { ClerkProvider } from "@clerk/react";
 import { applyPageSeo, setupSeoTracking } from "./v2/seo.js";
 import { ThemeProvider } from "./v2/theme.jsx";
+import { appPath, clerkAllowedRedirectOrigins, clerkConfigured, clerkPublishableKey } from "./v2/clerkConfig.js";
 import "./v2/styles.css";
 
 const FLORENCE_HOME = new Set([
@@ -50,11 +52,49 @@ if (shouldRedirectHome) {
 setupSeoTracking();
 applyPageSeo(route);
 
+function clerkGo(to) {
+  const dest = String(to || "");
+  if (!dest) return;
+
+  let url;
+  try {
+    url = dest.startsWith("http") ? new URL(dest) : new URL(dest, window.location.origin);
+  } catch {
+    return;
+  }
+
+  const app = new URL(appPath("/"));
+  const goesToApp =
+    url.origin === app.origin ||
+    url.pathname === "/start" ||
+    url.pathname.startsWith("/start/");
+  if (!goesToApp) return;
+
+  const appStart = appPath("/start");
+  window.location.assign(window.Clerk?.buildUrlWithAuth?.(appStart) || appStart);
+}
+
 function renderWithAnalytics(root, page) {
+  const tree = clerkConfigured ? (
+    <ClerkProvider
+      publishableKey={clerkPublishableKey}
+      routerPush={clerkGo}
+      routerReplace={clerkGo}
+      afterSignOutUrl="/"
+      signInFallbackRedirectUrl="/"
+      signUpFallbackRedirectUrl="/"
+      allowedRedirectOrigins={clerkAllowedRedirectOrigins}
+    >
+      {page}
+    </ClerkProvider>
+  ) : (
+    page
+  );
+
   root.render(
     <React.StrictMode>
       <ThemeProvider>
-        {page}
+        {tree}
         <Analytics />
       </ThemeProvider>
     </React.StrictMode>

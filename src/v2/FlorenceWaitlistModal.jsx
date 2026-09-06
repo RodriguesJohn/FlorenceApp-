@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { LiquidMetalButton } from "./LiquidMetalButton.jsx";
 
@@ -21,9 +21,11 @@ export const KIT_WAITLIST_FORMS = {
     id: "9882799",
     uid: "476af0a73d",
     titleId: "product-waitlist-title",
-    title: "Join the Florence waitlist",
+    title: "Fix AI Slop",
     description:
-      "A design system built for coding agents structured so MCP-connected builders can retrieve the right component instead of guessing."
+      "Enter your name and email. Then you get a command to drop into Cursor or Claude Code.",
+    submitLabel: "Continue",
+    nameRequired: true
   },
   course: {
     action: "https://app.kit.com/forms/9882802/subscriptions",
@@ -32,9 +34,13 @@ export const KIT_WAITLIST_FORMS = {
     titleId: "course-waitlist-title",
     titleLines: ["Join the Design Engineering", "waitlist"],
     description:
-      "Get notified when the self-paced course opens. Learn the intersection of design, code, and AI on your schedule."
+      "Get notified when the self-paced course opens. Learn the intersection of design, code, and AI on your schedule.",
+    submitLabel: "Join Waitlist",
+    nameRequired: false
   }
 };
+
+const FLORENCE_NPX_COMMAND = "npx -y github:RodriguesJohn/florence-mcp";
 
 function loadConvertKitScript() {
   return new Promise((resolve) => {
@@ -110,6 +116,15 @@ function useConvertKitForm(rootRef, active = true) {
   }, [active, rootRef]);
 }
 
+function kitFormSucceeded(root) {
+  if (!root) {
+    return false;
+  }
+
+  const success = root.querySelector(".formkit-alert-success");
+  return Boolean(success?.textContent?.trim());
+}
+
 function WaitlistFormCopy({ config }) {
   return (
     <div className="product-waitlist-form-copy">
@@ -151,6 +166,8 @@ export function KitWaitlistForm({ variant = "florence" }) {
             name="fields[first_name]"
             aria-label="First Name"
             placeholder="First Name"
+            required={config.nameRequired}
+            autoComplete="given-name"
             type="text"
           />
         </div>
@@ -161,11 +178,12 @@ export function KitWaitlistForm({ variant = "florence" }) {
             aria-label="Email Address"
             placeholder="Email Address"
             required
+            autoComplete="email"
             type="email"
           />
         </div>
         <button type="submit" data-element="submit" className="formkit-submit product-waitlist-submit">
-          <span>Join Waitlist</span>
+          <span>{config.submitLabel}</span>
         </button>
       </div>
       <p className="product-waitlist-disclaimer formkit-disclaimer" data-element="disclaimer">
@@ -175,13 +193,51 @@ export function KitWaitlistForm({ variant = "florence" }) {
   );
 }
 
-export function KitWaitlistModal({ open, onClose, variant = "florence" }) {
-  const closeRef = useRef(null);
-  const dialogRef = useRef(null);
-  const config = KIT_WAITLIST_FORMS[variant];
+function FlorenceNpxInstall({ copyRef }) {
+  const [copied, setCopied] = useState(false);
 
-  useConvertKitForm(dialogRef, open);
+  async function copyCommand() {
+    try {
+      await navigator.clipboard.writeText(FLORENCE_NPX_COMMAND);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      setCopied(false);
+    }
+  }
 
+  return (
+    <div className="product-waitlist-install">
+      <div className="product-waitlist-form-copy">
+        <h2 id="product-waitlist-title">Drop this into your agent</h2>
+        <p>Paste this in Cursor, Claude Code, or your terminal.</p>
+      </div>
+      <pre className="product-waitlist-code product-waitlist-code--command">
+        <code>{FLORENCE_NPX_COMMAND}</code>
+      </pre>
+      <button
+        ref={copyRef}
+        type="button"
+        className="product-waitlist-submit"
+        onClick={copyCommand}
+      >
+        <span>{copied ? "Copied" : "Copy command"}</span>
+      </button>
+      <p className="product-waitlist-disclaimer">No install. npx runs it.</p>
+    </div>
+  );
+}
+
+function WaitlistDialog({
+  open,
+  onClose,
+  labelledBy,
+  closeLabel,
+  dialogRef,
+  closeRef,
+  className = "",
+  children
+}) {
   useEffect(() => {
     if (!open) {
       return undefined;
@@ -189,10 +245,6 @@ export function KitWaitlistModal({ open, onClose, variant = "florence" }) {
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
-    const frame = requestAnimationFrame(() => {
-      closeRef.current?.focus();
-    });
 
     function handleKeyDown(event) {
       if (event.key === "Escape") {
@@ -202,7 +254,6 @@ export function KitWaitlistModal({ open, onClose, variant = "florence" }) {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => {
-      cancelAnimationFrame(frame);
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", handleKeyDown);
     };
@@ -224,24 +275,58 @@ export function KitWaitlistModal({ open, onClose, variant = "florence" }) {
     >
       <section
         ref={dialogRef}
-        className="product-waitlist-dialog"
+        className={`product-waitlist-dialog${className ? ` ${className}` : ""}`}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={config.titleId}
+        aria-labelledby={labelledBy}
       >
         <button
           ref={closeRef}
           type="button"
           className="product-waitlist-close"
-          aria-label="Close waitlist form"
+          aria-label={closeLabel}
           onClick={onClose}
         >
           <span aria-hidden="true">×</span>
         </button>
-        <WaitlistFormCopy config={config} />
-        <KitWaitlistForm variant={variant} />
+        {children}
       </section>
     </div>
+  );
+}
+
+export function KitWaitlistModal({ open, onClose, variant = "florence" }) {
+  const closeRef = useRef(null);
+  const dialogRef = useRef(null);
+  const config = KIT_WAITLIST_FORMS[variant];
+
+  useConvertKitForm(dialogRef, open);
+
+  useEffect(() => {
+    if (!open) {
+      return undefined;
+    }
+
+    const frame = requestAnimationFrame(() => {
+      const input = dialogRef.current?.querySelector("input");
+      (input ?? closeRef.current)?.focus();
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [open]);
+
+  return (
+    <WaitlistDialog
+      open={open}
+      onClose={onClose}
+      labelledBy={config.titleId}
+      closeLabel="Close waitlist form"
+      dialogRef={dialogRef}
+      closeRef={closeRef}
+    >
+      <WaitlistFormCopy config={config} />
+      <KitWaitlistForm variant={variant} />
+    </WaitlistDialog>
   );
 }
 
@@ -250,7 +335,90 @@ export function FlorenceWaitlistForm() {
 }
 
 export function FlorenceWaitlistModal({ open, onClose }) {
-  return <KitWaitlistModal open={open} onClose={onClose} variant="florence" />;
+  const closeRef = useRef(null);
+  const dialogRef = useRef(null);
+  const copyRef = useRef(null);
+  const config = KIT_WAITLIST_FORMS.florence;
+  const [step, setStep] = useState("form");
+
+  useConvertKitForm(dialogRef, open && step === "form");
+
+  useEffect(() => {
+    if (!open) {
+      setStep("form");
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (!open || step !== "form") {
+      return undefined;
+    }
+
+    const root = dialogRef.current;
+    if (!root) {
+      return undefined;
+    }
+
+    function detect() {
+      if (kitFormSucceeded(root)) {
+        setStep("install");
+      }
+    }
+
+    const observer = new MutationObserver(detect);
+    observer.observe(root, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+    return () => observer.disconnect();
+  }, [open, step]);
+
+  useEffect(() => {
+    if (!open) {
+      return undefined;
+    }
+
+    const frame = requestAnimationFrame(() => {
+      if (step === "install") {
+        copyRef.current?.focus();
+        return;
+      }
+
+      const input = dialogRef.current?.querySelector("input");
+      (input ?? closeRef.current)?.focus();
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [open, step]);
+
+  return (
+    <WaitlistDialog
+      open={open}
+      onClose={onClose}
+      labelledBy={config.titleId}
+      closeLabel={step === "install" ? "Close command" : "Close waitlist form"}
+      dialogRef={dialogRef}
+      closeRef={closeRef}
+      className={step === "install" ? "product-waitlist-dialog--install" : ""}
+    >
+      {step === "install" ? (
+        <FlorenceNpxInstall copyRef={copyRef} />
+      ) : (
+        <>
+          <WaitlistFormCopy config={config} />
+          <KitWaitlistForm variant="florence" />
+          <button
+            type="button"
+            className="product-waitlist-skip"
+            onClick={() => setStep("install")}
+          >
+            Skip
+          </button>
+        </>
+      )}
+    </WaitlistDialog>
+  );
 }
 
 export function CourseWaitlistModal({ open, onClose }) {
@@ -279,11 +447,15 @@ export function WaitlistButton({
   const isPrimary = /\bproduct-btn--primary\b/.test(className);
 
   if (isPrimary) {
+    const metalClass = [
+      className.includes("product-btn--full") ? "liquid-metal-btn--full" : "",
+      className.includes("liquid-metal-btn--wide") ? "liquid-metal-btn--wide" : ""
+    ]
+      .filter(Boolean)
+      .join(" ");
+
     return (
-      <LiquidMetalButton
-        className={className.includes("product-btn--full") ? "liquid-metal-btn--full" : ""}
-        onClick={onOpen}
-      >
+      <LiquidMetalButton className={metalClass} onClick={onOpen}>
         {children}
       </LiquidMetalButton>
     );

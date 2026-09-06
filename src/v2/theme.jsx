@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
-const STORAGE_KEY = "florence-theme";
+const STORAGE_KEY = "florence-appearance";
 const ThemeContext = createContext(null);
 
 function isTheme(value) {
@@ -15,9 +15,9 @@ function readTheme() {
     /* private mode */
   }
 
-  return document.documentElement.getAttribute("data-theme") === "light"
-    ? "light"
-    : "dark";
+  return document.documentElement.getAttribute("data-theme") === "dark"
+    ? "dark"
+    : "light";
 }
 
 function applyTheme(theme) {
@@ -25,24 +25,37 @@ function applyTheme(theme) {
   document.documentElement.style.colorScheme = theme;
 }
 
+function persistTheme(theme) {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, theme);
+  } catch {
+    /* private mode */
+  }
+}
+
 export function ThemeProvider({ children }) {
   const [theme, setThemeState] = useState(readTheme);
 
   useEffect(() => {
     applyTheme(theme);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, theme);
-    } catch {
-      /* private mode */
-    }
   }, [theme]);
 
   const value = useMemo(
     () => ({
       theme,
       isDark: theme === "dark",
-      setTheme: (next) => setThemeState(isTheme(next) ? next : "dark"),
-      toggleTheme: () => setThemeState((current) => (current === "dark" ? "light" : "dark"))
+      setTheme: (next) => {
+        const resolved = isTheme(next) ? next : "light";
+        setThemeState(resolved);
+        persistTheme(resolved);
+      },
+      toggleTheme: () => {
+        setThemeState((current) => {
+          const next = current === "dark" ? "light" : "dark";
+          persistTheme(next);
+          return next;
+        });
+      }
     }),
     [theme]
   );

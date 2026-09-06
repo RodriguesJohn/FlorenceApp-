@@ -37,12 +37,14 @@ import { CreateBrandDialog } from './CreateBrandDialog.jsx'
 import { TEST_UNLOCK_PIN } from '../data/platform.js'
 import { usePlatform } from '../state/platform.jsx'
 import { useTheme } from '../state/theme.jsx'
-
-const WEBSITE_HOME =
-  import.meta.env.VITE_WEBSITE_URL ||
-  (import.meta.env.DEV
-    ? 'http://localhost:5174/'
-    : 'https://florenceai-drab.vercel.app/')
+import {
+  clerkDisplayEmail,
+  clerkDisplayInitials,
+  clerkDisplayName,
+  clerkProfileOverlayOptions,
+  websiteHome,
+} from '../lib/clerk.js'
+import { useClerk, useUser } from '@clerk/react'
 
 const NAV = [
   {
@@ -100,10 +102,16 @@ export function AppShell({ children }) {
     createBrand,
     plan,
     isPaid,
+    isAdmin,
     choosePlan,
     toast,
     dismissToast,
   } = usePlatform()
+  const { user } = useUser()
+  const { signOut, openUserProfile } = useClerk()
+  const accountName = clerkDisplayName(user)
+  const accountEmail = clerkDisplayEmail(user)
+  const accountInitials = clerkDisplayInitials(user)
   const { isDark, setTheme } = useTheme()
   const location = useLocation()
   const navigate = useNavigate()
@@ -162,7 +170,7 @@ export function AppShell({ children }) {
         <SidebarHeader className="app-sidebar__brand">
           <a
             className="app-brand"
-            href={WEBSITE_HOME}
+            href={websiteHome()}
             aria-label="Florence AI home"
           >
             <strong>Florence AI</strong>
@@ -230,20 +238,14 @@ export function AppShell({ children }) {
           <button
             type="button"
             className="account-card"
-            onClick={() => {
-              if (isPaid) {
-                setAccountOpen(true)
-                return
-              }
-              openUnlock('/settings')
-            }}
+            onClick={() => setAccountOpen(true)}
           >
             <span className="account-card__avatar" aria-hidden="true">
-              JR
+              {accountInitials}
             </span>
             <span className="account-card__copy">
-              <strong>John Rodrigues</strong>
-              <span>Workspace admin</span>
+              <strong>{accountName}</strong>
+              <span>{accountEmail}</span>
             </span>
             <MoreHorizontal aria-hidden="true" />
           </button>
@@ -346,37 +348,59 @@ export function AppShell({ children }) {
       <Modal
         open={accountOpen}
         onOpenChange={setAccountOpen}
-        title="John Rodrigues"
-        description="Workspace admin"
+        title={accountName}
+        description={accountEmail}
         size="sm"
         footer={
           <>
+            {isPaid ? (
+              <>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setAccountOpen(false)
+                    navigate('/internal')
+                  }}
+                >
+                  Open internal
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setAccountOpen(false)
+                    navigate('/settings')
+                  }}
+                >
+                  Open settings
+                </Button>
+              </>
+            ) : null}
             <Button
               variant="secondary"
               onClick={() => {
                 setAccountOpen(false)
-                navigate('/internal')
+                openUserProfile(clerkProfileOverlayOptions)
               }}
             >
-              Open internal
+              Manage account
             </Button>
             <Button
-              variant="secondary"
-              onClick={() => {
+              variant="tertiary"
+              onClick={async () => {
                 setAccountOpen(false)
-                navigate('/settings')
+                await signOut({ redirectUrl: websiteHome() })
               }}
             >
-              Open settings
+              Log out
             </Button>
           </>
         }
       >
         <div className="account-dialog">
           <Tag tone="brand" size="sm">
-            {plan.name}
+            {isAdmin ? 'Admin' : plan.name}
           </Tag>
-          <p>One seat on this workspace. Manage plan and MCP in settings.</p>
+          <p>This account keeps your MCP command. Come back and it is still here.</p>
         </div>
       </Modal>
     </div>

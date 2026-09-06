@@ -18,8 +18,8 @@ export const PLANS = {
   studio: {
     id: 'studio',
     name: 'Studio',
-    price: '$99',
-    cadence: 'one subscription',
+    price: '$49',
+    cadence: 'per editor / month',
     seats: 1,
     summary: 'Generate one design system and plug it into your product.',
     features: [
@@ -27,7 +27,7 @@ export const PLANS = {
       'One design system generator',
       'Publish tokens and components to this workspace',
       'MCP serves your system, not the shared default',
-      'One editor seat',
+      'Billed per editor / month',
     ],
   },
   custom: {
@@ -253,10 +253,8 @@ export function buildMcpSnippet(_endpoint) {
     {
       mcpServers: {
         florence: {
-          command: 'node',
-          args: [
-            '/Users/johnrodrigues/Projects/Active Projects/Folrence AI App /mcp/src/index.js',
-          ],
+          command: 'npx',
+          args: ['-y', 'github:RodriguesJohn/florence-mcp'],
         },
       },
     },

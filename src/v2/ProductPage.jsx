@@ -3,6 +3,12 @@ import SaaSProductMockup from "./SaaSProductMockup.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
 import { FlorenceWaitlistModal, WaitlistButton } from "./FlorenceWaitlistModal.jsx";
+import { useAuth, useClerk } from "@clerk/react";
+import {
+  appPath,
+  clerkConfigured,
+  goToApp,
+} from "./clerkConfig.js";
 import figmaLogo from "../assets/logos/Figma.png";
 import storybookLogo from "../assets/logos/storybook.png";
 import reactLogo from "../assets/logos/react-mark.svg";
@@ -15,9 +21,6 @@ import "./product.css";
 
 const BOOKING_URL = "https://cal.com/john-rodrigues-rqt2lg/15min";
 const NEWSLETTER_URL = "https://substack.com/@johnrodrigues";
-const APP_HOME =
-  import.meta.env.VITE_APP_URL ||
-  (import.meta.env.DEV ? "http://localhost:5175/" : "https://florence-app-seven.vercel.app/");
 
 const systemLayers = [
   {
@@ -61,6 +64,8 @@ const outcomes = [
   "MCP connects. The layer is the product."
 ];
 
+const outcomeMapNodes = ["Brand", "System", "Guardrails", "Quality"];
+
 const layerInputs = [
   { name: "Storybook", logo: storybookLogo, contain: true },
   { name: "Figma", logo: figmaLogo, contain: true },
@@ -90,15 +95,17 @@ const pricingPlans = [
       "Ship with quality, not AI slop",
       "MCP for Cursor and Claude Code"
     ],
-    ctaLabel: "Join the waitlist",
-    waitlist: true,
+    ctaLabel: "Fix AI Slop",
+    waitlist: false,
+    signup: true,
+    ctaPrimary: true,
     featured: false
   },
   {
-    id: "platform",
-    name: "Platform",
-    price: "$99",
-    term: "per month",
+    id: "growth",
+    name: "Growth",
+    price: "$49",
+    term: "/ editor / month",
     description: "Self-serve Florence MCP on your design system.",
     features: [
       "Brand, system, constraints, and quality in one layer",
@@ -111,9 +118,9 @@ const pricingPlans = [
     featured: true
   },
   {
-    id: "custom",
-    name: "Custom",
-    price: "Project",
+    id: "scale",
+    name: "Scale",
+    price: "Custom Solution",
     term: null,
     description: "Custom solution to build your AI-ready design system.",
     features: [
@@ -352,7 +359,7 @@ function ProductEcosystemChip({ name, logo, glyph, contain, invert, chipRef }) {
   );
 }
 
-function ProductPricingCard({ plan, onWaitlistOpen }) {
+function ProductPricingCard({ plan, onWaitlistOpen, onFixAiSlop }) {
   return (
     <article
       className={`product-pricing-card${
@@ -370,7 +377,7 @@ function ProductPricingCard({ plan, onWaitlistOpen }) {
           <span>{plan.price}</span>
           {plan.term ? <small>{plan.term}</small> : null}
         </p>
-        <ProductPricingCta plan={plan} onWaitlistOpen={onWaitlistOpen} />
+        <ProductPricingCta plan={plan} onWaitlistOpen={onWaitlistOpen} onFixAiSlop={onFixAiSlop} />
       </div>
       <div className="product-pricing-card-body">
         <p className="product-pricing-card-description">{plan.description}</p>
@@ -384,15 +391,24 @@ function ProductPricingCard({ plan, onWaitlistOpen }) {
   );
 }
 
-function ProductPricingCta({ plan, onWaitlistOpen }) {
+function ProductPricingCta({ plan, onWaitlistOpen, onFixAiSlop }) {
+  const isPrimary = Boolean(plan.ctaPrimary);
+  const href = plan.ctaHref;
+  const className = `product-btn product-btn--full${
+    isPrimary ? " product-btn--primary" : " product-btn--ghost"
+  }`;
+
   if (plan.waitlist) {
     return (
-      <WaitlistButton
-        className={`product-btn product-btn--full${
-          plan.featured ? " product-btn--primary" : " product-btn--ghost"
-        }`}
-        onOpen={onWaitlistOpen}
-      >
+      <WaitlistButton className={className} onOpen={onWaitlistOpen}>
+        {plan.ctaLabel}
+      </WaitlistButton>
+    );
+  }
+
+  if (plan.signup) {
+    return (
+      <WaitlistButton className={className} onOpen={onFixAiSlop}>
         {plan.ctaLabel}
       </WaitlistButton>
     );
@@ -400,11 +416,9 @@ function ProductPricingCta({ plan, onWaitlistOpen }) {
 
   return (
     <a
-      className={`product-btn product-btn--full${
-        plan.featured ? " product-btn--primary" : " product-btn--ghost"
-      }`}
-      href={plan.ctaHref}
-      {...(plan.ctaHref.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+      className={className}
+      href={href}
+      {...(href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
     >
       {plan.ctaLabel}
     </a>
@@ -415,22 +429,28 @@ function ProductFooter() {
   return (
     <footer className="product-footer" aria-label="Florence AI footer">
       <div className="product-footer-inner">
-        <a className="product-footer-brand" href="/">
-          Florence AI
-        </a>
-        <a href={NEWSLETTER_URL} target="_blank" rel="noreferrer">
-          Publication
-        </a>
-        <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
-        <a href={BOOKING_URL} target="_blank" rel="noreferrer">
-          Book a call
-        </a>
+        <div className="product-footer-links">
+          <a className="product-footer-brand" href="/">
+            Florence AI
+          </a>
+          <a href={NEWSLETTER_URL} target="_blank" rel="noreferrer">
+            Publication
+          </a>
+          <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
+          <a href={BOOKING_URL} target="_blank" rel="noreferrer">
+            Book a call
+          </a>
+        </div>
+        <p className="product-footer-credit">
+          Florence AI by{" "}
+          <a href="https://www.humanaistudio.io">Human AI Studio</a>
+        </p>
       </div>
     </footer>
   );
 }
 
-export default function ProductPage() {
+function ProductPageView({ onFixAiSlop, onLogIn }) {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const openWaitlist = () => setWaitlistOpen(true);
 
@@ -442,21 +462,31 @@ export default function ProductPage() {
         <section className="product-hero" aria-labelledby="product-hero-title">
           <Entrance className="product-hero-inner" animate="visible">
             <EntranceItem className="product-hero-copy">
-              <h1 id="product-hero-title">Design System For Agents.</h1>
+              <h1 id="product-hero-title">Design System For Agents</h1>
               <p className="product-lede">
-                An MCP for your coding agent. Build brand, system, and
-                engineering constraints here so generated UI ships with
-                confidence.
+                Your agents produce off-brand, inconsistent UI. Our design
+                system keeps it on-brand, on constraint, and off AI slop.
               </p>
               <div className="product-hero-actions">
-                <WaitlistButton onOpen={openWaitlist} />
-                <a className="product-btn product-btn--ghost" href={APP_HOME}>
-                  Enter App
-                </a>
+                <WaitlistButton
+                  className="product-btn product-btn--primary liquid-metal-btn--wide"
+                  onOpen={onFixAiSlop}
+                >
+                  Fix AI Slop
+                </WaitlistButton>
+                <button
+                  type="button"
+                  className="product-btn product-btn--ghost"
+                  onClick={onLogIn}
+                >
+                  Log in
+                </button>
               </div>
             </EntranceItem>
             <EntranceItem className="product-preview">
-              <SaaSProductMockup embedded story="context" />
+              <div className="product-preview-frame">
+                <SaaSProductMockup embedded story="context" />
+              </div>
             </EntranceItem>
           </Entrance>
         </section>
@@ -464,8 +494,7 @@ export default function ProductPage() {
         <section className="product-section" aria-labelledby="product-gap-title">
           <Entrance className="product-section-inner product-gap">
             <EntranceItem as="h2" id="product-gap-title">
-              <span>How Florence AI solves</span>
-              <span>your problem.</span>
+              From scattered context to one source of truth.
             </EntranceItem>
             <EntranceItem as="p" className="product-body">
               They ship almost-right UI. QA load grows. Trust doesn&apos;t.
@@ -484,7 +513,10 @@ export default function ProductPage() {
         <section className="product-section" id="layers" aria-labelledby="product-ecosystem-title product-system-title">
           <Entrance className="product-section-inner">
             <EntranceItem className="product-section-heading product-ecosystem-heading">
-              <h2 id="product-ecosystem-title">Design infrastructure for coding agents</h2>
+              <h2 id="product-ecosystem-title">
+                <span>Design and Engineering Infrastructure</span>
+                <span>for Coding Agents</span>
+              </h2>
               <p className="product-body">
                 Your stack on one side. Your agents on the other. One context layer in the middle.
               </p>
@@ -530,10 +562,17 @@ export default function ProductPage() {
             </EntranceItem>
             <EntranceItem className="product-outcomes-map" aria-hidden="true">
               <div className="product-map-hub">Context layer</div>
-              <div className="product-map-node product-map-node--a">Brand</div>
-              <div className="product-map-node product-map-node--b">System</div>
-              <div className="product-map-node product-map-node--c">Guardrails</div>
-              <div className="product-map-node product-map-node--d">Quality</div>
+              <span className="product-map-trunk" />
+              <div className="product-map-connectors">
+                {outcomeMapNodes.map((node) => (
+                  <span key={node} />
+                ))}
+              </div>
+              <ul className="product-map-stack">
+                {outcomeMapNodes.map((node) => (
+                  <li key={node}>{node}</li>
+                ))}
+              </ul>
             </EntranceItem>
           </Entrance>
         </section>
@@ -546,7 +585,11 @@ export default function ProductPage() {
             <div className="product-pricing-grid">
               {pricingPlans.map((plan) => (
                 <EntranceItem key={plan.id}>
-                  <ProductPricingCard plan={plan} onWaitlistOpen={openWaitlist} />
+                  <ProductPricingCard
+                    plan={plan}
+                    onWaitlistOpen={openWaitlist}
+                    onFixAiSlop={onFixAiSlop}
+                  />
                 </EntranceItem>
               ))}
             </div>
@@ -576,3 +619,40 @@ export default function ProductPage() {
     </div>
   );
 }
+
+function ProductPageWithClerk() {
+  const { isLoaded, isSignedIn } = useAuth();
+  const clerk = useClerk();
+
+  function openSignUp() {
+    if (isLoaded && isSignedIn) {
+      goToApp(clerk);
+      return;
+    }
+    window.location.assign(appPath("/start?signup=1"));
+  }
+
+  function openSignIn() {
+    if (isLoaded && isSignedIn) {
+      goToApp(clerk);
+      return;
+    }
+    window.location.assign(appPath("/start?signin=1"));
+  }
+
+  return <ProductPageView onFixAiSlop={openSignUp} onLogIn={openSignIn} />;
+}
+
+export default function ProductPage() {
+  if (!clerkConfigured) {
+    return (
+      <ProductPageView
+        onFixAiSlop={() => window.location.assign(appPath("/start?signup=1"))}
+        onLogIn={() => window.location.assign(appPath("/start?signin=1"))}
+      />
+    );
+  }
+
+  return <ProductPageWithClerk />;
+}
+

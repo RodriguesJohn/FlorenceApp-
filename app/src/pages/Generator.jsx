@@ -62,7 +62,7 @@ export function Generator() {
         <PageHeader
           eyebrow="Studio"
           title="Design system generator"
-          description="Included on Studio ($99, one seat) and Custom."
+          description="Included on Studio ($49 per editor / month) and Custom."
         />
         <div className="layout-content">
           <InsightCard

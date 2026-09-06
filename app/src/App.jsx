@@ -1,6 +1,9 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Navigate, Route, Routes, useSearchParams } from 'react-router-dom'
+import { useAuth } from '@clerk/react'
 import { AppShell } from './layout/AppShell.jsx'
 import { StartHere } from './pages/StartHere.jsx'
+import { AuthGate } from './pages/Login.jsx'
 import { BrandSystem } from './pages/BrandSystem.jsx'
 import { Assets } from './pages/Assets.jsx'
 import { FoundationTokens } from './pages/FoundationTokens.jsx'
@@ -15,9 +18,42 @@ import { Internal } from './pages/Internal.jsx'
 import { Evals } from './pages/Evals.jsx'
 import { Settings } from './pages/Settings.jsx'
 import { Generator } from './pages/Generator.jsx'
+import { clerkConfigured, isClerkHandshakePending, websiteHome } from './lib/clerk.js'
 import './App.css'
 
-export default function App() {
+function AppRoutes() {
+  const { isLoaded, isSignedIn } = useAuth()
+  const [params] = useSearchParams()
+  const wantsAuth = params.get('signup') === '1' || params.get('signin') === '1'
+  const sendHome =
+    isLoaded && !isClerkHandshakePending() && !isSignedIn && !wantsAuth
+
+  useEffect(() => {
+    if (sendHome) {
+      window.location.replace(websiteHome())
+    }
+  }, [sendHome])
+
+  if (!isLoaded || isClerkHandshakePending()) {
+    return (
+      <div className="auth-screen">
+        <p className="page-header__meta">Loading account</p>
+      </div>
+    )
+  }
+
+  if (!isSignedIn && wantsAuth) {
+    return <AuthGate />
+  }
+
+  if (sendHome) {
+    return (
+      <div className="auth-screen">
+        <p className="page-header__meta">Loading account</p>
+      </div>
+    )
+  }
+
   return (
     <AppShell>
       <Routes>
@@ -39,7 +75,33 @@ export default function App() {
         <Route path="/evals" element={<Evals />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/generator" element={<Generator />} />
+        <Route path="/sign-in/*" element={<Navigate to="/start" replace />} />
+        <Route path="/sign-up/*" element={<Navigate to="/start" replace />} />
+        <Route path="*" element={<Navigate to="/start" replace />} />
       </Routes>
     </AppShell>
   )
+}
+
+function SendHome() {
+  useEffect(() => {
+    window.location.replace(websiteHome())
+  }, [])
+
+  return (
+    <div className="auth-screen">
+      <p className="page-header__meta">Loading account</p>
+    </div>
+  )
+}
+
+export default function App() {
+  if (!clerkConfigured) {
+    if (import.meta.env.PROD) {
+      return <SendHome />
+    }
+    return <AuthGate />
+  }
+
+  return <AppRoutes />
 }
