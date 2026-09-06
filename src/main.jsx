@@ -55,15 +55,23 @@ applyPageSeo(route);
 function clerkGo(to) {
   const dest = String(to || "");
   if (!dest) return;
-  const path = dest.startsWith("http") ? new URL(dest).pathname : dest.split("?")[0];
-  const leavesOrigin =
-    (/^https?:\/\//.test(dest) && !dest.startsWith(window.location.origin)) ||
-    path === "/start" ||
-    path.startsWith("/start");
-  if (!leavesOrigin) return;
+
+  let url;
+  try {
+    url = dest.startsWith("http") ? new URL(dest) : new URL(dest, window.location.origin);
+  } catch {
+    return;
+  }
+
+  const app = new URL(appPath("/"));
+  const goesToApp =
+    url.origin === app.origin ||
+    url.pathname === "/start" ||
+    url.pathname.startsWith("/start/");
+  if (!goesToApp) return;
+
   const appStart = appPath("/start");
-  const url = window.Clerk?.buildUrlWithAuth?.(appStart) || appStart;
-  window.location.assign(url);
+  window.location.assign(window.Clerk?.buildUrlWithAuth?.(appStart) || appStart);
 }
 
 function renderWithAnalytics(root, page) {
