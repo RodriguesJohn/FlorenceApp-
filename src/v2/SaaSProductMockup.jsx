@@ -148,7 +148,7 @@ function MockTokenPage({ locked = false }) {
         <p className="saas-insight-card__eyebrow">Free</p>
         <h4>Studio generates a system you can plug in</h4>
         <p>
-          Free already removes slop by serving Florence over MCP. For $99 you get one seat and a generator that publishes your tokens here.
+          Free already removes slop by serving Florence over MCP. For $49 per editor / month you get a generator that publishes your tokens here.
         </p>
         <Chrome locked={locked} className="saas-btn-primary">View Studio</Chrome>
       </article>

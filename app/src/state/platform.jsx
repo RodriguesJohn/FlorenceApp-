@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useRef, useState } from 'react'
+import { useUser } from '@clerk/react'
 import {
   DRAFT_BRAND_ID,
   PLANS,
@@ -11,6 +12,7 @@ import {
   isBrandSetup,
   normalizeBrand,
 } from '../data/platform.js'
+import { clerkConfigured, isClerkAdmin } from '../lib/clerk.js'
 
 function resolveReferenceName(workspace, id) {
   const custom = (workspace.references ?? []).find((ref) => ref.id === id)
@@ -57,7 +59,20 @@ function hydrateBrands(stored) {
 
 const PlatformContext = createContext(null)
 
-export function PlatformProvider({ children }) {
+export function AppPlatformProvider({ children }) {
+  if (!clerkConfigured) {
+    return <PlatformProvider>{children}</PlatformProvider>
+  }
+
+  return <ClerkAdminPlatform>{children}</ClerkAdminPlatform>
+}
+
+function ClerkAdminPlatform({ children }) {
+  const { user } = useUser()
+  return <PlatformProvider isAdmin={isClerkAdmin(user)}>{children}</PlatformProvider>
+}
+
+export function PlatformProvider({ children, isAdmin = false }) {
   const stored = loadState()
   const [planId, setPlanId] = useState(stored?.planId ?? 'free')
   const [workspaceId, setWorkspaceId] = useState(
@@ -89,12 +104,15 @@ export function PlatformProvider({ children }) {
   }
 
   const value = useMemo(() => {
-    const plan = PLANS[planId] ?? PLANS.free
+    const plan =
+      isAdmin && planId === 'free'
+        ? PLANS.studio
+        : (PLANS[planId] ?? PLANS.free)
     const workspace =
       workspaces.find((item) => item.id === workspaceId) ?? workspaces[0]
-    const isPaid = planId === 'studio' || planId === 'custom'
+    const isPaid = planId === 'studio' || planId === 'custom' || isAdmin
     const canGenerate = isPaid
-    const mcpEndpoint = 'node mcp/src/index.js'
+    const mcpEndpoint = 'npx -y github:RodriguesJohn/florence-mcp'
     const mcpSnippet = buildMcpSnippet(mcpEndpoint)
 
     function patchWorkspace(id, updater) {
@@ -110,6 +128,7 @@ export function PlatformProvider({ children }) {
     return {
       plan,
       planId,
+      isAdmin,
       isPaid,
       workspace,
       workspaceId,
@@ -329,7 +348,7 @@ export function PlatformProvider({ children }) {
       },
       dismissToast: () => setToast(null),
     }
-  }, [planId, workspaceId, workspaces, mcpConnected, toast])
+  }, [isAdmin, planId, workspaceId, workspaces, mcpConnected, toast])
 
   return (
     <PlatformContext.Provider value={value}>{children}</PlatformContext.Provider>

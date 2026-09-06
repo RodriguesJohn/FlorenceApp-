@@ -45,7 +45,7 @@ export function FoundationTokens() {
             tone="opportunity"
             eyebrow={plan.name}
             title="Studio generates a system you can plug in"
-            description="Free already removes slop by serving Florence over MCP. For $99 you get one seat and a generator that publishes your tokens here."
+            description="Free already removes slop by serving Florence over MCP. For $49 per editor / month you get a generator that publishes your tokens here."
             primaryAction={{
               label: 'View Studio',
               onClick: () => navigate('/settings?tab=plan'),

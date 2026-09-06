@@ -390,6 +390,26 @@
   margin-top: var(--space-stack-xs);
 }
 
+.auth-screen {
+  min-height: 100dvh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  background: var(--color-bg-page);
+  padding-block: var(--layout-margin-md);
+  padding-inline: var(--layout-margin-md);
+}
+
+.auth-screen__panel {
+  width: min(100%, var(--layout-container-sm));
+  display: grid;
+  gap: var(--space-stack-md);
+}
+
+.auth-screen__form {
+  width: 100%;
+}
+
 .surface-card {
   display: grid;
   gap: var(--space-stack-sm);

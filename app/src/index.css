@@ -35,3 +35,40 @@ pre {
   font-family: var(--text-code-font-family);
   font-size: var(--text-code-font-size);
 }
+
+html:has(.cl-modalBackdrop) #root {
+  filter: blur(0.75rem);
+}
+
+html:has(.cl-modalBackdrop) {
+  overflow: hidden;
+}
+
+.cl-modalBackdrop {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: color-mix(
+    in srgb,
+    var(--color-overlay-scrim) calc(100% * var(--opacity-scrim-soft)),
+    transparent
+  ) !important;
+  -webkit-backdrop-filter: blur(0.75rem) saturate(1.2) !important;
+  backdrop-filter: blur(0.75rem) saturate(1.2) !important;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  html:has(.cl-modalBackdrop) #root {
+    filter: none;
+  }
+
+  .cl-modalBackdrop {
+    background: color-mix(
+      in srgb,
+      var(--color-overlay-scrim) calc(100% * var(--opacity-scrim)),
+      transparent
+    ) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}

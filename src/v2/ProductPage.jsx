@@ -1,12 +1,11 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import SaaSProductMockup from "./SaaSProductMockup.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
 import { FlorenceWaitlistModal, WaitlistButton } from "./FlorenceWaitlistModal.jsx";
 import { useAuth, useClerk } from "@clerk/react";
 import {
-  APP_HOME,
-  APP_START,
+  appPath,
   clerkConfigured,
   clerkOverlayOptions,
 } from "./clerkConfig.js";
@@ -65,6 +64,8 @@ const outcomes = [
   "MCP connects. The layer is the product."
 ];
 
+const outcomeMapNodes = ["Brand", "System", "Guardrails", "Quality"];
+
 const layerInputs = [
   { name: "Storybook", logo: storybookLogo, contain: true },
   { name: "Figma", logo: figmaLogo, contain: true },
@@ -103,8 +104,8 @@ const pricingPlans = [
   {
     id: "growth",
     name: "Growth",
-    price: "$99",
-    term: "per month",
+    price: "$49",
+    term: "/ editor / month",
     description: "Self-serve Florence MCP on your design system.",
     features: [
       "Brand, system, constraints, and quality in one layer",
@@ -119,7 +120,7 @@ const pricingPlans = [
   {
     id: "scale",
     name: "Scale",
-    price: "Custom design system",
+    price: "Custom Solution",
     term: null,
     description: "Custom solution to build your AI-ready design system.",
     features: [
@@ -391,7 +392,7 @@ function ProductPricingCard({ plan, onWaitlistOpen, onFixAiSlop }) {
 }
 
 function ProductPricingCta({ plan, onWaitlistOpen, onFixAiSlop }) {
-  const isPrimary = Boolean(plan.featured || plan.ctaPrimary);
+  const isPrimary = Boolean(plan.ctaPrimary);
   const href = plan.ctaHref;
   const className = `product-btn product-btn--full${
     isPrimary ? " product-btn--primary" : " product-btn--ghost"
@@ -487,8 +488,7 @@ function ProductPageView({ onFixAiSlop, onLogIn }) {
         <section className="product-section" aria-labelledby="product-gap-title">
           <Entrance className="product-section-inner product-gap">
             <EntranceItem as="h2" id="product-gap-title">
-              <span>How Florence AI solves</span>
-              <span>your problem.</span>
+              From scattered context to one source of truth.
             </EntranceItem>
             <EntranceItem as="p" className="product-body">
               They ship almost-right UI. QA load grows. Trust doesn&apos;t.
@@ -507,7 +507,10 @@ function ProductPageView({ onFixAiSlop, onLogIn }) {
         <section className="product-section" id="layers" aria-labelledby="product-ecosystem-title product-system-title">
           <Entrance className="product-section-inner">
             <EntranceItem className="product-section-heading product-ecosystem-heading">
-              <h2 id="product-ecosystem-title">Design infrastructure for coding agents</h2>
+              <h2 id="product-ecosystem-title">
+                <span>Design and Engineering Infrastructure</span>
+                <span>for Coding Agents</span>
+              </h2>
               <p className="product-body">
                 Your stack on one side. Your agents on the other. One context layer in the middle.
               </p>
@@ -553,10 +556,17 @@ function ProductPageView({ onFixAiSlop, onLogIn }) {
             </EntranceItem>
             <EntranceItem className="product-outcomes-map" aria-hidden="true">
               <div className="product-map-hub">Context layer</div>
-              <div className="product-map-node product-map-node--a">Brand</div>
-              <div className="product-map-node product-map-node--b">System</div>
-              <div className="product-map-node product-map-node--c">Guardrails</div>
-              <div className="product-map-node product-map-node--d">Quality</div>
+              <span className="product-map-trunk" />
+              <div className="product-map-connectors">
+                {outcomeMapNodes.map((node) => (
+                  <span key={node} />
+                ))}
+              </div>
+              <ul className="product-map-stack">
+                {outcomeMapNodes.map((node) => (
+                  <li key={node}>{node}</li>
+                ))}
+              </ul>
             </EntranceItem>
           </Entrance>
         </section>
@@ -607,9 +617,16 @@ function ProductPageView({ onFixAiSlop, onLogIn }) {
 function ProductPageWithClerk() {
   const { isLoaded, isSignedIn } = useAuth();
   const clerk = useClerk();
+  const sendToApp = useRef(false);
+
+  useEffect(() => {
+    if (!sendToApp.current || !isLoaded || !isSignedIn) return;
+    sendToApp.current = false;
+    window.location.assign(appPath("/start"));
+  }, [isLoaded, isSignedIn]);
 
   function goToApp() {
-    window.location.assign(APP_START);
+    window.location.assign(appPath("/start"));
   }
 
   function openSignUp() {
@@ -617,11 +634,8 @@ function ProductPageWithClerk() {
       goToApp();
       return;
     }
-    clerk.openSignUp({
-      ...clerkOverlayOptions,
-      forceRedirectUrl: APP_START,
-      fallbackRedirectUrl: APP_START,
-    });
+    sendToApp.current = true;
+    clerk.openSignUp(clerkOverlayOptions);
   }
 
   function openSignIn() {
@@ -629,11 +643,8 @@ function ProductPageWithClerk() {
       goToApp();
       return;
     }
-    clerk.openSignIn({
-      ...clerkOverlayOptions,
-      forceRedirectUrl: APP_START,
-      fallbackRedirectUrl: APP_START,
-    });
+    sendToApp.current = true;
+    clerk.openSignIn(clerkOverlayOptions);
   }
 
   return <ProductPageView onFixAiSlop={openSignUp} onLogIn={openSignIn} />;
@@ -643,8 +654,8 @@ export default function ProductPage() {
   if (!clerkConfigured) {
     return (
       <ProductPageView
-        onFixAiSlop={() => window.location.assign(APP_START)}
-        onLogIn={() => window.location.assign(APP_HOME)}
+        onFixAiSlop={() => window.location.assign(appPath("/?signup=1"))}
+        onLogIn={() => window.location.assign(appPath("/"))}
       />
     );
   }

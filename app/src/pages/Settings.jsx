@@ -185,7 +185,8 @@ export function Settings() {
                 <h2 className="surface-card__title">Florence MCP</h2>
                 <p className="surface-card__body">
                   Free is this MCP. Copy the config into Cursor. It names slop
-                  in the product they already have and returns one recommendation.
+                  in the product they already have, writes an HTML report of
+                  the mistakes, and asks before it fixes.
                 </p>
                 <Input label="Command" value={mcpEndpoint} readOnly />
                 <Switch
@@ -255,7 +256,7 @@ export function Settings() {
                       variant={item.id === 'studio' ? 'primary' : 'secondary'}
                       onClick={() => choosePlan(item.id)}
                     >
-                      {item.id === 'studio' ? 'Subscribe for $99' : 'Use Free'}
+                      {item.id === 'studio' ? 'Subscribe for $49' : 'Use Free'}
                     </Button>
                   )}
                 </article>

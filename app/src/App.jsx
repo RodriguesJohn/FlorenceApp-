@@ -1,6 +1,9 @@
+import { useEffect } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import { useAuth } from '@clerk/react'
 import { AppShell } from './layout/AppShell.jsx'
 import { StartHere } from './pages/StartHere.jsx'
+import { AuthGate } from './pages/Login.jsx'
 import { BrandSystem } from './pages/BrandSystem.jsx'
 import { Assets } from './pages/Assets.jsx'
 import { FoundationTokens } from './pages/FoundationTokens.jsx'
@@ -15,9 +18,27 @@ import { Internal } from './pages/Internal.jsx'
 import { Evals } from './pages/Evals.jsx'
 import { Settings } from './pages/Settings.jsx'
 import { Generator } from './pages/Generator.jsx'
+import { clerkConfigured, isClerkHandshakePending, websiteHome } from './lib/clerk.js'
 import './App.css'
 
-export default function App() {
+function AppRoutes() {
+  const { isLoaded, isSignedIn } = useAuth()
+  const sendHome = isLoaded && !isClerkHandshakePending() && !isSignedIn
+
+  useEffect(() => {
+    if (sendHome) {
+      window.location.replace(websiteHome())
+    }
+  }, [sendHome])
+
+  if (!isLoaded || isClerkHandshakePending() || sendHome) {
+    return (
+      <div className="auth-screen">
+        <p className="page-header__meta">Loading account</p>
+      </div>
+    )
+  }
+
   return (
     <AppShell>
       <Routes>
@@ -39,7 +60,18 @@ export default function App() {
         <Route path="/evals" element={<Evals />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/generator" element={<Generator />} />
+        <Route path="/sign-in/*" element={<Navigate to="/start" replace />} />
+        <Route path="/sign-up/*" element={<Navigate to="/start" replace />} />
+        <Route path="*" element={<Navigate to="/start" replace />} />
       </Routes>
     </AppShell>
   )
+}
+
+export default function App() {
+  if (!clerkConfigured) {
+    return <AuthGate />
+  }
+
+  return <AppRoutes />
 }

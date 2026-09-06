@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
-const STORAGE_KEY = 'florence-theme'
+const STORAGE_KEY = 'florence-appearance'
 const ThemeContext = createContext(null)
 
 function isTheme(value) {
@@ -25,23 +25,30 @@ function applyTheme(theme) {
   document.documentElement.style.colorScheme = theme
 }
 
+function persistTheme(theme) {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, theme)
+  } catch {
+    /* private mode */
+  }
+}
+
 export function ThemeProvider({ children }) {
   const [theme, setThemeState] = useState(readTheme)
 
   useEffect(() => {
     applyTheme(theme)
-    try {
-      window.localStorage.setItem(STORAGE_KEY, theme)
-    } catch {
-      /* private mode */
-    }
   }, [theme])
 
   const value = useMemo(
     () => ({
       theme,
       isDark: theme === 'dark',
-      setTheme: (next) => setThemeState(isTheme(next) ? next : 'light'),
+      setTheme: (next) => {
+        const resolved = isTheme(next) ? next : 'light'
+        setThemeState(resolved)
+        persistTheme(resolved)
+      },
     }),
     [theme],
   )

@@ -2,6 +2,11 @@
 
 html:has(.product-page) {
   background: var(--bg);
+  --product-scrim: rgba(0, 0, 0, 0.56);
+}
+
+html[data-theme="light"]:has(.product-page) {
+  --product-scrim: rgba(20, 20, 20, 0.42);
 }
 
 .product-page {
@@ -16,7 +21,7 @@ html:has(.product-page) {
   --product-line: rgba(255, 255, 255, 0.12);
   --product-line-hover: rgba(255, 255, 255, 0.22);
   --product-header-bg: rgba(0, 0, 0, 0.72);
-  --product-scrim: rgba(0, 0, 0, 0.72);
+  --product-scrim: rgba(0, 0, 0, 0.56);
   --product-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
   --product-dialog: #111111;
   --product-success: #86efac;
@@ -409,12 +414,21 @@ html[data-theme="dark"] .product-preview {
 
 .product-gap h2 {
   max-width: none;
-  width: max-content;
 }
 
-.product-gap h2 > span {
+#product-ecosystem-title {
+  max-width: none;
+}
+
+#product-ecosystem-title span {
   display: block;
   white-space: nowrap;
+}
+
+@media (max-width: 40rem) {
+  #product-ecosystem-title span {
+    white-space: normal;
+  }
 }
 
 .product-gap-outcomes {
@@ -871,38 +885,96 @@ html[data-theme="dark"] .product-ecosystem-chip-logo--invert img {
 }
 
 .product-outcomes-map {
-  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0;
   min-height: 18rem;
+  padding: var(--spacing-24);
+  overflow: hidden;
   border: 1px solid var(--product-line);
-  border-radius: var(--radius-cards);
-  background: var(--product-charcoal-soft);
+  border-radius: var(--radius-nested);
+  background:
+    radial-gradient(
+      circle at 50% 22%,
+      color-mix(in srgb, var(--product-ink) 8%, transparent),
+      transparent 58%
+    ),
+    var(--product-charcoal-soft);
 }
 
-.product-map-hub,
-.product-map-node {
+.product-map-hub {
+  z-index: 1;
+  padding: var(--spacing-16) var(--spacing-24);
+  border: 1px solid color-mix(in srgb, var(--product-ink) 72%, transparent);
+  border-radius: 9999px;
+  background: var(--product-ink);
+  color: var(--product-black);
+  box-shadow: var(--product-shadow);
+  font-family: var(--font-display);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body-sm);
+  line-height: var(--leading-body-sm);
+  white-space: nowrap;
+}
+
+.product-map-trunk {
+  width: 1px;
+  height: var(--spacing-24);
+  background: color-mix(in srgb, var(--product-ink) 28%, transparent);
+}
+
+.product-map-connectors {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  height: var(--spacing-24);
+  position: relative;
+}
+
+.product-map-connectors::before {
+  content: "";
   position: absolute;
-  padding: var(--spacing-8) var(--spacing-16);
+  top: 0;
+  left: 12.5%;
+  right: 12.5%;
+  height: 1px;
+  background: color-mix(in srgb, var(--product-ink) 28%, transparent);
+}
+
+.product-map-connectors span {
+  justify-self: center;
+  width: 1px;
+  height: 100%;
+  background: color-mix(in srgb, var(--product-ink) 28%, transparent);
+}
+
+.product-map-stack {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-8);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-map-stack li {
+  display: grid;
+  place-items: center;
+  min-height: 2rem;
+  padding: var(--spacing-8);
   border: 1px solid var(--product-line);
   border-radius: 9999px;
   background: color-mix(in srgb, var(--product-ink) 6%, transparent);
   color: var(--product-muted);
   font-size: var(--text-caption);
   font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-caption);
+  line-height: 1.2;
+  text-align: center;
 }
-
-.product-map-hub {
-  top: 50%;
-  left: 50%;
-  border-color: color-mix(in srgb, var(--product-ink) 72%, transparent);
-  background: var(--product-ink);
-  color: var(--product-black);
-  transform: translate(-50%, -50%);
-}
-
-.product-map-node--a { top: 16%; left: 12%; }
-.product-map-node--b { top: 18%; right: 14%; }
-.product-map-node--c { bottom: 18%; left: 14%; }
-.product-map-node--d { bottom: 16%; right: 12%; }
 
 .product-pricing-grid {
   display: grid;
@@ -1258,6 +1330,15 @@ html[data-theme="dark"] .product-ecosystem-chip-logo--invert img {
 
   .product-section {
     padding-block: var(--spacing-64);
+  }
+
+  .product-map-stack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 16rem);
+  }
+
+  .product-map-connectors {
+    display: none;
   }
 }
 
@@ -1718,5 +1799,44 @@ html[data-theme="dark"] .product-ecosystem-chip-logo--invert img {
 
   .product-pin-dialog.is-error .product-pin-slots {
     animation: none;
+  }
+}
+
+html:has(.product-page):has(.cl-modalBackdrop) {
+  overflow: hidden;
+}
+
+html:has(.product-page):has(.cl-modalBackdrop) #root {
+  filter: blur(12px);
+}
+
+html:has(.product-page) .cl-modalBackdrop {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: var(--product-scrim) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.15) !important;
+  backdrop-filter: blur(12px) saturate(1.15) !important;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  html:has(.product-page):has(.cl-modalBackdrop) #root {
+    filter: none;
+  }
+
+  html:has(.product-page) .cl-modalBackdrop {
+    background: rgba(0, 0, 0, 0.82) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  html[data-theme="light"]:has(.product-page) .cl-modalBackdrop {
+    background: rgba(20, 20, 20, 0.72) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.product-page):has(.cl-modalBackdrop) #root {
+    transition: none;
   }
 }
