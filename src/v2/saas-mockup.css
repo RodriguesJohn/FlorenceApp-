@@ -1939,6 +1939,92 @@
 .saas-promptbar { position: relative; min-height: 3.15rem; margin-top: 1rem; padding: .55rem .6rem; display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: .65rem; border: 1px solid rgba(255,255,255,.12); border-radius: .65rem; background: rgba(26,28,32,.9); box-shadow: 0 1rem 2.5rem rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.04); backdrop-filter: blur(16px); }.saas-promptbar p { margin: 0; color: rgba(255,255,255,.28); font-size: .55rem; }.saas-promptbar kbd { padding: .22rem .35rem; border: 1px solid rgba(255,255,255,.08); border-radius: .25rem; color: rgba(255,255,255,.25); background: rgba(0,0,0,.15); font: .45rem inherit; }.saas-promptbar button { width: 1.7rem; height: 1.7rem; border: 0; border-radius: .42rem; background: #f3f4f4; color: #111; font-size: .7rem; }
 
 @media (max-width: 980px) {
+  .saas-preview-heading { grid-template-columns: 1fr; align-items: start; }
+  .saas-preview-intro { max-width: 38rem; }
+  .saas-app { min-height: 39rem; grid-template-columns: 3.8rem minmax(0,1fr); }
+  .saas-sidebar { padding-right: .5rem; padding-left: .5rem; }
+  .saas-workspace-switcher { padding: .45rem; }
+  .saas-workspace-switcher div { gap: .12rem; }
+  .saas-workspace-switcher strong { font-size: .56rem; }
+  .saas-sidebar nav span { padding: 0 .45rem; font-size: .56rem; }
+  .saas-sidebar nav svg { width: .88rem; height: .88rem; }
+  .saas-nav-group + .saas-nav-group { margin-top: .45rem; }
+  .saas-nav-group p { font-size: .4rem; }
+  .saas-user { padding: .6rem .35rem 0; gap: .45rem; }
+  .saas-user > span { width: 1.45rem; height: 1.45rem; }
+  .saas-operations-grid { grid-template-columns: minmax(0,1.55fr) minmax(11rem,.65fr); }
+  .saas-command-grid { grid-template-columns: minmax(0,2fr) minmax(12rem,.8fr); }
+}
+
+@media (max-width: 700px) {
+  /* Mobile-responsive: keep full desktop layout but scale appropriately */
+  .saas-preview { padding: clamp(3rem, 8vw, 6.5rem) clamp(.75rem, 4vw, 1.5rem); }
+  .saas-preview-heading { width: 100%; margin-bottom: clamp(2rem, 5vw, 3.5rem); grid-template-columns: 1fr; gap: 1.5rem; }
+  .saas-preview-heading h2 { font-size: clamp(1.8rem, 6vw, 3.5rem); }
+  .saas-preview-intro p { font-size: clamp(.9rem, 2.5vw, 1.05rem); }
+  
+  /* Device wrapper - keep desktop view visible with horizontal scroll */
+  .saas-device {
+    min-width: 680px;
+    margin: 0;
+    border-radius: .8rem;
+    transform-origin: top left;
+  }
+  
+  /* Wrapper for horizontal scrolling on mobile */
+  .saas-preview::after {
+    content: '';
+    display: block;
+    height: 1px;
+    margin-top: -1px;
+  }
+  
+  .saas-window-bar { height: 2.4rem; }
+  .saas-window-address { min-width: 14rem; font-size: .58rem; }
+  .saas-window-actions span { width: .68rem; height: .68rem; }
+  
+  /* Keep sidebar visible but more compact */
+  .saas-app { grid-template-columns: 11.5rem minmax(0,1fr); font-size: .7rem; }
+  .saas-sidebar { padding: 1rem .85rem .85rem; }
+  .saas-workspace-switcher { padding: .65rem; }
+  .saas-sidebar nav span { min-height: 2rem; padding: 0 .55rem; font-size: .58rem; }
+  .saas-sidebar nav svg { width: .85rem; height: .85rem; }
+  
+  /* Content area remains fully functional */
+  .saas-topbar { height: 3.2rem; padding: 0 1.2rem; }
+  .saas-breadcrumb { font-size: .56rem; }
+  .saas-breadcrumb strong { font-size: .58rem; }
+  .saas-icon-button { width: 1.6rem; height: 1.6rem; }
+  .saas-share { height: 1.6rem; padding: 0 .65rem; font-size: .5rem !important; }
+  
+  .saas-content { padding: clamp(1.2rem, 2.2vw, 2rem); }
+  .saas-content-title h3 { font-size: clamp(1.2rem, 2.2vw, 1.8rem); }
+  
+  /* Keep grid layouts responsive but visible */
+  .saas-metrics-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: .58rem; }
+  .saas-metric-card { padding: .7rem .75rem; }
+  
+  .saas-summary-grid { grid-template-columns: 1fr; gap: .75rem; }
+  .saas-health-card { min-height: auto; padding: .9rem; }
+  .saas-health-body { flex-direction: column; align-items: center; gap: 1.2rem; text-align: center; }
+  .saas-score { width: 6.5rem; height: 6.5rem; }
+  
+  .saas-system-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .55rem; }
+  .saas-system-card { padding: .65rem; }
+  .saas-system-visual { height: 3rem; }
+  
+  .saas-command-grid { grid-template-columns: 1fr; gap: .7rem; }
+  .saas-operations-grid { grid-template-columns: 1fr; gap: .7rem; }
+  
+  .saas-ds-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: .55rem; }
+  .saas-ds-preview { height: 4rem; }
+  
+  /* Tables remain scrollable */
+  .saas-table-shell { overflow-x: auto; }
+  
+  /* Token list stays functional */
+  .saas-token-list { gap: .24rem; }
+  .saas-token-row { padding: .38rem .45rem; }
   .saas-preview:not(.saas-preview-embedded) .saas-preview-heading { grid-template-columns: 1fr; align-items: start; }
   .saas-preview:not(.saas-preview-embedded) .saas-preview-intro { max-width: 38rem; }
   .saas-preview:not(.saas-preview-embedded) .saas-app { min-height: 39rem; grid-template-columns: 4.4rem minmax(0,1fr); }
