@@ -3,34 +3,55 @@ export const clerkPublishableKey =
 
 export const clerkConfigured = Boolean(clerkPublishableKey);
 
-export const APP_HOME =
-  import.meta.env.VITE_APP_URL ||
-  (import.meta.env.DEV
-    ? "http://localhost:5175/"
-    : "https://florence-app-seven.vercel.app/");
-
-export const APP_START = `${APP_HOME.replace(/\/?$/, "/")}start`;
-
-export const clerkAllowedRedirectOrigins = [
-  "http://localhost:5175",
-  "http://127.0.0.1:5175",
-  "https://florence-app-seven.vercel.app",
-  "https://florence-app-johns-projects-29581f2f.vercel.app",
+const DEFAULT_ADMIN_EMAILS = [
+  "john@humaaistudio.io",
+  "john@humanaistudio.io",
 ];
 
-export function appOrigin() {
-  if (import.meta.env.DEV && typeof window !== "undefined") {
-    const host =
-      window.location.hostname === "127.0.0.1" ? "127.0.0.1" : "localhost";
-    return `http://${host}:5175`;
-  }
-  return APP_HOME.replace(/\/?$/, "");
+export function adminEmails() {
+  const extra = (import.meta.env.VITE_ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((email) => email.trim().toLowerCase())
+    .filter(Boolean);
+  return [...new Set([...DEFAULT_ADMIN_EMAILS, ...extra])];
 }
 
+export function isAdminEmail(email) {
+  if (!email) return false;
+  return adminEmails().includes(email.trim().toLowerCase());
+}
+
+export function clerkUserEmails(user) {
+  if (!user) return [];
+  return [
+    user.primaryEmailAddress?.emailAddress,
+    ...(user.emailAddresses ?? []).map((item) => item.emailAddress),
+  ].filter(Boolean);
+}
+
+export function isClerkAdmin(user) {
+  return clerkUserEmails(user).some(isAdminEmail);
+}
+
+export const APP_BASE = "/app";
+
+export const clerkAllowedRedirectOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175",
+  "http://127.0.0.1:5173",
+  "http://127.0.0.1:5174",
+  "http://127.0.0.1:5175",
+  "https://www.florenceai.io",
+  "https://florenceai.io",
+  "https://florenceai-drab.vercel.app",
+];
+
 export function appPath(path = "/start") {
-  const origin = appOrigin();
-  if (!path || path === "/") return `${origin}/`;
-  return `${origin}${path.startsWith("/") ? path : `/${path}`}`;
+  const origin = typeof window !== "undefined" ? window.location.origin : "";
+  const suffix =
+    !path || path === "/" ? "" : path.startsWith("/") ? path : `/${path}`;
+  return `${origin}${APP_BASE}${suffix}`;
 }
 
 const SEND_TO_APP_KEY = "florence.sendToApp";

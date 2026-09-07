@@ -93,7 +93,7 @@ function bookingInsight({ freeUsers, paidUsers, bookings }) {
     return {
       tone: 'opportunity',
       title: `${people(freeUsers)} on free, none paid`,
-      description: 'Studio is $49 per editor / month. A booked intro is the path from a free MCP seat to a paid one.',
+      description: 'Growth is $99 per editor / month. A booked intro is the path from Starter to a team seat.',
     }
   }
 

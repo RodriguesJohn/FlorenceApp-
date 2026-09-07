@@ -21,13 +21,16 @@ export function isAdminEmail(email) {
   return adminEmails().includes(email.trim().toLowerCase())
 }
 
-export function isClerkAdmin(user) {
-  if (!user) return false
-  const emails = [
+export function clerkUserEmails(user) {
+  if (!user) return []
+  return [
     user.primaryEmailAddress?.emailAddress,
     ...(user.emailAddresses ?? []).map((item) => item.emailAddress),
-  ]
-  return emails.some(isAdminEmail)
+  ].filter(Boolean)
+}
+
+export function isClerkAdmin(user) {
+  return clerkUserEmails(user).some(isAdminEmail)
 }
 
 const clerkVariables = {
@@ -82,9 +85,29 @@ export const clerkOverlayOptions = { appearance: clerkAuthAppearance }
 
 export const clerkProfileOverlayOptions = { appearance: clerkProfileAppearance }
 
+export const APP_BASE = (import.meta.env.BASE_URL || '/app/').replace(/\/$/, '') || '/app'
+
+export function appHref(path = '/start') {
+  const suffix = !path || path === '/' ? '' : path.startsWith('/') ? path : `/${path}`
+  return `${APP_BASE}${suffix}`
+}
+
+export function routerPathFromHref(to) {
+  const dest = String(to || '')
+  if (!dest || /^https?:\/\//.test(dest)) return dest
+  if (dest === APP_BASE) return '/'
+  if (dest.startsWith(`${APP_BASE}/`)) return dest.slice(APP_BASE.length) || '/'
+  if (dest.startsWith(`${APP_BASE}?`)) return `/${dest.slice(APP_BASE.length)}`
+  return dest
+}
+
 export const clerkAllowedRedirectOrigins = [
+  'http://localhost:5173',
   'http://localhost:5174',
+  'http://localhost:5175',
+  'http://127.0.0.1:5173',
   'http://127.0.0.1:5174',
+  'http://127.0.0.1:5175',
   'https://florenceai-drab.vercel.app',
   'https://www.florenceai.io',
   'https://florenceai.io',
@@ -92,10 +115,14 @@ export const clerkAllowedRedirectOrigins = [
 ]
 
 export function websiteOrigin() {
-  if (import.meta.env.DEV && typeof window !== 'undefined') {
-    const host =
-      window.location.hostname === '127.0.0.1' ? '127.0.0.1' : 'localhost'
-    return `http://${host}:5174`
+  if (typeof window !== 'undefined') {
+    const { origin, hostname, port, pathname } = window.location
+    if (pathname === '/app' || pathname.startsWith('/app/')) return origin
+    if (import.meta.env.DEV && (port === '5175' || port === '5173')) {
+      const host = hostname === '127.0.0.1' ? '127.0.0.1' : 'localhost'
+      return `http://${host}:5174`
+    }
+    return origin
   }
   return (
     import.meta.env.VITE_WEBSITE_URL?.replace(/\/?$/, '') ||

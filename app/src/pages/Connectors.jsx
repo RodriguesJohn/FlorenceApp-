@@ -187,6 +187,7 @@ export function Connectors() {
   return (
     <>
       <PageHeader
+        eyebrow="Connect"
         title="Connectors"
         description={`Pull components and tokens into ${workspace.name} from GitHub, Figma, Storybook, or any library you already ship.`}
         actions={

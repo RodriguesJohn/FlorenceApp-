@@ -136,11 +136,6 @@
       "permanent": true
     },
     {
-      "source": "/app/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/playbook/",
       "destination": "/",
       "permanent": true
@@ -151,7 +146,18 @@
       "permanent": true
     }
   ],
+  "installCommand": "npm install && npm --prefix app install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "rewrites": [
+    {
+      "source": "/app",
+      "destination": "/app/index.html"
+    },
+    {
+      "source": "/app/(.*)",
+      "destination": "/app/index.html"
+    },
     {
       "source": "/florence/system",
       "destination": "/florence-system.html"

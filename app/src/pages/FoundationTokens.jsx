@@ -16,11 +16,11 @@ export function FoundationTokens() {
     <>
       <PageHeader
         eyebrow="Product"
-        title="Foundation Token"
+        title="Tokens"
         description={
           designSystem
             ? `${designSystem.name} is published to this workspace.`
-            : 'Semantic roles agents must use. Free reads Florence. Studio publishes your own.'
+            : 'Semantic roles agents must use. Starter generates your system. Growth publishes it for every editor.'
         }
         actions={
           <>
@@ -33,7 +33,7 @@ export function FoundationTokens() {
               </Button>
             ) : (
               <Button variant="secondary" size="sm" onClick={() => navigate('/settings?tab=plan')}>
-                Upgrade to Studio
+                Upgrade to Growth
               </Button>
             )}
           </>
@@ -44,10 +44,10 @@ export function FoundationTokens() {
           <InsightCard
             tone="opportunity"
             eyebrow={plan.name}
-            title="Studio generates a system you can plug in"
-            description="Free already removes slop by serving Florence over MCP. For $49 per editor / month you get a generator that publishes your tokens here."
+            title="Generate a system you can plug in"
+            description="$19 generates your first design system. $99 per editor / month publishes your tokens here."
             primaryAction={{
-              label: 'View Studio',
+              label: 'View plans',
               onClick: () => navigate('/settings?tab=plan'),
             }}
           />

@@ -15,8 +15,11 @@ function Icon({ name }) {
     components: <><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><path d="M17.5 14.5v6M14.5 17.5h6" /></>,
     tokens: <><path d="M12 3a9 9 0 1 0 0 18 2.4 2.4 0 0 0 0-4.8 2 2 0 0 1 0-4h4.4A4.6 4.6 0 0 0 21 7.6C21 4.9 17 3 12 3Z" /><circle cx="8.4" cy="9.2" r="1" /></>,
     plug: <><path d="M12 17v5M9 8V3M15 8V3" /><path d="M8 8h8v3a4 4 0 0 1-8 0V8Z" /></>,
+    zap: <><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" /></>,
+    boxes: <><rect x="3" y="3" width="7" height="7" rx="1.2" /><rect x="14" y="3" width="7" height="7" rx="1.2" /><rect x="3" y="14" width="7" height="7" rx="1.2" /><rect x="14" y="14" width="7" height="7" rx="1.2" /></>,
+    list: <><path d="M9 6h12M9 12h12M9 18h12M4 6h.01M4 12h.01M4 18h.01" /></>,
     sparkles: <><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6.2 6.2l2.1 2.1M15.7 15.7l2.1 2.1M17.8 6.2l-2.1 2.1M8.3 15.7l-2.1 2.1" /></>,
-    film: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M7 4v4M7 16v4M17 4v4M17 16v4M3 12h18" /></>,
+    book: <><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></>,
     dollar: <><circle cx="12" cy="12" r="9" /><path d="M12 7v10M15.2 9.2C15.2 8 13.8 7.2 12 7.2S8.8 8 8.8 9.2 10.4 11 12 11s3.2.7 3.2 1.8S13.8 14.8 12 14.8 8.8 14 8.8 12.8" /></>,
     settings: <><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z" /></>
   };
@@ -32,67 +35,24 @@ const navigation = [
 ];
 
 const systemNavigation = [
-  { group: "Start here", items: [["agents", "Agent Connect"]] },
-  { group: "Brand", items: [["voice", "Brand System"], ["assets", "Assets"]] },
-  { group: "Product", items: [["tokens", "Foundation Token"], ["components", "Components"], ["film", "Animation Library"], ["sparkles", "Skills"]] },
-  { group: "Connectors", items: [["plug", "Connectors"]] },
-  { group: "References", items: [["library", "Libraries"]] },
-  { group: "Engineering", items: [["code", "Guardrails"]] },
-  { group: "Quality", items: [["overview", "Dashboard"], ["activity", "Evals"]] },
+  { group: "Brand Studio", items: [["voice", "Brand"], ["assets", "Assets"]] },
+  {
+    group: "Product",
+    items: [
+      ["tokens", "Tokens"],
+      ["components", "Components"],
+      ["boxes", "Component Studio"],
+      ["book", "Content"],
+      ["sparkles", "Skills"]
+    ]
+  },
+  { group: "Connect", items: [["zap", "Agent Connect"], ["plug", "Connectors"]] },
+  { group: "Agents", items: [["agents", "Build agents"], ["list", "Manage agents"]] },
   { group: "Internal", items: [["dollar", "Internal"]] }
 ];
 
-const SYSTEM_PAGES = ["tokens", "components"];
+const SYSTEM_PAGES = ["components", "studio", "variants", "code", "architecture"];
 const PAGE_MS = 6200;
-
-const TOKEN_GROUPS = [
-  {
-    id: "color",
-    label: "Color",
-    items: [
-      { name: "--color-text-primary", role: "Primary text", swatch: "var(--color-text-primary)" },
-      { name: "--color-text-secondary", role: "Secondary text", swatch: "var(--color-text-secondary)" },
-      { name: "--color-bg-page", role: "Page", swatch: "var(--color-bg-page)" },
-      { name: "--color-bg-subtle", role: "Canvas", swatch: "var(--color-bg-subtle)" },
-      { name: "--color-bg-brand", role: "Brand fill", swatch: "var(--color-bg-brand)" },
-      { name: "--color-border-default", role: "Default stroke", swatch: "var(--color-border-default)" },
-      { name: "--color-interactive-primary", role: "Primary action", swatch: "var(--color-interactive-primary)" },
-      { name: "--color-focus-ring", role: "Focus", swatch: "var(--color-focus-ring)" }
-    ]
-  },
-  {
-    id: "typography",
-    label: "Typography",
-    items: [
-      { name: "--text-display-*", role: "Page heroes" },
-      { name: "--text-metric-*", role: "Balances and KPIs" },
-      { name: "--text-heading-*", role: "Section titles" },
-      { name: "--text-body-*", role: "Reading copy" },
-      { name: "--text-label-*", role: "Controls" },
-      { name: "--text-caption-*", role: "Meta and hints" }
-    ]
-  },
-  {
-    id: "spacing",
-    label: "Spacing",
-    items: [
-      { name: "--space-inset-*", role: "Padding inside surfaces" },
-      { name: "--space-stack-*", role: "Vertical rhythm" },
-      { name: "--space-inline-*", role: "Horizontal gaps" },
-      { name: "--space-section-*", role: "Section breaks" }
-    ]
-  },
-  {
-    id: "motion",
-    label: "Motion",
-    items: [
-      { name: "--motion-interaction-*", role: "Buttons and controls" },
-      { name: "--motion-expand-*", role: "Disclosure" },
-      { name: "--motion-overlay-*", role: "Menus and toasts" },
-      { name: "--motion-modal-*", role: "Dialogs" }
-    ]
-  }
-];
 
 const COMPONENT_ROWS = [
   { name: "Button", category: "Actions", when: "Primary CTA, submit, or destructive confirm", id: "button.json" },
@@ -126,68 +86,273 @@ const agentTeam = [
 ];
 
 const PAGE_META = {
-  tokens: {
-    title: "Foundation Token",
-    lede: "Semantic roles agents must use. Free reads Florence. Studio publishes your own.",
-    navActive: "Foundation Token"
-  },
   components: {
     title: "Components",
+    eyebrow: "Product",
     lede: "Retrieve the contract before composing. The MCP will not invent a sibling control.",
     navActive: "Components"
+  },
+  studio: {
+    title: "Component Studio",
+    navActive: "Component Studio"
+  },
+  variants: {
+    title: "Component Studio",
+    navActive: "Component Studio"
+  },
+  code: {
+    title: "Component Studio",
+    navActive: "Component Studio"
+  },
+  architecture: {
+    title: "Component Studio",
+    navActive: "Component Studio"
   }
 };
 
-function MockTokenPage({ locked = false }) {
-  const [activeGroup, setActiveGroup] = useState(TOKEN_GROUPS[0].id);
-  const group = TOKEN_GROUPS.find((item) => item.id === activeGroup) ?? TOKEN_GROUPS[0];
+function CodeToken({ type, children }) {
+  return <span className={`saas-code__token saas-code__token--${type}`}>{children}</span>;
+}
+
+function MockStudio({ locked = false, view = "preview" }) {
+  const tabs = ["Preview", "Variants", "Code", "Architecture", "Contract", "Tests"];
+  const activeTab =
+    view === "code"
+      ? "Code"
+      : view === "architecture"
+        ? "Architecture"
+        : view === "variants"
+          ? "Variants"
+          : "Preview";
+  const [explode, setExplode] = useState(78);
+  const [tilt, setTilt] = useState(70);
+  const [yaw, setYaw] = useState(-38);
+  const [openArch, setOpenArch] = useState(null);
+  const files = [
+    { name: "Button.jsx", path: "florence/components/button/Button.jsx", active: true },
+    { name: "button.css", path: "florence/components/button/button.css", active: false }
+  ];
+  const archNodes = [
+    { id: "tokens", label: "Tokens", sx: -2.15, sy: -1.7, sz: 4.8, title: "Tokens", body: "color · type · space · radius" },
+    { id: "variables", label: "Variables", sx: -2.35, sy: 1.15, sz: 6, title: "Variables", body: "--color-interactive-primary" },
+    { id: "props", label: "Props", sx: 2.25, sy: -1.55, sz: 3.6, title: "Props", body: "variant · size · loading" },
+    { id: "source", label: "Source", sx: -1.15, sy: 2.25, sz: 0.7, title: "Source", body: "Button.jsx · button.css" },
+    { id: "related", label: "Related", sx: 2.15, sy: 2.05, sz: 1.6, title: "Related", body: "Input · Modal · Toast" }
+  ];
+  const openArchNode = archNodes.find((node) => node.id === openArch) ?? null;
 
   return (
-    <div className="saas-app-page">
-      <article className="saas-insight-card">
-        <p className="saas-insight-card__eyebrow">Free</p>
-        <h4>Studio generates a system you can plug in</h4>
-        <p>
-          Free already removes slop by serving Florence over MCP. For $49 per editor / month you get a generator that publishes your tokens here.
-        </p>
-        <Chrome locked={locked} className="saas-btn-primary">View Studio</Chrome>
-      </article>
-      <div className="saas-tabs" role="tablist" aria-label="Token groups">
-        {TOKEN_GROUPS.map((tab) => {
-          const selected = tab.id === group.id;
-          return (
-            <Chrome
-              locked={locked}
-              className={selected ? "active" : ""}
-              key={tab.id}
-              role="tab"
-              aria-selected={selected}
-              onClick={() => setActiveGroup(tab.id)}
-            >
-              {tab.label}
-            </Chrome>
-          );
-        })}
-      </div>
-      <ul className="saas-token-list">
-        {group.items.map((token) => (
-          <li className="saas-token-row" key={token.name}>
-            {token.swatch ? (
-              <span
-                className="saas-token-swatch saas-token-swatch--bordered"
-                style={{ background: token.swatch }}
-                aria-hidden="true"
-              />
-            ) : (
-              <span className="saas-token-swatch saas-token-swatch--type" aria-hidden="true" />
-            )}
-            <div>
-              <code>{token.name}</code>
-              <span>{token.role}</span>
+    <div className="saas-studio">
+      <aside className="saas-chat" aria-label="Component chat">
+        <header className="saas-chat__header">
+          <div>
+            <p>Chat</p>
+            <span>
+              <i />
+              Button
+            </span>
+          </div>
+        </header>
+        <div className="saas-chat__messages">
+          <div className="saas-chat__row saas-chat__row--user">
+            <p>A primary button labeled Save draft</p>
+          </div>
+          <div className="saas-chat__row">
+            <p>Retrieved button.json from “A primary button labeled Save draft”.</p>
+          </div>
+        </div>
+        <div className="saas-chat__suggestions">
+          <span>Make it secondary</span>
+          <span>Make it smaller</span>
+          <span>Show the danger variant</span>
+        </div>
+        <div className="saas-chat__composer">
+          <p>Make it secondary, or describe another component…</p>
+          <span aria-hidden="true">↑</span>
+        </div>
+      </aside>
+
+      <section className="saas-studio-stage" aria-label="Playground">
+        <div className="saas-tabs" role="tablist" aria-label="Studio views">
+          {tabs.map((tab) => (
+            <span className={tab === activeTab ? "active" : ""} key={tab} role="tab" aria-selected={tab === activeTab}>
+              {tab}
+            </span>
+          ))}
+        </div>
+        {view === "code" ? (
+          <div className="saas-studio-code">
+            <div className="saas-studio-code__bar">
+              <p>florence/components/button/Button.jsx</p>
+              <Chrome locked={locked} className="saas-btn-tertiary">Copy code</Chrome>
             </div>
-          </li>
-        ))}
-      </ul>
+            <div className="saas-studio-code__files">
+              {files.map((file) => (
+                <span className={file.active ? "saas-btn-secondary" : "saas-btn-tertiary"} key={file.name}>
+                  {file.name}
+                </span>
+              ))}
+            </div>
+            <pre className="saas-studio-code__block">
+              <code>
+                <CodeToken type="keyword">import</CodeToken> <CodeToken type="string">'./button.css'</CodeToken>{"\n\n"}
+                <CodeToken type="keyword">export function</CodeToken> <CodeToken type="tag">Button</CodeToken>({"{\n"}
+                {"  "}variant = <CodeToken type="string">'primary'</CodeToken>,{"\n"}
+                {"  "}size = <CodeToken type="string">'md'</CodeToken>,{"\n"}
+                {"  "}children,{"\n"}
+                {") {\n"}
+                {"  "}<CodeToken type="keyword">return</CodeToken> ({"\n"}
+                {"    "}&lt;<CodeToken type="tag">button</CodeToken>{"\n"}
+                {"      "}<CodeToken type="attr">type</CodeToken>=<CodeToken type="string">"button"</CodeToken>{"\n"}
+                {"      "}<CodeToken type="attr">className</CodeToken>=<CodeToken type="string">"btn btn--primary"</CodeToken>{"\n"}
+                {"    "}&gt;{"\n"}
+                {"      "}&lt;<CodeToken type="tag">span</CodeToken> <CodeToken type="attr">className</CodeToken>=<CodeToken type="string">"btn__label"</CodeToken>&gt;{"{children}"}&lt;/<CodeToken type="tag">span</CodeToken>&gt;{"\n"}
+                {"    "}&lt;/<CodeToken type="tag">button</CodeToken>&gt;{"\n"}
+                {"  )\n"}
+                {"}"}
+              </code>
+            </pre>
+          </div>
+        ) : view === "architecture" ? (
+          <div
+            className={`saas-arch${locked ? " saas-arch--orbit" : ""}`}
+            style={{
+              "--arch-explode": explode / 100,
+              "--arch-tilt": `${tilt}deg`,
+              "--arch-yaw": `${yaw}deg`
+            }}
+          >
+            <div className="saas-arch__viewport">
+              <div className="saas-arch__world">
+                <div className="saas-arch__ground" aria-hidden="true" />
+                {[2.5, 0.7, 1.6, 3.6, 4.8, 6].map((sz) => (
+                  <span
+                    className="saas-arch__deck"
+                    key={`deck-${sz}`}
+                    style={{ "--sz": sz }}
+                    aria-hidden="true"
+                  />
+                ))}
+                {archNodes.map((node) => (
+                  <span
+                    className="saas-arch__link"
+                    key={`link-${node.id}`}
+                    style={{
+                      "--link-len": Math.hypot(node.sx, node.sy, node.sz - 2.5),
+                      "--link-z": 2.5,
+                      "--link-yaw": `${Math.atan2(node.sy, node.sx) * (180 / Math.PI)}deg`,
+                      "--link-pitch": `${Math.atan2(node.sz - 2.5, Math.hypot(node.sx, node.sy)) * (180 / Math.PI)}deg`
+                    }}
+                    aria-hidden="true"
+                  />
+                ))}
+                <span className="saas-arch__stem" style={{ "--sx": 0, "--sy": 0, "--sz": 2.5 }} aria-hidden="true" />
+                {archNodes.map((node) => (
+                  <span
+                    className="saas-arch__stem"
+                    key={`stem-${node.id}`}
+                    style={{ "--sx": node.sx, "--sy": node.sy, "--sz": node.sz }}
+                    aria-hidden="true"
+                  />
+                ))}
+                <div className="saas-arch__core" style={{ "--sx": 0, "--sy": 0, "--sz": 2.5 }}>
+                  <div className="saas-arch__core-slab">
+                    <p>Actions</p>
+                    <h4>Button</h4>
+                    <div className="saas-arch__preview">
+                      <span className="saas-preview-btn">Save draft</span>
+                    </div>
+                  </div>
+                </div>
+                {archNodes.map((node) => (
+                  <button
+                    type="button"
+                    className={`saas-arch__node${openArch === node.id ? " saas-arch__node--open" : ""}`}
+                    key={node.id}
+                    style={{ "--sx": node.sx, "--sy": node.sy, "--sz": node.sz }}
+                    aria-pressed={openArch === node.id}
+                    onClick={locked ? undefined : () => setOpenArch(node.id)}
+                  >
+                    <span className="saas-arch__dot" aria-hidden="true" />
+                    <span className="saas-arch__node-label">{node.label}</span>
+                  </button>
+                ))}
+              </div>
+              {openArchNode ? (
+                <article className="saas-arch__front">
+                  <p>{openArchNode.label}</p>
+                  <h4>{openArchNode.title}</h4>
+                  <span>{openArchNode.body}</span>
+                </article>
+              ) : null}
+            </div>
+            <div className="saas-arch__dock">
+              <span>Assembled</span>
+              {locked ? (
+                <span className="saas-arch__slider" aria-hidden="true" />
+              ) : (
+                <input
+                  className="saas-arch__slider"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={explode}
+                  aria-label="Explode architecture"
+                  onChange={(event) => setExplode(Number(event.target.value))}
+                />
+              )}
+              <span>Exploded</span>
+            </div>
+          </div>
+        ) : view === "variants" ? (
+          <div className="saas-studio-variants">
+            <div className="saas-studio-variants__intro">
+              <p>Variants</p>
+              <span>Every published look for this contract.</span>
+            </div>
+            {[
+              { title: "Primary", variant: "primary" },
+              { title: "Secondary", variant: "secondary" },
+              { title: "Tertiary", variant: "tertiary" },
+              { title: "Danger", variant: "danger" }
+            ].map((group) => (
+              <section className="saas-studio-variants__group" key={group.variant} aria-label={group.title}>
+                <p>{group.title}</p>
+                <div className="saas-studio-variants__row">
+                  {["sm", "md", "lg"].map((size) => (
+                    <div
+                      className={`saas-studio-variant${group.variant === "primary" && size === "md" ? " is-selected" : ""}`}
+                      key={size}
+                    >
+                      <span>{size}</span>
+                      <span className={`saas-preview-btn saas-preview-btn--${group.variant} saas-preview-btn--${size}`}>
+                        Save draft
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            ))}
+            <section className="saas-studio-variants__group" aria-label="States">
+              <p>States</p>
+              <div className="saas-studio-variants__row">
+                <div className="saas-studio-variant">
+                  <span>Disabled</span>
+                  <span className="saas-preview-btn saas-preview-btn--disabled">Save draft</span>
+                </div>
+                <div className="saas-studio-variant">
+                  <span>Loading</span>
+                  <span className="saas-preview-btn saas-preview-btn--loading">Save draft</span>
+                </div>
+              </div>
+            </section>
+          </div>
+        ) : (
+          <div className="saas-studio-canvas">
+            <span className="saas-preview-btn">Save draft</span>
+          </div>
+        )}
+      </section>
     </div>
   );
 }
@@ -348,7 +513,7 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
               </div>
             ) : null}
             <span className="saas-settings"><Icon name="settings" />Settings</span>
-            <div className="saas-user"><span>JR</span><div><strong>John Rodrigues</strong><small>Workspace admin</small></div><i /></div>
+            <div className="saas-user"><span>JR</span><div><strong>John Rodrigues</strong><small>john@humanaistudio.ai</small></div><i /></div>
           </aside>
 
           <div className="saas-main">
@@ -381,19 +546,29 @@ function SaaSProductMockup({ embedded = false, locked = false, story = "studio" 
                     >
                       <header className="saas-page-header">
                         <div>
-                          <p>Product</p>
+                          {pageMeta.eyebrow ? <p>{pageMeta.eyebrow}</p> : null}
                           <h3>{pageMeta.title}</h3>
-                          <span>{pageMeta.lede}</span>
+                          {pageMeta.lede ? <span>{pageMeta.lede}</span> : null}
                         </div>
-                        {currentPage === "tokens" ? (
+                        {currentPage === "studio" || currentPage === "variants" || currentPage === "code" || currentPage === "architecture" ? (
                           <div className="saas-page-header__actions">
-                            <span className="saas-tag">MCP off</span>
-                            <Chrome locked={locked} className="saas-btn-secondary">Upgrade to Studio</Chrome>
+                            <Chrome locked={locked} className="saas-btn-tertiary">New prompt</Chrome>
+                            <Chrome locked={locked} className="saas-btn-secondary">Open catalog</Chrome>
                           </div>
                         ) : null}
                       </header>
-                      <div className="saas-canvas-body">
-                        {currentPage === "tokens" ? <MockTokenPage locked={locked} /> : <MockComponentsTable />}
+                      <div className={`saas-canvas-body${currentPage === "components" ? "" : " saas-canvas-body--flush"}`}>
+                        {currentPage === "studio" ? (
+                          <MockStudio locked={locked} view="preview" />
+                        ) : currentPage === "variants" ? (
+                          <MockStudio locked={locked} view="variants" />
+                        ) : currentPage === "code" ? (
+                          <MockStudio locked={locked} view="code" />
+                        ) : currentPage === "architecture" ? (
+                          <MockStudio locked={locked} view="architecture" />
+                        ) : (
+                          <MockComponentsTable />
+                        )}
                       </div>
                     </motion.div>
                   </AnimatePresence>

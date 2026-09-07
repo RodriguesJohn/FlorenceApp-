@@ -28,6 +28,7 @@ export function StartHere() {
   return (
     <>
       <PageHeader
+        eyebrow="Connect"
         title="Agent Connect"
         description="Copy the package. Paste it into Cursor. Two steps."
       />

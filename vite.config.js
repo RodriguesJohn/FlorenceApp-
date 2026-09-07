@@ -61,7 +61,6 @@ function blogPlugin() {
 
 function htmlAliases() {
   const aliases = {
-    "/app": "/index.html",
     "/workshop/playbook": "/index.html",
     "/playbook": "/index.html",
     "/workshop/complete": "/index.html",
@@ -130,6 +129,13 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     allowedHosts: "all",
+    proxy: {
+      "/app": {
+        target: "http://127.0.0.1:5175",
+        changeOrigin: true,
+        ws: true
+      }
+    },
     watch: {
       ignored: [
         "**/MyPortfolio/**",

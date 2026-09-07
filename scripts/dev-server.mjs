@@ -16,6 +16,13 @@ const server = await createServer({
     port,
     strictPort: true,
     allowedHosts: "all",
+    proxy: {
+      "/app": {
+        target: "http://127.0.0.1:5175",
+        changeOrigin: true,
+        ws: true
+      }
+    },
     watch: {
       ignored: [
         "**/MyPortfolio/**",

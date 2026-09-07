@@ -22,7 +22,6 @@ const STUDIO_PATHS = [
   "/course",
   "/academy",
   "/history",
-  "/app",
   "/playbook",
   "/case-studies",
   "/case-studies/florence",
@@ -33,7 +32,9 @@ const STUDIO_PATHS = [
 ];
 
 let route = window.location.pathname.replace(/\/+$/, "") || "/";
+const isProductApp = route === "/app" || route.startsWith("/app/");
 const shouldRedirectHome =
+  !isProductApp &&
   route !== "/" &&
   (FLORENCE_HOME.has(route) ||
     STUDIO_PATHS.includes(route) ||
@@ -63,9 +64,9 @@ function clerkGo(to) {
     return;
   }
 
-  const app = new URL(appPath("/"));
   const goesToApp =
-    url.origin === app.origin ||
+    url.pathname === "/app" ||
+    url.pathname.startsWith("/app/") ||
     url.pathname === "/start" ||
     url.pathname.startsWith("/start/");
   if (!goesToApp) return;

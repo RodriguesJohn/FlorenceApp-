@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { useAuth, useClerk } from '@clerk/react'
 import { Button } from '../../florence/components/button/Button.jsx'
 import {
+  appHref,
   clerkConfigured,
   clerkOverlayOptions,
   isClerkHandshakePending,
@@ -26,35 +27,59 @@ function ClerkAuthGate() {
   const clerk = useClerk()
   const [searchParams] = useSearchParams()
   const opened = useRef(false)
-  const wantsSignup = searchParams.get('signup') === '1'
+  const denied = searchParams.get('denied') === '1'
+  const wantsSignup = searchParams.get('signup') === '1' && !denied
 
   function openSignIn() {
     clerk.openSignIn({
       ...clerkOverlayOptions,
-      forceRedirectUrl: '/start',
-      fallbackRedirectUrl: '/start',
+      forceRedirectUrl: appHref('/'),
+      fallbackRedirectUrl: appHref('/'),
     })
   }
 
   function openSignUp() {
     clerk.openSignUp({
       ...clerkOverlayOptions,
-      forceRedirectUrl: '/start',
-      fallbackRedirectUrl: '/start',
+      forceRedirectUrl: appHref('/'),
+      fallbackRedirectUrl: appHref('/'),
     })
   }
 
   useEffect(() => {
-    if (!isLoaded || opened.current || isClerkHandshakePending()) return
+    if (denied || !isLoaded || opened.current || isClerkHandshakePending()) return
     opened.current = true
     const options = {
       ...clerkOverlayOptions,
-      forceRedirectUrl: '/start',
-      fallbackRedirectUrl: '/start',
+      forceRedirectUrl: appHref('/'),
+      fallbackRedirectUrl: appHref('/'),
     }
     if (wantsSignup) clerk.openSignUp(options)
     else clerk.openSignIn(options)
-  }, [clerk, isLoaded, wantsSignup])
+  }, [clerk, denied, isLoaded, wantsSignup])
+
+  if (denied) {
+    return (
+      <div className="auth-screen">
+        <div className="auth-screen__panel layout-container-sm">
+          <p className="page-header__eyebrow">Florence AI</p>
+          <h1 className="page-header__title">This account isn’t allowed</h1>
+          <p className="page-header__meta">
+            Only the admin email can log in. Use that account, or go back to the
+            homepage.
+          </p>
+          <div className="layout-header__actions">
+            <Button variant="primary" onClick={openSignIn}>
+              Log in with a different account
+            </Button>
+          </div>
+          <p className="page-header__meta">
+            <a href={websiteHome()}>Back to Florence AI</a>
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="auth-screen">

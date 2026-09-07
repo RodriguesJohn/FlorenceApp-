@@ -9,7 +9,7 @@ export function Constraints() {
   return (
     <>
       <PageHeader
-        eyebrow="Engineering"
+        eyebrow="Quality"
         title="Guardrails"
         description="Rules the MCP returns with every retrieval. This is how Free removes slop without a custom system."
         actions={

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Activity,
+  Boxes,
   ChevronDown,
   CircleDollarSign,
   CirclePlus,
@@ -48,10 +49,6 @@ import { useClerk, useUser } from '@clerk/react'
 
 const NAV = [
   {
-    label: 'Start here',
-    items: [{ to: '/start', label: 'Agent Connect', icon: PlugZap }],
-  },
-  {
     label: 'Brand',
     items: [
       { to: '/brand', label: 'Brand System', icon: MessageSquare },
@@ -61,29 +58,30 @@ const NAV = [
   {
     label: 'Product',
     items: [
-      { to: '/tokens', label: 'Foundation Token', icon: Layers },
+      { to: '/tokens', label: 'Tokens', icon: Layers },
       { to: '/components', label: 'Components', icon: LayoutGrid },
       { to: '/animation', label: 'Animation Library', icon: Film },
       { to: '/skills', label: 'Skills', icon: Sparkles },
     ],
   },
   {
-    label: 'Connectors',
-    items: [{ to: '/connectors', label: 'Connectors', icon: Plug }],
+    label: 'Connect',
+    items: [
+      { to: '/start', label: 'Agent Connect', icon: PlugZap },
+      { to: '/connectors', label: 'Connectors', icon: Plug },
+      { to: '/libraries', label: 'Libraries', icon: Library },
+    ],
   },
   {
-    label: 'References',
-    items: [{ to: '/libraries', label: 'Libraries', icon: Library }],
-  },
-  {
-    label: 'Engineering',
-    items: [{ to: '/guardrails', label: 'Guardrails', icon: Code2 }],
+    label: 'Component Studio',
+    items: [{ to: '/studio', label: 'Studio', icon: Boxes }],
   },
   {
     label: 'Quality',
     items: [
       { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
       { to: '/evals', label: 'Evals', icon: Activity },
+      { to: '/guardrails', label: 'Guardrails', icon: Code2 },
     ],
   },
   {
@@ -121,14 +119,14 @@ export function AppShell({ children }) {
   const [pinOpen, setPinOpen] = useState(false)
   const [pin, setPin] = useState('')
   const [pinError, setPinError] = useState('')
-  const [pendingPath, setPendingPath] = useState('/start')
+  const [pendingPath, setPendingPath] = useState('/brand')
 
   useEffect(() => {
     if (isPaid || FREE_PATHS.has(location.pathname)) return
     navigate('/start', { replace: true })
   }, [isPaid, location.pathname, navigate])
 
-  function openUnlock(path = '/start') {
+  function openUnlock(path = '/brand') {
     setPendingPath(path)
     setPin('')
     setPinError('')
@@ -185,7 +183,7 @@ export function AppShell({ children }) {
                 setWorkspaceOpen(true)
                 return
               }
-              openUnlock('/start')
+              openUnlock('/brand')
             }}
           >
             <span>
@@ -322,7 +320,7 @@ export function AppShell({ children }) {
         open={pinOpen}
         onOpenChange={closeUnlock}
         title="Unlock paid features"
-        description="Free includes Agent Connect. Enter the test PIN to see the rest of the product."
+        description="Starter includes Agent Connect. Enter the test PIN to see the rest of the product."
         size="sm"
         footer={
           <Button variant="primary" type="submit" form="unlock-pin-form">

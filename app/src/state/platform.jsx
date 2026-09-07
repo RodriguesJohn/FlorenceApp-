@@ -110,7 +110,7 @@ export function PlatformProvider({ children, isAdmin = false }) {
         : (PLANS[planId] ?? PLANS.free)
     const workspace =
       workspaces.find((item) => item.id === workspaceId) ?? workspaces[0]
-    const isPaid = planId === 'studio' || planId === 'custom' || isAdmin
+    const isPaid = planId === 'free' || planId === 'studio' || planId === 'custom' || isAdmin
     const canGenerate = isPaid
     const mcpEndpoint = 'npx -y github:RodriguesJohn/florence-mcp'
     const mcpSnippet = buildMcpSnippet(mcpEndpoint)
@@ -329,7 +329,7 @@ export function PlatformProvider({ children, isAdmin = false }) {
           title: `${PLANS[id].name} is active`,
           description:
             id === 'custom'
-              ? 'Free and Studio flows stay available. We’ll scope seats next.'
+              ? 'Agency is a productized workspace. We’ll talk through how you run it across clients.'
               : PLANS[id].summary,
           status: 'success',
         })

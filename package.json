@@ -7,7 +7,8 @@
     "dev": "node scripts/dev-server.mjs",
     "dev:keep-alive": "node scripts/keep-dev-alive.mjs",
     "dev:academy": "node scripts/academy-server.mjs",
-    "build": "vite build",
+    "build": "vite build && npm --prefix app run build",
+    "postinstall": "npm --prefix app install",
     "preview": "vite preview"
   },
   "dependencies": {

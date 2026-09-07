@@ -71,7 +71,7 @@ export function Settings() {
       <PageHeader
         eyebrow="Settings"
         title={tab === 'mcp' ? 'MCP' : tab === 'plan' ? 'Plan' : 'Workspace'}
-        description="Free connects MCP. Studio adds one generator and one seat. Custom keeps both."
+        description="Starter generates your first system. Growth is per editor. Agency is a productized workspace."
         actions={
           <Tag tone="brand" size="sm">
             {plan.name}
@@ -106,8 +106,8 @@ export function Settings() {
                     value="John Rodrigues · Workspace admin"
                     hint={
                       planId === 'custom'
-                        ? 'Custom can add more seats. Ask us to scope it.'
-                        : 'Studio and Free include one seat.'
+                        ? 'Agency can add more seats. Contact us for pricing.'
+                        : 'Starter and Growth include one seat per editor.'
                     }
                     readOnly
                   />
@@ -161,7 +161,7 @@ export function Settings() {
                       ? `${designSystem.name} is published and served over MCP.`
                       : canGenerate
                         ? 'No system published yet. Run the generator to replace the shared Florence defaults.'
-                        : 'Free serves the shared Florence system. Upgrade to generate your own.'}
+                        : 'Starter generates your system. Upgrade to Growth for every editor.'}
                   </p>
                   <div className="layout-header__actions">
                     {canGenerate ? (
@@ -170,7 +170,7 @@ export function Settings() {
                       </Button>
                     ) : (
                       <Button variant="secondary" onClick={() => setTab('plan')}>
-                        View Studio
+                        View plans
                       </Button>
                     )}
                   </div>
@@ -184,7 +184,7 @@ export function Settings() {
               <div className="surface-card">
                 <h2 className="surface-card__title">Florence MCP</h2>
                 <p className="surface-card__body">
-                  Free is this MCP. Copy the config into Cursor. It names slop
+                  Starter is this MCP. Copy the config into Cursor. It names slop
                   in the product they already have, writes an HTML report of
                   the mistakes, and asks before it fixes.
                 </p>
@@ -249,14 +249,14 @@ export function Settings() {
                     </Button>
                   ) : item.id === 'custom' ? (
                     <Button variant="secondary" onClick={() => choosePlan('custom')}>
-                      Start a custom brief
+                      Contact for pricing
                     </Button>
                   ) : (
                     <Button
                       variant={item.id === 'studio' ? 'primary' : 'secondary'}
                       onClick={() => choosePlan(item.id)}
                     >
-                      {item.id === 'studio' ? 'Subscribe for $49' : 'Use Free'}
+                      {item.id === 'studio' ? 'Subscribe for $99' : 'Get started'}
                     </Button>
                   )}
                 </article>
@@ -264,9 +264,9 @@ export function Settings() {
             </section>
             <InsightCard
               tone="info"
-              eyebrow="Custom"
-              title="Custom still includes Free and Studio"
-              description="MCP connect and the one-system generator stay in the product. Custom adds seats, workspaces, and a private review."
+              eyebrow="Agency"
+              title="Agency is a productized workspace"
+              description="Not a custom build. Agencies run Florence across clients. Starter and Growth stay in the product."
             />
           </TabsContent>
         </Tabs>

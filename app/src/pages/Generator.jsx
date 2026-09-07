@@ -38,7 +38,7 @@ export function Generator() {
         status: step === 0 ? 'now' : 'later',
         phase: step === 0 ? 'Now' : 'Done',
         title: 'Name the system',
-        body: 'One system per Studio subscription.',
+        body: 'One system on Starter. Growth covers every editor.',
       },
       {
         status: step === 1 ? 'now' : step < 1 ? 'next' : 'later',
@@ -60,16 +60,16 @@ export function Generator() {
     return (
       <>
         <PageHeader
-          eyebrow="Studio"
+          eyebrow="Starter"
           title="Design system generator"
-          description="Included on Studio ($49 per editor / month) and Custom."
+          description="Included on Starter ($19 / month) and Growth ($99 per editor / month)."
         />
         <div className="layout-content">
           <InsightCard
             tone="opportunity"
-            eyebrow="Free"
+            eyebrow="Starter"
             title="Connect MCP first, then generate when you are ready"
-            description="Free already takes slop out by serving Florence. Studio lets you create one system and plug it into this workspace."
+            description="Starter generates your first system. Growth publishes it for every editor."
             primaryAction={{
               label: 'View plans',
               onClick: () => navigate('/settings?tab=plan'),
@@ -105,7 +105,7 @@ export function Generator() {
   return (
     <>
       <PageHeader
-        eyebrow="Studio"
+        eyebrow="Starter"
         title="Design system generator"
         description="Create one system for this seat, then MCP serves it instead of the shared Florence default."
       />

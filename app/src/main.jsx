@@ -7,9 +7,12 @@ import './index.css'
 import { AppPlatformProvider } from './state/platform.jsx'
 import { ThemeProvider } from './state/theme.jsx'
 import {
+  APP_BASE,
+  appHref,
   clerkAllowedRedirectOrigins,
   clerkConfigured,
   clerkPublishableKey,
+  routerPathFromHref,
   websiteHome,
 } from './lib/clerk.js'
 import App from './App.jsx'
@@ -21,32 +24,27 @@ function ClerkRoot({ children }) {
     return children
   }
 
-  function go(to) {
+  function go(to, options) {
     if (/^https?:\/\//.test(to)) {
-      window.location.assign(to)
+      if (options?.replace) window.location.replace(to)
+      else window.location.assign(to)
       return
     }
-    navigate(to)
+    navigate(routerPathFromHref(to), options)
   }
 
   return (
     <ClerkProvider
       publishableKey={clerkPublishableKey}
       routerPush={go}
-      routerReplace={(to) => {
-        if (/^https?:\/\//.test(to)) {
-          window.location.replace(to)
-          return
-        }
-        navigate(to, { replace: true })
-      }}
+      routerReplace={(to) => go(to, { replace: true })}
       afterSignOutUrl={websiteHome()}
-      signInUrl="/start?signin=1"
-      signUpUrl="/start?signup=1"
-      signInFallbackRedirectUrl="/start"
-      signUpFallbackRedirectUrl="/start"
-      signInForceRedirectUrl="/start"
-      signUpForceRedirectUrl="/start"
+      signInUrl={appHref('/start?signin=1')}
+      signUpUrl={appHref('/start?signup=1')}
+      signInFallbackRedirectUrl={appHref('/')}
+      signUpFallbackRedirectUrl={appHref('/')}
+      signInForceRedirectUrl={appHref('/')}
+      signUpForceRedirectUrl={appHref('/')}
       allowedRedirectOrigins={clerkAllowedRedirectOrigins}
     >
       {children}
@@ -56,7 +54,7 @@ function ClerkRoot({ children }) {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={APP_BASE}>
       <ClerkRoot>
         <ThemeProvider>
           <AppPlatformProvider>

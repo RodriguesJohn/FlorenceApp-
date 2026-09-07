@@ -2,12 +2,15 @@ import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import SaaSProductMockup from "./SaaSProductMockup.jsx";
 import { Entrance, EntranceItem } from "./entrance.jsx";
 import { SiteHeader } from "./SiteHeader.jsx";
-import { FlorenceWaitlistModal, WaitlistButton } from "./FlorenceWaitlistModal.jsx";
-import { useAuth, useClerk } from "@clerk/react";
+import { WaitlistButton } from "./FlorenceWaitlistModal.jsx";
+import { useAuth, useClerk, useUser } from "@clerk/react";
 import {
   appPath,
   clerkConfigured,
+  clerkOverlayOptions,
+  clerkUserEmails,
   goToApp,
+  isClerkAdmin,
 } from "./clerkConfig.js";
 import figmaLogo from "../assets/logos/Figma.png";
 import storybookLogo from "../assets/logos/storybook.png";
@@ -84,19 +87,18 @@ const layerOutputs = [
 
 const pricingPlans = [
   {
-    id: "entry",
-    name: "Entry",
-    price: "Free",
-    term: null,
-    description: "Free context so agents stop shipping AI slop.",
+    id: "starter",
+    name: "Starter",
+    price: "$29",
+    term: "/ month",
+    description: "Generate your first design system.",
     features: [
-      "Reduce AI slop",
-      "Lower token spend on retries and rework",
-      "Ship with quality, not AI slop",
-      "MCP for Cursor and Claude Code"
+      "Generate a first design system",
+      "Brand, tokens, and core context",
+      "MCP for Cursor and Claude Code",
+      "First-pass UI that stays on-system"
     ],
-    ctaLabel: "Fix AI Slop",
-    waitlist: false,
+    ctaLabel: "Get started",
     signup: true,
     ctaPrimary: true,
     featured: false
@@ -104,32 +106,32 @@ const pricingPlans = [
   {
     id: "growth",
     name: "Growth",
-    price: "$49",
+    price: "$99",
     term: "/ editor / month",
-    description: "Self-serve Florence MCP on your design system.",
+    description: "For every editor on the team.",
     features: [
-      "Brand, system, constraints, and quality in one layer",
+      "Everything in Starter",
       "MCP for Cursor, Claude Code, Codex, and Figma",
       "Component contracts and evals for generated UI",
       "Unlimited repos in your workspace"
     ],
-    ctaLabel: "Join the waitlist",
-    waitlist: true,
+    ctaLabel: "Get started",
+    signup: true,
     featured: true
   },
   {
-    id: "scale",
-    name: "Scale",
-    price: "Custom Solution",
+    id: "agency",
+    name: "Agency",
+    price: "Custom",
     term: null,
-    description: "Custom solution to build your AI-ready design system.",
+    description: "Run it across clients.",
     features: [
-      "Discovery, audit, and implementation with your team",
-      "Custom MCP integrations and quality criteria",
-      "Multi-repo governance and onboarding",
-      "Hands-on setup with design system owners"
+      "Productized workspace agencies can run",
+      "Multi-client brand and system context",
+      "MCP for client teams and their agents",
+      "Onboarding into the product, not a services engagement"
     ],
-    ctaLabel: "Book a discovery call",
+    ctaLabel: "Contact for pricing",
     ctaHref: BOOKING_URL,
     featured: false
   }
@@ -359,7 +361,7 @@ function ProductEcosystemChip({ name, logo, glyph, contain, invert, chipRef }) {
   );
 }
 
-function ProductPricingCard({ plan, onWaitlistOpen, onFixAiSlop }) {
+function ProductPricingCard({ plan, onFixAiSlop }) {
   return (
     <article
       className={`product-pricing-card${
@@ -377,7 +379,7 @@ function ProductPricingCard({ plan, onWaitlistOpen, onFixAiSlop }) {
           <span>{plan.price}</span>
           {plan.term ? <small>{plan.term}</small> : null}
         </p>
-        <ProductPricingCta plan={plan} onWaitlistOpen={onWaitlistOpen} onFixAiSlop={onFixAiSlop} />
+        <ProductPricingCta plan={plan} onFixAiSlop={onFixAiSlop} />
       </div>
       <div className="product-pricing-card-body">
         <p className="product-pricing-card-description">{plan.description}</p>
@@ -391,20 +393,12 @@ function ProductPricingCard({ plan, onWaitlistOpen, onFixAiSlop }) {
   );
 }
 
-function ProductPricingCta({ plan, onWaitlistOpen, onFixAiSlop }) {
+function ProductPricingCta({ plan, onFixAiSlop }) {
   const isPrimary = Boolean(plan.ctaPrimary);
   const href = plan.ctaHref;
   const className = `product-btn product-btn--full${
     isPrimary ? " product-btn--primary" : " product-btn--ghost"
   }`;
-
-  if (plan.waitlist) {
-    return (
-      <WaitlistButton className={className} onOpen={onWaitlistOpen}>
-        {plan.ctaLabel}
-      </WaitlistButton>
-    );
-  }
 
   if (plan.signup) {
     return (
@@ -451,9 +445,6 @@ function ProductFooter() {
 }
 
 function ProductPageView({ onFixAiSlop, onLogIn }) {
-  const [waitlistOpen, setWaitlistOpen] = useState(false);
-  const openWaitlist = () => setWaitlistOpen(true);
-
   return (
     <div className="product-page">
       <SiteHeader brand="Florence AI" />
@@ -472,7 +463,7 @@ function ProductPageView({ onFixAiSlop, onLogIn }) {
                   className="product-btn product-btn--primary liquid-metal-btn--wide"
                   onOpen={onFixAiSlop}
                 >
-                  Fix AI Slop
+                  Get started
                 </WaitlistButton>
                 <button
                   type="button"
@@ -587,7 +578,6 @@ function ProductPageView({ onFixAiSlop, onLogIn }) {
                 <EntranceItem key={plan.id}>
                   <ProductPricingCard
                     plan={plan}
-                    onWaitlistOpen={openWaitlist}
                     onFixAiSlop={onFixAiSlop}
                   />
                 </EntranceItem>
@@ -599,45 +589,60 @@ function ProductPageView({ onFixAiSlop, onLogIn }) {
         <section className="product-section product-close" aria-labelledby="product-close-title">
           <Entrance className="product-section-inner product-close-inner">
             <EntranceItem as="h2" id="product-close-title">
-              Teams that maintain a design system and run coding agents.
+              Teams and agencies that run coding agents.
             </EntranceItem>
             <EntranceItem as="p" className="product-body">
-              Growth-stage B2B SaaS through enterprise. The champion is
-              whoever owns the design system. Florence is the layer you
-              hand that buyer.
+              Start with a system. Grow per editor. Agencies get a
+              productized workspace, not a custom engagement.
             </EntranceItem>
             <EntranceItem className="product-hero-actions">
-              <WaitlistButton onOpen={openWaitlist} />
+              <WaitlistButton onOpen={onFixAiSlop}>Get started</WaitlistButton>
             </EntranceItem>
           </Entrance>
         </section>
       </main>
 
       <ProductFooter />
-
-      <FlorenceWaitlistModal open={waitlistOpen} onClose={() => setWaitlistOpen(false)} />
     </div>
   );
 }
 
 function ProductPageWithClerk() {
   const { isLoaded, isSignedIn } = useAuth();
+  const { isLoaded: userLoaded, user } = useUser();
   const clerk = useClerk();
 
-  function openSignUp() {
-    if (isLoaded && isSignedIn) {
+  function openAuth(signup) {
+    if (isLoaded && isSignedIn && userLoaded) {
+      if (clerkUserEmails(user).length > 0 && !isClerkAdmin(user)) {
+        clerk.signOut({
+          redirectUrl: appPath("/start?signin=1&denied=1"),
+        });
+        return;
+      }
       goToApp(clerk);
       return;
     }
-    window.location.assign(appPath("/start?signup=1"));
+    if (!isLoaded) {
+      window.location.assign(appPath(signup ? "/start?signup=1" : "/start?signin=1"));
+      return;
+    }
+    const dest = appPath("/start");
+    const options = {
+      ...clerkOverlayOptions,
+      forceRedirectUrl: dest,
+      fallbackRedirectUrl: dest,
+    };
+    if (signup) clerk.openSignUp(options);
+    else clerk.openSignIn(options);
+  }
+
+  function openSignUp() {
+    openAuth(true);
   }
 
   function openSignIn() {
-    if (isLoaded && isSignedIn) {
-      goToApp(clerk);
-      return;
-    }
-    window.location.assign(appPath("/start?signin=1"));
+    openAuth(false);
   }
 
   return <ProductPageView onFixAiSlop={openSignUp} onLogIn={openSignIn} />;

@@ -97,7 +97,7 @@ export function Libraries() {
   return (
     <>
       <PageHeader
-        eyebrow="References"
+        eyebrow="Connect"
         title="Libraries"
         description={`Explore design systems and component libraries. Pin the ones agents should retrieve for ${workspace.name}.`}
         actions={
